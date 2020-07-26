@@ -90,3 +90,13 @@ server/.vscode/
 .vscode/
 
 server/assets/images/
+
+server/.mvn/wrapper/maven-wrapper.jar
+
+server/.mvn/wrapper/maven-wrapper.properties
+
+server/.mvn/wrapper/
+
+server/mvnw
+
+server/mvnw.cmd
