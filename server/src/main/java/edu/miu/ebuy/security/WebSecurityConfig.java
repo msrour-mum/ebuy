@@ -20,43 +20,42 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//	@Autowired
-//	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-//
-//	@Autowired
-//	private UserDetailsService jwtUserDetailsService;
-//
-//	@Autowired
-//	private JwtRequestFilter jwtRequestFilter;
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//// configure AuthenticationManager so that it knows from where to load
-//// user for matching credentials
-//// Use BCryptPasswordEncoder
-//		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
-	}
+    @Autowired
+    private UserDetailsService jwtUserDetailsService;
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
 
-//	@Bean
-//	@Override
-//	public AuthenticationManager authenticationManagerBean() throws Exception {
-//		return super.authenticationManagerBean();
-//	}
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+// configure AuthenticationManager so that it knows from where to load
+// user for matching credentials
+// Use BCryptPasswordEncoder
+        auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+    }
 
-	@Override
-	protected void configure(HttpSecurity httpSecurity) throws Exception {
-// We don't need CSRF for this example
-//		httpSecurity.csrf().disable()
-//// dont authenticate this particular request
-//				.authorizeRequests().antMatchers(HttpMethod.POST, "/signin").permitAll().antMatchers("/login")
-//				.permitAll().antMatchers("/auth").permitAll().antMatchers("/register").permitAll()
-//				.antMatchers(HttpMethod.POST, "/api/user").permitAll().antMatchers("/error").permitAll()
-//				.antMatchers("/forwardLogin", "/facebook").permitAll()
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+//        httpSecurity.csrf().disable()
+//			// dont authenticate this particular request
+//                .authorizeRequests().antMatchers(HttpMethod.POST, "/signin").permitAll().antMatchers("/login")
+//                .permitAll().antMatchers("/auth").permitAll().antMatchers("/register").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/user").permitAll().antMatchers("/error").permitAll()
+//                .antMatchers("/forwardLogin", "/facebook").permitAll()
 //
 //                // all other requests need to be authenticated
 //                .anyRequest().authenticated()
@@ -68,22 +67,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .logout()
 //                .logoutSuccessUrl("/")
 //                .and()
-//                // make sure we use stateless session; session won't be used to
-//                // store user's state.
-//                //.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//				//.exceptionHandling().accessDeniedPage("/403")
-//                ;
-//                // Add a filter to validate the tokens with every request
-//                httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//        // make sure we use stateless session; session won't be used to
+//        // store user's state.
+//        //.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//        //.exceptionHandling().accessDeniedPage("/403")
+//        ;
+//        // Add a filter to validate the tokens with every request
+//        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         httpSecurity.csrf().disable()
                 .authorizeRequests().antMatchers("/*").permitAll();
     }
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/fonts/**");
-	}
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/fonts/**");
+    }
 
 //    public void successAuthenticate(HttpServletRequest req, HttpServletResponse res, Authentication auth){
 //
