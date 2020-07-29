@@ -31,10 +31,11 @@ public class UserService implements IUserService {
 
     @Override
     public User create(User user) {
-        //Todo: check role
-        user.setRole(new Role(4));
+        user.setRole(new Role(user.getRole().getId()));
+        user.setIsActive(true);
         user.setPassword(passwordUtil().encode(user.getPassword()));
-        return userRepository.save(user);}
+        return userRepository.save(user);
+    }
 
     @Override
     public User get(int id) {

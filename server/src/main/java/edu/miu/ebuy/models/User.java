@@ -33,20 +33,18 @@ public class User implements Serializable {
     @Column(name = "isActive",nullable = false, columnDefinition = "BIT(1) default 1")
     private Boolean isActive;
 
-    private String mobile;
+    private String phone;
     private String ImageUrl;
 
     @Transient
     MultipartFile image;
-    @Transient
-    MultipartFile cover;
 
-    public User(String name,String email, Role role, String pass, boolean isActive,String mobile) {
+    public User(String name,String email, Role role, String pass, boolean isActive,String phone) {
         this.name = name;
         this.email = email;
         this.role = role;
         this.password = pass;
         this.isActive = isActive;
-        this.mobile = mobile;
+        this.phone = phone;
     }
 }
