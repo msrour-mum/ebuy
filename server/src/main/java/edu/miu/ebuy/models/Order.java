@@ -1,6 +1,5 @@
 package edu.miu.ebuy.models;
 
-import edu.miu.ebuy.models.lookup.OrderStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,14 +19,8 @@ public class Order {
     @ManyToOne(optional = false)
     private User user;
 
-
-
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "statusId", nullable = false)
-    private OrderStatus status;
-
-    @Column(name ="creationDate", nullable = false, columnDefinition = "DATETIME default now()")
-    private Date creationDate;
+    @Column(name ="orderDate", nullable = false, columnDefinition = "DATETIME default now()")
+    private Date orderDate;
 
     @Column(name ="total" , nullable = false)
     private double total;
@@ -39,10 +32,8 @@ public class Order {
     @JoinColumn(name ="order_id", nullable = false)
     List<OrderItems> items =new ArrayList<>();
 
-
-
-    public void addComment(OrderItems item)    { if (items!=null)    items.add(item);    }
-    public void removeComment(OrderItems item)
+    public void addItem(OrderItems item)    { if (items!=null)    items.add(item);    }
+    public void removeItem(OrderItems item)
     {
         items.remove(item);
     }

@@ -1,6 +1,8 @@
 package edu.miu.ebuy.models;
 
 import com.sun.istack.Nullable;
+import edu.miu.ebuy.models.lookup.CardType;
+import edu.miu.ebuy.models.lookup.ProductStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,15 +24,20 @@ public class Product {
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="categoryId")
+    private Category category;
+
     @Column(name ="cost" , nullable = false)
     private double cost;
 
     @Column(name ="price" , nullable = false)
     private double price;
 
-    @Column(name = "isAvailable",nullable = false, columnDefinition = "BIT(1) default 1")
-    private boolean isAvailable;
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="statusId")
 
+    private ProductStatus productStatus;
 
     @Column(name = "isPublished",nullable = false, columnDefinition = "BIT(1) default 1")
     private boolean isPublished;

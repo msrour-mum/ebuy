@@ -1,5 +1,6 @@
 package edu.miu.ebuy.models;
 
+
 import edu.miu.ebuy.models.lookup.CardType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,13 +25,12 @@ public class UserCards {
     @Column(nullable = false)
     private int ccv;
 
-    @Column(nullable = false)
-    private int secretCode;
 
     @Column(nullable = false)
     private String expireDate;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "typeId", nullable = false)
-    private CardType typeId;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="typeId")
+    private CardType cardType;
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping(value = "/{id}")
-    public String get(@PathVariable("id") int id) throws Exception {
+    public User get(@PathVariable("id") int id) throws Exception {
 
         if(id == 0){ // general exception
             throw new Exception("Invalid user id");
@@ -24,8 +24,9 @@ public class TestController {
         else if(id == -1) { //business exception
 
             throw new HttpException(HttpStatus.BAD_REQUEST, "Invalid credentials", Errors.INVALID_CREDENTIALS_ERROR);
+
         }
-        return Integer.toString(id);
+        return new User();
     }
 
 }

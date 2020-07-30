@@ -1,7 +1,6 @@
 package edu.miu.ebuy.models;
 
-import edu.miu.ebuy.models.lookup.OrderStatus;
-import edu.miu.ebuy.models.lookup.PaymentType;
+import edu.miu.ebuy.models.lookup.CardType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,21 +26,16 @@ public class Payment {
     private String cardNumber;
 
     @Column(nullable = false)
-    private int ccv;
-
-    @Column(nullable = false)
-    private int secretCode;
+    private int cvv;
 
     @Column(nullable = false)
     private String expireDate;
 
-    @Column(name ="TransactionDate", nullable = false, columnDefinition = "DATETIME default now()")
-    private Date TransactionDate;
+    @Column(name ="transactionDate", nullable = false, columnDefinition = "DATETIME default now()")
+    private Date transactionDate;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "typeId", nullable = false)
-    private PaymentType paymentType;
-
-
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="cardTypeId")
+    private CardType cardType;
 
 }

@@ -33,8 +33,10 @@ public class User implements Serializable {
     @Column(name = "isActive",nullable = false, columnDefinition = "BIT(1) default 1")
     private Boolean isActive;
 
+    private String address;
     private String phone;
     private String ImageUrl;
+
 
     @Transient
     MultipartFile image;

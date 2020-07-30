@@ -1,12 +1,11 @@
 package edu.miu.ebuy.models;
 
+
 import edu.miu.ebuy.models.lookup.CardType;
-import edu.miu.ebuy.models.lookup.OrderStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Data
@@ -27,12 +26,9 @@ public class Card {
     private int ccv;
 
     @Column(nullable = false)
-    private int secretCode;
-
-    @Column(nullable = false)
     private String expireDate;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "typeId", nullable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name ="typeId")
     private CardType typeId;
 }

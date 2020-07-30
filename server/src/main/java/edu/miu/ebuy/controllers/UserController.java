@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @BaseResponse
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = "/api/users")
 public class UserController {
     @Autowired
     IUserService userService;

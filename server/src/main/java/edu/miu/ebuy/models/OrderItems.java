@@ -19,11 +19,9 @@ public class OrderItems {
     private Product product;
 
     @Column(name ="quantity" , nullable = false)
-    private int Quantity;
+    private int quantity;
 
     @Column(name ="itemTotal" , nullable = false)
     private double itemTotal;
-
-
 
 }
