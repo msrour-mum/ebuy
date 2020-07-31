@@ -1,0 +1,358 @@
+html{
+  font-size: 15px;
+}
+body {
+  /*background-image: url("../images/bg.png");*/
+}
+body, html, .container-fluid, .container {
+min-height: 70vh;
+}
+.container-fluid, .container {
+  padding-top: 40px;
+}
+footer {
+    min-height: 200px !important;
+    padding: 0 20px;
+    margin-top:20px;
+    border-top: #4875a5 solid 3px;
+}
+
+.footer-mid, .footer-right, .footer-left{
+    padding: 40px;
+    box-sizing: border-box;
+    height: inherit;
+}
+.footer-mid, .footer-right {
+    border-left: #89898985 dotted 1px;
+}
+footer a.a-ftr {
+    color: white !important;
+    padding: 10px;
+}
+
+footer a.a-ftr:hover {
+    /*color: #18BC9C !important;*/
+}
+footer .cpy {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    /*margin-right: -25px;*/
+    padding: 5px;
+    font-size: 10px;
+}
+
+.block {
+    display: block !important;
+}
+
+.img-box {
+    position: relative;
+    border-radius: 5px;
+}
+.r-all-5 {
+    border-radius: 5px;
+}
+.r-btm-5 {
+    border-radius: 0 0 5px 5px;
+}
+.img-box-p {
+    color: white;
+    background-color: rgba(86, 86, 86, 0.6);
+    position: absolute;
+    bottom: 0;
+    min-height: 100px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.head-text, .details-text, bottom-text{
+    margin: 5px;
+}
+.details-text{
+    color: #dabf00;
+    font-size: 11px;
+}
+.bottom-text{
+    color: #b2d3d3;
+    font-size: 11px;
+}
+
+.product-box-lg
+{
+    margin-top:5px;
+    min-height: 255px;
+}
+.prd-img-lg {
+    /*max-width: 100%;*/
+    /*max-height: 100%;*/
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+}
+
+.add-cart {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.btn-add-cart {
+    margin: 3px !important;
+}
+
+/*.shw-hdn {*/
+/*    display: none;*/
+/*}*/
+
+/*img:hover + .shw-hdn{*/
+/*    display: block;*/
+/*}*/
+
+.red-l-b{
+    border-left: 3px solid red;
+    padding-left: 7px;
+    margin-left: 7px;
+    height: 12px;
+}
+.green-l-b{
+    border-left: 3px solid green;
+    padding-left: 7px;
+    margin-left: 7px;
+    height: 12px;
+}
+.gold-l-b{
+    border-left: 3px solid goldenrod;
+    padding-left: 7px;
+    margin-left: 7px;
+    height: 12px;
+}
+.blue-l-b{
+    border-left: 3px solid #00bcd4;
+    padding-left: 7px;
+    margin-left: 7px;
+    height: 12px;
+}
+
+.order-summary-box {
+    background-color: #9B251C;
+    /*border: 1px solid black;*/
+    min-height: 500px;
+    color: white;
+}
+.sum-item {
+    margin-top: 10px;
+}
+
+.total {
+    font-weight: bold;
+    color: wheat;
+}
+.lbl {
+    font-weight: bold;
+}
+.sum-btns {
+    /*position: absolute;*/
+    margin-top: 35px;
+    bottom: 10px;
+}
+.pd-lft-0 {
+  padding-left:0 !important;
+}
+
+.mr-top-10
+{
+  margin-top: 10px;
+}
+.mr-btm-10
+{
+ margin-bottom: 10px;
+}
+.mr-lft-5{
+  margin-left: 5px;
+}
+
+.user-prof-info-bar{
+  margin-bottom: 10px;
+}
+
+.user-small-sqr-img {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+
+.user-small-img {
+  width: 35px;
+  height: 30px;
+  margin-right: 5px;
+  border-radius: 50px;
+}
+.cart-prd-img {
+    width: 150px;
+    height: 100px;
+}
+.prd-lbl {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.order-line-cmd {
+   margin-top: 30px;
+  margin-left: 15px;
+}
+
+.order-line-cmd-rgt {
+  position: absolute;
+  bottom: 17px;
+  right: 25px;
+}
+.prodcut-cmd-icon {
+
+    margin-right: 5px;
+}
+
+.user_name{
+  font-size:14px;
+  font-weight: bold;
+}
+.comments-list .media{
+  border-bottom: 1px dotted #ccc;
+}
+.stick-rgt-25 {
+  position: absolute;
+  right: 25px;
+
+}
+
+.main-panel {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.Notstick-rgt-25 {
+  position: relative;;
+  right: 25px;
+
+}
+
+. -results {
+  height: 20rem;
+  overflow: scroll;
+}
+
+.box{
+  margin-bottom: 20px;
+}
+
+/*    --------------------------------------------------
+	:: General
+	-------------------------------------------------- */
+.content h1 {
+  text-align: center;
+}
+.content .content-footer p {
+  color: #6d6d6d;
+  font-size: 12px;
+  text-align: center;
+}
+.content .content-footer p a {
+  color: inherit;
+  font-weight: bold;
+}
+
+/*	--------------------------------------------------
+	:: Table Filter
+	-------------------------------------------------- */
+.panel {
+  border: 1px solid #ddd;
+  background-color: #fcfcfc;
+}
+.panel .btn-group {
+  margin: 15px 0 30px;
+}
+.panel .btn-group .btn {
+  transition: background-color .3s ease;
+}
+.table-filter {
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+.table-filter tbody tr:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+.table-filter tbody tr td {
+  padding: 10px;
+  vertical-align: middle;
+  border-top-color: #eee;
+}
+.table-filter tbody tr.selected td {
+  background-color: #eee;
+}
+.table-filter tr td:first-child {
+  width: 38px;
+}
+.table-filter tr td:nth-child(2) {
+  width: 35px;
+}
+.table-filter .star {
+  color: #ccc;
+  text-align: center;
+  display: block;
+}
+.table-filter .star.star-checked {
+  color: #F0AD4E;
+}
+.table-filter .star:hover {
+  color: #ccc;
+}
+.table-filter .star.star-checked:hover {
+  color: #F0AD4E;
+}
+.table-filter .media-photo {
+  width: 35px;
+  margin:0 10px;
+}
+.table-filter .media-body {
+  display: block;
+  /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+}
+.table-filter .media-meta {
+  font-size: 11px;
+  color: #999;
+}
+.table-filter .media .title {
+  color: #2BBCDE;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  margin: 0;
+}
+.table-filter .media .title span {
+  font-size: .8em;
+  margin-right: 20px;
+}
+.table-filter .media .title span.pagado {
+  color: #5cb85c;
+}
+.table-filter .media .title span.pendiente {
+  color: #f0ad4e;
+}
+.table-filter .media .title span.cancelado {
+  color: #d9534f;
+}
+.table-filter .media .summary {
+  font-size: 14px;
+}
+.acc-form {
+  margin-top: 20px;
+}
+
+.custom-error {
+  display: block !important;
+}
+
+.search-results {
+  height: 100%;
+}
+

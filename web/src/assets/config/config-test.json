@@ -1,0 +1,5 @@
+{
+  "config_id": "test",
+  "apiServiceUrl": "http://localhost:8080",
+  "retryCount": 3
+}
