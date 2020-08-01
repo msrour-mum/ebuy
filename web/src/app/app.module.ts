@@ -13,6 +13,10 @@ import {LoginComponent} from './modules/authentication/login/login.component';
 import {SignupComponent} from './modules/authentication/signup/signup.component';
 import {CommonModule} from '@angular/common';
 import {ProductListComponent} from './modules/shopping/products/product-list/product-list.component';
+import { ManageCategoryListComponent } from "./modules/admin/manage-category/manage-category-list.component";
+import { ManageProductListComponent } from "./modules/admin/manage-product/manage-product-list.component";
+import { AddCategoryComponent } from "./modules/admin/manage-category/add-category/add-category.component";
+import { AddProductComponent } from "./modules/admin/manage-product/add-product/add-product.component";
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -24,6 +28,10 @@ export function initializeApp(appConfig: AppConfig) {
     LoginComponent,
     SignupComponent,
     ProductListComponent,
+    ManageProductListComponent,
+    ManageCategoryListComponent,
+    AddProductComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,
