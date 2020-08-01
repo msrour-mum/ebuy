@@ -7,15 +7,17 @@ import edu.miu.ebuy.models.Card;
 import edu.miu.ebuy.models.dto.Checkout;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class ShoppingService implements IShoppingService {
 
     @Autowired
     OrderRepository orderRepository;
-    @Autowired
-    OrderItemRepository orderItemRepository;
     @Autowired
     PaymentRepository paymentRepository;
     @Autowired
@@ -41,7 +43,7 @@ public class ShoppingService implements IShoppingService {
 
     @Override
     public boolean validateCard(String cardNo, String expireDate, int ccv, int typeId) {
-        List<Card> lst = cardRepository.findByCardNumberAndExpireDateAndccvAndtypeId(cardNo, expireDate, ccv, typeId);
+        List<Card> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndTypeId(cardNo, expireDate, ccv, typeId);
         if (lst==null || lst.size()==0)
             return false;
         return  true;
