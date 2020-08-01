@@ -29,8 +29,7 @@ export class AuthenticationService{
     //ToDo:implement this
     //return this.authenticationSubject.value ? this.authenticationSubject.value.user : null;
 
-    return {photoUrl: '/',
-            name: 'test'};
+    return {photoUrl: '/', name: 'test'};
   }
 
   public get authToken(): any {
