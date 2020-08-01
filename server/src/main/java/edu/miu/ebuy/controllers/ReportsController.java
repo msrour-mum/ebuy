@@ -20,21 +20,15 @@ import java.util.List;
 public class ReportsController {
     @Autowired
     private IReportService reportService;
-    @Autowired
-    private OrderItemReportRepository orderItemReportRepository;
+  
 
     @GetMapping("/{userId}/orders")
     public String generateOrdersReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
         return reportService.exportOrderReport(userId);
 
-
-
     }
 
-    @GetMapping("/{userId}/test")
-    public List<OrderItemReport> retriveOrderItemsbyUserID(@PathVariable int userId){
-        return  orderItemReportRepository.findByUserId(userId);
-    }
+
     @GetMapping("/{userId}/orderDetails")
     public String generateOrderDetailsReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
         return reportService.exportOrderItemReport(userId);
