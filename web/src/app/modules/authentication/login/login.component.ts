@@ -27,28 +27,27 @@ export class LoginComponent implements OnInit , OnDestroy {
   }
 
   // tslint:disable-next-line:typedef
-  ngOnInit() {
+  public ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      name: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.subs.unsubscribe();
   }
-  hasError(controlName, validationType) {
+  public hasError(controlName, validationType) {
     return this.loginForm.get(controlName).errors &&
       this.loginForm.get(controlName).errors[validationType] &&
       this.loginForm.get(controlName).touched;
   }
-  isValid(controlName) {
+  public isValid(controlName) {
     return this.loginForm.get(controlName).invalid &&
       this.loginForm.get(controlName).touched;
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
 
     if (this.loginForm.invalid) {
       return;
@@ -57,16 +56,16 @@ export class LoginComponent implements OnInit , OnDestroy {
       .pipe(first())
       .subscribe((result: any) => {
           if (result.error) {
-            return this.failedLoginHandler(result.error.message);
+            return this.failedLoginHandler(result.error);
           } else {
             return this.router.navigate(['home']);
           }
         },
-        result => this.failedLoginHandler(result.error.error.message)
+        result => this.failedLoginHandler(result.error),
       ));
   };
 
-  failedLoginHandler(message): void {
+  private failedLoginHandler(message): void {
     this.loginFailed = true;
     this.message = message;
   }
