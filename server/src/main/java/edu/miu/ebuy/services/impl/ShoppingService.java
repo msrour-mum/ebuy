@@ -29,11 +29,13 @@ public class ShoppingService implements IShoppingService {
                 checkout.getPayment().getCvv(), checkout.getPayment().getCardType().getId()))
         {
             throw new ApplicationException("Card not valid!", Errors.CARD_NOT_Valid);
+            //return false;
         }
 
         orderRepository.save(checkout.getOrder());
         checkout.getPayment().setOrder(checkout.getOrder());
         paymentRepository.saveAndFlush(checkout.getPayment());
+        return true;
 
     }
 

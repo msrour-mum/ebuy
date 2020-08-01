@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CardRepository extends JpaRepository<Card, Integer> {
 
-    public List< Card> findByCardNumberAndExpireDateAndccvAndtypeId(String cardNo, String expireDate, int ccv, int typeId)
+    public List< Card> findByCardNumberAndExpireDateAndccvAndtypeId(String cardNo, String expireDate, int ccv, int typeId);
 }
 
 
