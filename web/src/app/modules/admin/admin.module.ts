@@ -9,5 +9,4 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ]
 })
-//Test
 export class AdminModule { }
