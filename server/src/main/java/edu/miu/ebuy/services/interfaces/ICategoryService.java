@@ -12,4 +12,5 @@ public interface ICategoryService {
     Category update(int CategoryId, Category category) throws ApplicationException;
     ResponseEntity<Void> delete(int id) throws ApplicationException;
     Category get(int id) throws ApplicationException;
+
 }

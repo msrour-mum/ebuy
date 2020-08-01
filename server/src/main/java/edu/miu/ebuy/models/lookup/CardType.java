@@ -15,4 +15,22 @@ public class CardType {
     @Column(nullable = false)
     private String name;
 
+
+    public Integer getId() {
+        return id;
+    }
+
+    public CardType setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public CardType setName(String name) {
+        this.name = name;
+        return this;
+    }
 }

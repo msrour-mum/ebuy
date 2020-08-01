@@ -37,4 +37,58 @@ public class Order {
     {
         items.remove(item);
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public Order setId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Order setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public Order setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+        return this;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public Order setTotal(double total) {
+        this.total = total;
+        return this;
+    }
+
+    public double getShipping() {
+        return shipping;
+    }
+
+    public Order setShipping(double shipping) {
+        this.shipping = shipping;
+        return this;
+    }
+
+    public List<OrderItems> getItems() {
+        return items;
+    }
+
+    public Order setItems(List<OrderItems> items) {
+        this.items = items;
+        return this;
+    }
 }
