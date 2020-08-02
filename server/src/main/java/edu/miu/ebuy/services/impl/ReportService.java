@@ -2,7 +2,7 @@ package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.dao.OrderItemReportRepository;
 import edu.miu.ebuy.dao.OrderRepository;
-import edu.miu.ebuy.models.Orders;
+import edu.miu.ebuy.models.Order;
 
 import edu.miu.ebuy.models.dto.OrdersDto;
 import edu.miu.ebuy.services.interfaces.IReportService;
@@ -28,11 +28,11 @@ public class ReportService implements IReportService {
 
    public String  exportOrderReport(int userId) throws FileNotFoundException, JRException {
 
-       List<Orders> orders = orderRepository.findByUserId(userId);
+       List<Order> orders = orderRepository.findByUserId(userId);
        //load file and compile it
 
        List<OrdersDto> lst = new ArrayList<>();
-       for (Orders or:orders)
+       for (Order or:orders)
        {
            //OrdersDto ordersDto = new OrdersDto(or.getId(),or.getUser().getName(),or.getOrderDate(),or.getTotal(),or.getShipping())
            OrdersDto ordersDto =OrdersDto.read(or);
@@ -57,13 +57,13 @@ public class ReportService implements IReportService {
    //OrdersDto
     public String  exportOrderItemReport(int userId) throws FileNotFoundException, JRException {
 
-        List<Orders> ordersItems =  orderItemReportRepository.findByUserId(userId);
+        List<Order> orderItems =  orderItemReportRepository.findByUserId(userId);
 
         //load file and compile it
         File file2 = ResourceUtils.getFile("classpath:orderdetailsReport.jrxml");
         JasperReport jasperReport2 = JasperCompileManager.compileReport(file2.getAbsolutePath());
 
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ordersItems);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orderItems);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("createdBy", "EBUY ECOMMERCE");

@@ -1,7 +1,7 @@
 package edu.miu.ebuy.dao;
 
-import edu.miu.ebuy.models.CardTransactions;
+import edu.miu.ebuy.models.MerchantCardTransactions;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CardTransactionsRepository extends JpaRepository<CardTransactions, Long> {
+public interface CardTransactionsRepository extends JpaRepository<MerchantCardTransactions, Long> {
 }

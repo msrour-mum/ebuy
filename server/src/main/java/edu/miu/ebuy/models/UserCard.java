@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-public class UserCards {
+public class UserCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

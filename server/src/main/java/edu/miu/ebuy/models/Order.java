@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+@Entity(name = "Orders")
 @Data
 @NoArgsConstructor
-public class Orders {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -31,16 +31,16 @@ public class Orders {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name ="order_id", nullable = false)
-    List<OrderItems> items =new ArrayList<>();
+    List<OrderItem> items =new ArrayList<>();
 
-    public void addItem(OrderItems item)    { if (items!=null)    items.add(item);    }
-    public void removeItem(OrderItems item)
+    public void addItem(OrderItem item)    { if (items!=null)    items.add(item);    }
+    public void removeItem(OrderItem item)
     {
         items.remove(item);
     }
 
 
-    public Orders(User user, Date orderDate, double total, double shipping) {
+    public Order(User user, Date orderDate, double total, double shipping) {
 
         this.user = user;
         this.orderDate = orderDate;
@@ -52,7 +52,7 @@ public class Orders {
         return id;
     }
 
-    public Orders setId(long id) {
+    public Order setId(long id) {
         this.id = id;
         return this;
     }
@@ -61,7 +61,7 @@ public class Orders {
         return user;
     }
 
-    public Orders setUser(User user) {
+    public Order setUser(User user) {
         this.user = user;
         return this;
     }
@@ -70,7 +70,7 @@ public class Orders {
         return orderDate;
     }
 
-    public Orders setOrderDate(Date orderDate) {
+    public Order setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
         return this;
     }
@@ -79,7 +79,7 @@ public class Orders {
         return total;
     }
 
-    public Orders setTotal(double total) {
+    public Order setTotal(double total) {
         this.total = total;
         return this;
     }
@@ -88,16 +88,16 @@ public class Orders {
         return shipping;
     }
 
-    public Orders setShipping(double shipping) {
+    public Order setShipping(double shipping) {
         this.shipping = shipping;
         return this;
     }
 
-    public List<OrderItems> getItems() {
+    public List<OrderItem> getItems() {
         return items;
     }
 
-    public Orders setItems(List<OrderItems> items) {
+    public Order setItems(List<OrderItem> items) {
         this.items = items;
         return this;
     }

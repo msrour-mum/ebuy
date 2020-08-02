@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.websocket.OnClose;
 import java.io.Serializable;
 
 
@@ -40,7 +39,7 @@ public class User implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cardId", referencedColumnName = "id")
-    private UserCards card;
+    private UserCard card;
 
 
     @Transient

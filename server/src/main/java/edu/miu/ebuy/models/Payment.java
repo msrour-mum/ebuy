@@ -20,13 +20,13 @@ public class Payment {
     private User user;
 
     @ManyToOne(optional = false)
-    private Orders orders;
+    private Order order;
 
     @Column(nullable = false)
     private String cardNumber;
 
     @Column(nullable = false)
-    private int cvv;
+    private int ccv;
 
     @Column(nullable = false)
     private String expireDate;
@@ -57,12 +57,12 @@ public class Payment {
         return this;
     }
 
-    public Orders getOrders() {
-        return orders;
+    public Order getOrder() {
+        return order;
     }
 
-    public Payment setOrders(Orders orders) {
-        this.orders = orders;
+    public Payment setOrder(Order order) {
+        this.order = order;
         return this;
     }
 
@@ -75,12 +75,12 @@ public class Payment {
         return this;
     }
 
-    public int getCvv() {
-        return cvv;
+    public int getCcv() {
+        return ccv;
     }
 
-    public Payment setCvv(int cvv) {
-        this.cvv = cvv;
+    public Payment setCcv(int ccv) {
+        this.ccv = ccv;
         return this;
     }
 

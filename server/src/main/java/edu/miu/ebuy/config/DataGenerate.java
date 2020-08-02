@@ -1,6 +1,7 @@
 package edu.miu.ebuy.config;
 
 import edu.miu.ebuy.models.*;
+import edu.miu.ebuy.models.lookup.CardType;
 import edu.miu.ebuy.models.lookup.ProductStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -35,6 +36,17 @@ public class DataGenerate {
         em.persist(roleAdmin);
         em.persist(roleVendor);
         em.persist(roleUser);
+
+
+        CardType cardTypeVisa= new CardType(1,"Visa");
+        CardType cardTypeMaster= new CardType(2,"MasterCard");
+        CardType cardTypeAm= new CardType(3,"AMEX");
+
+        em.persist(cardTypeVisa);
+        em.persist(cardTypeMaster);
+        em.persist(cardTypeAm);
+
+
 
 
         User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232");
@@ -89,7 +101,7 @@ public class DataGenerate {
         for (int i = 1; i < 21; i++) {
             Category category = categoryList.get(i%5);
             User user = vendorList.get(i%5);
-            Product product = new Product("Product "+i,  "Product description"+i, user, category, i*20, i*40, productStatusActive, true, false, "imageUrl");
+            Product product = new Product("Product "+i,  "Product description"+i,"Product description"+i, user, category, i*20, i*40, productStatusActive, true, false, "imageUrl");
             em.persist(product);
         }
 
@@ -106,18 +118,18 @@ public class DataGenerate {
 
         for (User user: users)
         {
-            Orders orders = new Orders(user,new Date(),0,20);
+            Order order = new Order(user,new Date(),0,20);
             int total=0;
             int c1 = new Random().nextInt(4)+1;
             for (int i = 0; i < c1; i++) {
                 Product p= products.get(new Random().nextInt(products.size()));
                 int qt = new Random().nextInt(3);
-                OrderItems item = new OrderItems(p,qt,p.getPrice()*qt);
-                orders.addItem(item);
+                OrderItem item = new OrderItem(p,qt,p.getPrice()*qt);
+                order.addItem(item);
                 total+=p.getPrice()*qt;
             }
-            orders.setTotal(total);
-            em.persist(orders);
+            order.setTotal(total);
+            em.persist(order);
         }
 
 /*

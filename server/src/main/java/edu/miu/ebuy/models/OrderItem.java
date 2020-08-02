@@ -4,12 +4,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class OrderItems {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +24,7 @@ public class OrderItems {
     private double itemTotal;
 
 
-    public OrderItems(Product product, int quantity, double itemTotal) {
+    public OrderItem(Product product, int quantity, double itemTotal) {
 
         this.product = product;
         this.quantity = quantity;
@@ -36,7 +35,7 @@ public class OrderItems {
         return id;
     }
 
-    public OrderItems setId(long id) {
+    public OrderItem setId(long id) {
         this.id = id;
         return this;
     }
@@ -45,7 +44,7 @@ public class OrderItems {
         return product;
     }
 
-    public OrderItems setProduct(Product product) {
+    public OrderItem setProduct(Product product) {
         this.product = product;
         return this;
     }
@@ -54,7 +53,7 @@ public class OrderItems {
         return quantity;
     }
 
-    public OrderItems setQuantity(int quantity) {
+    public OrderItem setQuantity(int quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -63,7 +62,7 @@ public class OrderItems {
         return itemTotal;
     }
 
-    public OrderItems setItemTotal(double itemTotal) {
+    public OrderItem setItemTotal(double itemTotal) {
         this.itemTotal = itemTotal;
         return this;
     }

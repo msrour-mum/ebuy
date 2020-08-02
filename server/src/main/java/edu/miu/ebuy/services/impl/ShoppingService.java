@@ -3,7 +3,7 @@ package edu.miu.ebuy.services.impl;
 import edu.miu.ebuy.dao.*;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.exceptions.Errors;
-import edu.miu.ebuy.models.Card;
+import edu.miu.ebuy.models.MerchantCard;
 import edu.miu.ebuy.models.dto.Checkout;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +28,14 @@ public class ShoppingService implements IShoppingService {
     @Override
     public boolean checkout(Checkout checkout) throws ApplicationException {
         if (!validateCard(checkout.getPayment().getCardNumber(),checkout.getPayment().getExpireDate(),
-                checkout.getPayment().getCvv(), checkout.getPayment().getCardType().getId()))
+                checkout.getPayment().getCcv(), checkout.getPayment().getCardType().getId()))
         {
             throw new ApplicationException("Card not valid!", Errors.CARD_NOT_Valid);
             //return false;
         }
 
-        orderRepository.save(checkout.getOrders());
-        checkout.getPayment().setOrders(checkout.getOrders());
+        orderRepository.save(checkout.getOrder());
+        checkout.getPayment().setOrder(checkout.getOrder());
         paymentRepository.saveAndFlush(checkout.getPayment());
         return true;
 
@@ -43,7 +43,7 @@ public class ShoppingService implements IShoppingService {
 
     @Override
     public boolean validateCard(String cardNo, String expireDate, int ccv, int typeId) {
-        List<Card> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndTypeId(cardNo, expireDate, ccv, typeId);
+        List<MerchantCard> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndTypeId(cardNo, expireDate, ccv, typeId);
         if (lst==null || lst.size()==0)
             return false;
         return  true;

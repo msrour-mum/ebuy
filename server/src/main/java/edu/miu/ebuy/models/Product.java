@@ -22,8 +22,10 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
-    private String description;
+    private String shortDescription;
 
+    @Column(nullable = false)
+    private String description;
 
     @ManyToOne(optional = false)
     @JoinColumn(name ="vendorId")
@@ -41,7 +43,6 @@ public class Product {
 
     @ManyToOne(optional = false)
     @JoinColumn(name ="statusId")
-
     private ProductStatus productStatus;
 
     @Column(name = "isPublished",nullable = false, columnDefinition = "BIT(1) default 1")
@@ -53,10 +54,11 @@ public class Product {
     private String imageUrl;
 
 
-    public Product(String name, String description, User user, Category category, double cost, double price, ProductStatus productStatus, boolean isPublished, boolean isService, String imageUrl) {
+    public Product(String name,String shortDescription, String description, User user, Category category, double cost, double price, ProductStatus productStatus, boolean isPublished, boolean isService, String imageUrl) {
 
         this.name = name;
         this.description = description;
+        this.shortDescription = shortDescription;
         this.user = user;
         this.category = category;
         this.cost = cost;

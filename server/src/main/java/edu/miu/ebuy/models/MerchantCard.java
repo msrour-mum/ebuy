@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Merchant_Card")
 @Data
 @NoArgsConstructor
-public class Card {
+public class MerchantCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

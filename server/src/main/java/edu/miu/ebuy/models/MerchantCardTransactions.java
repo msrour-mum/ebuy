@@ -6,17 +6,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name = "Merchant_CardTransactions")
 @Data
 @NoArgsConstructor
-public class CardTransactions {
+public class MerchantCardTransactions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(optional = false)
-    private Card card;
+    @JoinColumn(name ="cardId")
+    private MerchantCard card;
 
     @Column(name ="balance" , nullable = false)
     private double balance;

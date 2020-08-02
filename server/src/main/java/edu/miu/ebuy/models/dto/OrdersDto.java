@@ -1,10 +1,7 @@
 package edu.miu.ebuy.models.dto;
 
-import edu.miu.ebuy.models.OrderItems;
-import edu.miu.ebuy.models.Orders;
-import edu.miu.ebuy.models.User;
+import edu.miu.ebuy.models.Order;
 
-import javax.persistence.*;
 import java.util.Date;
 
 public class OrdersDto {
@@ -26,7 +23,7 @@ public class OrdersDto {
     }
 
 
-    public static OrdersDto read(Orders or)
+    public static OrdersDto read(Order or)
     {
         OrdersDto ordersDto = new OrdersDto(or.getId(),or.getUser().getName(),or.getOrderDate(),or.getTotal(),or.getShipping());
 

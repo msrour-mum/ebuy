@@ -2,8 +2,7 @@ package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.dao.CardRepository;
 import edu.miu.ebuy.dao.PaymentRepository;
-import edu.miu.ebuy.models.Card;
-import edu.miu.ebuy.models.Payment;
+import edu.miu.ebuy.models.MerchantCard;
 import edu.miu.ebuy.services.interfaces.IPaymentGatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class PaymentGatewayService implements IPaymentGatewayService {
 
     @Override
     public boolean validateCard(String cardNo, String expireDate, int ccv, int typeId) {
-        List<Card> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndTypeId(cardNo, expireDate, ccv, typeId);
+        List<MerchantCard> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndTypeId(cardNo, expireDate, ccv, typeId);
         if (lst==null || lst.size()==0)
             return false;
         return  true;
