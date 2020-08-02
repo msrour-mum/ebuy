@@ -1,8 +1,11 @@
-package mum.itweet.config;
+package edu.miu.ebuy.config;
 
-import mum.itweet.model.*;
-import mum.itweet.model.lookups.Gender;
-import mum.itweet.model.lookups.PostStatus;
+;
+
+
+import edu.miu.ebuy.models.*;
+import edu.miu.ebuy.models.lookup.ProductStatus;
+import org.hibernate.criterion.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.EntityManager;
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -30,61 +34,98 @@ public class DataGenerate {
         em.getTransaction().begin();
 
         Role roleAdmin = new Role(1, "Admin");
-        Role roleContentManager = new Role(2, "ContentManager");
-        Role roleMarketManager = new Role(3, "MarketManager");
-        Role roleUser = new Role(4, "RegularUser");
-
-        User userAdmin1 = new User("Admin", "admin@mum.com", true, roleAdmin, pass, true, new Date(), 1, "1232", "Admin User");
-        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu", true, roleAdmin, pass, true, new Date(), 1, "1232", "Admin User");
-        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com", true, roleContentManager, pass, true, new Date(), 1, "1232", "Admin User");
-        User userAdmin4 = new User("Mo Salah", "mosalah@mum.com", true, roleMarketManager, pass, true, new Date(), 1, "1232", "Admin User");
-        User userAdmin5 = new User("Ibrahim Samier", "adminIbrahim@mum.com", true, roleAdmin, pass, true, new Date(), 1, "1232", "Admin User");
-
-
-        User user1 = new User("Moustafa Zein", "user1@mum.com", false, roleUser, pass, true, new Date(), 1, "1232", "User 1");
-        User user2 = new User("Mahmoud Srour", "user2@mum.com", false, roleUser, pass, true, new Date(), 1, "1232", "User 2");
-        User user3 = new User("Mo Salah", "user3@mum.com", false, roleUser, pass, true, new Date(), 1, "1232", "User 3");
-        User user4 = new User("Ibrahim Samer", "user4@mum.com", false, roleUser, pass, true, new Date(), 1, "1232", "User 4");
-        User user5 = new User("Mobark Salem", "user5@mum.com", false, roleUser, pass, true, new Date(), 1, "1232", "User 5");
-        User user6 = new User("Yasser Kmal", "user6@mum.com", false, roleUser, pass, true, new Date(), 1, "1232", "User 6");
-        User user7 = new User("Said Said", "user7@mum.com", false, roleUser, pass, true, new Date(), 1, "1232", "User 7");
+        Role roleVendor = new Role(2, "Vendor");
+        Role roleUser = new Role(3, "RegularUser");
 
         em.persist(roleAdmin);
-        em.persist(roleContentManager);
-        em.persist(roleMarketManager);
+        em.persist(roleVendor);
         em.persist(roleUser);
 
+
+        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232");
+        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232");
+        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232");
+        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232");
         em.persist(userAdmin1);
         em.persist(userAdmin2);
         em.persist(userAdmin3);
         em.persist(userAdmin4);
-        em.persist(userAdmin5);
 
 
-        em.persist(user1);
-        em.persist(user2);
-        em.persist(user3);
-        em.persist(user4);
-        em.persist(user5);
-        em.persist(user6);
-        em.persist(user7);
+        List<User> vendorList = new ArrayList<>();
 
+        for (int i = 1; i < 6; i++) {
+            User user1 = new User("Vender "+ i, "Vender "+ i+"@mum.com",  roleVendor, pass, true, "1232");
+            em.persist(user1);
+            vendorList.add(user1);
+        }
 
-        UnhealthyKey unhealthyKey1=new UnhealthyKey(1,"Bad");
-        UnhealthyKey unhealthyKey2=new UnhealthyKey(2,"shut");
-        UnhealthyKey unhealthyKey3=new UnhealthyKey(3,"bitch");
-        em.persist(unhealthyKey1);
-        em.persist(unhealthyKey2);
-        em.persist(unhealthyKey3);
-
-
-
-        for (int i = 8; i < 15; i++) {
-            User userTemp = new User("Name : " + i, "user" + i + "@mum.com", false, roleUser, pass, true,new Date(), 1, "1232", "Bio " + i);
-            em.persist(userTemp);
+        for (int i = 0; i < 10; i++) {
+            User user1 = new User("User "+ i, "User "+ i+"@mum.com",  roleUser, pass, true, "1232");
+            em.persist(user1);
         }
 
 
+        Category category1 = new Category(1,"Category 1");
+        Category category2 = new Category(1,"Category 2");
+        Category category3 = new Category(1,"Category 3");
+        Category category4 = new Category(1,"Category 4");
+        Category category5 = new Category(1,"Category 5");
+        em.persist(category1);
+        em.persist(category2);
+        em.persist(category3);
+        em.persist(category4);
+        em.persist(category5);
+
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(category1);
+        categoryList.add(category2);
+        categoryList.add(category3);
+        categoryList.add(category4);
+        categoryList.add(category5);
+
+        ProductStatus productStatusPending = new ProductStatus(1,"Pending");
+        ProductStatus productStatusActive = new ProductStatus(2,"Active");
+        ProductStatus productStatusRejected = new ProductStatus(3,"Rejected");
+        em.persist(productStatusPending);
+        em.persist(productStatusActive);
+        em.persist(productStatusRejected);
+
+        for (int i = 1; i < 21; i++) {
+            Category category = categoryList.get(i%5);
+            User user = vendorList.get(i%5);
+            Product product = new Product("Product "+i,  "Product description"+i, user, category, i*20, i*40, productStatusActive, true, false, "imageUrl");
+            em.persist(product);
+        }
+
+
+
+
+        TypedQuery<User> q = em.createQuery("from User where roleId=3", User.class);
+        List<User> users = q.getResultList();
+
+        TypedQuery<Product> q2 = em.createQuery("from Product  ", Product.class);
+        List<Product> products = q2.getResultList();
+
+        int postCount = 1;
+
+        for (User user: users)
+        {
+            Orders orders = new Orders(user,new Date(),0,20);
+            int total=0;
+            int c1 = new Random().nextInt(4)+1;
+            for (int i = 0; i < c1; i++) {
+                Product p= products.get(new Random().nextInt(products.size()));
+                int qt = new Random().nextInt(3);
+                OrderItems item = new OrderItems(p,qt,p.getPrice()*qt);
+                orders.addItem(item);
+                total+=p.getPrice()*qt;
+            }
+            orders.setTotal(total);
+            em.persist(orders);
+        }
+
+/*
         TypedQuery<User> q = em.createQuery("from User where isAdmin=0", User.class);
         List<User> users = q.getResultList();
         int postCount = 1;
@@ -179,7 +220,7 @@ public class DataGenerate {
                 em.persist(user);
             } catch (Exception EX) {            }
         }
-
+*/
         em.getTransaction().commit();
         emf.close();
 
