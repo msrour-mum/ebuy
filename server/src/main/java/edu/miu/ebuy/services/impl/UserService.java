@@ -2,11 +2,16 @@ package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.dao.RoleRepository;
 import edu.miu.ebuy.dao.UserRepository;
+import edu.miu.ebuy.exceptions.ApplicationException;
+import edu.miu.ebuy.exceptions.Errors;
+import edu.miu.ebuy.exceptions.HttpException;
 import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,13 +35,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User create(User user) {
+    public User create(User user) throws HttpException {
+        CheckIfUserNameExists(user);
         user.setRole(new Role(user.getRole().getId()));
         user.setIsActive(true);
         user.setPassword(passwordUtil().encode(user.getPassword()));
         return userRepository.save(user);
     }
-
     @Override
     public User get(int id) {
         return userRepository.findById(id).get();
@@ -65,6 +70,13 @@ public class UserService implements IUserService {
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    private void CheckIfUserNameExists(User user) throws HttpException {
+        User exUser = userRepository.findByEmail(user.getEmail()).orElse(null);
+        if(exUser != null) {
+            throw new HttpException(HttpStatus.BAD_REQUEST, "User name is already exists!", Errors.NOT_UNIQUE_USER_NAME_ERROR);
+        }
     }
 
 //    @Override

@@ -67,6 +67,6 @@ export class LoginComponent implements OnInit , OnDestroy {
 
   private failedLoginHandler(message): void {
     this.loginFailed = true;
-    this.message = message;
+    this.message = "Invalid username or password";
   }
 }

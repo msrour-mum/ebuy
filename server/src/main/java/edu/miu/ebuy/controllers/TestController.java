@@ -5,10 +5,8 @@ import edu.miu.ebuy.exceptions.Errors;
 import edu.miu.ebuy.exceptions.HttpException;
 import edu.miu.ebuy.models.User;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @BaseResponse
 @RestController
@@ -27,6 +25,18 @@ public class TestController {
 
         }
         return new User();
+    }
+
+    @GetMapping()
+    public boolean get() throws Exception {
+
+        return true;
+    }
+
+    @GetMapping(value = "/string")
+    public ResponseEntity<?> get2() throws Exception {
+
+        return ResponseEntity.ok("String");
     }
 
 }

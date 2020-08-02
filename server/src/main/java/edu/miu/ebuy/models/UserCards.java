@@ -16,8 +16,8 @@ public class UserCards {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(optional = false)
-    private User user;
+    @Column(nullable = false)
+    private String HolderName;
 
     @Column(nullable = false)
     private String cardNumber;

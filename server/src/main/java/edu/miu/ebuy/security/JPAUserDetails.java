@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class JPAUserDetails implements UserDetails {
 
     private int id;
+    private String name;
     private String username;
     private String password;
     private boolean isActive;
@@ -21,6 +22,7 @@ public class JPAUserDetails implements UserDetails {
 
     public JPAUserDetails(User user) {
         id = user.getId();
+        name = user.getName();
         username = user.getEmail();
         password = user.getPassword();
         isActive = user.getIsActive();
@@ -34,7 +36,6 @@ public class JPAUserDetails implements UserDetails {
                 .collect(Collectors.toList());
 
     }
-
     @Override
     public String getPassword() {
         return password;
@@ -72,4 +73,9 @@ public class JPAUserDetails implements UserDetails {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getName() { return this.name;}
+
+    public List<Role> getRoles() { return this.roles;}
+    public Role getRole() { return this.roles.get(0);}
 }
