@@ -19,8 +19,8 @@ public class MerchantCardTransactions {
     @JoinColumn(name ="cardId")
     private MerchantCard card;
 
-    @Column(name ="balance" , nullable = false)
-    private double balance;
+    @Column(name ="amount" , nullable = false)
+    private double amount;
 
     @Column(nullable = false)
     private String description;

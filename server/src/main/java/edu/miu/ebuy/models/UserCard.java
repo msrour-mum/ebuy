@@ -33,4 +33,13 @@ public class UserCard {
     @ManyToOne(optional = false)
     @JoinColumn(name ="typeId")
     private CardType cardType;
+
+    public UserCard(String holderName, String cardNumber, int ccv, String expireDate, CardType cardType) {
+
+        HolderName = holderName;
+        this.cardNumber = cardNumber;
+        this.ccv = ccv;
+        this.expireDate = expireDate;
+        this.cardType = cardType;
+    }
 }

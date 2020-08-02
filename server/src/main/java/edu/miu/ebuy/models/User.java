@@ -35,7 +35,7 @@ public class User implements Serializable {
 
     private String address;
     private String phone;
-    private String ImageUrl;
+    private String imageUrl;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cardId", referencedColumnName = "id")
@@ -52,5 +52,17 @@ public class User implements Serializable {
         this.password = pass;
         this.isActive = isActive;
         this.phone = phone;
+    }
+
+    public User(String name, String email, Role role, String password, Boolean isActive,  String phone, String address, String imageUrl) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.password = password;
+        this.isActive = isActive;
+        this.address = address;
+        this.phone = phone;
+        this.imageUrl = imageUrl;
+
     }
 }

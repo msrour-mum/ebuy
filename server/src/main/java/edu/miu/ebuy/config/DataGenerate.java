@@ -49,26 +49,27 @@ public class DataGenerate {
 
 
 
-        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232");
-        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232");
-        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232");
-        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232");
+        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
         em.persist(userAdmin1);
         em.persist(userAdmin2);
         em.persist(userAdmin3);
         em.persist(userAdmin4);
 
 
+        //Vendors Users
         List<User> vendorList = new ArrayList<>();
-
         for (int i = 1; i < 6; i++) {
-            User user1 = new User("Vender "+ i, "Vender "+ i+"@mum.com",  roleVendor, pass, true, "1232");
+            User user1 = new User("Vender "+ i, "Vender "+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","imageUrl");
             em.persist(user1);
             vendorList.add(user1);
         }
 
-        for (int i = 0; i < 10; i++) {
-            User user1 = new User("User "+ i, "User "+ i+"@mum.com",  roleUser, pass, true, "1232");
+        //End Users
+        for (int i = 1; i < 11; i++) {
+            User user1 = new User("User "+ i, "User "+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
             em.persist(user1);
         }
 
@@ -98,6 +99,11 @@ public class DataGenerate {
         em.persist(productStatusActive);
         em.persist(productStatusRejected);
 
+
+        Product productSubscription = new Product("Subscription Fees",  "Subscription Fees","Subscription Fees, pay with vendor membership", userAdmin1, category1, 0, 20000, productStatusActive, true, true, "imageUrl");
+        em.persist(productSubscription);
+
+        //Products
         for (int i = 1; i < 21; i++) {
             Category category = categoryList.get(i%5);
             User user = vendorList.get(i%5);
@@ -114,7 +120,7 @@ public class DataGenerate {
         TypedQuery<Product> q2 = em.createQuery("from Product  ", Product.class);
         List<Product> products = q2.getResultList();
 
-        int postCount = 1;
+        int recCount = 10;
 
         for (User user: users)
         {
@@ -130,7 +136,19 @@ public class DataGenerate {
             }
             order.setTotal(total);
             em.persist(order);
+
+
+            int ct = new Random().nextInt(2)+1;
+            String cardNo="54789632587412"+recCount;
+            MerchantCard merchantCard = new MerchantCard(user.getName(),cardNo,123,"24/02",new CardType(ct,""),100000);
+            UserCard userCard = new UserCard(user.getName(),cardNo,123,"24/02",new CardType(ct,""));
+            recCount++;
+            em.persist(merchantCard);
+            em.persist(userCard);
         }
+
+
+
 
 /*
         TypedQuery<User> q = em.createQuery("from User where isAdmin=0", User.class);
