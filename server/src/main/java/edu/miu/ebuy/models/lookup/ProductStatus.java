@@ -17,4 +17,9 @@ public class   ProductStatus {
 
     @Column(nullable = false)
     private String name;
+
+    public ProductStatus(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

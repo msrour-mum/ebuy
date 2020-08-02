@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Immutable
-@Table(name="vworderitemdetails")
+//@Table(name="vworderitemdetails")
 public class OrderItemReport {
     @Id
     private long id;

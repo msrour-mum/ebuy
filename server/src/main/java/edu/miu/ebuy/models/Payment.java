@@ -20,7 +20,7 @@ public class Payment {
     private User user;
 
     @ManyToOne(optional = false)
-    private Order order;
+    private Orders orders;
 
     @Column(nullable = false)
     private String cardNumber;
@@ -57,12 +57,12 @@ public class Payment {
         return this;
     }
 
-    public Order getOrder() {
-        return order;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public Payment setOrder(Order order) {
-        this.order = order;
+    public Payment setOrders(Orders orders) {
+        this.orders = orders;
         return this;
     }
 

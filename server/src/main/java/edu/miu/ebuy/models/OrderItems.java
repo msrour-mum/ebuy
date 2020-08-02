@@ -24,4 +24,47 @@ public class OrderItems {
     @Column(name ="itemTotal" , nullable = false)
     private double itemTotal;
 
+
+    public OrderItems(Product product, int quantity, double itemTotal) {
+
+        this.product = product;
+        this.quantity = quantity;
+        this.itemTotal = itemTotal;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public OrderItems setId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public OrderItems setProduct(Product product) {
+        this.product = product;
+        return this;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public OrderItems setQuantity(int quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public double getItemTotal() {
+        return itemTotal;
+    }
+
+    public OrderItems setItemTotal(double itemTotal) {
+        this.itemTotal = itemTotal;
+        return this;
+    }
 }

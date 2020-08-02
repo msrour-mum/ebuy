@@ -3,8 +3,6 @@ package edu.miu.ebuy.controllers;
 
 import edu.miu.ebuy.common.http.BaseResponse;
 import edu.miu.ebuy.exceptions.ApplicationException;
-import edu.miu.ebuy.exceptions.Errors;
-import edu.miu.ebuy.models.Order;
 import edu.miu.ebuy.models.dto.Checkout;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
