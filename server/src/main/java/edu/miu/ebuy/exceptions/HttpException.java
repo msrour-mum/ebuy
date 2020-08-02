@@ -8,7 +8,6 @@ public class HttpException extends ApplicationException {
 
     HttpStatus httpStatus;
 
-
     public HttpException(HttpStatus httpStatus, String message, int errorCode) {
         super(message, errorCode);
         this.httpStatus = httpStatus;

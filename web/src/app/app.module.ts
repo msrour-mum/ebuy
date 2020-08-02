@@ -8,7 +8,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from './services/authentication.service';
 import {JwtInterceptor} from './common/interceptors/jwt.interceptor';
 import {ReactiveFormsModule} from '@angular/forms';
-import {PreloadAllModules, RouterModule} from '@angular/router';
 import {LoginComponent} from './modules/authentication/login/login.component';
 import {SignupComponent} from './modules/authentication/signup/signup.component';
 import {CommonModule} from '@angular/common';
@@ -25,7 +24,7 @@ export function initializeApp(appConfig: AppConfig) {
     LoginComponent,
     SignupComponent,
     ProductListComponent,
-    ApproveProductComponent
+    ApproveProductComponent,
   ],
   imports: [
     BrowserModule,

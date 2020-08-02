@@ -89,6 +89,14 @@
                 </div>
 
                 <div class="card-body" *ngIf="isVendorSignup">
+                  <div class="card text-white bg-info mb-3">
+                    <div class="card-body">
+                      <h4 class="card-title">Vendor Subscription</h4>
+                      <p class="card-text">To use ebuy online shopping as vendor you must purchase the vendor service,
+                        this service will cost <b>$20,000</b> Once a time.<br> As a vendor you can create and sell your own products online, as well as, admin pages to mange your sales</p>
+                      <p class="text-warning" style="font-size:11px;"><span class="badge badge-danger">*</span> This payment will be deducted automatically once you complete signup process</p>
+                    </div>
+                  </div>
                   <fieldset>
                     <legend>Credit Card Information</legend>
                     <div class="form-group">
@@ -183,9 +191,9 @@
 
             </fieldset>
 
-            <p> form: {{signupForm.value | json}}</p>
-            <p> Ss Invalid: {{signupForm.invalid}}</p>
-            <p> Ss Invalid: {{signupForm.errors | json}}</p>
+<!--            <p> form: {{signupForm.value | json}}</p>-->
+<!--            <p> Ss Invalid: {{signupForm.invalid}}</p>-->
+<!--            <p> Ss Invalid: {{signupForm.errors | json}}</p>-->
           </form>
 
         </div>

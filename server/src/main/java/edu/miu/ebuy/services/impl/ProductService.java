@@ -62,6 +62,11 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public Product getServiceProduct() {
+        return productRepository.getProductByIsService(true);
+    }
+
+    @Override
     public List<Product> getProductByPrice(double fromPrice, double toPrice) {
         return productRepository.getProductByPrice(fromPrice,toPrice);
     }

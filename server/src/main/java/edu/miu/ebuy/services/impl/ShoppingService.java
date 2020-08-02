@@ -3,13 +3,18 @@ package edu.miu.ebuy.services.impl;
 import edu.miu.ebuy.dao.*;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.exceptions.Errors;
-import edu.miu.ebuy.models.MerchantCard;
+import edu.miu.ebuy.exceptions.HttpException;
+import edu.miu.ebuy.models.*;
 import edu.miu.ebuy.models.dto.Checkout;
+import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,12 +30,18 @@ public class ShoppingService implements IShoppingService {
     @Autowired
     CardRepository cardRepository;
 
+    @Autowired
+    IMerchantService merchantService;
+
+    @Autowired
+    private ProductService productService;
+
     @Override
     public boolean checkout(Checkout checkout) throws ApplicationException {
-        if (!validateCard(checkout.getPayment().getCardNumber(),checkout.getPayment().getExpireDate(),
+        if (!merchantService.validateCard(checkout.getPayment().getCardNumber(),checkout.getPayment().getExpireDate(),
                 checkout.getPayment().getCcv(), checkout.getPayment().getCardType().getId()))
         {
-            throw new ApplicationException("Card not valid!", Errors.CARD_NOT_Valid);
+            throw new ApplicationException("Card not valid!", Errors.CARD_NOT_VALID);
             //return false;
         }
 
@@ -42,10 +53,28 @@ public class ShoppingService implements IShoppingService {
     }
 
     @Override
-    public boolean validateCard(String cardNo, String expireDate, int ccv, int typeId) {
-        List<MerchantCard> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndTypeId(cardNo, expireDate, ccv, typeId);
-        if (lst==null || lst.size()==0)
-            return false;
-        return  true;
+    public Product subscribeVendor(User user) throws HttpException {
+        Product serviceProduct =  productService.getServiceProduct();
+        if(!merchantService.validateCard(user.getCard().getCardNumber(),
+                user.getCard().getExpireDate(),
+                user.getCard().getCcv(),
+                user.getCard().getCardType().getId())) {
+            throw new HttpException(HttpStatus.BAD_REQUEST, "Invalid credit card", Errors.CARD_NOT_VALID);
+        } else {
+            if(!merchantService.pay(user.getCard().getCardNumber(),
+                    user.getCard().getExpireDate(),
+                    user.getCard().getCcv(),
+                    user.getCard().getCardType().getId(),
+                    serviceProduct.getPrice())) {
+                throw new HttpException(HttpStatus.BAD_REQUEST, "Payment failed, insufficient balance", Errors.CARD_INSUFFICIENT_BALANCE);
+            }
+        }
+        return serviceProduct;
     }
+
+    public void addOrder(OrderItem orderItem, User user, double shipping) {
+        Order order = new Order(user,new Date(), orderItem.getItemTotal(), shipping);
+        orderRepository.save(order);
+    }
+
 }

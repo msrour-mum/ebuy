@@ -85,7 +85,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     if (e.target.checked) {
       role.setValue('2'); //Todo: map to constant Role 2: vendor
       holderName.setValidators(Validators.required);
-      cardNumber.setValidators([Validators.required, Validators.pattern('^\\d{4}$')]);
+      cardNumber.setValidators([Validators.required, Validators.pattern('^\\d{16}$')]);
       ccv.setValidators([Validators.required, Validators.pattern('^\\d{3}$')]);
       expireDate.setValidators([Validators.required, Validators.pattern('^\\d{2}/\\\d{2}$')]);
     } else {

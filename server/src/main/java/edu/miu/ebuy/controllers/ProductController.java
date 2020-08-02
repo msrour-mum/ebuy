@@ -25,7 +25,7 @@ public class ProductController {
         return productService.create(product);
     }
 
-    @PutMapping("/{categoryId}")
+    @PutMapping("/{productId}")
     public Product update(@RequestBody Product product, @PathVariable int productId) throws ApplicationException {
        return productService.update(productId,product);
     }
@@ -37,15 +37,15 @@ public class ProductController {
 
     }
 
-    @GetMapping("/{categoryId}")
+    @GetMapping("/{productId}")
     public Product get(@PathVariable int productId) {
 
             return productService.get(productId);
 
     }
 
-    @DeleteMapping("/{categoryId}")
-    public void delete(@PathVariable int categoryId) {
-        productService.delete(categoryId);
+    @DeleteMapping("/{productId}")
+    public void delete(@PathVariable int productId) {
+        productService.delete(productId);
     }
 }
