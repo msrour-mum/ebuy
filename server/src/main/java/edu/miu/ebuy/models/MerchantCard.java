@@ -30,18 +30,18 @@ public class MerchantCard {
 
     @ManyToOne(optional = false)
     @JoinColumn(name ="typeId")
-    private CardType typeId;
+    private CardType cardType;
 
     @Column(name ="balance" , nullable = false)
     private double balance;
 
 
-    public MerchantCard(String ownerName, String cardNumber, int ccv, String expireDate, CardType typeId, double balance) {
+    public MerchantCard(String ownerName, String cardNumber, int ccv, String expireDate, CardType cardType, double balance) {
         this.ownerName = ownerName;
         this.cardNumber = cardNumber;
         this.ccv = ccv;
         this.expireDate = expireDate;
-        this.typeId = typeId;
+        this.cardType = cardType;
         this.balance = balance;
     }
 }

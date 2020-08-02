@@ -17,7 +17,7 @@ public class UserCard {
     private int id;
 
     @Column(nullable = false)
-    private String HolderName;
+    private String holderName;
 
     @Column(nullable = false)
     private String cardNumber;
@@ -36,10 +36,64 @@ public class UserCard {
 
     public UserCard(String holderName, String cardNumber, int ccv, String expireDate, CardType cardType) {
 
-        HolderName = holderName;
+        this.holderName = holderName;
         this.cardNumber = cardNumber;
         this.ccv = ccv;
         this.expireDate = expireDate;
         this.cardType = cardType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public UserCard setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public UserCard setHolderName(String holderName) {
+        holderName = holderName;
+        return this;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public UserCard setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+        return this;
+    }
+
+    public int getCcv() {
+        return ccv;
+    }
+
+    public UserCard setCcv(int ccv) {
+        this.ccv = ccv;
+        return this;
+    }
+
+    public String getExpireDate() {
+        return expireDate;
+    }
+
+    public UserCard setExpireDate(String expireDate) {
+        this.expireDate = expireDate;
+        return this;
+    }
+
+    public CardType getCardType() {
+        return cardType;
+    }
+
+    public UserCard setCardType(CardType cardType) {
+        this.cardType = cardType;
+        return this;
     }
 }

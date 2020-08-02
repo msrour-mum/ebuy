@@ -8,6 +8,7 @@ import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class ShoppingController {
     IShoppingService  iShoppingService;
 
     @PostMapping("/checkout")
-    public boolean checkout(Checkout checkout) throws ApplicationException {
+    public boolean checkout(@RequestBody Checkout checkout) throws ApplicationException {
             return  iShoppingService.checkout(checkout);
 
     }

@@ -21,7 +21,7 @@ public class MerchantService implements IMerchantService {
 
     @Override
     public boolean validateCard(String cardNo, String expireDate, int ccv, int typeId) {
-        List<MerchantCard> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndTypeId(cardNo, expireDate, ccv, typeId);
+        List<MerchantCard> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndCardType_Id(cardNo, expireDate, ccv, typeId);
         if (lst==null || lst.size()==0)
             return false;
         return  true;
@@ -29,7 +29,7 @@ public class MerchantService implements IMerchantService {
 
     @Override
     public boolean validateCard(String cardNo, String expireDate, int ccv, int typeId, double amount) {
-        List<MerchantCard> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndTypeIdAndBalanceGreaterThan(cardNo, expireDate, ccv, typeId, amount);
+        List<MerchantCard> lst = cardRepository.findByCardNumberAndExpireDateAndCcvAndCardType_IdAndBalanceGreaterThan(cardNo, expireDate, ccv, typeId, amount);
         if (lst==null || lst.size()==0)
             return false;
         return  true;

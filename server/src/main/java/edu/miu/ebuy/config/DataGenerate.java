@@ -140,7 +140,7 @@ public class DataGenerate {
 
             int ct = new Random().nextInt(2)+1;
             String cardNo="54789632587412"+recCount;
-            MerchantCard merchantCard = new MerchantCard(user.getName(),cardNo,123,"24/02",new CardType(ct,""),100000);
+            MerchantCard merchantCard = new MerchantCard(user.getName(),cardNo,123,"02/24",new CardType(ct,"sadsd"),100000);
             UserCard userCard = new UserCard(user.getName(),cardNo,123,"24/02",new CardType(ct,""));
             recCount++;
             em.persist(merchantCard);
