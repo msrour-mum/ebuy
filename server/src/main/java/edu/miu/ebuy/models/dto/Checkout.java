@@ -1,19 +1,19 @@
 package edu.miu.ebuy.models.dto;
 
-import edu.miu.ebuy.models.Order;
+import edu.miu.ebuy.models.Orders;
 import edu.miu.ebuy.models.Payment;
 
 public class Checkout {
 
-    private Order order;
+    private Orders orders;
     private Payment payment;
 
-    public Order getOrder() {
-        return order;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public Checkout setOrder(Order order) {
-        this.order = order;
+    public Checkout setOrders(Orders orders) {
+        this.orders = orders;
         return this;
     }
 

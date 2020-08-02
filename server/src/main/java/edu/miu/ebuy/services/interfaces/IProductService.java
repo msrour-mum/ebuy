@@ -1,4 +1,4 @@
-package server.src.main.java.edu.miu.ebuy.services.interfaces;
+package edu.miu.ebuy.services.interfaces;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Product ;
 
@@ -10,6 +10,7 @@ public interface IProductService {
     public void delete(int productId);
     public List<Product> getProductByPrice(double fromPrice,double toPrice);
     public List<Product> getAll();
+    public Product get(int productId);
     public Product approveProduct(Product product);
     public Product rejectProduct(Product product);
 }

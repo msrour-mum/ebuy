@@ -132,7 +132,7 @@
             <line>
                 <reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="1ae3dade-8c2f-4cc0-8117-04c5db7e1530"/>
             </line>
-            <textField textAdjust="StretchHeight">
+            <textField>
                 <reportElement x="-20" y="0" width="69" height="20" uuid="284f789d-f804-4e15-8b4c-0296cb1cea04">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63059436-eeef-46a5-bdd6-f78bc2829b6b"/>
                 </reportElement>
@@ -141,7 +141,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField >
                 <reportElement x="49" y="0" width="69" height="20" uuid="09973b09-157f-47fb-b0e1-3ee37b58d64b">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="18d628b2-9f4d-48cf-b7e5-c55c02f10e17"/>
                 </reportElement>
@@ -150,7 +150,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{orderDate}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField >
                 <reportElement x="125" y="0" width="58" height="20" uuid="28dadb24-9e02-4260-99ba-9df06a9b56c6">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="07b8b4d8-a9ab-4c4f-996d-417efd442af3"/>
                 </reportElement>
@@ -159,7 +159,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField >
                 <reportElement x="200" y="0" width="99" height="20" uuid="08072de4-718a-43a2-ace4-8269a360f782">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f3a1d26-54e2-42d5-80c4-b7081d6ccd0e"/>
                 </reportElement>
@@ -168,7 +168,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField >
                 <reportElement x="310" y="-2" width="59" height="20" uuid="01ce0356-612d-4715-a3e7-401e2a2305d2">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b1cf8270-0b97-495b-8400-ff0656d98708"/>
                 </reportElement>
@@ -177,7 +177,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField >
                 <reportElement x="370" y="-2" width="68" height="20" uuid="cf6e2b99-5626-428d-b963-00bd6dbf75c6">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3b86c5b2-93d3-4918-a2b1-fb7196c46614"/>
                 </reportElement>
@@ -186,7 +186,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField >
                 <reportElement x="440" y="0" width="69" height="20" uuid="4ea8c31b-4076-4a04-be4f-4bef488b550a">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2632c30e-c650-4abf-b269-545c17c9a5b2"/>
                 </reportElement>
@@ -195,7 +195,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{shipping}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField >
                 <reportElement x="506" y="0" width="69" height="20" uuid="59ce5d53-4bc2-4fbc-a909-39c31074b923">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="112d0c7b-81ca-4cad-8183-21081c9a3a9e"/>
                 </reportElement>

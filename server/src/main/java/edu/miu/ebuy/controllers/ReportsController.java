@@ -1,8 +1,6 @@
 package edu.miu.ebuy.controllers;
 
 import edu.miu.ebuy.common.http.BaseResponse;
-import edu.miu.ebuy.dao.OrderItemReportRepository;
-import edu.miu.ebuy.models.OrderItemReport;
 import edu.miu.ebuy.services.interfaces.IReportService;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 
 @RestController
 @BaseResponse

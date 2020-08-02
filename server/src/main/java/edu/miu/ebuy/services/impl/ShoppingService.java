@@ -34,8 +34,8 @@ public class ShoppingService implements IShoppingService {
             //return false;
         }
 
-        orderRepository.save(checkout.getOrder());
-        checkout.getPayment().setOrder(checkout.getOrder());
+        orderRepository.save(checkout.getOrders());
+        checkout.getPayment().setOrders(checkout.getOrders());
         paymentRepository.saveAndFlush(checkout.getPayment());
         return true;
 

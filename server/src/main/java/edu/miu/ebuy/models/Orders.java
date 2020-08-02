@@ -11,15 +11,16 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name ="userId")
     private User user;
 
-    @Column(name ="orderDate", nullable = false, columnDefinition = "DATETIME default now()")
+    @Column(name ="orderDate", nullable = false, columnDefinition = "DATETIME")
     private Date orderDate;
 
     @Column(name ="total" , nullable = false)
@@ -38,11 +39,20 @@ public class Order {
         items.remove(item);
     }
 
+
+    public Orders(User user, Date orderDate, double total, double shipping) {
+
+        this.user = user;
+        this.orderDate = orderDate;
+        this.total = total;
+        this.shipping = shipping;
+    }
+
     public long getId() {
         return id;
     }
 
-    public Order setId(long id) {
+    public Orders setId(long id) {
         this.id = id;
         return this;
     }
@@ -51,7 +61,7 @@ public class Order {
         return user;
     }
 
-    public Order setUser(User user) {
+    public Orders setUser(User user) {
         this.user = user;
         return this;
     }
@@ -60,7 +70,7 @@ public class Order {
         return orderDate;
     }
 
-    public Order setOrderDate(Date orderDate) {
+    public Orders setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
         return this;
     }
@@ -69,7 +79,7 @@ public class Order {
         return total;
     }
 
-    public Order setTotal(double total) {
+    public Orders setTotal(double total) {
         this.total = total;
         return this;
     }
@@ -78,7 +88,7 @@ public class Order {
         return shipping;
     }
 
-    public Order setShipping(double shipping) {
+    public Orders setShipping(double shipping) {
         this.shipping = shipping;
         return this;
     }
@@ -87,7 +97,7 @@ public class Order {
         return items;
     }
 
-    public Order setItems(List<OrderItems> items) {
+    public Orders setItems(List<OrderItems> items) {
         this.items = items;
         return this;
     }

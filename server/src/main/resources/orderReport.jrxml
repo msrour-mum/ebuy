@@ -89,7 +89,7 @@
             <line>
                 <reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="2cee325a-daac-42e6-97dc-4852a15ae392"/>
             </line>
-            <textField textAdjust="StretchHeight">
+            <textField>
                 <reportElement x="0" y="0" width="138" height="20" uuid="7cf37bd1-e67e-4995-81fe-a02a30efc208">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf8675ee-391a-4caa-a7a6-ee7838d4e84d"/>
                 </reportElement>
@@ -98,7 +98,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField>
                 <reportElement x="120" y="0" width="138" height="20" uuid="9af6814e-86cc-45de-bbb0-3ee9916c261d">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="82836e35-7f58-462c-b6f8-15629d65c624"/>
                 </reportElement>
@@ -107,7 +107,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{orderDate}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField>
                 <reportElement x="290" y="0" width="130" height="20" uuid="780588a2-b5eb-4660-9f45-2edfefc6acda">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d97b118e-0ff1-4cc8-a53f-a2614e2f8444"/>
                 </reportElement>
@@ -116,7 +116,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{shipping}]]></textFieldExpression>
             </textField>
-            <textField textAdjust="StretchHeight">
+            <textField>
                 <reportElement x="437" y="-2" width="138" height="20" uuid="fb7bc8ca-ba6b-4a58-b1e0-3e43aa615a08">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0c1cf6ee-d759-4420-a73a-6c860f67423f"/>
                 </reportElement>
