@@ -1,11 +1,7 @@
 package edu.miu.ebuy.config;
 
-;
-
-
 import edu.miu.ebuy.models.*;
 import edu.miu.ebuy.models.lookup.ProductStatus;
-import org.hibernate.criterion.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.EntityManager;
@@ -13,13 +9,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+;
 
 public class DataGenerate {
 
