@@ -28,7 +28,7 @@
         </li>
       </ul>
 <!--      <div style="margin-right: 20px" *ngIf="authService.isAuthenticated">-->
-      <div style="margin-right: 20px">-->
+      <div style="margin-right: 20px">
         <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
           <input class="form-control mr-sm-2" type="text" placeholder="Search" [formControl]="searchForm.get('search')">
           <button type="submit"  class="btn btn-secondary my-2 my-sm-0">Search</button>

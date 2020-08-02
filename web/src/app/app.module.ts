@@ -13,6 +13,7 @@ import {LoginComponent} from './modules/authentication/login/login.component';
 import {SignupComponent} from './modules/authentication/signup/signup.component';
 import {CommonModule} from '@angular/common';
 import {ProductListComponent} from './modules/shopping/products/product-list/product-list.component';
+import { ApproveProductComponent } from './modules/admin/approve-product/approve-product.component';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -24,6 +25,7 @@ export function initializeApp(appConfig: AppConfig) {
     LoginComponent,
     SignupComponent,
     ProductListComponent,
+    ApproveProductComponent
   ],
   imports: [
     BrowserModule,
