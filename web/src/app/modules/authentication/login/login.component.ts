@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit , OnDestroy {
  public subs = new SubSink();
  public loginFailed: boolean;
  public message: string;
-  public loginForm: FormGroup;
+ public loginForm: FormGroup;
 
   constructor(private fb: FormBuilder,
               private router: Router,

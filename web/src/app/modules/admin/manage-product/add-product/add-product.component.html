@@ -1,0 +1,130 @@
+<main class="acc-form">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <h4>Admin Category List</h4>
+      </div>
+      <div class="col-4">
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">Create/Edit Product</div>
+            <div class="card-body">
+              <form [formGroup]="productForm" >
+                <div class="form-group row">
+                  <label for="name" class="col-md-4 col-form-label text-md-right">Product</label>
+                  <div class="col-md-6">
+                    <input type="text"
+                           [formControl]="productForm.get('name')"
+                           [ngClass]="{'is-invalid': isValid('name')}"
+                           id="name"
+                           class="form-control"
+                           name="category" autofocus>
+                    <div *ngIf="hasError('name')" class="invalid-feedback">
+                      product name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="shortdesc" class="col-md-4 col-form-label text-md-right">Short Description</label>
+                  <div class="col-md-6">
+                    <textarea
+                           [formControl]="productForm.get('shortdesc')"
+                           [ngClass]="{'is-invalid': isValid('shortdesc')}"
+                           id="shortdesc"
+                           class="form-control"
+                           name="shortdesc" autofocus></textarea>
+                    <div *ngIf="hasError('shortdesc')" class="invalid-feedback">
+                      short description is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+                  <div class="col-md-6">
+                    <textarea
+                      [formControl]="productForm.get('description')"
+                      [ngClass]="{'is-invalid': isValid('shortdesc')}"
+                      id="description"
+                      class="form-control"
+                      name="description" autofocus></textarea>
+                    <div *ngIf="hasError('description')" class="invalid-feedback">
+                      description is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="cost" class="col-md-4 col-form-label text-md-right">Cost</label>
+                  <div class="col-md-6">
+                    <input type="number"
+                           [formControl]="productForm.get('cost')"
+                           [ngClass]="{'is-invalid': isValid('cost')}"
+                           id="cost"
+                           class="form-control"
+                           name="cost" autofocus>
+                    <div *ngIf="hasError('cost')" class="invalid-feedback">
+                      product cost price is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="price" class="col-md-4 col-form-label text-md-right">Selling Price</label>
+                  <div class="col-md-6">
+                    <input type="number"
+                           [formControl]="productForm.get('price')"
+                           [ngClass]="{'is-invalid': isValid('price')}"
+                           id="price"
+                           class="form-control"
+                           name="price" autofocus>
+                    <div *ngIf="hasError('price')" class="invalid-feedback">
+                      selling price is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="imageurl" class="col-md-4 col-form-label text-md-right">Image Url</label>
+                  <div class="col-md-6">
+                    <input type="text"
+                           [formControl]="productForm.get('imageurl')"
+                           [ngClass]="{'is-invalid': isValid('imageurl')}"
+                           id="imageurl"
+                           class="form-control"
+                           name="imageurl" autofocus>
+                    <div *ngIf="hasError('imageurl')" class="invalid-feedback">
+                      image url is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="category" class="col-md-4 col-form-label text-md-right">Category</label>
+                  <div class="col-md-6">
+                    <input type="text"
+                           [formControl]="productForm.get('category')"
+                           [ngClass]="{'is-invalid': isValid('category')}"
+                           id="category"
+                           class="form-control"
+                           name="category" autofocus>
+                    <div *ngIf="hasError('category')" class="invalid-feedback">
+                      category is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 offset-md-4">
+                  <button class="btn btn-primary" (click)="onSubmit()" >Save</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+

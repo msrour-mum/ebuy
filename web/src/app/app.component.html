@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" [routerLink]="['home']" *ngIf="authService.isAuthenticated" style="font-family: 'Agency FB'; font-size: 2em">
+    <a class="navbar-brand" [routerLink]="['home']" style="font-family: 'Agency FB'; font-size: 2em">
       <i class="fa fa-shopping-basket" aria-hidden="true"></i>
       <span style="margin:3px;"><strong style="color:#ffd43b;">e</strong>Buy</span>
     </a>
@@ -15,19 +15,25 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['home']" *ngIf="authService.isAuthenticated">Home</a>
         </li>
-
         <li class="nav-item">
-
-          <a class="nav-link" [routerLink]="['user', authService.currentUser._id, 'auctions']"
-             *ngIf="authService.isAuthenticated">My Auctions</a>
+          <a class="nav-link" [routerLink]="['myOrders']" *ngIf="authService.isAuthenticated">My Orders</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['auctions']" *ngIf="authService.isAuthenticated">Create Auction</a>
+        <li class="nav-item dropdown" *ngIf="authService.isAuthenticated">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="admin" aria-expanded="false">
+            Admin <span class="caret"></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="admin">
+            <a class="dropdown-item" href="../default/">Manage Users</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../cerulean/">Manage Products</a>
+            <a class="dropdown-item" [routerLink]="['approve-product']">Review Products</a>
+            <a class="dropdown-item" [routerLink]="['categories']">Manage Categories</a>
+
+          </div>
         </li>
       </ul>
-<!--      <div style="margin-right: 20px" *ngIf="authService.isAuthenticated">-->
-      <div style="margin-right: 20px">
+      <div>
         <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
           <input class="form-control mr-sm-2" type="text" placeholder="Search" [formControl]="searchForm.get('search')">
           <button type="submit"  class="btn btn-secondary my-2 my-sm-0 search-icon">
@@ -36,9 +42,9 @@
         </form>
       </div>
 
-      <a [routerLink]="['user/auctions']" *ngIf="authService.isAuthenticated"><img class="user-small-img"
-                                                                                   src="{{hostUrl + authService.currentUser.photoUrl}}"
-                                                                                   alt="avatar"></a>
+      <a [routerLink]="['user/auctions']" *ngIf="authService.isAuthenticated">
+        <img class="user-small-img" src="/src/assets/images/profile-photo.png" alt="avatar">
+      </a>
       <a class="nav-link" style="color:white" *ngIf="!authService.isAuthenticated" [routerLink]="['login']">Login</a>
       <a class="nav-link" style="color:white" [routerLink]="['home']"
          *ngIf="authService.isAuthenticated">Hello, {{authService.currentUser.name}} </a>
@@ -55,16 +61,20 @@
 </section>
 <footer class="footer bg-primary row">
   <div class="footer-left col-xs-12 col-sm-12 col-md-4">
-    <a href="http://mumstudents.org/" class="block a-ftr">CS572 Modern Web Applications</a>
+    <a href="http://mumstudents.org/" class="block a-ftr">Company info</a>
+    <a href="http://mumstudents.org/" class="block a-ftr">Government relations</a>
 
   </div>
   <div class="footer-mid col-xs-12 col-sm-12 col-md-4">
-    <a href="http://mumstudents.org/" class="block a-ftr">CS572 Modern Web Applications</a>
-    <a href="https://www.mum.edu/" class="block a-ftr">Students life in USA</a>
-    <a href="https://www.mum.edu/" class="block a-ftr">Department of Computer Scienc</a>
+    <a href="http://mumstudents.org/" class="block a-ftr">Business sellers</a>
+    <a href="https://www.mum.edu/" class="block a-ftr">How to sell</a>
+    <a href="https://www.mum.edu/" class="block a-ftr">Registration & Signup</a>
   </div>
   <div class="footer-right col-xs-12 col-sm-12 col-md-4">
     <a href="#" class="block a-ftr">Polices & privacy</a>
+    <a href="#" class="block a-ftr">Contact us</a>
+    <a href="#" class="block a-ftr">Charity Shop</a>
+    <a href="#" class="block a-ftr">eBuy Community</a>
     <i class="icon-twitter"></i>
     <i class="icon-facebook"></i>
     <i class="icon-apple"></i>

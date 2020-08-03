@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
-import { OrdersListComponent } from './orders-list/orders-list.component';
+import { MyOrdersListComponent } from './my-orders-list/my-orders-list.component';
 
 
 
 @NgModule({
-  declarations: [ProfileComponent, OrdersListComponent],
+  declarations: [ProfileComponent, MyOrdersListComponent],
   imports: [
     CommonModule
   ]
