@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+@Entity(name = "Orders")
 @Data
 @NoArgsConstructor
 public class Order {
@@ -17,9 +17,10 @@ public class Order {
     private long id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name ="userId")
     private User user;
 
-    @Column(name ="orderDate", nullable = false, columnDefinition = "DATETIME default now()")
+    @Column(name ="orderDate", nullable = false, columnDefinition = "DATETIME")
     private Date orderDate;
 
     @Column(name ="total" , nullable = false)
@@ -30,12 +31,21 @@ public class Order {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name ="order_id", nullable = false)
-    List<OrderItems> items =new ArrayList<>();
+    List<OrderItem> items =new ArrayList<>();
 
-    public void addItem(OrderItems item)    { if (items!=null)    items.add(item);    }
-    public void removeItem(OrderItems item)
+    public void addItem(OrderItem item)    { if (items!=null)    items.add(item);    }
+    public void removeItem(OrderItem item)
     {
         items.remove(item);
+    }
+
+
+    public Order(User user, Date orderDate, double total, double shipping) {
+
+        this.user = user;
+        this.orderDate = orderDate;
+        this.total = total;
+        this.shipping = shipping;
     }
 
     public long getId() {
@@ -83,11 +93,11 @@ public class Order {
         return this;
     }
 
-    public List<OrderItems> getItems() {
+    public List<OrderItem> getItems() {
         return items;
     }
 
-    public Order setItems(List<OrderItems> items) {
+    public Order setItems(List<OrderItem> items) {
         this.items = items;
         return this;
     }

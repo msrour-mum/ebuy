@@ -1,12 +1,20 @@
 package edu.miu.ebuy.services.impl;
 
+import edu.miu.ebuy.common.enums.RoleEnum;
 import edu.miu.ebuy.dao.RoleRepository;
 import edu.miu.ebuy.dao.UserRepository;
+import edu.miu.ebuy.exceptions.Errors;
+import edu.miu.ebuy.exceptions.HttpException;
+import edu.miu.ebuy.models.OrderItem;
+import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
+import edu.miu.ebuy.services.interfaces.IMerchantService;
+import edu.miu.ebuy.services.interfaces.IShoppingService;
 import edu.miu.ebuy.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,17 +32,37 @@ public class UserService implements IUserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    IMerchantService merchantService;
+
+    @Autowired
+    IShoppingService shoppingService;
+
     @Bean
     public PasswordEncoder passwordUtil() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
-    public User create(User user) {
+    public User create(User user) throws HttpException {
+        CheckIfUserNameExists(user);
+        Product product = null;
+        if(user.getRole().getId() == RoleEnum.VENDOR.id)
+        {
+            product = shoppingService.subscribeVendor(user);
+        }
         user.setRole(new Role(user.getRole().getId()));
         user.setIsActive(true);
         user.setPassword(passwordUtil().encode(user.getPassword()));
-        return userRepository.save(user);
+        User savedUser =  userRepository.save(user);
+
+        if(user.getRole().getId() == RoleEnum.VENDOR.id)
+        {
+            assert product != null;
+            OrderItem orderItem = new OrderItem(product, 1, product.getPrice());
+            shoppingService.addOrder(orderItem, savedUser, 0);
+        }
+        return savedUser;
     }
 
     @Override
@@ -65,6 +93,13 @@ public class UserService implements IUserService {
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    private void CheckIfUserNameExists(User user) throws HttpException {
+        User exUser = userRepository.findByEmail(user.getEmail()).orElse(null);
+        if(exUser != null) {
+            throw new HttpException(HttpStatus.BAD_REQUEST, "User name is already exists!", Errors.NOT_UNIQUE_USER_NAME_ERROR);
+        }
     }
 
 //    @Override

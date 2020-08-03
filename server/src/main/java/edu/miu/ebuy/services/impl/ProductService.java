@@ -1,14 +1,14 @@
-package server.src.main.java.edu.miu.ebuy.services.impl;
+package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.dao.ProductRepository;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Category;
 import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.lookup.ProductStatus;
+import edu.miu.ebuy.services.interfaces.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import server.src.main.java.edu.miu.ebuy.services.interfaces.IProductService;
 
 import javax.naming.Name;
 import java.util.List;
@@ -42,6 +42,10 @@ public class ProductService implements IProductService {
     public List<Product> getAll() {
         return (List<Product>) productRepository.findAll();
     }
+    @Override
+    public Product get(int productId) {
+        return  productRepository.getOne(productId);
+    }
 
     @Override
     public Product approveProduct(Product product) {
@@ -55,6 +59,11 @@ public class ProductService implements IProductService {
         ProductStatus productStatus = product.getProductStatus();
         productStatus.setName("Rejected");
         return productRepository.save(product);
+    }
+
+    @Override
+    public Product getServiceProduct() {
+        return productRepository.getProductByIsService(true);
     }
 
     @Override

@@ -48,15 +48,15 @@ public class CategoryController {
         return null;
     }
 
-//    @GetMapping("/{categoryId}")
-//    public Category get(@PathVariable int categoryId) {
-//        try {
-//            return iCategoryService.get(categoryId);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
-//    }
+    @GetMapping("/{categoryId}")
+    public Category get(@PathVariable int categoryId) {
+        try {
+            return iCategoryService.get(categoryId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 
     @DeleteMapping("/{categoryId}")
     public String delete(@PathVariable int categoryId) {

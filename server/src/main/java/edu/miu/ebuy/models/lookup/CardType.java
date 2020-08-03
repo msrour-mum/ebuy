@@ -15,6 +15,10 @@ public class CardType {
     @Column(nullable = false)
     private String name;
 
+    public CardType(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;

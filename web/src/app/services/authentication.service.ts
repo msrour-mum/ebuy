@@ -26,10 +26,7 @@ export class AuthenticationService{
   }
 
   public get currentUser(): any {
-    //ToDo:implement this
-    //return this.authenticationSubject.value ? this.authenticationSubject.value.user : null;
-
-    return {photoUrl: '/', name: 'test'};
+    return this.authenticationSubject.value ? this.authenticationSubject.value.user : null;
   }
 
   public get authToken(): any {
@@ -37,14 +34,12 @@ export class AuthenticationService{
   }
 
   public get isAuthenticated(): boolean {
-    //toDo: implement this
-    //return !this.jwtHelperService.isTokenExpired(this.authToken);
-    return false;
+    return !this.jwtHelperService.isTokenExpired(this.authToken);
   }
 
   // tslint:disable-next-line:typedef
   register(body: any) {
-    return this.http.post(`${AppConfig.settings.apiServiceUrl}/auth/signup`,
+    return this.http.post(`${AppConfig.settings.apiServiceUrl}/users/signup`,
       body,{ observe: 'body' });
   }
 

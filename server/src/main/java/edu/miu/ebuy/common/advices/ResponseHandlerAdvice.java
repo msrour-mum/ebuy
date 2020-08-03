@@ -1,9 +1,6 @@
 package edu.miu.ebuy.common.advices;
 
-import edu.miu.ebuy.common.http.BaseResponse;
-import edu.miu.ebuy.common.http.ExceptionResult;
-import edu.miu.ebuy.common.http.ResponseResult;
-import edu.miu.ebuy.common.http.ResponseStatus;
+import edu.miu.ebuy.common.http.*;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,8 +31,7 @@ public class ResponseHandlerAdvice implements ResponseBodyAdvice {
             } else {
                 // Only the normal returned result will enter the judgment process, so the normal successful status code will be returned.
                 return new ResponseResult(new ResponseStatus(HttpStatus.OK.value(),
-                        HttpStatus.OK.getReasonPhrase()),
-                        body);
+                        HttpStatus.OK.getReasonPhrase()),body);
             }
         }
         // Non-JSON format body can be returned directly

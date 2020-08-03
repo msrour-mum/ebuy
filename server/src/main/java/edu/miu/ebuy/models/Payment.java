@@ -26,7 +26,7 @@ public class Payment {
     private String cardNumber;
 
     @Column(nullable = false)
-    private int cvv;
+    private int ccv;
 
     @Column(nullable = false)
     private String expireDate;
@@ -75,12 +75,12 @@ public class Payment {
         return this;
     }
 
-    public int getCvv() {
-        return cvv;
+    public int getCcv() {
+        return ccv;
     }
 
-    public Payment setCvv(int cvv) {
-        this.cvv = cvv;
+    public Payment setCcv(int ccv) {
+        this.ccv = ccv;
         return this;
     }
 

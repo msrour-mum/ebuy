@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router} from "@angular/router";
-import {SubSink} from 'subsink';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ProductService} from "../../../../services/product.service";
+import { Router} from '@angular/router';
+import {SubSink} from 'subsink';
+import {ProductService} from '../../../../services/product.service';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  styleUrls: ['./add-product.component.css'],
 })
-export class AddProductComponent implements OnInit,OnDestroy {
+export class AddProductComponent implements OnInit, OnDestroy {
   public productForm: FormGroup;
   public subs = new SubSink();
 
