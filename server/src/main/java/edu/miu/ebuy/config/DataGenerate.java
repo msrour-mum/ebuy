@@ -62,14 +62,14 @@ public class DataGenerate {
         //Vendors Users
         List<User> vendorList = new ArrayList<>();
         for (int i = 1; i < 6; i++) {
-            User user1 = new User("Vender "+ i, "Vender "+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+            User user1 = new User("Vender "+ i, "Vender"+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","imageUrl");
             em.persist(user1);
             vendorList.add(user1);
         }
 
         //End Users
         for (int i = 1; i < 11; i++) {
-            User user1 = new User("User "+ i, "User "+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+            User user1 = new User("User "+ i, "User"+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
             em.persist(user1);
         }
 
@@ -107,7 +107,7 @@ public class DataGenerate {
         for (int i = 1; i < 21; i++) {
             Category category = categoryList.get(i%5);
             User user = vendorList.get(i%5);
-            Product product = new Product("Product "+i,  "Product description"+i,"Product description"+i, user, category, i*20, i*40, productStatusActive, true, false, "imageUrl");
+            Product product = new Product("Product "+i,  "Product description "+i,"Product description roduct description roduct description roduct description roduct description roduct description roduct description roduct description roduct description "+i, user, category, i*20, i*40, productStatusActive, true, false, "imageUrl");
             em.persist(product);
         }
 

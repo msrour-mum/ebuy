@@ -39,7 +39,7 @@ public class MerchantService implements IMerchantService {
     public boolean pay(String cardNo, String expireDate, int ccv, int typeId, double amount) {
 
         //sub from balance
-        //add transaction
+        //add transaction v
         //add payment
         return true;
     }

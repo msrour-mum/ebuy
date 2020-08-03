@@ -29,7 +29,4 @@ public class MerchantController {
         return  iMerchantService.validateCard(userCard.getCardNumber(),userCard.getExpireDate(),userCard.getCcv(),userCard.getCardType().getId(),amount);
 
     }
-
-
-
 }
