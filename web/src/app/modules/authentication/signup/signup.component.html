@@ -89,6 +89,10 @@
                 </div>
 
                 <div class="card-body" *ngIf="isVendorSignup">
+                  <div class="alert alert-dismissible alert-danger" *ngIf="isFailed">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{error}}, please make sure that all billing information correct and try submitting again.
+                  </div>
                   <div class="card text-white bg-info mb-3">
                     <div class="card-body">
                       <h4 class="card-title">Vendor Subscription</h4>

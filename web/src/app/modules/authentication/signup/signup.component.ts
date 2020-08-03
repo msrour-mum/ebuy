@@ -12,8 +12,9 @@ import {AuthenticationService} from '../../../services/authentication.service';
 export class SignupComponent implements OnInit, OnDestroy {
 
   public userEmailFail: boolean;
-  // tslint:disable-next-line:ban-types
   public userEmailIsAlreadyTakenErrorMessage: String;
+  public isFailed: boolean;
+  public error: String;
 
   public subs = new SubSink();
   public signupForm: FormGroup;
@@ -104,6 +105,9 @@ export class SignupComponent implements OnInit, OnDestroy {
           if(result.error && result.errCode == 1002) {
             this.userEmailFail = true;
             this.userEmailIsAlreadyTakenErrorMessage = result.error;
+          } if(result.error && result.errCode == 1003) {
+            this.isFailed = true;
+            this.error = result.error;
           } else if(result.status.code == 200) {
             this.router.navigate(['/login']);
           }
