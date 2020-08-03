@@ -43,6 +43,17 @@ footer .cpy {
     font-size: 10px;
 }
 
+.search-icon {
+  background-color: transparent;
+  background-image: none;
+  border-color: transparent;
+  color: white;
+}
+.search-icon:hover {
+  background-image: none;
+  background-color: transparent;
+  border-color: transparent;
+}
 .block {
     display: block !important;
 }
@@ -97,7 +108,10 @@ footer .cpy {
     right: 10px;
 }
 .btn-add-cart {
-    margin: 3px !important;
+  margin: 3px !important;
+  background-image: none;
+  background-color: transparent !important;
+  border-color: transparent;
 }
 
 /*.shw-hdn {*/

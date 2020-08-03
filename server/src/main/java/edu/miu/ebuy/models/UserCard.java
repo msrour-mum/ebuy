@@ -57,7 +57,7 @@ public class UserCard {
     }
 
     public UserCard setHolderName(String holderName) {
-        holderName = holderName;
+        this.holderName = holderName;
         return this;
     }
 

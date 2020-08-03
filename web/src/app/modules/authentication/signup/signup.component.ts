@@ -29,21 +29,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-    // this.signupForm =  this.fb.group({
-    //   email: ['', [Validators.required, Validators.email]],
-    //   name: ['', Validators.required],
-    //   password: ['', [Validators.required, Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$')]],
-    //   address: this.fb.group({
-    //     street: ['', Validators.required],
-    //     city: ['', Validators.required],
-    //     state: ['', Validators.required],
-    //     zipCode: ['', Validators.required]
-    //   }),
-    //   phone: [''],
-    //   photoUrl: ['', Validators.required]
-    // });
-
     this.signupForm =  this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
@@ -75,7 +60,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onSignupAsVendorChanged(e) {
-
     this.isVendorSignup = e.target.checked;
     let holderName = this.signupForm.get('card.holderName');
     let cardNumber = this.signupForm.get('card.cardNumber');

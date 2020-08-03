@@ -1,11 +1,10 @@
 <header>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" [routerLink]="['home']" *ngIf="authService.isAuthenticated"
-       style="font-family: 'Agency FB'; font-size: 2em">
-
-      <img src="../assets/images/auction-bid.png" height="40px">
-      <strong style="color: #ce2929"> i</strong> <samp>Bid</samp>
+    <a class="navbar-brand" [routerLink]="['home']" *ngIf="authService.isAuthenticated" style="font-family: 'Agency FB'; font-size: 2em">
+      <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+      <span style="margin:3px;"><strong style="color:#ffd43b;">e</strong>Buy</span>
     </a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -31,7 +30,9 @@
       <div style="margin-right: 20px">
         <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
           <input class="form-control mr-sm-2" type="text" placeholder="Search" [formControl]="searchForm.get('search')">
-          <button type="submit"  class="btn btn-secondary my-2 my-sm-0">Search</button>
+          <button type="submit"  class="btn btn-secondary my-2 my-sm-0 search-icon">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
         </form>
       </div>
 
