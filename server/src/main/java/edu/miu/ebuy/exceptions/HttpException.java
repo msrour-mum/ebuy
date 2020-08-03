@@ -1,9 +1,10 @@
 package edu.miu.ebuy.exceptions;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.http.HttpStatus;
 
-@Data
+@Data @EqualsAndHashCode
 public class HttpException extends ApplicationException {
 
     HttpStatus httpStatus;
