@@ -34,7 +34,7 @@
         </li>
       </ul>
       <div>
-        <form class="form-inline my-3 my-lg-0" [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
+        <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
           <input class="form-control mr-sm-2" type="text" placeholder="Search" [formControl]="searchForm.get('search')">
           <button type="submit"  class="btn btn-secondary my-2 my-sm-0 search-icon">
             <i class="fa fa-search" aria-hidden="true"></i>

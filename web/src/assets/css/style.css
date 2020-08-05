@@ -49,6 +49,20 @@ footer .cpy {
   border-color: transparent;
   color: white;
 }
+.adv-search {
+  margin: 0px 0px;
+  padding: 7px 30px 0px 30px;
+  border: none;
+  position: absolute;
+  top: 60px;
+  right: -15px;
+  z-index: 1000;
+}
+.adv-search-crd {
+  background-color: #f7f7f7;
+  border-radius: 10px !important;
+  border-color: navajowhite;
+}
 .white, .white:hover {
   color: white;
   text-decoration: none;
