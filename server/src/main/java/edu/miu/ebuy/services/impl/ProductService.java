@@ -4,6 +4,8 @@ import edu.miu.ebuy.dao.ProductRepository;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Category;
 import edu.miu.ebuy.models.Product;
+import edu.miu.ebuy.models.dto.ProductDto;
+import edu.miu.ebuy.models.dto.ProductSearchItem;
 import edu.miu.ebuy.models.lookup.ProductStatus;
 import edu.miu.ebuy.services.interfaces.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.naming.Name;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,47 +22,50 @@ public class ProductService implements IProductService {
     @Autowired
     private ProductRepository productRepository;
 
+
+    @Override
+    public List<Product> getAll() {
+        return (List<Product>) productRepository.findByIsDeleted(false);
+    }
+
+    @Override
+    public List<Product> getActive() {
+        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+    }
+
+
+    @Override
+    public Product get(int productId) {
+        return  productRepository.getOne(productId);
+    }
+
+
     @Override
     public Product create(Product product) {
         return productRepository.save(product);
     }
 
     @Override
-    public Product update(int productId, Product new_product)throws ApplicationException {
-       Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ApplicationException("Product Not Found", 404));
-        product.setName(new_product.getName());
+    public Product update(Product product) {
+//       Product product = productRepository.findById(productId)
+//                .orElseThrow(() -> new ApplicationException("Product Not Found", 404));
+//        product.setName(new_product.getName());
         return productRepository.save(product);
     }
 
 
     @Override
     public void  delete(int productId) {
-        productRepository.deleteById(productId);
+
+        productRepository.updateItemDelete(productId);
     }
 
     @Override
-    public List<Product> getAll() {
-        return (List<Product>) productRepository.findAll();
-    }
-    @Override
-    public Product get(int productId) {
-        return  productRepository.getOne(productId);
+    public void approveProduct(int productId, int statusId) {
+
+        productRepository.updateStatus(productId,statusId);
     }
 
-    @Override
-    public Product approveProduct(Product product) {
-        ProductStatus productStatus = product.getProductStatus();
-        productStatus.setName("Approved");
-        return productRepository.save(product);
-    }
-
-    @Override
-    public Product rejectProduct(Product product) {
-        ProductStatus productStatus = product.getProductStatus();
-        productStatus.setName("Rejected");
-        return productRepository.save(product);
-    }
 
     @Override
     public Product getServiceProduct() {
@@ -69,6 +75,33 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getProductByPrice(double fromPrice, double toPrice) {
         return productRepository.getProductByPrice(fromPrice,toPrice);
+    }
+
+
+    @Override
+    public List<ProductDto> search(ProductSearchItem searchItem) {
+
+        searchItem.fitParameters();
+        List<Product> productList= productRepository.search(searchItem.getProductName(),searchItem.getVendorName(),searchItem.getPriceFrom(),searchItem.getPriceTo());
+
+        List<ProductDto> lst = new ArrayList<>();
+        for (Product product : productList)
+        {
+            ProductDto productDto =
+                    new ProductDto(product.getId(),product.getName(),product.getDescription(),
+                            product.getDescription(),
+                            product.getUser().getId(),product.getCategory().getId(),
+                            product.getCost(),product.getPrice(),
+                            product.getProductStatus().getId(),
+                            product.isPublished(), product.isService(),
+                            product.getImageUrl(),
+                            product.isDeleted(),
+                            product.getUser().getName(),
+                            product.getCategory().getName());
+
+            lst.add(productDto);
+        }
+        return  lst;
     }
 
 }

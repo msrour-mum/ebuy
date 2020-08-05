@@ -3,6 +3,7 @@ package edu.miu.ebuy.services.impl;
 import edu.miu.ebuy.dao.CategoryRepository;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Category;
+import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.services.interfaces.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,18 @@ public class CategoryService implements ICategoryService {
     CategoryRepository categoryRepository;
 
     @Override
+    public Category get(int productId) {
+        return  categoryRepository.getOne(productId);
+    }
+
+    @Override
     public List<Category> getAll() {
-        return categoryRepository.findAll();
+        return categoryRepository.findByIsDeleted(false);
+    }
+
+    @Override
+    public List<Category> getActive() {
+        return (List<Category>) categoryRepository.findByIsDeleted(false);
     }
 
     @Override
@@ -28,24 +39,19 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public Category update(int categoryId, Category new_category) throws ApplicationException {
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ApplicationException("Category Not Found", 404));
-        category.setName(new_category.getName());
+    public Category update(Category category) {
         return categoryRepository.save(category);
     }
 
     @Override
-    public ResponseEntity<Void> delete(int id) throws ApplicationException {
-        Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new ApplicationException("Category Not Found", 404));
-        categoryRepository.delete(category);
-        return  ResponseEntity.noContent().build();
+    public void  delete(int productId) {
+
+        categoryRepository.updateItemDelete(productId);
     }
 
-    @Override
-    public Category get(int id) throws ApplicationException {
-        return categoryRepository.findById(id)
-                .orElseThrow(() -> new ApplicationException("Category Not Found", 404));
-    }
+
+
+
+
+
 }

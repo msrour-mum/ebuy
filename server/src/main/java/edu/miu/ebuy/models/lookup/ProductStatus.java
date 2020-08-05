@@ -22,4 +22,22 @@ public class   ProductStatus {
         this.id = id;
         this.name = name;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public ProductStatus setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ProductStatus setName(String name) {
+        this.name = name;
+        return this;
+    }
 }

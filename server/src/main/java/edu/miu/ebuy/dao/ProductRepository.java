@@ -2,7 +2,9 @@ package edu.miu.ebuy.dao;
 
 import edu.miu.ebuy.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -10,4 +12,31 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product  p WHERE p.price >= :fromPrice AND p.price <= :toPrice")
     List<Product> getProductByPrice(double fromPrice, double toPrice);
     Product getProductByIsService(boolean isService);
+
+
+    List<Product> findByIsDeleted(boolean isDeleted);
+    List<Product> findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(boolean isDeleted,boolean isService,boolean isPublished,int statusId);
+
+
+
+    @Modifying
+    @Query(value = "UPDATE product SET isDeleted=1 WHERE id=?1",nativeQuery = true)
+    public void updateItemDelete( @Param("id") Integer id);
+
+
+    @Modifying
+    @Query(value = "UPDATE product SET statusId=?2 WHERE id=?1",nativeQuery = true)
+    public void updateStatus( @Param("id") Integer id, @Param("statusId") Integer statusId);
+
+
+    @Query(value = "select  p.* from product p\n" +
+            "inner join user vendor on vendor.id=p.vendorId\n" +
+            "inner join category cat on cat.id=p.categoryId\n" +
+            "where p.isDeleted=0 and p.isService=0 and p.isPublished=1\n" +
+            "and p.name like %:name%\n" +
+            "and vendor.name like %:vendorName%\n" +
+            "and p.price between :priceFrom and :priceTo", nativeQuery = true)
+    public List<Product> search( @Param("name") String name,@Param("vendorName") String vendorName ,
+                                @Param("priceFrom") double priceFrom, @Param("priceTo") double priceTo);
+
 }

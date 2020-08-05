@@ -124,19 +124,23 @@ public class DataGenerate {
 
         for (User user: users)
         {
-            Order order = new Order(user,new Date(),0,20);
-            int total=0;
-            int c1 = new Random().nextInt(4)+1;
-            for (int i = 0; i < c1; i++) {
-                Product p= products.get(new Random().nextInt(products.size()));
-                int qt = new Random().nextInt(3);
-                OrderItem item = new OrderItem(p,qt,p.getPrice()*qt);
-                order.addItem(item);
-                total+=p.getPrice()*qt;
-            }
-            order.setTotal(total);
-            em.persist(order);
 
+            for (int k = 0; k < 7; k++) {
+
+
+                Order order = new Order(user, new Date(), 0, 20);
+                int total = 0;
+                int c1 = new Random().nextInt(4) + 1;
+                for (int i = 0; i < c1; i++) {
+                    Product p = products.get(new Random().nextInt(products.size()));
+                    int qt = new Random().nextInt(3);
+                    OrderItem item = new OrderItem(p, qt, p.getPrice() * qt);
+                    order.addItem(item);
+                    total += p.getPrice() * qt;
+                }
+                order.setTotal(total);
+                em.persist(order);
+            }
 
             int ct = new Random().nextInt(2)+1;
             String cardNo="54789632587412"+recCount;
