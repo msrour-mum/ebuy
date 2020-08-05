@@ -1,9 +1,10 @@
 package edu.miu.ebuy.models.dto;
 
 import edu.miu.ebuy.models.Order;
+import lombok.Data;
 
 import java.util.Date;
-
+@Data
 public class OrdersDto {
 
     private long id;

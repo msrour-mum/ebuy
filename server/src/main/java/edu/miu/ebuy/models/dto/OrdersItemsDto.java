@@ -1,7 +1,9 @@
 package edu.miu.ebuy.models.dto;
 
 import edu.miu.ebuy.models.OrderItem;
+import lombok.Data;
 
+@Data
 public class OrdersItemsDto {
 
     private long id;

@@ -54,6 +54,10 @@ public class Product {
     private String imageUrl;
 
 
+    @Column(name = "isDeleted",nullable = false, columnDefinition = "BIT(1) default 0")
+    private boolean isDeleted;
+
+
     public Product(String name,String shortDescription, String description, User user, Category category, double cost, double price, ProductStatus productStatus, boolean isPublished, boolean isService, String imageUrl) {
 
         this.name = name;
@@ -84,6 +88,15 @@ public class Product {
 
     public Product setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public Product setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
         return this;
     }
 
@@ -165,6 +178,15 @@ public class Product {
 
     public Product setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public Product setDeleted(boolean deleted) {
+        isDeleted = deleted;
         return this;
     }
 }
