@@ -49,6 +49,14 @@ footer .cpy {
   border-color: transparent;
   color: white;
 }
+.white, .white:hover {
+  color: white;
+  text-decoration: none;
+}
+.cart-ico {
+  color: #ffd43b;
+  font-weight: 800;
+}
 .search-icon:hover {
   background-image: none;
   background-color: transparent;
@@ -159,7 +167,13 @@ footer .cpy {
 
 .total {
     font-weight: bold;
-    color: wheat;
+    color: #ffd43b;
+}
+.master {
+  color: #ff5f00;
+}
+.visa {
+  color: #192061;
 }
 .lbl {
     font-weight: bold;
@@ -171,6 +185,9 @@ footer .cpy {
 }
 .pd-lft-0 {
   padding-left:0 !important;
+}
+.pd-lft-1 {
+  padding-left:1px !important;
 }
 
 .mr-top-10
@@ -210,9 +227,14 @@ footer .cpy {
     font-weight: bold;
 }
 
+.font-size-2rem{
+  font-size: 2rem;
+}
+
 .order-line-cmd {
-   margin-top: 30px;
-  margin-left: 15px;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
 
 .order-line-cmd-rgt {

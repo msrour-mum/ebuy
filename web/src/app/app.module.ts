@@ -23,6 +23,7 @@ import {UserListComponent} from './modules/admin/manage-users/user-list/user-lis
 import {EditProductComponent} from './modules/admin/manage-product/edit-product/edit-product.component';
 import {EditCategoryComponent} from './modules/admin/manage-category/edit-category/edit-category.component';
 import {UsersModule} from './modules/users/users.module';
+import {ShoppingModule} from './modules/shopping/shopping.module';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -35,7 +36,6 @@ export function initializeApp(appConfig: AppConfig) {
     LoginComponent,
     SignupComponent,
     ProductListComponent,
-    ProductCatalogListComponent,
     CategoryListComponent,
     AddProductComponent,
     AddCategoryComponent,
@@ -52,6 +52,7 @@ export function initializeApp(appConfig: AppConfig) {
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
+    ShoppingModule,
   ],
   providers: [AppConfig,
     { provide: APP_INITIALIZER,

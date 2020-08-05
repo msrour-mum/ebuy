@@ -9,6 +9,8 @@ import { AddProductComponent} from "./modules/admin/manage-product/add-product/a
 import { AddCategoryComponent} from "./modules/admin/manage-category/add-category/add-category.component";
 import {EditUserComponent} from './modules/admin/manage-users/edit-user/edit-user.component';
 import {ProfileComponent} from './modules/users/profile/profile.component';
+import {CartComponent} from './modules/shopping/cart/cart.component';
+import {CheckoutComponent} from './modules/shopping/checkout/checkout.component';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -21,6 +23,8 @@ const routes: Routes =  [
   {path: 'add-category', component: AddCategoryComponent},
   {path: 'edit-user/:id', component: EditUserComponent},
   {path: 'edit-profile', component: ProfileComponent},
+  {path: 'cart', component: CartComponent},
+  {path: 'checkout', component: CheckoutComponent},
   {path: '**', redirectTo: '/home'}];
 
 @NgModule({

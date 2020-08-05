@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { MyOrdersListComponent } from './my-orders-list/my-orders-list.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from '../../app-routing.module';
 
 
 
@@ -11,6 +12,7 @@ import {ReactiveFormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AppRoutingModule,
   ]
 })
 export class UsersModule { }

@@ -1,1 +1,128 @@
-<p>checkout works!</p>
+<div class="container">
+  <div class="jumbotron col-md-9">
+
+    <div><h1>SUMMARY</h1></div>
+    <div><i>Fill your billing address, credit card information to process checking out</i></div>
+    <div class="sum-item subTotal row">
+      <div class="col-9 lbl">Sub Total</div>
+      <div class="col-3">$cart.subtotal</div>
+    </div>
+    <div class="sum-item tax row">
+      <div class="col-9 lbl">Tax</div>
+      <div class="col-3">$cart.tax</div>
+    </div>
+    <div class="sum-item shipping row">
+      <div class="col-9 lbl">Shipping</div>
+      <div class="col-3">$cart.shipping$</div>
+    </div>
+    <hr>
+    <div class="sum-item total row">
+      <h6 class="col-9 lbl">TOTAL</h6>
+      <h6 class="col-3">$cart.total</h6>
+    </div>
+     <br> <br>
+    <form method="post" action="/checkout">
+        <div class="alert alert-dismissible alert-danger" >
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          error, please make sure that all billing information correct and try submitting again.
+        </div>
+        <fieldset>
+          <legend>Checkout Information</legend>
+          <div class="form-group">
+            <label for="visa">Card Type:</label>
+            <div>
+              <i class="fa fa-cc-visa visa" aria-hidden="true"></i>&nbsp;
+              <input id="visa"
+                     type="radio"
+                     value="1"
+                     name="cardType">
+              <label for="visa">&nbsp;Visa</label>
+            </div>
+
+            <div>
+              <i class="fa fa-cc-mastercard master" aria-hidden="true"></i>&nbsp;
+              <input id="master"
+                     type="radio"
+                     value="2"
+                     name="cardType">
+              <label for="master">&nbsp;Master</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="holderName">Holder Name</label>
+            <input  type="text"
+                    class="form-control"
+                    id="holderName"
+                    class="form-control"
+                    placeholder="Enter Card holder name" />
+
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="cardNumber">Credit Card Number</label>
+            <input  type="text"
+                    class="form-control"
+                    id="cardNumber"
+
+                    class="form-control"
+                    placeholder="16 digits" />
+
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="cardNumber">CCV</label>
+              <input  type="text"
+                      class="form-control"
+                      id="ccv"
+
+                      class="form-control"
+                      placeholder="3 digits" />
+
+            </div>
+            <div class="form-group col-md-6">
+              <label for="expireDate">Expire Date</label>
+              <input  type="text"
+                      class="form-control"
+                      id="expireDate"
+
+                      class="form-control"
+                      placeholder="MM/DD" />
+
+            </div>
+          </div>
+        </fieldset>
+      <fieldset class="form-group">
+        <legend>Options</legend>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value="1" checked="">
+            Set this as default payment type, all payments should be paid using this
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value="2"  checked="">
+            Save my credit card number, I agree to save my credit number
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="sum-btns row">
+        <button type="submit" class="btn btn-success col-md-3 offset-md-1 col-sm-12 mr-btm-10">
+          <i class="fa fa-credit-card"></i> Confirm Checkout
+        </button>
+        <a [routerLink]="['/cart']" class="btn btn-primary col-md-3 offset-md-1 col-sm-12 mr-btm-10">
+          <i class="fa fa-shopping-cart"></i> View Cart
+        </a>
+        <a [routerLink]="['/home']" class="btn btn-info col-md-3 offset-md-1 col-sm-12 mr-btm-10">
+          <i class="fa fa-home"></i> Continue shopping
+        </a>
+      </div>
+    </form>
+
+  </div>
+</div>
