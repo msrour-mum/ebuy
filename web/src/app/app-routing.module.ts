@@ -8,6 +8,7 @@ import {CategoryListComponent} from './modules/admin/manage-category/category-li
 import { AddProductComponent} from "./modules/admin/manage-product/add-product/add-product.component";
 import { AddCategoryComponent} from "./modules/admin/manage-category/add-category/add-category.component";
 import {EditUserComponent} from './modules/admin/manage-users/edit-user/edit-user.component';
+import {ProfileComponent} from './modules/users/profile/profile.component';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes =  [
   {path: 'categories', component: CategoryListComponent},
   {path: 'add-category', component: AddCategoryComponent},
   {path: 'edit-user/:id', component: EditUserComponent},
+  {path: 'edit-profile', component: ProfileComponent},
   {path: '**', redirectTo: '/home'}];
 
 @NgModule({

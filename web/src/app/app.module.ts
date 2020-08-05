@@ -22,6 +22,7 @@ import {EditUserComponent} from './modules/admin/manage-users/edit-user/edit-use
 import {UserListComponent} from './modules/admin/manage-users/user-list/user-list.component';
 import {EditProductComponent} from './modules/admin/manage-product/edit-product/edit-product.component';
 import {EditCategoryComponent} from './modules/admin/manage-category/edit-category/edit-category.component';
+import {UsersModule} from './modules/users/users.module';
 
 
 export function initializeApp(appConfig: AppConfig) {
