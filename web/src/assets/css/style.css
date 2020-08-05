@@ -60,8 +60,10 @@ footer .cpy {
 }
 .adv-search-crd {
   background-color: #f7f7f7;
-  border-radius: 10px !important;
-  border-color: navajowhite;
+  border: 0px #4CAF50 solid;
+  margin: -11px 0px 10px 0px;
+  border-top: 1px #1d9ce5 dashed;
+  border-radius: 0 !important;
 }
 .white, .white:hover {
   color: white;
