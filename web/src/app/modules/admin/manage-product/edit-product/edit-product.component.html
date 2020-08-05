@@ -1,1 +1,116 @@
-<p>edit-product works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="card col-md-8">
+      <div class="card-header">Create Product</div>
+      <div class="card-body">
+        <form [formGroup]="form">
+          <fieldset>
+            <div class="form-group row">
+              <label for="name">Product</label>
+              <input type="text"
+                     [formControl]="form.get('name')"
+                     [ngClass]="{'is-invalid': isValid('name')}"
+                     id="name"
+                     class="form-control"
+                     name="category" autofocus>
+              <div *ngIf="hasError('name')" class="invalid-feedback">
+                product name is required
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="shortdesc">Short Description</label>
+
+              <textarea
+                [formControl]="form.get('shortdesc')"
+                [ngClass]="{'is-invalid': isValid('shortdesc')}"
+                id="shortdesc"
+                class="form-control"
+                name="shortdesc" autofocus></textarea>
+              <div *ngIf="hasError('shortdesc')" class="invalid-feedback">
+                short description is required
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="description">Description</label>
+              <textarea
+                [formControl]="form.get('description')"
+                [ngClass]="{'is-invalid': isValid('shortdesc')}"
+                id="description"
+                class="form-control"
+                name="description" autofocus></textarea>
+              <div *ngIf="hasError('description')" class="invalid-feedback">
+                description is required
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="form-group col-sm-12 col-md-6">
+                <label for="cost">Cost</label>
+                <input type="number"
+                       [formControl]="form.get('cost')"
+                       [ngClass]="{'is-invalid': isValid('cost')}"
+                       id="cost"
+                       class="form-control"
+                       name="cost" autofocus>
+                <div *ngIf="hasError('cost')" class="invalid-feedback">
+                  product cost price is required
+                </div>
+              </div>
+              <div class="form-group col-sm-12 col-md-6">
+                <label for="price">Selling Price</label>
+                <input type="number"
+                       [formControl]="form.get('price')"
+                       [ngClass]="{'is-invalid': isValid('price')}"
+                       id="price"
+                       class="form-control"
+                       name="price" autofocus>
+                <div *ngIf="hasError('price')" class="invalid-feedback">
+                  selling price is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="category">Category</label>
+              <select class="form-control" id="category">
+                <option>Cat 1</option>
+                <option>Cat 2</option>
+                <option>Cat 3</option>
+                <option>Cat 4</option>
+                <option>Cat 5</option>
+              </select>
+              <div *ngIf="hasError('category')" class="invalid-feedback">
+                category is required
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="imageUrl">Image</label>
+              <input type="file"
+                     class="form-control-file"
+                     id="imageUrl"
+                     aria-describedby="fileHelp"
+                     (change)="onFileSelect($event)">
+
+              <div *ngIf="hasError('imageurl')" class="invalid-feedback">
+                image url is required
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="row pull-right">
+            <button class="btn btn-primary" (click)="onSubmit()">
+              <i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4 mr-btm-10">
+      <app-product-help></app-product-help>
+    </div>
+  </div>
+</div>

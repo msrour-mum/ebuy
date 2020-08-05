@@ -24,6 +24,7 @@ import {EditProductComponent} from './modules/admin/manage-product/edit-product/
 import {EditCategoryComponent} from './modules/admin/manage-category/edit-category/edit-category.component';
 import {UsersModule} from './modules/users/users.module';
 import {ShoppingModule} from './modules/shopping/shopping.module';
+import {AdminModule} from './modules/admin/admin.module';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -35,16 +36,6 @@ export function initializeApp(appConfig: AppConfig) {
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ProductListComponent,
-    CategoryListComponent,
-    AddProductComponent,
-    AddCategoryComponent,
-    EditCategoryComponent,
-    ApproveProductComponent,
-    EditProductComponent,
-    AddUserComponent,
-    EditUserComponent,
-    UserListComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +44,7 @@ export function initializeApp(appConfig: AppConfig) {
     CommonModule,
     HttpClientModule,
     ShoppingModule,
+    AdminModule,
   ],
   providers: [AppConfig,
     { provide: APP_INITIALIZER,

@@ -11,14 +11,18 @@ import {EditUserComponent} from './modules/admin/manage-users/edit-user/edit-use
 import {ProfileComponent} from './modules/users/profile/profile.component';
 import {CartComponent} from './modules/shopping/cart/cart.component';
 import {CheckoutComponent} from './modules/shopping/checkout/checkout.component';
+import {ProductListComponent} from './modules/admin/manage-product/product-list/product-list.component';
+import {EditProductComponent} from './modules/admin/manage-product/edit-product/edit-product.component';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: ProductCatalogListComponent},
   {path: 'login', component: LoginComponent  },
   {path: 'signup', component: SignupComponent},
+  {path: 'product-list', component: ProductListComponent},
   {path: 'approve-product', component: ApproveProductComponent},
   {path: 'add-product', component: AddProductComponent},
+  {path: 'edit-product/:productId', component: EditProductComponent},
   {path: 'categories', component: CategoryListComponent},
   {path: 'add-category', component: AddCategoryComponent},
   {path: 'edit-user/:id', component: EditUserComponent},

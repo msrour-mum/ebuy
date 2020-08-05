@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductListComponent } from './manage-product/product-list/product-list.component';
 import { CategoryListComponent } from './manage-category/category-list/category-list.component';
@@ -12,10 +12,13 @@ import { EditCategoryComponent } from './manage-category/edit-category/edit-cate
 import { AddUserComponent } from './manage-users/add-user/add-user.component';
 import { EditUserComponent } from './manage-users/edit-user/edit-user.component';
 import { UserListComponent } from './manage-users/user-list/user-list.component';
+import { ProductHelpComponent } from './manage-product/product-help/product-help.component';
+import {AppRoutingModule} from '../../app-routing.module';
 
 @NgModule({
   declarations: [ProductListComponent,
     CategoryListComponent,
+    ProductHelpComponent,
     AddCategoryComponent,
     AddProductComponent,
     ApproveProductComponent,
@@ -24,10 +27,12 @@ import { UserListComponent } from './manage-users/user-list/user-list.component'
     EditCategoryComponent,
     AddUserComponent,
     EditUserComponent,
-    UserListComponent],
+    UserListComponent,
+    ProductHelpComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AppRoutingModule,
   ],
 })
 export class AdminModule { }

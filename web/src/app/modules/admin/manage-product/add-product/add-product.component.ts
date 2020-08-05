@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
 import {SubSink} from 'subsink';
@@ -10,7 +10,8 @@ import {ProductService} from '../../../../services/product.service';
   styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit, OnDestroy {
-  public productForm: FormGroup;
+  private photoFile;
+  public form: FormGroup;
   public subs = new SubSink();
 
   constructor(private fb: FormBuilder,
@@ -20,12 +21,12 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.productForm = this.fb.group({
+    this.form = this.fb.group({
       category: ['', [Validators.required]],
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       shortdesc: ['', [Validators.required]],
-      imageurl: ['', [Validators.required]],
+      imageUrl: ['', [Validators.required]],
       cost: ['', [Validators.required]],
       price: ['', [Validators.required]],
     });
@@ -36,21 +37,27 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  onSubmit() {
-    if(this.productForm.valid){
+  public onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      this.photoFile = event.target.files[0];
+    }
+  }
 
-    }
-    else {
-      //not valid
-    }
+  onSubmit() {
+      if (this.form.invalid) {
+        return;
+      }
+      let formData: any = new FormData();
+      formData.append("product", JSON.stringify(this.form.value));
+      formData.append("file", this.photoFile);
   }
 
   hasError(field: string): boolean {
-    return field == "" || field == null;
+    return field == '' || field == null;
   }
 
   isValid(field: string) {
-    return this.productForm.get(field).invalid && this.productForm.get(field).touched;
+    return this.form.get(field).invalid && this.form.get(field).touched;
   }
 
 }

@@ -1,35 +1,61 @@
-<main class="acc-form">
-
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-8">
-        <h4>Admin Product List</h4>
-      </div>
-      <div class="col-4">
-        <button type="button" class="btn btn-primary">Add Product</button>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col">
-        <table class="table table-hover">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Price</th>
-            <th scope="col">Vendor</th>
-            <th>&nbsp;</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr>
-
-            </tr>
-          </tbody>
-
-        </table>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 mr-btm-10">
+      <a [routerLink]="['/add-product']" class="btn btn-primary float-right">
+        <i class="fa fa-plus" aria-hidden="true"></i> Add Product
+      </a>
     </div>
   </div>
-</main>
+  <div class="row">
+    <div class="col-sm-12 col-md-8 order-line-box">
+
+      <!--      <c:forEach var="product" items="${products}">-->
+      <div class="card border-info mb-3">
+        <div class="card-header row">
+          <div class="col-4">
+            <i class="prd-lbl fa fa-money"> Cost</i><i>$product.cost</i>
+          </div>
+          <div class="col-5">
+            <i class="prd-lbl fa fa-money"> Price</i> <i>$product.price</i>
+          </div>
+          <div class="col-3">
+            <i class="prd-lbl fa fa-th"> Stock</i>
+            <i> In-stock</i> <!--remove this implemet the below -->
+            <!--            <i *ngIf="isPublish"> In-stock</i>-->
+            <!--            <i *ngIf="product.isPublish"> Out-stock</i>-->
+          </div>
+        </div>
+        <div class="card-body row">
+          <img src="product.imageUrl" class="cart-prd-img col-3">
+          <div class="col-9">
+            <h4 class="card-title">product.productName</h4>
+            <p class="card-text">product.short-description</p>
+          </div>
+          <div class="order-line-cmd row">
+            <div class="prodcut-cmd-icon ">
+              <button type="button" class="btn btn-primary">
+                <i class="fa fa-upload" aria-hidden="true"></i> Upload
+              </button>
+            </div>
+
+            <div class="prodcut-cmd-icon ">
+              <button type="button" class="btn btn-danger">
+                <i class="fa fa-download" aria-hidden="true"></i> Download
+              </button>
+            </div>
+
+            <div class="prodcut-cmd-icon ">
+              <a [routerLink]="['/edit-product', 1]" class="btn btn-primary">
+                <i class="fa fa-edit" aria-hidden="true"></i> Edit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--      </c:forEach>-->
+    </div>
+    <div class="col-sm-12 col-md-4 mr-btm-10">
+      <app-product-help></app-product-help>
+    </div>
+  </div>
+</div>
