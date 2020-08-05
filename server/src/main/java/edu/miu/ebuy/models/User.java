@@ -2,6 +2,7 @@ package edu.miu.ebuy.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -12,7 +13,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class User implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -40,10 +40,6 @@ public class User implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cardId", referencedColumnName = "id")
     private UserCard card;
-
-
-    @Transient
-    MultipartFile image;
 
     public User(String name,String email, Role role, String pass, boolean isActive,String phone) {
         this.name = name;

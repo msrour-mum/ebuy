@@ -11,6 +11,7 @@ public interface IUserService {
     public User create(User user) throws HttpException;
     public User get(int id);
     public User update(User user);
+    public User update(User user, String imageUrl);
     public void delete(int id);
     public List<User> findAllByEmail(String name);
     public Optional<User> findByEmail(String email);

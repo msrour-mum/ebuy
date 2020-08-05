@@ -50,7 +50,8 @@ public class AuthenticationController {
                 jpaUserDetails.getName(),
                 jpaUserDetails.getUsername(),
                 jpaUserDetails.getRole(),
-                jpaUserDetails.isEnabled()));
+                jpaUserDetails.isEnabled(),
+                jpaUserDetails.getImageUrl()));
         return model;
     }
 

@@ -72,8 +72,22 @@ public class UserService implements IUserService {
 
     @Override
     public User update(User user) {
-        return userRepository.save(user);
+        User userToUpdate = this.get(user.getId());
+        userToUpdate.setName(user.getName());
+        userToUpdate.setPhone(user.getPhone());
+        userToUpdate.setAddress(user.getAddress());
+        return userRepository.save(userToUpdate);
     }
+
+    public User update(User user, String imageUrl) {
+        User userToUpdate = this.get(user.getId());
+        userToUpdate.setName(user.getName());
+        userToUpdate.setPhone(user.getPhone());
+        userToUpdate.setAddress(user.getAddress());
+        userToUpdate.setImageUrl(imageUrl);
+        return userRepository.save(userToUpdate);
+    }
+
 
     @Override
     public void delete(int id) {

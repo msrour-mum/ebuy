@@ -42,8 +42,15 @@
         </form>
       </div>
 
-      <a [routerLink]="['user/auctions']" *ngIf="authService.isAuthenticated">
-        <img class="user-small-img" src="/src/assets/images/profile-photo.png" alt="avatar">
+      <a [routerLink]="['edit-user',1]" *ngIf="authService.isAuthenticated">
+        <img class="user-small-img"
+             src="{{hostUrl + '/uploads/profile-photo.png'}}"
+             alt="avatar"
+        *ngIf="authService.currentUser.imageUrl ==''">
+        <img class="user-small-img"
+             src="{{hostUrl + authService.currentUser.imageUrl}}"
+             alt="avatar"
+             *ngIf="authService.currentUser.imageUrl !=''">
       </a>
       <a class="nav-link" style="color:white" *ngIf="!authService.isAuthenticated" [routerLink]="['login']">Login</a>
       <a class="nav-link" style="color:white" [routerLink]="['home']"

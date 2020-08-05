@@ -49,10 +49,10 @@ public class DataGenerate {
 
 
 
-        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
-        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
-        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
-        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
+        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
+        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
+        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
         em.persist(userAdmin1);
         em.persist(userAdmin2);
         em.persist(userAdmin3);
@@ -62,14 +62,14 @@ public class DataGenerate {
         //Vendors Users
         List<User> vendorList = new ArrayList<>();
         for (int i = 1; i < 6; i++) {
-            User user1 = new User("Vender "+ i, "Vender"+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+            User user1 = new User("Vender "+ i, "Vender"+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","");
             em.persist(user1);
             vendorList.add(user1);
         }
 
         //End Users
         for (int i = 1; i < 11; i++) {
-            User user1 = new User("User "+ i, "User"+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+            User user1 = new User("User "+ i, "User"+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
             em.persist(user1);
         }
 
@@ -100,14 +100,14 @@ public class DataGenerate {
         em.persist(productStatusRejected);
 
 
-        Product productSubscription = new Product("Subscription Fees",  "Subscription Fees","Subscription Fees, pay with vendor membership", userAdmin1, category1, 0, 20000, productStatusActive, true, true, "imageUrl");
+        Product productSubscription = new Product("Subscription Fees",  "Subscription Fees","Subscription Fees, pay with vendor membership", userAdmin1, category1, 0, 20000, productStatusActive, true, true, "");
         em.persist(productSubscription);
 
         //Products
         for (int i = 1; i < 21; i++) {
             Category category = categoryList.get(i%5);
             User user = vendorList.get(i%5);
-            Product product = new Product("Product "+i,  "Product description "+i,"Product description roduct description roduct description roduct description roduct description roduct description roduct description roduct description roduct description "+i, user, category, i*20, i*40, productStatusActive, true, false, "imageUrl");
+            Product product = new Product("Product "+i,  "Product description "+i,"Product description roduct description roduct description roduct description roduct description roduct description roduct description roduct description roduct description "+i, user, category, i*20, i*40, productStatusActive, true, false, "");
             em.persist(product);
         }
 

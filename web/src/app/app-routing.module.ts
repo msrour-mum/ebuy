@@ -5,6 +5,7 @@ import {SignupComponent} from './modules/authentication/signup/signup.component'
 import {ProductCatalogListComponent} from './modules/shopping/products/product-catalog-list/product-catalog-list.component';
 import { ApproveProductComponent } from './modules/admin/manage-product/approve-product/approve-product.component';
 import {CategoryListComponent} from './modules/admin/manage-category/category-list/category-list.component';
+import {EditUserComponent} from './modules/admin/manage-users/edit-user/edit-user.component';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -13,6 +14,7 @@ const routes: Routes =  [
   {path: 'signup', component: SignupComponent},
   {path: 'approve-product', component: ApproveProductComponent},
   {path: 'categories', component: CategoryListComponent},
+  {path: 'edit-user/:id', component: EditUserComponent},
   {path: '**', redirectTo: '/home'}];
 
 @NgModule({

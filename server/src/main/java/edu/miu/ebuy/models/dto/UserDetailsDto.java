@@ -17,6 +17,7 @@ public class UserDetailsDto {
     private String email;
     private Role role;
     private Boolean isActive;
+    private String imageUrl;
     //private String address;
     //private String phone;
 }
