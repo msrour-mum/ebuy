@@ -5,6 +5,8 @@ import {SignupComponent} from './modules/authentication/signup/signup.component'
 import {ProductCatalogListComponent} from './modules/shopping/products/product-catalog-list/product-catalog-list.component';
 import { ApproveProductComponent } from './modules/admin/manage-product/approve-product/approve-product.component';
 import {CategoryListComponent} from './modules/admin/manage-category/category-list/category-list.component';
+import { AddProductComponent} from "./modules/admin/manage-product/add-product/add-product.component";
+import { AddCategoryComponent} from "./modules/admin/manage-category/add-category/add-category.component";
 import {EditUserComponent} from './modules/admin/manage-users/edit-user/edit-user.component';
 
 const routes: Routes =  [
@@ -13,7 +15,9 @@ const routes: Routes =  [
   {path: 'login', component: LoginComponent  },
   {path: 'signup', component: SignupComponent},
   {path: 'approve-product', component: ApproveProductComponent},
+  {path: 'add-product', component: AddProductComponent},
   {path: 'categories', component: CategoryListComponent},
+  {path: 'add-category', component: AddCategoryComponent},
   {path: 'edit-user/:id', component: EditUserComponent},
   {path: '**', redirectTo: '/home'}];
 
