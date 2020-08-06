@@ -1,18 +1,25 @@
 package edu.miu.ebuy.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.ebuy.common.http.BaseResponse;
+import edu.miu.ebuy.common.storage.IStorageService;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.exceptions.Errors;
 import edu.miu.ebuy.models.Category;
 import edu.miu.ebuy.models.Product;
+import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.models.dto.ProductDto;
 import edu.miu.ebuy.models.dto.ProductSearchItem;
+import edu.miu.ebuy.security.Context;
 import edu.miu.ebuy.services.interfaces.ICategoryService;
 import edu.miu.ebuy.services.interfaces.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,16 +28,22 @@ import java.util.List;
 public class ProductController {
     @Autowired
     IProductService productService;
-
+    @Autowired
+    IStorageService storageService;
 
     @GetMapping()
     public List<Product> getAll() {
         return productService.getAll();
     }
 
-    @GetMapping("/Active")
+    @GetMapping("/active")
     public List<Product> getActive() {
         return productService.getActive();
+    }
+
+    @GetMapping("/pending")
+    public List<Product> getPending() {
+        return productService.getPendingProduct();
     }
 
     @PostMapping("/search")
@@ -44,14 +57,31 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product add(@RequestBody Product product) throws ApplicationException {
-        return productService.create(product);
+    public Product add(@RequestParam String productJson, @RequestParam(value ="file", required=false) MultipartFile file) throws ApplicationException, IOException {
+        //return productService.create(product);
+        Product product = new ObjectMapper().readValue(productJson, Product.class);
+            Product product1 = productService.create(product,
+                    storageService.uploadMultipartFile(file, Context.getUserIdAsString()));
+      return product1;
     }
 
     @PutMapping("/{productId}")
-    public Product update(@RequestBody Product product) {
-       return productService.update(product);
+    public Product update(@RequestParam String productJson, @RequestParam(value ="file", required=false) MultipartFile file) throws ApplicationException, IOException {
+        Product product = new ObjectMapper().readValue(productJson, Product.class);
+        if (file!=null) {
+
+            Product product1 = productService.create(product,
+                    storageService.uploadMultipartFile(file, Context.getUserIdAsString()));
+            return product1;
+        }
+        else
+            return  productService.update(product);
     }
+
+//    @PutMapping("/{productId}")
+//    public Product update(@RequestBody Product product) {
+//       return productService.update(product);
+//    }
 
     @DeleteMapping("/{productId}")
     public void delete(@PathVariable int productId) {

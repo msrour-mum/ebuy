@@ -4,9 +4,11 @@ import edu.miu.ebuy.dao.ProductRepository;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Category;
 import edu.miu.ebuy.models.Product;
+import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.models.dto.ProductDto;
 import edu.miu.ebuy.models.dto.ProductSearchItem;
 import edu.miu.ebuy.models.lookup.ProductStatus;
+import edu.miu.ebuy.security.Context;
 import edu.miu.ebuy.services.interfaces.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,17 +43,35 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public Product create(Product product) {
+    public Product create(Product product, String imageUrl) {
+
+       // product.setDeleted(false);
+        product.setProductStatus(new ProductStatus(1,""));
+        product.setUser(new User(Context.getUserId()));
+        product.setImageUrl(imageUrl);
         return productRepository.save(product);
     }
 
     @Override
-    public Product update(Product product) {
-//       Product product = productRepository.findById(productId)
-//                .orElseThrow(() -> new ApplicationException("Product Not Found", 404));
-//        product.setName(new_product.getName());
+    public Product update(Product product, String imageUrl) {
+        product.setProductStatus(new ProductStatus(product.getProductStatus().getId(),""));
+        product.setUser(new User(Context.getUserId()));
+        product.setImageUrl(imageUrl);
         return productRepository.save(product);
     }
+
+
+
+    @Override
+    public Product update(Product product) {
+        product.setProductStatus(new ProductStatus(product.getProductStatus().getId(),""));
+        product.setUser(new User(Context.getUserId()));
+        product.setImageUrl(product.getImageUrl());
+        return productRepository.save(product);
+    }
+
+
+
 
 
     @Override
@@ -77,6 +97,10 @@ public class ProductService implements IProductService {
         return productRepository.getProductByPrice(fromPrice,toPrice);
     }
 
+    @Override
+    public List<Product> getPendingProduct() {
+        return productRepository.findByProductStatus_Id(1);
+    }
 
     @Override
     public List<ProductDto> search(ProductSearchItem searchItem) {

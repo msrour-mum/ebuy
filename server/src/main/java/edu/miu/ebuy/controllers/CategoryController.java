@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @BaseResponse
-@RequestMapping("/api/Categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class CategoryController {
         return iCategoryService.getAll();
     }
 
-    @GetMapping("/Active")
+    @GetMapping("/active")
     public List<Category> getActive() {
         return iCategoryService.getActive();
     }

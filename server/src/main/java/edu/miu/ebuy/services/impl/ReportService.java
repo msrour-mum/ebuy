@@ -2,9 +2,13 @@ package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.dao.OrderItemReportRepository;
 import edu.miu.ebuy.dao.OrderRepository;
+import edu.miu.ebuy.dao.ProductRepository;
 import edu.miu.ebuy.models.Order;
 
+import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.dto.OrdersDto;
+import edu.miu.ebuy.models.dto.ProductDto;
+import edu.miu.ebuy.models.dto.ProfitDto;
 import edu.miu.ebuy.services.interfaces.IReportService;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -22,11 +26,11 @@ public class ReportService implements IReportService {
     OrderRepository orderRepository;
     @Autowired
     private OrderItemReportRepository orderItemReportRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    private   String  path =System.getProperty("user.home")+"\\Downloads";
 
-
-  private   String  path =System.getProperty("user.home")+"\\Downloads";
-
-   public String  exportOrderReport(int userId) throws FileNotFoundException, JRException {
+    public String  OrderReport(int userId) throws FileNotFoundException, JRException {
 
        List<Order> orders = orderRepository.findByUserId(userId);
        //load file and compile it
@@ -54,16 +58,29 @@ public class ReportService implements IReportService {
    }
 
 
-   //OrdersDto
-    public String  exportOrderItemReport(int userId) throws FileNotFoundException, JRException {
+    public String  profitReport(int userId) throws FileNotFoundException, JRException {
 
-        List<Order> orderItems =  orderItemReportRepository.findByUserId(userId);
+        List<Product> productList =  productRepository.reportProfit(userId);
+
+        List<ProfitDto> lstProfit = new ArrayList<>();
+        for (Product product : productList)
+        {
+            ProfitDto productDto =
+                    new ProfitDto(product.getId(),product.getName(),
+                            product.getUser().getId(),
+                            product.getUser().getName(),
+                            product.getCategory().getName(),product.getPrice());
+
+            lstProfit.add(productDto);
+        }
+
+
 
         //load file and compile it
         File file2 = ResourceUtils.getFile("classpath:orderdetailsReport.jrxml");
         JasperReport jasperReport2 = JasperCompileManager.compileReport(file2.getAbsolutePath());
 
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orderItems);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lstProfit);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("createdBy", "EBUY ECOMMERCE");

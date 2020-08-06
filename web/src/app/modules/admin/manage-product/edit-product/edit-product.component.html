@@ -19,15 +19,15 @@
             </div>
 
             <div class="form-group row">
-              <label for="shortdesc">Short Description</label>
+              <label for="shortDescription">Short Description</label>
 
               <textarea
-                [formControl]="form.get('shortdesc')"
-                [ngClass]="{'is-invalid': isValid('shortdesc')}"
-                id="shortdesc"
+                [formControl]="form.get('shortDescription')"
+                [ngClass]="{'is-invalid': isValid('shortDescription')}"
+                id="shortDescription"
                 class="form-control"
-                name="shortdesc" autofocus></textarea>
-              <div *ngIf="hasError('shortdesc')" class="invalid-feedback">
+                name="shortDescription" autofocus></textarea>
+              <div *ngIf="hasError('shortDescription')" class="invalid-feedback">
                 short description is required
               </div>
             </div>
@@ -36,7 +36,7 @@
               <label for="description">Description</label>
               <textarea
                 [formControl]="form.get('description')"
-                [ngClass]="{'is-invalid': isValid('shortdesc')}"
+                [ngClass]="{'is-invalid': isValid('description')}"
                 id="description"
                 class="form-control"
                 name="description" autofocus></textarea>
@@ -74,27 +74,25 @@
 
             <div class="form-group row">
               <label for="category">Category</label>
-              <select class="form-control" id="category">
-                <option>Cat 1</option>
-                <option>Cat 2</option>
-                <option>Cat 3</option>
-                <option>Cat 4</option>
-                <option>Cat 5</option>
+              <select class="form-control" id="category" [formControl]="form.get('category.id')">
+                <option *ngFor="let cat of lstCategory; let i = index" [value]="lstCategory[i].id">
+                  {{lstCategory[i].name}}
+                </option>                  
               </select>
-              <div *ngIf="hasError('category')" class="invalid-feedback">
+              <div *ngIf="hasError('categoryId')" class="invalid-feedback">
                 category is required
               </div>
             </div>
 
             <div class="form-group row">
               <label for="imageUrl">Image</label>
-              <input type="file"
+              <input type="file" [formControl]="form.get('imageUrl')"
                      class="form-control-file"
                      id="imageUrl"
                      aria-describedby="fileHelp"
                      (change)="onFileSelect($event)">
 
-              <div *ngIf="hasError('imageurl')" class="invalid-feedback">
+              <div *ngIf="hasError('imageUrl')" class="invalid-feedback"  >
                 image url is required
               </div>
             </div>
@@ -107,6 +105,9 @@
           </div>
 
         </form>
+        <p> form: {{form.value | json}}</p>
+        <p> Ss Invalid: {{form.invalid}}</p>
+       <p> Ss Invalid: {{form.errors | json}}</p>
       </div>
     </div>
     <div class="col-sm-12 col-md-4 mr-btm-10">

@@ -16,6 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByIsDeleted(boolean isDeleted);
     List<Product> findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(boolean isDeleted,boolean isService,boolean isPublished,int statusId);
+    List<Product> findByProductStatus_Id(int statusId);
+
 
 
 
@@ -38,5 +40,38 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "and p.price between :priceFrom and :priceTo", nativeQuery = true)
     public List<Product> search( @Param("name") String name,@Param("vendorName") String vendorName ,
                                 @Param("priceFrom") double priceFrom, @Param("priceTo") double priceTo);
+
+
+    @Query(value = "select \n" +
+            "    product.id,\n" +
+            "    product.cost,\n" +
+            "    product.description,\n" +
+            "    product.imageUrl,\n" +
+            "    product.isPublished,\n" +
+            "    product.isService,\n" +
+            "    product.name,\n" +
+            "   \n" +
+            "    product.shortDescription,\n" +
+            "    product.categoryId,\n" +
+            "    product.statusId,\n" +
+            "    product.vendorId,\n" +
+            "    product.isDeleted ,\n" +
+            "    sum(oi.quantity * (product.price-product.cost)) as price\n" +
+            " from product \n" +
+            "inner join orderitem oi on product.id=oi.product_id\n" +
+            "where product.isDeleted=0 and product.isService=0 and product.isPublished=1 and product.vendorId=:vendorId\n" +
+            "group by  product.id,\n" +
+            "    product.cost,\n" +
+            "    product.description,\n" +
+            "    product.imageUrl,\n" +
+            "    product.isPublished,\n" +
+            "    product.isService,\n" +
+            "    product.name,   \n" +
+            "    product.shortDescription,\n" +
+            "    product.categoryId,\n" +
+            "    product.statusId,\n" +
+            "    product.vendorId,\n" +
+            "    product.isDeleted ", nativeQuery = true)
+    public List<Product> reportProfit( @Param("vendorId") int vendorId);
 
 }

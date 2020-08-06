@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
 import {SubSink} from 'subsink';
 import {ProductService} from '../../../../services/product.service';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-add-product',
@@ -13,19 +14,22 @@ export class AddProductComponent implements OnInit, OnDestroy {
   private photoFile;
   public form: FormGroup;
   public subs = new SubSink();
-
+  public lstCategory =[];
   constructor(private fb: FormBuilder,
               private router: Router,
-              private productService: ProductService) {
+              private productService: ProductService,
+              private categoryService:CategoryService) {
+
+                this.getCategories();
 
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      category: ['', [Validators.required]],
+      category: this.fb.group({ id: ['', [Validators.required]]}),
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      shortdesc: ['', [Validators.required]],
+      shortDescription: ['', [Validators.required]],
       imageUrl: ['', [Validators.required]],
       cost: ['', [Validators.required]],
       price: ['', [Validators.required]],
@@ -33,24 +37,36 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //throw new Error("Method not implemented.");
     this.subs.unsubscribe();
   }
 
+ 
   public onFileSelect(event) {
     if (event.target.files.length > 0) {
       this.photoFile = event.target.files[0];
     }
   }
 
-  onSubmit() {
-      if (this.form.invalid) {
-        return;
-      }
-      let formData: any = new FormData();
-      formData.append("product", JSON.stringify(this.form.value));
-      formData.append("file", this.photoFile);
-  }
+  onSubmit(): void {
+    
+    if (this.form.invalid) {
+      return;
+    }
+    let formData: any = new FormData();   
+    formData.append("productJson", JSON.stringify(this.form.value));
+    formData.append("file", this.photoFile);
+    this.subs.add(this.productService.create(formData)
+      .subscribe(
+        (result: any) => {
+         if(result.status.code == 200) {
+            //this.router.navigate(['/login']);
+            console.log("Done")
+            this.form.reset();
+          }
+        },
+        error => console.log(error)
+      ));
+  };
 
   hasError(field: string): boolean {
     return field == '' || field == null;
@@ -58,6 +74,18 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   isValid(field: string) {
     return this.form.get(field).invalid && this.form.get(field).touched;
+  }
+
+  
+  getCategories() {
+     this.categoryService.getActive().subscribe( {
+       next: (result)=> {        
+        this.lstCategory = result.data;
+        console.log(this.lstCategory);
+       },
+       error: (err)=> console.log(err.console.error())
+      });
+
   }
 
 }

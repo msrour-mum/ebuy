@@ -21,13 +21,13 @@ public class ReportsController {
 
     @GetMapping("/{userId}/orders")
     public String generateOrdersReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
-        return reportService.exportOrderReport(userId);
+        return reportService.OrderReport(userId);
 
     }
 
 
-    @GetMapping("/{userId}/orderDetails")
+    @GetMapping("/{userId}/profits")
     public String generateOrderDetailsReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
-        return reportService.exportOrderItemReport(userId);
+        return reportService.profitReport(userId);
     }
 }

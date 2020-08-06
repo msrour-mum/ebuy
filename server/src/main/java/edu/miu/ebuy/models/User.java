@@ -50,6 +50,10 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    public User(int id) {
+        this.id = id;
+    }
+
     public User(String name, String email, Role role, String password, Boolean isActive,  String phone, String address, String imageUrl) {
         this.name = name;
         this.email = email;

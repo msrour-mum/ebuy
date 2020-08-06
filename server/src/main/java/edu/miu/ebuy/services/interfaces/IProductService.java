@@ -13,10 +13,11 @@ public interface IProductService {
     public List<Product> getAll();
     public List<Product> getActive();
     public Product get(int productId);
-    public Product create(Product product);
+    public Product create(Product product, String imageUrl);
     public Product update(Product product);
+    public Product update(Product product, String imageUrl);
     public void  delete(int productId);
-
+    public List<Product> getPendingProduct();
 
     public void approveProduct(int productId, int statusId);
     public Product getServiceProduct();
