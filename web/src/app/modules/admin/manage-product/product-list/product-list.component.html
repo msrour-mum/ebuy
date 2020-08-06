@@ -1,6 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-8 mr-btm-10">
+    <div class="col-sm-12 col-md-6 mr-btm-10">
+      <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
+        <input class="form-control mr-sm-2 col-5" type="text" placeholder="Search product name" >
+        <button type="submit"  class="btn btn-secondary">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+    <div class="col-sm-12 col-md-2 mr-btm-10">
       <a [routerLink]="['/add-product']" class="btn btn-primary float-right">
         <i class="fa fa-plus" aria-hidden="true"></i> Add Product
       </a>
