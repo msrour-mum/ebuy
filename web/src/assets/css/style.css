@@ -421,3 +421,14 @@ footer .cpy {
 .search-results {
   height: 100%;
 }
+
+.alert-custom-brdr {
+  border-radius: 0;
+}
+.alert-0-l-r-p {
+  padding-right: 0;
+  padding-left: 0;
+}
+.color-black {
+  color: black;
+}
