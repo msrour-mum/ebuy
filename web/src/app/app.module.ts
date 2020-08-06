@@ -7,7 +7,7 @@ import {AppConfig} from './config/app.config';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from './services/authentication.service';
 import {JwtInterceptor} from './common/interceptors/jwt.interceptor';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, NgForm, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './modules/authentication/login/login.component';
 import {SignupComponent} from './modules/authentication/signup/signup.component';
 import {CommonModule} from '@angular/common';
@@ -25,6 +25,7 @@ import {EditCategoryComponent} from './modules/admin/manage-category/edit-catego
 import {UsersModule} from './modules/users/users.module';
 import {ShoppingModule} from './modules/shopping/shopping.module';
 import {AdminModule} from './modules/admin/admin.module';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -40,11 +41,14 @@ export function initializeApp(appConfig: AppConfig) {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
     ShoppingModule,
     AdminModule,
+    UsersModule,
+    Ng2SearchPipeModule,
   ],
   providers: [AppConfig,
     { provide: APP_INITIALIZER,

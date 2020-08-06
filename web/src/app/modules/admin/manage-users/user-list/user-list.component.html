@@ -1,1 +1,44 @@
-<p>user-list works!</p>
+<h3 style="margin-top: 40px;">Users</h3>
+
+
+<div class="row">
+  <div class="form-group col-sm-12 col-md-10 mr-btm-10">
+    <input type="text" class="form-control" placeholder="Search by name here" [(ngModel)]="search">
+  </div>
+  <div class="col-sm-12 col-md-2 mr-btm-10">
+    <a [routerLink]="['/add-user']" class="btn btn-primary">
+      <i class="fa fa-plus" aria-hidden="true"></i> Add User
+    </a>
+  </div>
+</div>
+
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Email</th>
+    <th scope="col">Is Active</th>
+    <th scope="col" colSpan="3">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr class="table-secondary" *ngFor="let user of (users | async)?.data | filter:search">
+    <td>{{user.name}}</td>
+    <td scope="col">{{user.email}}</td>
+    <td scope="col">
+      <div *ngIf="user.isActive">Active</div>
+      <div *ngIf="!user.isActive">InActive</div>
+      <div></div>
+    </td>
+    <td><button class="btn btn-success mr-btm-10" type="button">Activate</button>&nbsp;
+      <button class="btn btn-danger mr-btm-10" type="button">Deactivate</button>&nbsp;
+      <a class="btn btn-primary mr-btm-10" [routerLink]="['/edit-user', user.id]">Edit</a>
+    </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+
+  </tbody>
+</table>

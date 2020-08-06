@@ -18,4 +18,8 @@ export class UsersService {
     return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/users/${userId}`);
   }
 
+  public getAll() {
+    return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/users`);
+  }
+
 }

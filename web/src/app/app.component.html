@@ -16,7 +16,7 @@
           <a class="nav-link" [routerLink]="['home']" *ngIf="authService.isAuthenticated">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['myOrders']" *ngIf="authService.isAuthenticated">My Orders</a>
+          <a class="nav-link" [routerLink]="['my-orders']" *ngIf="authService.isAuthenticated">My Orders</a>
         </li>
 
         <li class="nav-item dropdown" *ngIf="authService.isAuthenticated">
@@ -24,7 +24,7 @@
             Admin <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="admin">
-            <a class="dropdown-item" href="../default/">Manage Users</a>
+            <a class="dropdown-item" [routerLink]="['manage-users']">Manage Users</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>
             <a class="dropdown-item" [routerLink]="['approve-product']">Review Products</a>

@@ -234,9 +234,18 @@ footer .cpy {
   margin-right: 5px;
   border-radius: 50px;
 }
+.order-dtls-box {
+  margin: 5px;
+}
 .cart-prd-img {
     width: 150px;
     height: 100px;
+}
+.order-prd-img {
+  width: 56px;
+  height: 42px;
+  margin-top: -8px;
+  marigin-left: 10px;
 }
 .prd-lbl {
     margin-right: 10px;

@@ -13,6 +13,9 @@ import {CartComponent} from './modules/shopping/cart/cart.component';
 import {CheckoutComponent} from './modules/shopping/checkout/checkout.component';
 import {ProductListComponent} from './modules/admin/manage-product/product-list/product-list.component';
 import {EditProductComponent} from './modules/admin/manage-product/edit-product/edit-product.component';
+import {MyOrdersListComponent} from './modules/users/my-orders-list/my-orders-list.component';
+import {UserListComponent} from './modules/admin/manage-users/user-list/user-list.component';
+import {AddUserComponent} from './modules/admin/manage-users/add-user/add-user.component';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -20,15 +23,18 @@ const routes: Routes =  [
   {path: 'login', component: LoginComponent  },
   {path: 'signup', component: SignupComponent},
   {path: 'product-list', component: ProductListComponent},
+  {path: 'my-orders', component: MyOrdersListComponent},
   {path: 'approve-product', component: ApproveProductComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:productId', component: EditProductComponent},
   {path: 'categories', component: CategoryListComponent},
   {path: 'add-category', component: AddCategoryComponent},
+  {path: 'add-user', component: AddUserComponent},
   {path: 'edit-user/:id', component: EditUserComponent},
   {path: 'edit-profile', component: ProfileComponent},
   {path: 'cart', component: CartComponent},
   {path: 'checkout', component: CheckoutComponent},
+  {path: 'manage-users', component: UserListComponent},
   {path: '**', redirectTo: '/home'}];
 
 @NgModule({

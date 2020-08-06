@@ -1,1 +1,57 @@
-<p>orders-list works!</p>
+<div class="container">
+  <h1>My Orders</h1>
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <div class="card border-success mb-3">
+        <div class="card-header row">
+          <div class="col-3">
+            <i class="prd-lbl fa fa-clock-o"> Date</i><i>order.orderDate</i>
+          </div>
+          <div class="col-3">
+            <i class="prd-lbl fa fa-money"> Tax</i> <i>$00.00</i>
+          </div>
+          <div class="col-3">
+            <i class="prd-lbl fa fa-money"> Shipping</i> <i>$03.00</i>
+          </div>
+          <div class="col-3">
+            <i class="prd-lbl fa fa-money"> Total</i> <i>$order.total</i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-link"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#orderDetails_1"
+                    aria-expanded="false">
+              <i class="fa fa-angle-down" aria-hidden="true">Order details</i>
+            </button>
+          </div>
+        </div>
+
+        <div class="collapse row order-dtls-box" id="orderDetails_1">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-6"></div>
+              <div class="col-2"><i class="prd-lbl fa fa-money"> Price</i></div>
+              <div class="col-2"><i class="fa fa-bars" aria-hidden="true"> Quantity</i></div>
+              <div class="col-2"><i class="prd-lbl fa fa-money"> Total</i></div>
+            </div>
+          </div>
+          <div class="col-12">  <!-- ngFor order.orderItem -->
+            <div class="row">
+              <div class="col-2">
+                <img src="product.imageUrl" class="order-prd-img">
+              </div>
+              <div class="col-4">product.name</div>
+              <div class="col-2">$orderItem.prdocut.price</div>
+              <div class="col-2">orderItem.quantity</div>
+              <div class="col-2">orderItem.total</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div> <!-- ngFor each order in orders -->
+</div>

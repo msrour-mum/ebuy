@@ -7,14 +7,10 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  search: string;
 
-  public searchForm: FormGroup;
+  constructor() {
 
-  constructor(private  fb: FormBuilder) {
-  this.searchForm = this.fb.group(
-      {
-        search: [''],
-      });
   }
 
   ngOnInit() {

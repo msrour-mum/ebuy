@@ -4,7 +4,7 @@ import { ProductListComponent } from './manage-product/product-list/product-list
 import { CategoryListComponent } from './manage-category/category-list/category-list.component';
 import { AddCategoryComponent } from './manage-category/add-category/add-category.component';
 import { AddProductComponent } from './manage-product/add-product/add-product.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ApproveProductComponent } from './manage-product/approve-product/approve-product.component';
 import { ViewSalesComponent } from './view-sales/view-sales.component';
 import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
@@ -14,6 +14,7 @@ import { EditUserComponent } from './manage-users/edit-user/edit-user.component'
 import { UserListComponent } from './manage-users/user-list/user-list.component';
 import { ProductHelpComponent } from './manage-product/product-help/product-help.component';
 import {AppRoutingModule} from '../../app-routing.module';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 @NgModule({
   declarations: [ProductListComponent,
@@ -31,8 +32,10 @@ import {AppRoutingModule} from '../../app-routing.module';
     ProductHelpComponent],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    Ng2SearchPipeModule,
   ],
 })
 export class AdminModule { }
