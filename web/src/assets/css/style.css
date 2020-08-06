@@ -105,7 +105,7 @@ footer .cpy {
     margin: 5px;
 }
 .details-text{
-    color: #dabf00;
+    color: #ead241;
     font-size: 11px;
 }
 .bottom-text{
@@ -129,13 +129,18 @@ footer .cpy {
 .add-cart {
     position: absolute;
     bottom: 10px;
-    right: 10px;
+    right: 0px;
 }
 .btn-add-cart {
   margin: 3px !important;
   background-image: none;
   background-color: transparent !important;
   border-color: transparent;
+}
+.prd-cat-price {
+  position: absolute;
+  top: 5px;
+  right: 15px;
 }
 
 /*.shw-hdn {*/
