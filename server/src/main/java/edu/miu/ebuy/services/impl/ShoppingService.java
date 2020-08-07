@@ -6,6 +6,7 @@ import edu.miu.ebuy.exceptions.Errors;
 import edu.miu.ebuy.exceptions.HttpException;
 import edu.miu.ebuy.models.*;
 import edu.miu.ebuy.models.dto.Checkout;
+import edu.miu.ebuy.models.dto.OrdersDto;
 import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +76,18 @@ public class ShoppingService implements IShoppingService {
     public void addOrder(OrderItem orderItem, User user, double shipping) {
         Order order = new Order(user,new Date(), orderItem.getItemTotal(), shipping);
         orderRepository.save(order);
+    }
+
+
+    @Override
+    public List<OrdersDto> userOrder(int userId){
+        List<Order> lst= orderRepository.findByUserId(userId);
+        List<OrdersDto> result = new ArrayList<>();
+        for (Order order : lst){
+            OrdersDto ordersDto = OrdersDto.readFull(order);
+            result.add(ordersDto);
+        }
+        return result;
     }
 
 }

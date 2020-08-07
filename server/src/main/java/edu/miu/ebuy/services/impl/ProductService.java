@@ -49,6 +49,7 @@ public class ProductService implements IProductService {
         product.setProductStatus(new ProductStatus(1,""));
         product.setUser(new User(Context.getUserId()));
         product.setImageUrl(imageUrl);
+        product.setPublished(true);
         return productRepository.save(product);
     }
 
@@ -57,6 +58,8 @@ public class ProductService implements IProductService {
         product.setProductStatus(new ProductStatus(product.getProductStatus().getId(),""));
         product.setUser(new User(Context.getUserId()));
         product.setImageUrl(imageUrl);
+
+
         return productRepository.save(product);
     }
 
@@ -98,8 +101,17 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> getPendingProduct() {
-        return productRepository.findByProductStatus_Id(1);
+    public List<ProductDto> getPendingProduct() {
+
+        List<Product> productList=  productRepository.findByProductStatus_Id(1);
+        List<ProductDto> lst = new ArrayList<>();
+        for (Product product : productList)
+        {
+            ProductDto productDto =ProductDto.read(product);
+
+            lst.add(productDto);
+        }
+        return  lst;
     }
 
     @Override
@@ -111,18 +123,7 @@ public class ProductService implements IProductService {
         List<ProductDto> lst = new ArrayList<>();
         for (Product product : productList)
         {
-            ProductDto productDto =
-                    new ProductDto(product.getId(),product.getName(),product.getDescription(),
-                            product.getDescription(),
-                            product.getUser().getId(),product.getCategory().getId(),
-                            product.getCost(),product.getPrice(),
-                            product.getProductStatus().getId(),
-                            product.isPublished(), product.isService(),
-                            product.getImageUrl(),
-                            product.isDeleted(),
-                            product.getUser().getName(),
-                            product.getCategory().getName());
-
+            ProductDto productDto =ProductDto.read(product);
             lst.add(productDto);
         }
         return  lst;

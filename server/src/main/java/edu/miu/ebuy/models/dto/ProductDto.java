@@ -1,6 +1,8 @@
 package edu.miu.ebuy.models.dto;
 
 import edu.miu.ebuy.models.Category;
+import edu.miu.ebuy.models.Order;
+import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.models.lookup.ProductStatus;
 
@@ -26,6 +28,23 @@ public class ProductDto {
 
     private String vendorName;
     private String categoryName;
+
+    public static ProductDto read(Product product)
+    {
+        ProductDto productDto =
+                new ProductDto(product.getId(),product.getName(),
+                        product.getShortDescription(),
+                        product.getDescription(),
+                        product.getUser().getId(),product.getCategory().getId(),
+                        product.getCost(),product.getPrice(),
+                        product.getProductStatus().getId(),
+                        product.isPublished(), product.isService(),
+                        product.getImageUrl(),
+                        product.isDeleted(),
+                        product.getUser().getName(),
+                        product.getCategory().getName());
+        return productDto;
+    }
 
     public ProductDto(Integer id, String name, String shortDescription, String description, int vendorId, int categoryId, double cost, double price, int statusId, boolean isPublished, boolean isService, String imageUrl, boolean isDeleted, String vendorName, String categoryName) {
         this.id = id;

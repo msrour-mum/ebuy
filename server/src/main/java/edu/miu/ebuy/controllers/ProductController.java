@@ -42,7 +42,7 @@ public class ProductController {
     }
 
     @GetMapping("/pending")
-    public List<Product> getPending() {
+    public List<ProductDto> getPending() {
         return productService.getPendingProduct();
     }
 

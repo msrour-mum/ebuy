@@ -17,7 +17,7 @@ import {Router} from '@angular/router';
 })
 export class ProductCatalogListComponent implements OnInit {
 
-  private hostUrl: string;
+  public hostUrl: string;
   // public lstProduct =[];
   public lstProduct:Observable<any[]>;
   searchForm: FormGroup;

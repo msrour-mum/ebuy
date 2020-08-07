@@ -20,16 +20,17 @@ export class ProductService {
       return this.http.post<any>(`${AppConfig.settings.apiServiceUrl}/products/`, body);
     }
     public getOne(productId) {
-      console.log(`${AppConfig.settings.apiServiceUrl}/products/${productId}`)
+     
+      
       return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/${productId}`);
     }
 
      public approve(productId:number) {
-          return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/${productId}/approve/2`);
+          return this.http.put<any>(`${AppConfig.settings.apiServiceUrl}/products/${productId}/approve/2`,null);
      }
      public reject(productId:number) {
-               return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/${productId}/approve/3`);
-          }
+      return this.http.put<any>(`${AppConfig.settings.apiServiceUrl}/products/${productId}/approve/3`,null);
+     }
 
      public get() {
           return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/`);
