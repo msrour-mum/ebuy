@@ -16,6 +16,7 @@ import {EditProductComponent} from './modules/admin/manage-product/edit-product/
 import {MyOrdersListComponent} from './modules/users/my-orders-list/my-orders-list.component';
 import {UserListComponent} from './modules/admin/manage-users/user-list/user-list.component';
 import {AddUserComponent} from './modules/admin/manage-users/add-user/add-user.component';
+import {ProductDetailsComponent} from './modules/shopping/products/product-details/product-details.component';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -27,6 +28,7 @@ const routes: Routes =  [
   {path: 'approve-product', component: ApproveProductComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:productId', component: EditProductComponent},
+  {path: 'product/:productId', component: ProductDetailsComponent},
   {path: 'categories', component: CategoryListComponent},
   {path: 'add-category', component: AddCategoryComponent},
   {path: 'add-user', component: AddUserComponent},

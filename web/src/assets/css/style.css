@@ -204,6 +204,9 @@ footer .cpy {
     margin-top: 35px;
     bottom: 10px;
 }
+.pd {
+  padding:10px;
+}
 .pd-lft-0 {
   padding-left:0 !important;
 }
