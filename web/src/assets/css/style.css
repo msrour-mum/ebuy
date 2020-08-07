@@ -229,6 +229,14 @@ footer .cpy {
 .user-prof-info-bar{
   margin-bottom: 10px;
 }
+.cus-bar {
+  border: 1px dashed #239ee5;
+  border-top-width: 2px;
+  border-radius: 0;
+}
+.mr-min- {
+  margin-top: -11px;
+}
 
 .user-small-sqr-img {
   width: 40px;
