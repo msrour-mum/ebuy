@@ -33,18 +33,13 @@
           </div>
         </li>
       </ul>
-      <div>
-        <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" [formControl]="searchForm.get('search')">
-          <button type="submit"  class="btn btn-secondary my-2 my-sm-0 search-icon">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
-          <!-- Cart  -->
-          <a [routerLink]="['/cart']" class="mr-1 white">
-            <i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>
-            <i class="cart-ico" *ngIf="true">20</i> <!-- Todo: check cart items count if zero then ngIf=false -->
-          </a>
-        </form>
+      <div class="m-2">
+        <!-- Cart  -->
+        <a [routerLink]="['/cart']" class="mr-1 white">
+          <i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>
+          <i class="cart-ico" *ngIf="true">{{(shoppingService.getCart() | async)?.count}}</i>
+          <!-- Todo: check cart items count if zero then ngIf=false -->
+        </a>
       </div>
 
       <!-- User image -->

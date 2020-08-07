@@ -6,6 +6,7 @@ import {ProductDetailsComponent} from './products/product-details/product-detail
 import {CheckoutComponent} from './checkout/checkout.component';
 import {AppRoutingModule} from '../../app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
 // import { ProductSearchComponent } from './products/product-search/product-search.component';
 
@@ -14,7 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   declarations: [CartComponent,
     ProductCatalogListComponent,
     ProductDetailsComponent,
-    CheckoutComponent],   
+    CheckoutComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ProductService } from 'src/app/services/product.service';
 import { AppConfig } from 'src/app/config/app.config';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ShoppingService} from '../../../../services/shopping.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -20,16 +22,16 @@ export class ProductCatalogListComponent implements OnInit {
   public lstProduct:Observable<any[]>;
   searchForm: FormGroup;
   public searchItem:any;
-  constructor(private dataService: ProductService, private  fb: FormBuilder) {   
+  constructor(private dataService: ProductService, private  fb: FormBuilder, private shoppingService: ShoppingService, private router: Router) {
     //  this.dataService.get().subscribe( {
-    //    next: (result)=> {        
+    //    next: (result)=> {
     //     this.lstProduct = result.data;
     //     console.log(this.lstProduct);
     //    },
     //    error: (err)=> console.log(err.console.error())
     //   });
 
-    
+
     this.searchForm = this.fb.group(
       {
         productName: [''],
@@ -49,7 +51,7 @@ export class ProductCatalogListComponent implements OnInit {
 
   OnSubmit(): void {
     this.searchItem = this.searchForm.value;
-    
+
 
     // if (this.searchItem.bid_price < 0) {
     //   this.errorMsg = 'bid price could not be negative number';
@@ -69,10 +71,14 @@ export class ProductCatalogListComponent implements OnInit {
       // if (err) {
       //   this.errorMsg = err;
       // }
-    
+
 
   }
 
+  addToCart(product: any) {
+    this.shoppingService.addProduct(product, 1);
+    this.router.navigate(['/cart']);
+  }
   clear():void  {
     this.searchForm.reset();
   }

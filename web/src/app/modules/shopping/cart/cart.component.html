@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
     <div class="alert alert-dismissible alert-primary alert-custom-brdr color-black">
       The price and availability of items at eBuy.com are subject to change.
       The Cart is a temporary place to store a list of your items and reflects each item's most recent price.
@@ -7,78 +7,74 @@
     </div>
   </div>
   <div class="row">
-
-    <!--  <c:if test="${cart == null}">-->
-    <div class="card bg-light mb-3" *ngIf="false">
+    <!-- Empty Cart Message box -->
+    <div class="card bg-light mb-3" *ngIf="(shoppingService.getCart() | async)?.count === 0">
       <div class="card-header">Information</div>
       <div class="card-body">
         <h4 class="card-title">Empty Cart</h4>
         <p class="card-text">There are no products found in your card, please continue shopping then add
           your products to the cart.</p>
 
-        <div><a class="btn btn-primary" href="/home"> Continue Shopping</a></div>
+        <div><a class="btn btn-primary" [routerLink]="['/home']"> Continue Shopping</a></div>
       </div>
     </div>
-    <!--  </c:if>-->
-    <!--  <c:if test="${cart != null}">-->
-    <div class="col-sm-12 col-md-8 order-line-box">
-
-      <!--      <c:forEach var="cartItem" items="${cart.orderLines}">-->
-      <div class="card border-info mb-3">
+    <!-- Cart -->
+    <div class="col-sm-12 col-md-8 order-line-box" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
+      <div class="card border-info mb-3" *ngFor="let orderItem of (shoppingService.getCart() | async)?.items">
         <div class="card-header row">
           <div class="col-4">
-            <i class="prd-lbl">Price</i><i>cartItem.unitPrice</i>
+            <i class="prd-lbl">Price</i>&nbsp;<i>${{orderItem.product.price}}</i>
           </div>
           <div class="col-5">
-            <i class="prd-lbl">Quantity</i> <i>cartItem.quantity</i>
+            <i class="prd-lbl">Quantity</i>&nbsp;<i>{{orderItem.quantity}}</i>
           </div>
           <div class="col-3">
-            <i class="prd-lbl">Sum</i> <i>cartItem.subtotal</i>
+            <i class="prd-lbl">Sum</i>&nbsp;<i>${{orderItem.total}}</i>
           </div>
         </div>
         <div class="card-body row">
-          <img src="cartItem.imageUrl" class="cart-prd-img col-3">
+          <img src="{{hostUrl + orderItem.product.imageUrl}}" class="cart-prd-img col-3">
           <div class="col-9">
-            <h4 class="card-title">cartItem.product.productName</h4>
-            <p class="card-text">cartItem.product.description</p>
+            <h4 class="card-title">{{orderItem.product.name}}</h4>
+            <p class="card-text">{{orderItem.product.shortDescription}}</p>
           </div>
           <div class="order-line-cmd row">
+
             <div class="prodcut-cmd-icon ">
-              <button type="button" class="btn btn-primary" (click)="addProduct(5)">
+              <button type="button" class="btn btn-primary" (click)="addToCart(orderItem.product)">
                 <i class="fa fa-plus"></i>
               </button>
             </div>
-
             <div class="prodcut-cmd-icon ">
-                <button type="button" class="btn btn-danger" (click)="removeProduct(5)">
+                <button type="button" class="btn btn-danger" (click)="removeFromCartCart(orderItem.product)">
                   <i class="fa fa-minus"></i>
                 </button>
             </div>
+
           </div>
         </div>
       </div>
-      <!--      </c:forEach>-->
     </div>
-    <div class="col-sm-12 col-md-4 order-summary-box jumbotron">
+    <div class="col-sm-12 col-md-4 order-summary-box jumbotron" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
 
       <span class="font-size-2rem">SUMMARY</span><hr>
       <div><i>Total price that you will pay as described bellow</i></div>
       <div class="sum-item subTotal row">
         <div class="col-8 lbl">Sub Total</div>
-        <div class="col-4">$cart.subtotal</div>
+        <div class="col-4">${{(shoppingService.getCart() | async)?.subTotal}}</div>
       </div>
       <div class="sum-item tax row">
         <div class="col-8 lbl">Tax</div>
-        <div class="col-4">$cart.tax</div>
+        <div class="col-4">${{(shoppingService.getCart() | async)?.tax}}</div>
       </div>
       <div class="sum-item shipping row">
         <div class="col-8 lbl">Shipping</div>
-        <div class="col-4">$cart.shipping</div>
+        <div class="col-4">${{(shoppingService.getCart() | async)?.shipping}}</div>
       </div>
       <hr>
       <div class="sum-item total row">
         <div class="col-8 lbl">TOTAL</div>
-        <div class="col-4">$cart.total</div>
+        <div class="col-4">${{(shoppingService.getCart() | async)?.total}}</div>
       </div>
 
       <div class="sum-btns row">
@@ -91,9 +87,8 @@
       </div>
 
     </div>
-    <!--  </c:if>-->
   </div>
-  <div class="row">
+  <div class="row" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
     <div class="col-md-8 col-sm-12"> </div>
     <div class="col-md-4 col-sm-12 alert-0-l-r-p">
       <div class="alert alert-dismissible alert-info alert-custom-brdr alert-0-l-r-mr color-black">

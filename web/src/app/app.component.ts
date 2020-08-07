@@ -3,6 +3,7 @@ import {AppConfig} from './config/app.config';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from './services/authentication.service';
+import {ShoppingService} from './services/shopping.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
     });
 
   constructor(public authService: AuthenticationService,
+              public shoppingService: ShoppingService,
               private  fb: FormBuilder,
               private router: Router) {
 
