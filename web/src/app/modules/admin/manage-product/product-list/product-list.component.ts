@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Observable, Subject} from 'rxjs';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { ProductService } from 'src/app/services/product.service';
+import { AppConfig } from 'src/app/config/app.config';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-manage-product-list',
@@ -7,19 +14,32 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  
+  public hostUrl: string;
   search: string;
+  // public lstProduct =[];
+  public lstProduct:Observable<any[]>;
+  //searchForm: FormGroup;
+  //public searchItem:any;
+  constructor(private dataService: ProductService, private  fb: FormBuilder) {    
+      //this.lstProduct = this.dataService.getActive();
+    }
 
-  constructor() {
-
+  ngOnInit(): void {
+    this.hostUrl = AppConfig.settings.apiServiceUrl;
+    this.lstProduct = this.dataService.getActive();
+    
+  
   }
 
-  ngOnInit() {
+
+  OnSubmit(): void {
+   
+    //this.lstProduct = this.dataService.search(this.searchItem);
   }
 
-  onSubmit(): void {
-    // let search = this.searchForm.get('search').value;
-    // this.searchForm.reset();
-    // this.router.navigate(['search'], {queryParams: {q: search}});
+  clear():void  {
+   
   }
 
 }

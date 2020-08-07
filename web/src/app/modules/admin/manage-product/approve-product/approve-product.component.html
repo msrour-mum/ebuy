@@ -1,30 +1,30 @@
 <h3 style="margin-top: 40px;">Pending Products</h3>
-<table class="table table-hover">
+<table class="table table-hover" style="table-layout: fixed;">
   <thead>
     <tr>
       <th scope="col">Product Name</th>
-      <th scope="col">Short Description</th>
-      <th scope="col">Description</th>
-      <th scope="col">Price</th>
+      <th style="width: 20%;"scope="col">Short Description</th>
+      <th style="width: 40%;" scope="col">Description</th>
+      <th style="width: 5%;"scope="col">Price</th>
       <th scope="col">Vendor</th>
-      <th scope="col" colSpan="2">Actions</th>
+      <th style="width: 15%;"scope="col" colSpan="2">Actions</th>
     </tr>
   </thead>
   <tbody>
 
-    <tr class="table-secondary">
-      <td>Product 1</td>
-      <td scope="col">Short Description</td>
-      <td scope="col">Lorem ipsum dolor sit amet, pro expetenda argumentum in, vim facer scripserit ea. Vim ad partem commodo constituto, nec liber expetenda expetendis ex. Pri an iriure adipisci erroribus. Eos ut melius malorum virtute, autem mazim torquatos cu vis. Nemore assentior ei vis, te imperdiet cotidieque per. Te sed adhuc atqui graeco, eos fuisset expetenda vulputate ut.</td>
-      <td scope="col">$100</td>
-      <td>Vendor 1</td>
-      <td> <button class="btn btn-success" type="button">Approve</button> </td>
-      <td> <button class="btn btn-danger" type="button">Reject</button></td>
-    </tr>
+     <tr *ngFor="let product of (lstProduct | async)?.data" class="table-secondary" style="word-wrap: break-word;">
+      <td>{{product.name}}</td>
+      <td  scope="col">{{product.shortDescription}}</td>
+      <td scope="col">{{product.description}}</td>
+      <td scope="col">${{product.price}}</td>
+      <td>{{product.vendorName}}</td>
+      <td> <button class="btn btn-success" type="button"  (click)="OnAprove(product.id)"  >Approve</button> </td>
+      <td> <button class="btn btn-danger" type="button" (click)="OnReject(product.id)">Reject</button></td>
+    </tr> 
 
-    <tr class="table-secondary">
-      <td>Product 2</td>
-      <td scope="col">Short Description</td>
+    <!-- <tr *ngFor="let product of (lstProduct | async)?.data" class="table-secondary">
+      <td>{{product.name}}</td>
+      <td scope="col"  style=" word-wrap: break-word;"><p> {{product.shortDescription}}</p></td>
       <td scope="col">Lorem ipsum dolor sit amet, pro expetenda argumentum in, vim facer scripserit ea. Vim ad partem commodo constituto, nec liber expetenda expetendis ex. Pri an iriure adipisci erroribus. Eos ut melius malorum virtute, autem mazim torquatos cu vis. Nemore assentior ei vis, te imperdiet cotidieque per. Te sed adhuc atqui graeco, eos fuisset expetenda vulputate ut.</td>
       <td scope="col">$100</td>
       <td>Vendor 1</td>
@@ -40,7 +40,7 @@
       <td>Vendor 2</td>
       <td> <button class="btn btn-success" type="button">Approve</button> </td>
       <td> <button class="btn btn-danger" type="button">Reject</button></td>
-    </tr>
+    </tr> -->
 
   </tbody>
 </table>

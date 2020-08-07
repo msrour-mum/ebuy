@@ -96,8 +96,14 @@
                 image url is required
               </div>
             </div>
-          </fieldset>
 
+           
+
+           
+          </fieldset>
+          <div class="form-group row">             
+            <img src="{{hostUrl + img}}"  class="prd-img-lg" >
+          </div>
           <div class="row pull-right">
             <button class="btn btn-primary" (click)="onSubmit()">
               <i class="fa fa-floppy-o" aria-hidden="true"></i> Save
@@ -105,9 +111,9 @@
           </div>
 
         </form>
-        <p> form: {{form.value | json}}</p>
+        <!-- <p> form: {{form.value | json}}</p>
         <p> Ss Invalid: {{form.invalid}}</p>
-       <p> Ss Invalid: {{form.errors | json}}</p>
+       <p> Ss Invalid: {{form.errors | json}}</p> -->
       </div>
     </div>
     <div class="col-sm-12 col-md-4 mr-btm-10">

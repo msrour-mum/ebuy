@@ -71,7 +71,7 @@
       <div  *ngFor="let product of (lstProduct | async)?.data" class="col-xs-12 col-md-4 col-sm-6 hh-50 product-box-lg">
         <div class="img-box">
           <a [routerLink]="['/product', product.id]">
-            <img src="../../../../../assets/images/p1.jpg" class="prd-img-lg">
+            <img src="{{hostUrl + product.imageUrl}}" class="prd-img-lg">
             <div class="brd img-box-p r-btm-5 shw-hdn col-12">
               <div class="row">
                 <div class="head-text col-9">{{product.name}}</div>

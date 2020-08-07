@@ -5,6 +5,7 @@ import {SubSink} from 'subsink';
 import {ProductService} from '../../../../services/product.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AppConfig } from 'src/app/config/app.config';
 
 @Component({
   selector: 'app-edit-product',
@@ -18,8 +19,8 @@ export class EditProductComponent implements OnInit, OnDestroy {
   public product;
   public lstCategory =[];
   private productSubject: Observable<any> = new BehaviorSubject({}) ;
-  private img=null;
-
+  public img=null;
+  public hostUrl: string;
   constructor(private fb: FormBuilder,
               private router: Router,
               private activeRouter: ActivatedRoute,
@@ -44,7 +45,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     });
 
     this.getCategories();
-
+    this.hostUrl = AppConfig.settings.apiServiceUrl;
     this.subs.add(this.productSubject
       .subscribe({
           next: (result) => {

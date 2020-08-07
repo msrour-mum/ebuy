@@ -1,3 +1,5 @@
+
+
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-10 mr-btm-10">
@@ -12,16 +14,16 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 col-md-8 order-line-box">
+    <div   class="col-sm-12 col-md-8 order-line-box">
 
       <!--      <c:forEach var="product" items="${products}">-->
-      <div class="card border-info mb-3">
+      <div *ngFor="let product of (lstProduct | async)?.data" class="card border-info mb-3">
         <div class="card-header row">
           <div class="col-4">
-            <i class="prd-lbl fa fa-money"> Cost</i><i>$product.cost</i>
+            <i class="prd-lbl fa fa-money"> Cost</i><i>${{product.cost}}</i>
           </div>
           <div class="col-5">
-            <i class="prd-lbl fa fa-money"> Price</i> <i>$product.price</i>
+            <i class="prd-lbl fa fa-money"> Price</i> <i>${{product.price}}</i>
           </div>
           <div class="col-3">
             <i class="prd-lbl fa fa-th"> Stock</i>
@@ -31,10 +33,11 @@
           </div>
         </div>
         <div class="card-body row">
-          <img src="product.imageUrl" class="cart-prd-img col-3">
+          <img src="{{hostUrl + product.imageUrl}}" class="cart-prd-img col-3">
+          
           <div class="col-9">
-            <h4 class="card-title">product.productName</h4>
-            <p class="card-text">product.short-description</p>
+            <h4 class="card-title">{{product.name}}</h4>
+            <p class="card-text">{{product.shortDescription}}</p>
           </div>
           <div class="order-line-cmd row">
             <div class="prodcut-cmd-icon ">
@@ -50,7 +53,7 @@
             </div>
 
             <div class="prodcut-cmd-icon ">
-              <a [routerLink]="['/edit-product', 1]" class="btn btn-primary">
+              <a [routerLink]="['/edit-product', product.id]" class="btn btn-primary">
                 <i class="fa fa-edit" aria-hidden="true"></i> Edit
               </a>
             </div>

@@ -15,7 +15,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class ProductCatalogListComponent implements OnInit {
 
-  private hostUrl: string;
+  public hostUrl: string;
   // public lstProduct =[];
   public lstProduct:Observable<any[]>;
   searchForm: FormGroup;
