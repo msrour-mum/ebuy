@@ -7,7 +7,9 @@ import edu.miu.ebuy.common.storage.IStorageService;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.exceptions.Errors;
 import edu.miu.ebuy.exceptions.HttpException;
+import edu.miu.ebuy.models.Order;
 import edu.miu.ebuy.models.User;
+import edu.miu.ebuy.services.interfaces.IOrderService;
 import edu.miu.ebuy.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -28,6 +30,9 @@ public class UserController {
     @Autowired
     IStorageService storageService;
 
+    @Autowired
+    IOrderService orderService;
+
 
     @PostMapping("/signup")
     public User add(@RequestBody User user) throws HttpException {
@@ -35,11 +40,6 @@ public class UserController {
             user.setCard(null);
         return userService.create(user);
     }
-
-//    @PutMapping()
-//    public User update(@RequestBody User user) throws HttpException {
-//        return userService.update(user);
-//    }
 
     @PutMapping("/{userId}")
     public User update(@RequestParam(value ="file", required=false) MultipartFile file,  @RequestParam String user, @PathVariable String userId) throws HttpException, IOException {
@@ -65,6 +65,12 @@ public class UserController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") int id) {
         userService.delete(id);
+    }
+
+    @GetMapping(value="/{userId}/orders")
+    public List<Order> getOrders (@PathVariable("userId") int userId)
+    {
+      return orderService.getAll(userId);
     }
 }
 
