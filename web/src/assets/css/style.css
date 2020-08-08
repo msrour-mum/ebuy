@@ -107,6 +107,7 @@ footer .cpy {
 .details-text{
     color: #ead241;
     font-size: 11px;
+    font-weight: 500;
 }
 .bottom-text{
     color: #b2d3d3;
@@ -117,6 +118,14 @@ footer .cpy {
 {
     margin-top:5px;
     min-height: 255px;
+}
+.product-box-lg, a  {
+  color: white;
+  font-weight: 500;
+}
+.product-box-lg, a:hover {
+  color: white;
+  /*text-decoration: none;*/
 }
 .prd-img-lg {
     /*max-width: 100%;*/
@@ -177,10 +186,11 @@ footer .cpy {
 }
 
 .order-summary-box {
-    background-color: #9B251C;
-    /*border: 1px solid black;*/
+    background-color: #d5edfa;
+    border: 1px solid #cae8f9;
     min-height: 500px;
-    color: white;
+    color: #000000;
+    border-radius: 0;
 }
 .sum-item {
     margin-top: 10px;
@@ -257,6 +267,11 @@ footer .cpy {
     width: 150px;
     height: 100px;
 }
+.custom-card-border {
+  border: 0;
+  border-bottom: 1px #e1e1e1 dashed;
+  border-radius: 0 !important;
+}
 .order-prd-img {
   width: 56px;
   height: 42px;
@@ -284,8 +299,13 @@ footer .cpy {
   right: 25px;
 }
 .prodcut-cmd-icon {
-
     margin-right: 5px;
+}
+.cart-add-btn {
+  color: green;
+}
+.cart-remove-btn{
+  color: red;
 }
 
 .user_name{

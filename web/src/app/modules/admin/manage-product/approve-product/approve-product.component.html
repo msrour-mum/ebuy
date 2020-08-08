@@ -16,11 +16,11 @@
       <td>{{product.name}}</td>
       <td  scope="col">{{product.shortDescription}}</td>
       <td scope="col">{{product.description}}</td>
-      <td scope="col">${{product.price}}</td>
+      <td scope="col">{{product.price | currency}}</td>
       <td>{{product.vendorName}}</td>
       <td> <button class="btn btn-success" type="button"  (click)="OnAprove(product.id)"  >Approve</button> </td>
       <td> <button class="btn btn-danger" type="button" (click)="OnReject(product.id)">Reject</button></td>
-    </tr> 
+    </tr>
 
     <!-- <tr *ngFor="let product of (lstProduct | async)?.data" class="table-secondary">
       <td>{{product.name}}</td>
