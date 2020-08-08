@@ -12,7 +12,7 @@
           <p style="text-align: right"><i class="fa fa-th">&nbsp;Stock<strong>&nbsp;&nbsp;In-Stock</strong></i></p>
         </div>
         <div class="col-md-3">
-         <p style="text-align: right"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;<strong>product.price</strong></p>
+         <p style="text-align: right"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;<strong>{{product.price}}</strong></p>
         </div>
 
       </div>
@@ -20,18 +20,14 @@
         <div class="well">
           <div class="media">
             <a class="pull-left" href="#">
-              <img class="media-object" src="http://placekitten.com/150/150">
+              <img class="media-object" src="{{hostUrl + product.imageUrl}}" style=" width: 150px;">
             </a>
             <div class="media-body pd row">
-              <div class="col-md-7 col-sm-12"><h4 class="media-heading">Receta 1</h4></div>
-              <div class="col-md-5 col-sm-12"><p class="text-right">By Francisco</p></div>
+              <div class="col-md-7 col-sm-12"><h4 class="media-heading">{{product.name}}</h4></div>
+              <div class="col-md-5 col-sm-12"><p class="text-right">By {{product.vendorName}}</p></div>
               <div class="col-12">
-                <p>Short description goes here</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
-                  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
-                  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                  Aliquam in felis sit amet augue, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</p>
+                <p>{{product.shortDescription}}</p>
+                <p>{{product.description}}</p>
               </div>
             </div>
           </div>

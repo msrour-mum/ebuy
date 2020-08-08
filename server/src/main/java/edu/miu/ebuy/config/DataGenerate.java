@@ -235,13 +235,13 @@ public class DataGenerate {
             for (int k = 0; k < 7; k++) {
 
 
-                Order order = new Order(user, new Date(), 0, 20);
+                Order order = new Order(user, new Date(), 0, 20,user.getAddress());
                 int total = 0;
                 int c1 = new Random().nextInt(4) + 1;
                 for (int i = 0; i < c1; i++) {
                     Product p = products.get(new Random().nextInt(products.size()));
                     int qt = new Random().nextInt(3);
-                    OrderItem item = new OrderItem(p, qt, p.getPrice() * qt);
+                    OrderItem item = new OrderItem(p, qt, p.getPrice());
                     order.addItem(item);
                     total += p.getPrice() * qt;
                 }

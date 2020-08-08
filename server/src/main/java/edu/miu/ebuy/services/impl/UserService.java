@@ -59,7 +59,7 @@ public class UserService implements IUserService {
         if(user.getRole().getId() == RoleEnum.VENDOR.id)
         {
             assert product != null;
-            OrderItem orderItem = new OrderItem(product, 1, product.getPrice());
+            OrderItem orderItem = new OrderItem(product, 1,product.getPrice());
             shoppingService.addOrder(orderItem, savedUser, 0);
         }
         return savedUser;

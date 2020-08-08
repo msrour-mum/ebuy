@@ -74,7 +74,7 @@ public class ShoppingService implements IShoppingService {
     }
 
     public void addOrder(OrderItem orderItem, User user, double shipping) {
-        Order order = new Order(user,new Date(), orderItem.getItemTotal(), shipping);
+        Order order = new Order(user,new Date(), orderItem.getItemTotal(), shipping,user.getAddress());
         orderRepository.save(order);
     }
 

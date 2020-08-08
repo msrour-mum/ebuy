@@ -32,12 +32,12 @@ public class ProductController {
     IStorageService storageService;
 
     @GetMapping()
-    public List<Product> getAll() {
+    public List<ProductDto> getAll() {
         return productService.getAll();
     }
 
     @GetMapping("/active")
-    public List<Product> getActive() {
+    public List<ProductDto> getActive() {
         return productService.getActive();
     }
 
@@ -52,7 +52,7 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
-    public Product get(@PathVariable int productId) {
+    public ProductDto get(@PathVariable int productId) {
         return productService.get(productId);
     }
 
