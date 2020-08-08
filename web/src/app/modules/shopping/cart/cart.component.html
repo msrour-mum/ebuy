@@ -33,13 +33,20 @@
           </div>
         </div>
         <div class="card-body row">
-          <img src="{{hostUrl + orderItem.product.imageUrl}}" class="cart-prd-img col-3">
-          <div class="col-9">
-            <h4 class="card-title">{{orderItem.product.name}}</h4>
-            <p class="card-text">{{orderItem.product.shortDescription}}</p>
-          </div>
-          <div class="order-line-cmd row">
 
+          <img src="{{hostUrl + orderItem.product.imageUrl}}"
+               class="cart-prd-img col-3 pointer-cursor"
+               [routerLink]="['/product', orderItem.product.id]">
+          <div class="col-9">
+            <a [routerLink]="['/product', orderItem.product.id]">
+              <h4 class="card-title underline-text">{{orderItem.product.name}}</h4>
+
+              <p class="card-text body-color underline-text">{{orderItem.product.shortDescription}}</p>
+            </a>
+
+          </div>
+
+          <div class="order-line-cmd row">
             <div>
               <button type="button" class="btn success-color" (click)="addToCart(orderItem.product)">
                 <i class="fa fa-plus"></i>

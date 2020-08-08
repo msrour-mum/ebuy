@@ -279,7 +279,8 @@ footer .cpy {
   width: 56px;
   height: 42px;
   margin-top: -8px;
-  marigin-left: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 .prd-lbl {
     margin-right: 10px;
@@ -477,6 +478,15 @@ footer .cpy {
 .color-black {
   color: black;
 }
+.body-color {
+ color:  #495057;
+}
 .txt-rt-align {
   text-align: right;
+}
+.pointer-cursor:hover {
+  cursor: pointer;
+}
+.underline-text:hover {
+  text-decoration: underline;
 }
