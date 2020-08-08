@@ -272,6 +272,9 @@ footer .cpy {
   border-bottom: 1px #e1e1e1 dashed;
   border-radius: 0 !important;
 }
+.brdr-no-radius {
+  border-radius: 0 !important;
+}
 .order-prd-img {
   width: 56px;
   height: 42px;
@@ -281,6 +284,23 @@ footer .cpy {
 .prd-lbl {
     margin-right: 10px;
     font-weight: bold;
+}
+
+.primary-color {
+  color: #1d9ce5;
+}
+
+.success-color {
+  color: #88c149;
+}
+.warning-color {
+  color: #ff6707;
+}
+.danger-color {
+  color: #e12b31;
+}
+.info-color {
+  color: #04519b;
 }
 
 .font-size-2rem{
@@ -300,12 +320,6 @@ footer .cpy {
 }
 .prodcut-cmd-icon {
     margin-right: 5px;
-}
-.cart-add-btn {
-  color: green;
-}
-.cart-remove-btn{
-  color: red;
 }
 
 .user_name{

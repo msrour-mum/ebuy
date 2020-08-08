@@ -41,12 +41,12 @@
           <div class="order-line-cmd row">
 
             <div>
-              <button type="button" class="btn cart-add-btn" (click)="addToCart(orderItem.product)">
+              <button type="button" class="btn success-color" (click)="addToCart(orderItem.product)">
                 <i class="fa fa-plus"></i>
               </button>
             </div>
             <div>
-                <button type="button" class="btn cart-remove-btn" (click)="removeFromCartCart(orderItem.product)">
+                <button type="button" class="btn danger-color" (click)="removeFromCartCart(orderItem.product)">
                   <i class="fa fa-minus"></i>
                 </button>
             </div>
@@ -73,8 +73,8 @@
       </div>
       <hr>
       <div class="sum-item total row">
-        <div class="col-8 lbl">TOTAL</div>
-        <div class="col-4">{{(shoppingService.getCart() | async)?.total | currency}}</div>
+        <div class="col-8 lbl info-color">TOTAL</div>
+        <div class="col-4 info-color">{{(shoppingService.getCart() | async)?.total | currency}}</div>
       </div>
 
       <div class="sum-btns row">
