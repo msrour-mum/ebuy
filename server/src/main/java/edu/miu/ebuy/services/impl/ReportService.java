@@ -1,14 +1,10 @@
 package edu.miu.ebuy.services.impl;
 
-import edu.miu.ebuy.dao.OrderItemReportRepository;
-import edu.miu.ebuy.dao.OrderRepository;
-import edu.miu.ebuy.dao.ProductRepository;
+import edu.miu.ebuy.dao.*;
 import edu.miu.ebuy.models.Order;
 
 import edu.miu.ebuy.models.Product;
-import edu.miu.ebuy.models.dto.OrdersDto;
-import edu.miu.ebuy.models.dto.ProductDto;
-import edu.miu.ebuy.models.dto.ProfitDto;
+import edu.miu.ebuy.models.dto.*;
 import edu.miu.ebuy.services.interfaces.IReportService;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -23,32 +19,39 @@ import java.util.*;
 @Service
 public class ReportService implements IReportService {
     @Autowired
-    OrderRepository orderRepository;
+    OrderReportRepository orderReportRepository;
     @Autowired
     private OrderItemReportRepository orderItemReportRepository;
+
     @Autowired
-    private ProductRepository productRepository;
+    private ProfitDtoRepository profitDtoRepository;
+
     private   String  path =System.getProperty("user.home")+"\\Downloads";
+
+
+
 
     public String  OrderReport(int userId) throws FileNotFoundException, JRException {
 
-       List<Order> orders = orderRepository.findByUserId(userId);
-       //load file and compile it
+       List<OrderReport> orders = orderReportRepository.findByUserId(userId);
 
-       List<OrdersDto> lst = new ArrayList<>();
-       for (Order or:orders)
-       {
-           //OrdersDto ordersDto = new OrdersDto(or.getId(),or.getUser().getName(),or.getOrderDate(),or.getTotal(),or.getShipping())
-           OrdersDto ordersDto =OrdersDto.read(or);
-           lst.add(ordersDto);
+       if(orders.isEmpty()){
+           return "User Id doesnot exit";
        }
-       File file1 = ResourceUtils.getFile("classpath:orderReport.jrxml");
+       //load file
+       File file1 = ResourceUtils.getFile("classpath:ordersReport.jrxml");
+
+        //compile it
        JasperReport jasperReport = JasperCompileManager.compileReport(file1.getAbsolutePath());
-       JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lst);
-       Map<String, Object> parameters = new HashMap<>();
-       parameters.put("createdBy", "EBUY ECOMMERCE");
-       JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-      //generate pdf
+
+       JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orders);
+
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("logo", ClassLoader.getSystemResource("cart.png").getPath());
+
+       JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource);
+
+       //generate pdf
        String fileName = path + "\\orders"+new Random().nextInt(9500000) +".pdf";
        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
 
@@ -58,37 +61,62 @@ public class ReportService implements IReportService {
    }
 
 
-    public String  profitReport(int userId) throws FileNotFoundException, JRException {
+    public String  profitReport(int vendorId) throws FileNotFoundException, JRException {
 
-        List<Product> productList =  productRepository.reportProfit(userId);
+        List<ProfitDto> productList =  profitDtoRepository.findByVendorId(vendorId);
+        System.out.print (productList);
+       if(productList.isEmpty()){
+           return "vendor Id doesn't exist";
+       }
 
-        List<ProfitDto> lstProfit = new ArrayList<>();
-        for (Product product : productList)
-        {
-            ProfitDto productDto =
-                    new ProfitDto(product.getId(),product.getName(),
-                            product.getUser().getId(),
-                            product.getUser().getName(),
-                            product.getCategory().getName(),product.getPrice());
+        //load file
+        File fileProfit = ResourceUtils.getFile("classpath:profitsReport.jrxml");
 
-            lstProfit.add(productDto);
-        }
+        // compile it
+        JasperReport jasperReportProfits = JasperCompileManager.compileReport(fileProfit.getAbsolutePath());
 
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(productList );
+
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("logo", ClassLoader.getSystemResource("cart.png").getPath());
 
 
-        //load file and compile it
-        File file2 = ResourceUtils.getFile("classpath:orderdetailsReport.jrxml");
-        JasperReport jasperReport2 = JasperCompileManager.compileReport(file2.getAbsolutePath());
-
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lstProfit);
-
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("createdBy", "EBUY ECOMMERCE");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport2, parameters, dataSource);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReportProfits, params, dataSource);
 
         //generate pdf
-        JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\orderDetails.pdf");
+        String fileName = path + "\\VendorProfits"+new Random().nextInt(9500000) +".pdf";
+        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
+
+        return "report generated in path : " + path;
+
+    }
+
+
+    public String  orderItemReport(int userId) throws FileNotFoundException, JRException {
+
+        List<OrderItemReport> orderItems =  orderItemReportRepository.findByUserId(userId);
+             if(orderItems.isEmpty()){
+                 return "User Id doesnot exist";
+             }
+
+        //load file
+        File fileOrderItem = ResourceUtils.getFile("classpath:orderItemsReport.jrxml");
+
+        // compile it
+        JasperReport jasperOrderItems = JasperCompileManager.compileReport(fileOrderItem.getAbsolutePath());
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orderItems);
+
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("logo", ClassLoader.getSystemResource("cart.png").getPath());
+
+
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperOrderItems, params, dataSource);
+
+        //generate pdf
+        String fileName = path + "\\OrderItemsReport"+new Random().nextInt(9500000) +".pdf";
+        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
 
         return "report generated in path : " + path;
 

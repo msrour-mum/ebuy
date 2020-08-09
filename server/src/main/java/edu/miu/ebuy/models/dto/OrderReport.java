@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Immutable;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
 @Data
@@ -15,14 +13,13 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemReport {
-    @Id
+public class OrderReport {
+     @Id
     private long id;
-    private int userId;
     private Date orderDate;
-    private String productName;
-    private double price;
-    private int quantity;
+    private int userId;
+    private String userName;
+    private String userAddress;
     private double shipping;
-    private double itemTotal;
+    private double total;
 }
