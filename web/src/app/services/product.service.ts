@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import {AppConfig} from '../config/app.config';
 import {Observable} from 'rxjs';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,8 +18,6 @@ export class ProductService {
       return this.http.post<any>(`${AppConfig.settings.apiServiceUrl}/products/`, body);
     }
     public getOne(productId) {
-     
-      
       return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/${productId}`);
     }
 
@@ -36,8 +32,12 @@ export class ProductService {
           return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/`);
      }
      public getPending() {
-               return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/pending`);
+        return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/pending`);
      }
+
+  public getRejected() {
+    return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/`);
+  }
 
      public getActive() {
                     return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/active`);
@@ -46,8 +46,6 @@ export class ProductService {
      public delete(productId) {
            return this.http.delete<any>(`${AppConfig.settings.apiServiceUrl}/products/${productId}`);
      }
-
-
      public search(body: any) {
       return this.http.post<any>(`${AppConfig.settings.apiServiceUrl}/products/search/`, body);
     }

@@ -33,7 +33,20 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if(this.categoryForm.valid){
+      let formData = new FormData();
+      formData.append("name", JSON.stringify(this.categoryForm.get('category')));
+      this.subs.add(this.categoryService.create(formData)
+        .subscribe(
+          (result: any) => {
+            if(result.status.code == 200) {
+              console.log("Done")
+              this.categoryForm.reset();
+              this.router.navigate(['/categories']);
 
+            }
+          },
+          error => console.log(error)
+        ));
     }
     else {
       //not valid

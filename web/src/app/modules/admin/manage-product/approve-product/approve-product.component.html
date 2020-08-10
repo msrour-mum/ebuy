@@ -2,7 +2,8 @@
 <table class="table table-hover" style="table-layout: fixed;">
   <thead>
     <tr>
-      <th scope="col">Product Name</th>
+      <th>#</th>
+      <th style="width: 10%;"scope="col" nowrap>Product Name</th>
       <th style="width: 20%;"scope="col">Short Description</th>
       <th style="width: 40%;" scope="col">Description</th>
       <th style="width: 5%;"scope="col">Price</th>
@@ -12,15 +13,16 @@
   </thead>
   <tbody>
 
-     <tr *ngFor="let product of (lstProduct | async)?.data" class="table-secondary" style="word-wrap: break-word;">
-      <td>{{product.name}}</td>
+     <tr *ngFor="let product of (listProduct | async)?.data; let i=index" class="table-secondary" style="word-wrap: break-word;">
+      <td>{{i+1}}</td>
+      <td scope="col" nowrap>{{product.name}}</td>
       <td  scope="col">{{product.shortDescription}}</td>
       <td scope="col">{{product.description}}</td>
       <td scope="col">${{product.price}}</td>
       <td>{{product.vendorName}}</td>
       <td> <button class="btn btn-success" type="button"  (click)="OnAprove(product.id)"  >Approve</button> </td>
       <td> <button class="btn btn-danger" type="button" (click)="OnReject(product.id)">Reject</button></td>
-    </tr> 
+    </tr>
 
     <!-- <tr *ngFor="let product of (lstProduct | async)?.data" class="table-secondary">
       <td>{{product.name}}</td>
