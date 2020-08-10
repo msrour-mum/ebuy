@@ -1,0 +1,27 @@
+<h3 style="margin-top: 40px;">Rejected Products</h3>
+<table class="table table-hover" style="table-layout: fixed;">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th scope="col" nowrap>Product Name</th>
+    <th scope="col">Short Description</th>
+<!--    <th style="width: 40%;" scope="col">Description</th>-->
+    <th scope="col">Price</th>
+    <th scope="col">Vendor</th>
+    <th scope="col" colSpan="1">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr *ngFor="let product of (listProduct | async)?.data; let i=index" class="table-secondary" style="word-wrap: break-word;">
+    <td>{{i+1}}</td>
+    <td scope="col" nowrap>{{product.name}}</td>
+    <td  scope="col">{{product.shortDescription}}</td>
+<!--    <td scope="col">{{product.description}}</td>-->
+    <td scope="col">${{product.price}}</td>
+    <td>{{product.vendorName}}</td>
+    <td> <button class="btn btn-success" type="button"  (click)="OnAprove(product.id)"  >Approve</button> </td>
+  </tr>
+
+  </tbody>
+</table>

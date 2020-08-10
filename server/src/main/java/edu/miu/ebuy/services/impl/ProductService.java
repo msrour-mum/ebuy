@@ -108,10 +108,8 @@ public class ProductService implements IProductService {
 
     @Override
     public void approveProduct(int productId, int statusId) {
-
         productRepository.updateStatus(productId,statusId);
     }
-
 
     @Override
     public Product getServiceProduct() {
@@ -135,7 +133,6 @@ public class ProductService implements IProductService {
 
     @Override
     public List<ProductDto> getPendingProduct() {
-
         List<Product> productList=  productRepository.findByProductStatus_Id(1);
         List<ProductDto> lst = new ArrayList<>();
         for (Product product : productList)
