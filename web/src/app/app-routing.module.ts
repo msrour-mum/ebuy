@@ -18,6 +18,7 @@ import {MyOrdersListComponent} from './modules/users/my-orders-list/my-orders-li
 import {UserListComponent} from './modules/admin/manage-users/user-list/user-list.component';
 import {AddUserComponent} from './modules/admin/manage-users/add-user/add-user.component';
 import {ProductDetailsComponent} from './modules/shopping/products/product-details/product-details.component';
+import { RejectedProjectComponent} from "./modules/admin/manage-product/rejected-project/rejected-project.component";
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -27,6 +28,7 @@ const routes: Routes =  [
   {path: 'product-list', component: ProductListComponent},
   {path: 'my-orders', component: MyOrdersListComponent},
   {path: 'approve-product', component: ApproveProductComponent},
+  {path: 'rejected-product', component: RejectedProjectComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:productId', component: EditProductComponent},
   {path: 'product/:productId', component: ProductDetailsComponent},

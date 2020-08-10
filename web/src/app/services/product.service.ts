@@ -36,7 +36,7 @@ export class ProductService {
      }
 
   public getRejected() {
-    return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/`);
+    return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/products/rejected`);
   }
 
      public getActive() {
