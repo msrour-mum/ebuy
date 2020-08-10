@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
-    <div class="alert alert-dismissible alert-primary alert-custom-brdr color-black">
+    <div class="alert alert-dismissible alert-warning alert-custom-brdr color-black">
       The price and availability of items at eBuy.com are subject to change.
       The Cart is a temporary place to store a list of your items and reflects each item's most recent price.
       Shopping CartLearn more.
@@ -20,33 +20,40 @@
     </div>
     <!-- Cart -->
     <div class="col-sm-12 col-md-8 order-line-box" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
-      <div class="card border-info mb-3" *ngFor="let orderItem of (shoppingService.getCart() | async)?.items">
+      <div class="card custom-card-border mb-3" *ngFor="let orderItem of (shoppingService.getCart() | async)?.items">
         <div class="card-header row">
           <div class="col-4">
-            <i class="prd-lbl">Price</i>&nbsp;<i>${{orderItem.product.price}}</i>
+            <i class="prd-lbl">Price</i>&nbsp;<i>{{orderItem.product.price | currency}}</i>
           </div>
           <div class="col-5">
             <i class="prd-lbl">Quantity</i>&nbsp;<i>{{orderItem.quantity}}</i>
           </div>
           <div class="col-3">
-            <i class="prd-lbl">Sum</i>&nbsp;<i>${{orderItem.total}}</i>
+            <i class="prd-lbl">Sum</i>&nbsp;<i>{{orderItem.total | currency}}</i>
           </div>
         </div>
         <div class="card-body row">
-          <img src="{{hostUrl + orderItem.product.imageUrl}}" class="cart-prd-img col-3">
-          <div class="col-9">
-            <h4 class="card-title">{{orderItem.product.name}}</h4>
-            <p class="card-text">{{orderItem.product.shortDescription}}</p>
-          </div>
-          <div class="order-line-cmd row">
 
-            <div class="prodcut-cmd-icon ">
-              <button type="button" class="btn btn-primary" (click)="addToCart(orderItem.product)">
+          <img src="{{hostUrl + orderItem.product.imageUrl}}"
+               class="cart-prd-img col-3 pointer-cursor"
+               [routerLink]="['/product', orderItem.product.id]">
+          <div class="col-9">
+            <a [routerLink]="['/product', orderItem.product.id]">
+              <h4 class="card-title underline-text">{{orderItem.product.name}}</h4>
+
+              <p class="card-text body-color underline-text">{{orderItem.product.shortDescription}}</p>
+            </a>
+
+          </div>
+
+          <div class="order-line-cmd row">
+            <div>
+              <button type="button" class="btn success-color" (click)="addToCart(orderItem.product)">
                 <i class="fa fa-plus"></i>
               </button>
             </div>
-            <div class="prodcut-cmd-icon ">
-                <button type="button" class="btn btn-danger" (click)="removeFromCartCart(orderItem.product)">
+            <div>
+                <button type="button" class="btn danger-color" (click)="removeFromCartCart(orderItem.product)">
                   <i class="fa fa-minus"></i>
                 </button>
             </div>
@@ -61,20 +68,20 @@
       <div><i>Total price that you will pay as described bellow</i></div>
       <div class="sum-item subTotal row">
         <div class="col-8 lbl">Sub Total</div>
-        <div class="col-4">${{(shoppingService.getCart() | async)?.subTotal}}</div>
+        <div class="col-4">{{(shoppingService.getCart() | async)?.subTotal | currency}}</div>
       </div>
       <div class="sum-item tax row">
         <div class="col-8 lbl">Tax</div>
-        <div class="col-4">${{(shoppingService.getCart() | async)?.tax}}</div>
+        <div class="col-4">{{(shoppingService.getCart() | async)?.tax | currency}}</div>
       </div>
       <div class="sum-item shipping row">
         <div class="col-8 lbl">Shipping</div>
-        <div class="col-4">${{(shoppingService.getCart() | async)?.shipping}}</div>
+        <div class="col-4">{{(shoppingService.getCart() | async)?.shipping | currency}}</div>
       </div>
       <hr>
       <div class="sum-item total row">
-        <div class="col-8 lbl">TOTAL</div>
-        <div class="col-4">${{(shoppingService.getCart() | async)?.total}}</div>
+        <div class="col-8 lbl info-color">TOTAL</div>
+        <div class="col-4 info-color">{{(shoppingService.getCart() | async)?.total | currency}}</div>
       </div>
 
       <div class="sum-btns row">

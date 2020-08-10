@@ -6,7 +6,7 @@
     <input type="text" class="form-control" placeholder="Search by name here" [(ngModel)]="search">
   </div>
   <div class="col-sm-12 col-md-2 mr-btm-10">
-    <a [routerLink]="['/add-user']" class="btn btn-primary">
+    <a [routerLink]="['/add-user']" class="btn primary-color">
       <i class="fa fa-plus" aria-hidden="true"></i> Add User
     </a>
   </div>
@@ -32,9 +32,15 @@
       <div *ngIf="!user.isActive">InActive</div>
       <div></div>
     </td>
-    <td><button class="btn btn-success mr-btm-10" type="button">Activate</button>&nbsp;
-      <button class="btn btn-danger mr-btm-10" type="button">Deactivate</button>&nbsp;
-      <a class="btn btn-primary mr-btm-10" [routerLink]="['/edit-user', user.id]">Edit</a>
+    <td><button class="btn success-color mr-btm-10" type="button">
+      <i class="fa fa-check" aria-hidden="true">&nbsp;Activate</i>
+    </button>&nbsp;
+      <button class="btn warning-color mr-btm-10" type="button">
+        <i class="fa fa-times" aria-hidden="true">&nbsp;Deactivate</i>
+      </button>&nbsp;
+      <a class="btn primary-color mr-btm-10" [routerLink]="['/edit-user', user.id]">
+        <i class="fa fa-edit" aria-hidden="true">&nbsp;Edit</i>
+      </a>
     </td>
     <td> </td>
     <td> </td>

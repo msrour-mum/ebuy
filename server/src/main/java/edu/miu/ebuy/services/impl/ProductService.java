@@ -26,19 +26,42 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public List<Product> getAll() {
-        return (List<Product>) productRepository.findByIsDeleted(false);
+    public List<ProductDto> getAll() {
+
+        //return (List<Product>) productRepository.findByIsDeleted(false);
+
+        List<Product> productList=  productRepository.findByIsDeleted(false);
+        List<ProductDto> lst = new ArrayList<>();
+        for (Product product : productList)
+        {
+            ProductDto productDto =ProductDto.read(product);
+
+            lst.add(productDto);
+        }
+        return  lst;
     }
 
     @Override
-    public List<Product> getActive() {
-        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+    public List<ProductDto> getActive() {
+        //return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+        List<ProductDto> lst = new ArrayList<>();
+        for (Product product : productList)
+        {
+            ProductDto productDto =ProductDto.read(product);
+
+            lst.add(productDto);
+        }
+        return  lst;
     }
 
 
     @Override
-    public Product get(int productId) {
-        return  productRepository.getOne(productId);
+    public ProductDto get(int productId) {
+       //return  productRepository.getOne(productId);
+
+        ProductDto productDto =ProductDto.read(productRepository.getOne(productId));
+        return  productDto;
     }
 
 
@@ -94,8 +117,18 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> getProductByPrice(double fromPrice, double toPrice) {
-        return productRepository.getProductByPrice(fromPrice,toPrice);
+    public List<ProductDto> getProductByPrice(double fromPrice, double toPrice) {
+        //return productRepository.getProductByPrice(fromPrice,toPrice);
+
+        List<Product> productList= productRepository.getProductByPrice(fromPrice,toPrice);
+        List<ProductDto> lst = new ArrayList<>();
+        for (Product product : productList)
+        {
+            ProductDto productDto =ProductDto.read(product);
+
+            lst.add(productDto);
+        }
+        return  lst;
     }
 
     @Override

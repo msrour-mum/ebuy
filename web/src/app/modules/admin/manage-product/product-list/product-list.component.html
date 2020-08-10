@@ -2,13 +2,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-10 mr-btm-10">
+    <div class="col-sm-12 col-md-8 mr-btm-10">
       <div class="form-group col-sm-12 col-md-10 mr-btm-10">
         <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="search">
       </div>
     </div>
-    <div class="col-sm-12 col-md-2 mr-btm-10">
-      <a [routerLink]="['/add-product']" class="btn btn-primary">
+    <div class="col-sm-12 col-md-4 mr-btm-10">
+      <a [routerLink]="['/add-product']" class="btn btn-flat">
         <i class="fa fa-plus" aria-hidden="true"></i> Add Product
       </a>
     </div>
@@ -17,16 +17,16 @@
     <div   class="col-sm-12 col-md-8 order-line-box">
 
       <!--      <c:forEach var="product" items="${products}">-->
-      <div *ngFor="let product of (lstProduct | async)?.data" class="card border-info mb-3">
+      <div *ngFor="let product of (lstProduct | async)?.data | filter:search" class="card custom-card-border mb-3">
         <div class="card-header row">
           <div class="col-4">
-            <i class="prd-lbl fa fa-money"> Cost</i><i>${{product.cost}}</i>
+            <i class="prd-lbl fa fa-money">&nbsp;<strong>Cost</strong></i><i>{{product.cost | currency}}</i>
           </div>
           <div class="col-5">
-            <i class="prd-lbl fa fa-money"> Price</i> <i>${{product.price}}</i>
+            <i class="prd-lbl fa fa-money">&nbsp;<strong>Price</strong></i> <i>{{product.price | currency}}</i>
           </div>
           <div class="col-3">
-            <i class="prd-lbl fa fa-th"> Stock</i>
+            <i class="prd-lbl fa fa-th">&nbsp;<strong>Stock</strong></i>
             <i> In-stock</i> <!--remove this implemet the below -->
             <!--            <i *ngIf="isPublish"> In-stock</i>-->
             <!--            <i *ngIf="product.isPublish"> Out-stock</i>-->
@@ -34,26 +34,26 @@
         </div>
         <div class="card-body row">
           <img src="{{hostUrl + product.imageUrl}}" class="cart-prd-img col-3">
-          
+
           <div class="col-9">
             <h4 class="card-title">{{product.name}}</h4>
             <p class="card-text">{{product.shortDescription}}</p>
           </div>
           <div class="order-line-cmd row">
             <div class="prodcut-cmd-icon ">
-              <button type="button" class="btn btn-primary">
+              <button type="button" class="btn btn-flat success-color">
                 <i class="fa fa-upload" aria-hidden="true"></i> Upload
               </button>
             </div>
 
             <div class="prodcut-cmd-icon ">
-              <button type="button" class="btn btn-danger">
+              <button type="button" class="btn btn-flat danger-color">
                 <i class="fa fa-download" aria-hidden="true"></i> Download
               </button>
             </div>
 
             <div class="prodcut-cmd-icon ">
-              <a [routerLink]="['/edit-product', product.id]" class="btn btn-primary">
+              <a [routerLink]="['/edit-product', product.id]" class="btn btn-flat info-color">
                 <i class="fa fa-edit" aria-hidden="true"></i> Edit
               </a>
             </div>

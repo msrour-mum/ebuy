@@ -13,10 +13,10 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['home']" *ngIf="authService.isAuthenticated">Home</a>
+          <a class="nav-link" [routerLink]="['home']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['my-orders']" *ngIf="authService.isAuthenticated">My Orders</a>
+          <a class="nav-link" [routerLink]="['my-orders', authService.currentUser.id]" *ngIf="authService.isAuthenticated">My Orders</a>
         </li>
 
         <li class="nav-item dropdown" *ngIf="authService.isAuthenticated">
@@ -55,7 +55,7 @@
              *ngIf="authService.currentUser.imageUrl !=''">
       </a>
       <!-- Login -->
-      <a class="nav-link" style="color:white" *ngIf="!authService.isAuthenticated" [routerLink]="['login']">
+      <a class="nav-link" style="color:white" [routerLink]="['login']" *ngIf="!authService.isAuthenticated">
         Login
       </a>
       <!-- user name -->

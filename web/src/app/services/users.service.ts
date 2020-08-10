@@ -22,4 +22,8 @@ export class UsersService {
     return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/users`);
   }
 
+  public getOrders(userId: number) {
+    return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/users/${userId}/orders`);
+  }
+
 }

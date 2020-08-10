@@ -78,7 +78,7 @@
               <div class="row">
                 <div class="head-text col-9">{{product.name}}</div>
                 <div class="col-3"></div>
-                <div class="prd-cat-price">${{product.price}}</div>
+                <div class="prd-cat-price">{{product.price | currency }}</div>
               </div>
               <div class="details-text row">{{product.shortDescription}}</div>
             </a>

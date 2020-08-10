@@ -40,7 +40,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
- 
+
   public onFileSelect(event) {
     if (event.target.files.length > 0) {
       this.photoFile = event.target.files[0];
@@ -48,20 +48,20 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    
+
     if (this.form.invalid) {
       return;
     }
-    let formData: any = new FormData();   
+    let formData: any = new FormData();
     formData.append("productJson", JSON.stringify(this.form.value));
     formData.append("file", this.photoFile);
     this.subs.add(this.productService.create(formData)
       .subscribe(
         (result: any) => {
          if(result.status.code == 200) {
-            //this.router.navigate(['/login']);
-            console.log("Done")
-            this.form.reset();
+           this.form.reset();
+           console.log("Done");
+            this.router.navigate(['/product-list']);
           }
         },
         error => console.log(error)
@@ -76,10 +76,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
     return this.form.get(field).invalid && this.form.get(field).touched;
   }
 
-  
+
   getCategories() {
      this.categoryService.getActive().subscribe( {
-       next: (result)=> {        
+       next: (result)=> {
         this.lstCategory = result.data;
         console.log(this.lstCategory);
        },
