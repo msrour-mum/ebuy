@@ -8,7 +8,10 @@ import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.exceptions.Errors;
 import edu.miu.ebuy.exceptions.HttpException;
 import edu.miu.ebuy.models.Order;
+import edu.miu.ebuy.models.Product;
+import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
+import edu.miu.ebuy.security.Context;
 import edu.miu.ebuy.services.interfaces.IOrderService;
 import edu.miu.ebuy.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +55,14 @@ public class UserController {
         return userService.update(userToUpdate);
     }
 
+    @PostMapping
+    public User create(@RequestParam String userJson, @RequestParam(value ="file", required=false) MultipartFile file) throws ApplicationException, IOException {
+        //return productService.create(product);
+        User user = new ObjectMapper().readValue(userJson, User.class);
+        return userService.add(user,
+                storageService.uploadMultipartFile(file, Context.getUserIdAsString()));
+    }
+
     @GetMapping()
     public List<User> getAll() {
         return userService.getAll();
@@ -71,6 +82,11 @@ public class UserController {
     public List<Order> getOrders (@PathVariable("userId") int userId)
     {
       return orderService.getAll(userId);
+    }
+
+    @GetMapping(value = "/roles")
+    public List<Role> get() {
+        return userService.getRoles();
     }
 }
 

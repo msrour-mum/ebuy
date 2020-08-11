@@ -59,8 +59,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
       .subscribe(
         (result: any) => {
          if(result.status.code == 200) {
-           this.form.reset();
-           console.log("Done");
+          alert("Record added successfully");
+          
+          this.form.reset();
+         
             this.router.navigate(['/product-list']);
           }
         },

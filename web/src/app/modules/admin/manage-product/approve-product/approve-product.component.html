@@ -14,7 +14,7 @@
   </thead>
   <tbody>
 
-     <tr *ngFor="let product of (listProduct | async)?.data; let i=index" class="table-secondary" style="word-wrap: break-word;">
+     <tr *ngFor="let product of (lstProduct | async)?.data; let i=index" class="table-secondary" style="word-wrap: break-word;">
       <td>{{i+1}}</td>
       <td scope="col" nowrap>{{product.name}}</td>
       <td  scope="col">{{product.shortDescription}}</td>

@@ -16,6 +16,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByIsDeleted(boolean isDeleted);
     List<Product> findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(boolean isDeleted,boolean isService,boolean isPublished,int statusId);
+
+    List<Product> findByIsDeletedAndIsServiceAndProductStatus_Id(boolean isDeleted,boolean isService,int statusId);
+    List<Product> findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(boolean isDeleted,boolean isService,int userid,int statusId);
+
     List<Product> findByProductStatus_Id(int statusId);
 
 
@@ -24,6 +28,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Modifying
     @Query(value = "UPDATE product SET isDeleted=1 WHERE id=?1",nativeQuery = true)
     public void updateItemDelete( @Param("id") Integer id);
+
+
+    @Modifying
+    @Query(value = "UPDATE product SET isPublished=?2 WHERE id=?1",nativeQuery = true)
+    public void updateItemPublished( @Param("id") Integer id,@Param("isPublished")  Boolean isPublished);
 
 
     @Modifying

@@ -35,6 +35,15 @@ public class ProductController {
         return productService.getActive();
     }
 
+    @GetMapping("/admin")
+    public List<ProductDto> getAdminList() {
+        return productService.getAdminList();
+    }
+    @GetMapping("/admin/{vendorId}")
+    public List<ProductDto> getAdminList(@PathVariable int vendorId) {
+        return productService.getAdminList(vendorId);
+    }
+
     @GetMapping("/pending")
     public List<ProductDto> getPending() {
         return productService.getPendingProduct();
@@ -91,6 +100,11 @@ public class ProductController {
     @PutMapping("/{productId}/approve/{statusId}")
     public void approveProduct(@PathVariable int productId, @PathVariable int statusId) {
          productService.approveProduct( productId, statusId);
+    }
+
+    @PutMapping("/{productId}/published/{isPublished}")
+    public void published(@PathVariable int productId, @PathVariable boolean isPublished) {
+        productService.published( productId, isPublished);
     }
 
 

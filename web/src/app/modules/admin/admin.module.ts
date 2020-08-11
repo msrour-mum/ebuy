@@ -17,6 +17,7 @@ import {AppRoutingModule} from '../../app-routing.module';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { RejectedProjectComponent } from './manage-product/rejected-project/rejected-project.component';
 
+
 @NgModule({
   declarations: [ProductListComponent,
     CategoryListComponent,
@@ -38,6 +39,9 @@ import { RejectedProjectComponent } from './manage-product/rejected-project/reje
     ReactiveFormsModule,
     AppRoutingModule,
     Ng2SearchPipeModule,
+    
+    
   ],
+  providers:[ ]
 })
 export class AdminModule { }

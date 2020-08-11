@@ -3,8 +3,10 @@ import {Observable, Subject} from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { ProductService } from 'src/app/services/product.service';
+
 import { AppConfig } from 'src/app/config/app.config';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-approve-product',
@@ -16,45 +18,49 @@ export class ApproveProductComponent implements OnInit {
   private hostUrl: string;
   search: string;
   // public lstProduct =[];
-  public listProduct:Observable<any[]>;
+  public lstProduct:Observable<any[]>;
   //searchForm: FormGroup;
   //public searchItem:any;
-  constructor(private dataService: ProductService, private  fb: FormBuilder) {
+  constructor(private dataService: ProductService, private  fb: FormBuilder) {    
       //this.lstProduct = this.dataService.getActive();
     }
 
   ngOnInit(): void {
     this.hostUrl = AppConfig.settings.apiServiceUrl;
     this.loadData();
-    //this.listProduct.subscribe(x=>console.log(x));
-
+    //this.lstProduct.subscribe(x=>console.log(x.data));
+  
   }
   loadData(): void {
-
-    this.listProduct = this.dataService.getPending();
+   
+    this.lstProduct = this.dataService.getPending();
   }
 
   OnSubmit(): void {
-
+   
     //this.lstProduct = this.dataService.search(this.searchItem);
   }
 
   OnAprove(productId: number): void {
+   
+    this.dataService.approve(productId).subscribe();   
+    //this.notifyService.showSuccess("product approve successfully !!", "eBuy")
 
-    let xx=  this.dataService.approve(productId);
-    xx.subscribe(x=>console.log(x))
     this.loadData();
+
   }
 
   OnReject(productId: number): void {
+    
+    this.dataService.reject(productId).subscribe();
+    //this.notifyService.showSuccess("product rejected successfully !!", "eBuy")
 
-    this.dataService.reject(productId);
      this.loadData();
    }
-
+  
 
   clear():void  {
-
+   
   }
 
 }
