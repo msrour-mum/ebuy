@@ -3,9 +3,8 @@ package edu.miu.ebuy.controllers;
 
 import edu.miu.ebuy.common.http.BaseResponse;
 import edu.miu.ebuy.exceptions.ApplicationException;
-import edu.miu.ebuy.models.dto.Checkout;
+import edu.miu.ebuy.models.dto.CheckoutDto;
 import edu.miu.ebuy.models.dto.OrdersDto;
-import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class ShoppingController {
     IShoppingService  iShoppingService;
 
     @PostMapping("/checkout")
-    public boolean checkout(@RequestBody Checkout checkout) throws ApplicationException {
+    public boolean checkout(@RequestBody CheckoutDto checkout) throws ApplicationException {
             return  iShoppingService.checkout(checkout);
 
     }

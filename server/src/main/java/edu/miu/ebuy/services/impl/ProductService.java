@@ -162,4 +162,9 @@ public class ProductService implements IProductService {
         return  lst;
     }
 
+    @Override
+    public List<Product> getAllProducts(List<Integer> productIds) {
+        return productRepository.findByIdIn(productIds);
+    }
+
 }

@@ -53,6 +53,15 @@ public class Order {
 
     }
 
+    public Order( User user, Date orderDate, double shipping, String orderAddress) {
+
+        this.user = user;
+        this.orderDate = orderDate;
+        this.shipping = shipping;
+        this.orderAddress = orderAddress;
+
+    }
+
     public long getId() {
         return id;
     }

@@ -62,7 +62,7 @@
          *ngIf="authService.isAuthenticated">Hello, {{authService.currentUser.name}}
       </a>
       <!-- Logout -->
-      <a class="nav-link" style="color:white" *ngIf="authService.isAuthenticated"
+      <a class="nav-link" style="color:white; cursor: pointer;" *ngIf="authService.isAuthenticated"
          (click)="authService.logout()">Logout
       </a>
     </div>

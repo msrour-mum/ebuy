@@ -24,4 +24,5 @@ public interface IProductService {
     public List<ProductDto> getProductByPrice(double fromPrice, double toPrice);
 
     public List<ProductDto> search(ProductSearchItem searchItem);
+    List<Product> getAllProducts(List<Integer> productIds);
 }

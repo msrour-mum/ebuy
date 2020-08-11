@@ -17,6 +17,7 @@ import {MyOrdersListComponent} from './modules/users/my-orders-list/my-orders-li
 import {UserListComponent} from './modules/admin/manage-users/user-list/user-list.component';
 import {AddUserComponent} from './modules/admin/manage-users/add-user/add-user.component';
 import {ProductDetailsComponent} from './modules/shopping/products/product-details/product-details.component';
+import {AuthGuard} from './common/guards/authGaurd';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -35,7 +36,7 @@ const routes: Routes =  [
   {path: 'edit-user/:id', component: EditUserComponent},
   {path: 'edit-profile', component: ProfileComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'checkout', component: CheckoutComponent},
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   {path: 'manage-users', component: UserListComponent},
   {path: '**', redirectTo: '/home'}];
 

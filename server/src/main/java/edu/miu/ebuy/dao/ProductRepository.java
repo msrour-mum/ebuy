@@ -74,4 +74,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "    product.isDeleted ", nativeQuery = true)
     public List<Product> reportProfit( @Param("vendorId") int vendorId);
 
+    List<Product> findByIdIn(List<Integer> productIds);
+
 }

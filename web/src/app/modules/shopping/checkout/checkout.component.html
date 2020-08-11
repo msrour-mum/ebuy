@@ -5,107 +5,144 @@
     <div><i>Fill your billing address, credit card information to process checking out</i></div>
     <div class="sum-item subTotal row">
       <div class="col-9 lbl">Sub Total</div>
-      <div class="col-3">$cart.subtotal</div>
+      <div class="col-3">{{(shoppingService.getCart() | async)?.subTotal | currency}}</div>
     </div>
     <div class="sum-item tax row">
       <div class="col-9 lbl">Tax</div>
-      <div class="col-3">$cart.tax</div>
+      <div class="col-3">{{(shoppingService.getCart() | async)?.tax | currency}}</div>
     </div>
     <div class="sum-item shipping row">
       <div class="col-9 lbl">Shipping</div>
-      <div class="col-3">$cart.shipping$</div>
+      <div class="col-3">{{(shoppingService.getCart() | async)?.shipping | currency}}</div>
     </div>
     <hr>
     <div class="sum-item total row">
       <h6 class="col-9 lbl">TOTAL</h6>
-      <h6 class="col-3">$cart.total</h6>
+      <h6 class="col-3">{{(shoppingService.getCart() | async)?.total | currency}}</h6>
     </div>
-     <br> <br>
-    <!-- <form method="post" action="/checkout"> -->
-        <div class="alert alert-dismissible alert-danger" >
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          error, please make sure that all billing information correct and try submitting again.
+    <br> <br>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="alert alert-dismissible alert-danger" *ngIf="error || showError">
+        <button type="button" class="close" (click)="closeError()">&times;</button>
+        {{error}}, please make sure that all billing information correct and try submitting again.
+      </div>
+      <fieldset>
+        <legend>Checkout Information</legend>
+        <div class="form-group">
+          <label for="visa">Card Type:</label>
+          <div>
+            <i class="fa fa-cc-visa visa" aria-hidden="true"></i>&nbsp;
+            <input id="visa"
+                   type="radio"
+                   value="1"
+                   name="cardType"
+                   [formControl]="form.get('card.cardType.id')">
+            <label for="visa">&nbsp;Visa</label>
+          </div>
+
+          <div>
+            <i class="fa fa-cc-mastercard master" aria-hidden="true"></i>&nbsp;
+            <input id="master"
+                   type="radio"
+                   value="2"
+                   name="cardType"
+                   [formControl]="form.get('card.cardType.id')">
+            <label for="master">&nbsp;Master</label>
+          </div>
         </div>
-        <fieldset>
-          <legend>Checkout Information</legend>
-          <div class="form-group">
-            <label for="visa">Card Type:</label>
-            <div>
-              <i class="fa fa-cc-visa visa" aria-hidden="true"></i>&nbsp;
-              <input id="visa"
-                     type="radio"
-                     value="1"
-                     name="cardType">
-              <label for="visa">&nbsp;Visa</label>
+
+        <div class="form-group">
+          <label for="holderName">Holder Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="holderName"
+                 class="form-control"
+                 placeholder="Enter Card holder name"
+                 [formControl]="form.get('card.holderName')"
+                 [ngClass]="{'is-invalid': isValid('card.holderName')}"/>
+          <div *ngIf="hasError('card.holderName', 'required')" class="invalid-feedback">
+            Card holder name is required
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea class="form-control" id="address" rows="3"
+                    [formControl]="form.get('address')"
+                    [ngClass]="{'is-invalid': isValid('address')}"></textarea>
+          <div *ngIf="hasError('address', 'required')" class="invalid-feedback">
+            Address is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cardNumber">Credit Card Number</label>
+          <input type="text"
+                 class="form-control"
+                 id="cardNumber"
+                 class="form-control"
+                 placeholder="16 digits"
+                 [formControl]="form.get('card.cardNumber')"
+                 [ngClass]="{'is-invalid': isValid('card.cardNumber')}"/>
+          <div *ngIf="hasError('card.cardNumber', 'required')" class="invalid-feedback">
+            Credit card number is required
+          </div>
+          <div *ngIf="hasError('card.cardNumber', 'pattern')" class="invalid-feedback">
+            Invalid Credit card number, it must be 16 digits
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="cardNumber">CCV</label>
+            <input type="text"
+                   class="form-control"
+                   id="ccv"
+                   class="form-control"
+                   placeholder="3 digits"
+                   [formControl]="form.get('card.ccv')"
+                   [ngClass]="{'is-invalid': isValid('card.ccv')}"/>
+            <div *ngIf="hasError('card.ccv', 'required')" class="invalid-feedback">
+              CCV is required
+            </div>
+            <div *ngIf="hasError('card.ccv', 'pattern')" class="invalid-feedback">
+              Invalid CCV, it must be 3 digits
             </div>
 
-            <div>
-              <i class="fa fa-cc-mastercard master" aria-hidden="true"></i>&nbsp;
-              <input id="master"
-                     type="radio"
-                     value="2"
-                     name="cardType">
-              <label for="master">&nbsp;Master</label>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="expireDate">Expire Date</label>
+            <input type="text"
+                   class="form-control"
+                   id="expireDate"
+                   class="form-control"
+                   placeholder="MM/DD"
+                   [formControl]="form.get('card.expireDate')"
+                   [ngClass]="{'is-invalid': isValid('card.expireDate')}"/>
+            <div *ngIf="hasError('card.expireDate', 'required')" class="invalid-feedback">
+              Expire date is required
             </div>
-          </div>
-
-          <div class="form-group">
-            <label for="holderName">Holder Name</label>
-            <input  type="text"
-                    class="form-control"
-                    id="holderName"
-                    class="form-control"
-                    placeholder="Enter Card holder name" />
-
-          </div>
-          <div class="form-group">
-            <label for="address">Address</label>
-            <textarea class="form-control" id="address" rows="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="cardNumber">Credit Card Number</label>
-            <input  type="text"
-                    class="form-control"
-                    id="cardNumber"
-
-                    class="form-control"
-                    placeholder="16 digits" />
-
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label for="cardNumber">CCV</label>
-              <input  type="text"
-                      class="form-control"
-                      id="ccv"
-
-                      class="form-control"
-                      placeholder="3 digits" />
-
-            </div>
-            <div class="form-group col-md-6">
-              <label for="expireDate">Expire Date</label>
-              <input  type="text"
-                      class="form-control"
-                      id="expireDate"
-
-                      class="form-control"
-                      placeholder="MM/DD" />
+            <div *ngIf="hasError('card.expireDate', 'pattern')" class="invalid-feedback">
+              Invalid expire date, must be MM/YY
 
             </div>
           </div>
-        </fieldset>
+        </div>
+      </fieldset>
       <fieldset class="form-group">
         <legend>Options</legend>
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" value="1" checked="">
-            Set this as default payment type, all payments should be paid using this
+            <input class="form-check-input"
+                   type="checkbox"
+                   [formControl]="form.get('checkoutOptions.saveUpdateMyAddress')">
+            Set this as default address, all orders should be shipped using this
           </label>
         </div>
         <div class="form-check disabled">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" value="2"  checked="">
+            <input class="form-check-input"
+                   type="checkbox"
+                   [formControl]="form.get('checkoutOptions.saveUpdateMyCard')">
             Save my credit card number, I agree to save my credit number
           </label>
         </div>
@@ -122,7 +159,10 @@
           <i class="fa fa-home"></i> Continue shopping
         </a>
       </div>
-    <!-- </form> -->
+                  <p> form: {{form.value | json}}</p>
+                  <p> Ss Invalid: {{form.invalid}}</p>
+                  <p> Ss errors: {{form.errors | json}}</p>
+    </form>
 
   </div>
 </div>
