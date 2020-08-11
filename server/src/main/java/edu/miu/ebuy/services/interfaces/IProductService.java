@@ -18,8 +18,10 @@ public interface IProductService {
     public Product update(Product product, String imageUrl);
     public void  delete(int productId);
     public List<ProductDto> getPendingProduct();
-
+    public List<ProductDto> getAdminList();
+    public List<ProductDto> getAdminList(int userId);
     public void approveProduct(int productId, int statusId);
+    public void published(int productId, boolean isPublished);
     public Product getServiceProduct();
     public List<ProductDto> getProductByPrice(double fromPrice, double toPrice);
 

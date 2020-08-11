@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ProductService } from 'src/app/services/product.service';
 import { AppConfig } from 'src/app/config/app.config';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
 
 
 
@@ -17,18 +19,27 @@ export class ProductListComponent implements OnInit {
   
   public hostUrl: string;
   search: string;
-  // public lstProduct =[];
   public lstProduct:Observable<any[]>;
-  //searchForm: FormGroup;
-  //public searchItem:any;
-  constructor(private dataService: ProductService, private  fb: FormBuilder) {    
-      //this.lstProduct = this.dataService.getActive();
+  constructor(private dataService: ProductService,
+    public authService: AuthenticationService,
+    private router: Router,
+     private  fb: FormBuilder) {    
     }
 
   ngOnInit(): void {
     this.hostUrl = AppConfig.settings.apiServiceUrl;
-    this.lstProduct = this.dataService.getActive();
-    
+    this.loadData();
+  }
+
+  loadData(): void {
+
+    if(this.authService.currentUser.role.id==1)
+      this.lstProduct = this.dataService.getAdminList();
+    else if(this.authService.currentUser.role.id==2)
+      this.lstProduct = this.dataService.getVendorList(this.authService.currentUser.id);
+    else
+     this.router.navigate(['/']);
+
   
   }
 
@@ -38,8 +49,25 @@ export class ProductListComponent implements OnInit {
     //this.lstProduct = this.dataService.search(this.searchItem);
   }
 
-  clear():void  {
+  published(productId:number ):void  {
    
+    this.dataService.published(productId,true).subscribe();
+    //this.lstProduct = this.dataService.getAdminList();
+    this.loadData();
+  }
+  unPublished(productId:number ):void  {
+   
+    this.dataService.published(productId,false).subscribe();
+    //this.lstProduct = this.dataService.getAdminList();
+    //this.lstProduct.subscribe(x=>console.log(x)); 
+    this.loadData();
+  }
+
+  delete(productId:number ):void  {
+   
+    this.dataService.delete(productId).subscribe();
+    //this.lstProduct = this.dataService.getAdminList();
+    this.loadData();
   }
 
 }

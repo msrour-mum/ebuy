@@ -15,6 +15,8 @@ import { UserListComponent } from './manage-users/user-list/user-list.component'
 import { ProductHelpComponent } from './manage-product/product-help/product-help.component';
 import {AppRoutingModule} from '../../app-routing.module';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { RejectedProjectComponent } from './manage-product/rejected-project/rejected-project.component';
+
 
 @NgModule({
   declarations: [ProductListComponent,
@@ -29,13 +31,17 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     AddUserComponent,
     EditUserComponent,
     UserListComponent,
-    ProductHelpComponent],
+    ProductHelpComponent,
+    RejectedProjectComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     Ng2SearchPipeModule,
+    
+    
   ],
+  providers:[ ]
 })
 export class AdminModule { }

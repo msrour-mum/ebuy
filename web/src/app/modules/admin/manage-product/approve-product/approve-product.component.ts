@@ -3,8 +3,10 @@ import {Observable, Subject} from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { ProductService } from 'src/app/services/product.service';
+
 import { AppConfig } from 'src/app/config/app.config';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-approve-product',
@@ -41,14 +43,18 @@ export class ApproveProductComponent implements OnInit {
 
   OnAprove(productId: number): void {
    
-    let xx=  this.dataService.approve(productId);   
-    xx.subscribe(x=>console.log(x))
+    this.dataService.approve(productId).subscribe();   
+    //this.notifyService.showSuccess("product approve successfully !!", "eBuy")
+
     this.loadData();
+
   }
 
   OnReject(productId: number): void {
     
-    this.dataService.reject(productId);
+    this.dataService.reject(productId).subscribe();
+    //this.notifyService.showSuccess("product rejected successfully !!", "eBuy")
+
      this.loadData();
    }
   

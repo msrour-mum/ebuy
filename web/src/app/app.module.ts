@@ -26,6 +26,8 @@ import {UsersModule} from './modules/users/users.module';
 import {ShoppingModule} from './modules/shopping/shopping.module';
 import {AdminModule} from './modules/admin/admin.module';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -37,6 +39,7 @@ export function initializeApp(appConfig: AppConfig) {
     AppComponent,
     LoginComponent,
     SignupComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,9 @@ export function initializeApp(appConfig: AppConfig) {
     ShoppingModule,
     AdminModule,
     UsersModule,
-    Ng2SearchPipeModule,
+    Ng2SearchPipeModule, 
+  
+    
   ],
   providers: [AppConfig,
     { provide: APP_INITIALIZER,

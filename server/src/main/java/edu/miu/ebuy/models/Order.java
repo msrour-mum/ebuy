@@ -26,11 +26,16 @@ public class Order {
     @Column(name ="total" , nullable = false)
     private double total;
 
+    @Column(name ="tax" , nullable = false)
+    private double tax;
+
     @Column(name ="shipping" , nullable = false)
     private double shipping;
 
     @Column(name ="orderAddress" , nullable = false)
     private String orderAddress;
+
+
 
 
     @OneToMany(cascade = CascadeType.ALL)

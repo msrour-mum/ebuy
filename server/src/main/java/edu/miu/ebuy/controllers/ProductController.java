@@ -1,21 +1,15 @@
 package edu.miu.ebuy.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.ebuy.common.http.BaseResponse;
 import edu.miu.ebuy.common.storage.IStorageService;
 import edu.miu.ebuy.exceptions.ApplicationException;
-import edu.miu.ebuy.exceptions.Errors;
-import edu.miu.ebuy.models.Category;
 import edu.miu.ebuy.models.Product;
-import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.models.dto.ProductDto;
 import edu.miu.ebuy.models.dto.ProductSearchItem;
 import edu.miu.ebuy.security.Context;
-import edu.miu.ebuy.services.interfaces.ICategoryService;
 import edu.miu.ebuy.services.interfaces.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,9 +35,24 @@ public class ProductController {
         return productService.getActive();
     }
 
+    @GetMapping("/admin")
+    public List<ProductDto> getAdminList() {
+        return productService.getAdminList();
+    }
+    @GetMapping("/admin/{vendorId}")
+    public List<ProductDto> getAdminList(@PathVariable int vendorId) {
+        return productService.getAdminList(vendorId);
+    }
+
     @GetMapping("/pending")
     public List<ProductDto> getPending() {
         return productService.getPendingProduct();
+    }
+
+    @GetMapping("/rejected")
+    public List<ProductDto> getRejected() {
+        //TODO: rejected list
+        return null;
     }
 
     @PostMapping("/search")
@@ -60,9 +69,8 @@ public class ProductController {
     public Product add(@RequestParam String productJson, @RequestParam(value ="file", required=false) MultipartFile file) throws ApplicationException, IOException {
         //return productService.create(product);
         Product product = new ObjectMapper().readValue(productJson, Product.class);
-            Product product1 = productService.create(product,
-                    storageService.uploadMultipartFile(file, Context.getUserIdAsString()));
-      return product1;
+        return productService.create(product,
+                storageService.uploadMultipartFile(file, Context.getUserIdAsString()));
     }
 
     @PutMapping("/{productId}")
@@ -92,6 +100,11 @@ public class ProductController {
     @PutMapping("/{productId}/approve/{statusId}")
     public void approveProduct(@PathVariable int productId, @PathVariable int statusId) {
          productService.approveProduct( productId, statusId);
+    }
+
+    @PutMapping("/{productId}/published/{isPublished}")
+    public void published(@PathVariable int productId, @PathVariable boolean isPublished) {
+        productService.published( productId, isPublished);
     }
 
 

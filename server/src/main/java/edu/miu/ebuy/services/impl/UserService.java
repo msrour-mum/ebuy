@@ -79,6 +79,7 @@ public class UserService implements IUserService {
         return userRepository.save(userToUpdate);
     }
 
+    @Override
     public User update(User user, String imageUrl) {
         User userToUpdate = this.get(user.getId());
         userToUpdate.setName(user.getName());
@@ -86,6 +87,16 @@ public class UserService implements IUserService {
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setImageUrl(imageUrl);
         return userRepository.save(userToUpdate);
+    }
+
+    @Override
+    public User add(User user, String imageUrl) {
+        user.setImageUrl(imageUrl);
+        user.setActive(true);
+        BCryptPasswordEncoder passwordUtil=new BCryptPasswordEncoder();
+        String pass=passwordUtil.encode("sa");
+        user.setPassword(pass);
+        return userRepository.save(user);
     }
 
 
@@ -97,6 +108,11 @@ public class UserService implements IUserService {
     @Override
     public List<User> getAll() {
         return (List<User>) userRepository.findAll();
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        return (List<Role>) roleRepository.findAll();
     }
 
     @Override

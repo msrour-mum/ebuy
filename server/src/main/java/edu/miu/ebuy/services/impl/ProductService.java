@@ -57,6 +57,35 @@ public class ProductService implements IProductService {
 
 
     @Override
+    public List<ProductDto> getAdminList() {
+        //return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndProductStatus_Id(false,false,2);
+        List<ProductDto> lst = new ArrayList<>();
+        for (Product product : productList)
+        {
+            ProductDto productDto =ProductDto.read(product);
+
+            lst.add(productDto);
+        }
+        return  lst;
+    }
+
+    @Override
+    public List<ProductDto> getAdminList(int userId) {
+        //return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(false,false,userId,2);
+        List<ProductDto> lst = new ArrayList<>();
+        for (Product product : productList)
+        {
+            ProductDto productDto =ProductDto.read(product);
+
+            lst.add(productDto);
+        }
+        return  lst;
+    }
+
+
+    @Override
     public ProductDto get(int productId) {
        //return  productRepository.getOne(productId);
 
@@ -108,8 +137,13 @@ public class ProductService implements IProductService {
 
     @Override
     public void approveProduct(int productId, int statusId) {
-
         productRepository.updateStatus(productId,statusId);
+    }
+
+    @Override
+    public void published(int productId, boolean isPublished) {
+
+        productRepository.updateItemPublished(productId,isPublished);
     }
 
 
@@ -135,7 +169,6 @@ public class ProductService implements IProductService {
 
     @Override
     public List<ProductDto> getPendingProduct() {
-
         List<Product> productList=  productRepository.findByProductStatus_Id(1);
         List<ProductDto> lst = new ArrayList<>();
         for (Product product : productList)

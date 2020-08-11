@@ -10,14 +10,18 @@ public class ProfitDto {
     private String vendorName;
     private String categoryName;
     private double profit;
+    private double cost;
+    private double price;
 
-    public ProfitDto(Integer productId, String productName, Integer vendorId, String vendorName, String categoryName, double profit) {
+    public ProfitDto(Integer productId, String productName, Integer vendorId, String vendorName, String categoryName, double profit, double cost, double price) {
         this.productId = productId;
         this.productName = productName;
         this.vendorId = vendorId;
         this.vendorName = vendorName;
         this.categoryName = categoryName;
         this.profit = profit;
+        this.cost = cost;
+        this.price = price;
     }
 
     public Integer getProductId() {
