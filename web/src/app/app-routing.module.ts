@@ -20,6 +20,7 @@ import {AddUserComponent} from './modules/admin/manage-users/add-user/add-user.c
 import {ProductDetailsComponent} from './modules/shopping/products/product-details/product-details.component';
 import {AuthGuard} from './common/guards/authGaurd';
 import { RejectedProjectComponent} from './modules/admin/manage-product/rejected-project/rejected-project.component';
+import {ProductsUploadComponent} from './modules/admin/manage-product/products-upload/products-upload.component';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -32,6 +33,7 @@ const routes: Routes =  [
   {path: 'rejected-product', component: RejectedProjectComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:productId', component: EditProductComponent},
+  {path: 'products-upload', component: ProductsUploadComponent},
   {path: 'product/:productId', component: ProductDetailsComponent},
   {path: 'categories', component: CategoryListComponent},
   {path: 'add-category', component: AddCategoryComponent},

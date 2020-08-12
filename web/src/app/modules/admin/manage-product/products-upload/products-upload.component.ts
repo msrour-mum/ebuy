@@ -1,0 +1,70 @@
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {SubSink} from 'subsink';
+import {Router} from '@angular/router';
+import {ProductService} from '../../../../services/product.service';
+
+@Component({
+  selector: 'app-products-upload',
+  templateUrl: './products-upload.component.html',
+  styleUrls: ['./products-upload.component.css']
+})
+export class ProductsUploadComponent implements OnInit {
+
+  private photoFile;
+  public form: FormGroup;
+  public subs = new SubSink();
+
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private productService: ProductService) {
+
+  }
+
+
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      filePath: ['', Validators.required],
+    });
+
+  }
+
+  public onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      this.photoFile = event.target.files[0];
+    }
+  }
+
+  onSubmit(): void {
+
+    if (this.form.invalid) {
+      return;
+    }
+    let formData: any = new FormData();
+    formData.append("file", this.photoFile);
+    // this.subs.add(this.productService.create(formData)
+    //   .subscribe(
+    //     (result: any) => {
+    //       if(result.status.code == 200) {
+    //         alert("Record added successfully");
+    //
+    //         this.form.reset();
+    //
+    //         this.router.navigate(['/product-list']);
+    //       }
+    //     },
+    //     error => console.log(error)
+    //   ));
+  }
+
+  hasError(field: string): boolean {
+    return field == '' || field == null;
+  }
+
+  isValid(field: string) {
+    return this.form.get(field).invalid && this.form.get(field).touched;
+  }
+
+
+}

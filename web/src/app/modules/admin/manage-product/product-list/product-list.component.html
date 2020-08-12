@@ -25,12 +25,17 @@
     <div   class="col-sm-12 col-md-8 order-line-box">
 
       <div class="row">
-        <div class="form-group col-sm-12 col-md-10 mr-btm-10">
+        <div class="form-group col-sm-12 col-md-8 mr-btm-10">
           <input type="text" class="form-control" placeholder="Search by name here" [(ngModel)]="search">
         </div>
         <div class="col-sm-12 col-md-2 mr-btm-10">
           <a [routerLink]="['/add-product']" class="btn btn-flat">
-            <i class="fa fa-plus" aria-hidden="true"></i> Add Product
+            <i class="fa fa-plus" aria-hidden="true"></i> Add
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-2 mr-btm-10">
+          <a [routerLink]="['/products-upload']" class="btn btn-flat">
+            <i class="fa fa-upload" aria-hidden="true"></i> Upload
           </a>
         </div>
       </div>
@@ -59,9 +64,9 @@
             <p class="card-text">{{product.shortDescription}}</p>
           </div>
           <div class="order-line-cmd row">
-            
-            <div class="prodcut-cmd-icon " *ngIf="!product.published"> 
-            
+
+            <div class="prodcut-cmd-icon " *ngIf="!product.published">
+
               <button type="button" class="btn btn-flat success-color" (click)="published(product.id)">
                 <i class="fa fa-upload" aria-hidden="true"></i> Enable
               </button>

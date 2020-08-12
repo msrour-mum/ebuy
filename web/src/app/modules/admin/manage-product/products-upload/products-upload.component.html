@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-3">Upload Products</h1>
+    <p class="lead">This component allow you to upload all your products to the system as bulk, instead of creating your products one by one.
+      featured content or information.</p>
+    <hr class="my-4">
+    <p>Select file that contains the product information, Only CSV, Excel are allowd</p>
+
+    <form [formGroup]="form">
+
+
+        <div class="form-group row">
+          <label for="imageUrl">Image</label>
+          <input type="file" [formControl]="form.get('filePath')"
+                 class="form-control-file"
+                 id="imageUrl"
+                 aria-describedby="fileHelp"
+                 (change)="onFileSelect($event)">
+
+          <div *ngIf="hasError('filePath')" class="invalid-feedback"  >
+            File is required
+          </div>
+        </div>
+
+      <div class="row pull-right">
+        <button class="btn btn-primary" (click)="onSubmit()">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i> upload
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

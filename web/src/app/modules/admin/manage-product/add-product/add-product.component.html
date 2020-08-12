@@ -78,7 +78,7 @@
                 <select class="form-control" id="category" [formControl]="form.get('category.id')">
                   <option *ngFor="let cat of lstCategory; let i = index" [value]="lstCategory[i].id">
                     {{lstCategory[i].name}}
-                  </option>                  
+                  </option>
                 </select>
                 <div *ngIf="hasError('categoryId')" class="invalid-feedback">
                   category is required
@@ -107,9 +107,9 @@
 
           </form>
 
-                     <p> form: {{form.value | json}}</p>
- <p> Ss Invalid: {{form.invalid}}</p>
-<p> Ss Invalid: {{form.errors | json}}</p>
+<!--                     <p> form: {{form.value | json}}</p>-->
+<!-- <p> Ss Invalid: {{form.invalid}}</p>-->
+<!--<p> Ss Invalid: {{form.errors | json}}</p>-->
 
         </div>
       </div>

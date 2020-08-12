@@ -16,6 +16,7 @@ import { ProductHelpComponent } from './manage-product/product-help/product-help
 import {AppRoutingModule} from '../../app-routing.module';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { RejectedProjectComponent } from './manage-product/rejected-project/rejected-project.component';
+import { ProductsUploadComponent } from './manage-product/products-upload/products-upload.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { RejectedProjectComponent } from './manage-product/rejected-project/reje
     EditUserComponent,
     UserListComponent,
     ProductHelpComponent,
-    RejectedProjectComponent],
+    RejectedProjectComponent,
+    ProductsUploadComponent],
   imports: [
     CommonModule,
     FormsModule,
