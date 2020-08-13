@@ -55,7 +55,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
             this.form =  this.fb.group({
               id: [pro.id],
               category: this.fb.group({ id: [pro.category.id, [Validators.required]]}),
-              user: this.fb.group({ id: [pro.user.id, [Validators.required]]}),
+              user: this.fb.group({ id: [pro.user.id]}),
               productStatus: this.fb.group({ id: [pro.productStatus.id, [Validators.required]]}),
               name: [pro.name, [Validators.required]],
               published: [pro.published, [Validators.required]],
@@ -64,7 +64,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
               description: [pro.description, [Validators.required]],
               shortDescription: [pro.shortDescription, [Validators.required]],
-              imageUrl: ['',[Validators.required] ],
+              imageUrl: ['' ],
               cost: [pro.cost, [Validators.required]],
               price: [pro.price, [Validators.required]],
             });
@@ -86,7 +86,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    
+    console.log(this.form.invalid)
     if (this.form.invalid) {
       return;
     }
@@ -103,7 +103,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
             //this.router.navigate(['/login']);
 
            alert("Record updated successfully");
-            this.form.reset();
+           
           }
         },
         error => console.log(error)

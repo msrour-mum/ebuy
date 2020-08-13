@@ -10,22 +10,22 @@ public interface IProductService {
 
 
 
-    public List<ProductDto> getAll();
-    public List<ProductDto> getActive();
+    public List<Product> getAll();
+    public List<Product> getActive();
     public Product get(int productId);
     public Product create(Product product, String imageUrl);
     public Product update(Product product);
     public Product update(Product product, String imageUrl);
     public void  delete(int productId);
     public List<ProductDto> getPendingProduct();
-    public List<ProductDto> getAdminList();
-    public List<ProductDto> getAdminList(int userId);
+    public List<Product> getAdminList();
+    public List<Product> getAdminList(int userId);
     public void approveProduct(int productId, int statusId);
     public void published(int productId, boolean isPublished);
     public Product getServiceProduct();
-    public List<ProductDto> getProductByPrice(double fromPrice, double toPrice);
+    public List<Product> getProductByPrice(double fromPrice, double toPrice);
 
-    public List<ProductDto> search(ProductSearchItem searchItem);
+    public List<Product> search(ProductSearchItem searchItem);
     List<Product> getAllProducts(List<Integer> productIds);
     public void ftp(int userId , String[] lines) ;
 }

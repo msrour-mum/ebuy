@@ -32,21 +32,21 @@ public class ProductController {
     IStorageService storageService;
 
     @GetMapping()
-    public List<ProductDto> getAll() {
+    public List<Product> getAll() {
         return productService.getAll();
     }
 
     @GetMapping("/active")
-    public List<ProductDto> getActive() {
+    public List<Product> getActive() {
         return productService.getActive();
     }
 
     @GetMapping("/admin")
-    public List<ProductDto> getAdminList() {
+    public List<Product> getAdminList() {
         return productService.getAdminList();
     }
     @GetMapping("/admin/{vendorId}")
-    public List<ProductDto> getAdminList(@PathVariable int vendorId) {
+    public List<Product> getAdminList(@PathVariable int vendorId) {
         return productService.getAdminList(vendorId);
     }
 
@@ -62,7 +62,7 @@ public class ProductController {
     }
 
     @PostMapping("/search")
-    public List<ProductDto> search(@RequestBody ProductSearchItem searchItem) {
+    public List<Product> search(@RequestBody ProductSearchItem searchItem) {
         return productService.search(searchItem);
     }
 

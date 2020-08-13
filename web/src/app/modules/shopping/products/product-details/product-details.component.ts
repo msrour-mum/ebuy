@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class ProductDetailsComponent implements OnInit {
 
   public hostUrl: string = AppConfig.settings.apiServiceUrl;
-  public product;
+  public product = {};
   public subs = new SubSink();
 
   private productSubject: Observable<any> = new BehaviorSubject({}) ;
@@ -26,22 +26,23 @@ export class ProductDetailsComponent implements OnInit {
               private activeRouter: ActivatedRoute,
               private productService: ProductService) { 
 
-                activeRouter.params.subscribe((p) => {
-                  this.productSubject = productService.getOne(p.productId);
-                });
+                this.activeRouter.params.subscribe((p) => {
+                  this.productService.getOne(p.productId).subscribe(x=>this.product = x.data);  });    
     }
 
   public ngOnInit(): void {
 
-    this.subs.add(this.productSubject
-      .subscribe({
-          next: (result) => {
-            this.product = result.data;
-            console.log(result)
-          },
-        error: (err) => { console.log(err); },
-        },
-      ));
+   
+    //   this.subs.add(this.productSubject
+    //     .subscribe({
+    //         next: (result) => {
+    //           this.product = result.data;
+    //           console.log(result)
+    //         },
+    //       error: (err) => { console.log(err); },
+    //       },
+    //     ));
+     
 
   }
 

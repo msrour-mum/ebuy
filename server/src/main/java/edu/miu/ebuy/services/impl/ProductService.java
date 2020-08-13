@@ -38,62 +38,62 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public List<ProductDto> getAll() {
+    public List<Product> getAll() {
 
-        //return (List<Product>) productRepository.findByIsDeleted(false);
+        return (List<Product>) productRepository.findByIsDeleted(false);
 
-        List<Product> productList=  productRepository.findByIsDeleted(false);
-        List<ProductDto> lst = new ArrayList<>();
-        for (Product product : productList)
-        {
-            ProductDto productDto =ProductDto.read(product);
-
-            lst.add(productDto);
-        }
-        return  lst;
+//        List<Product> productList=  productRepository.findByIsDeleted(false);
+//        List<ProductDto> lst = new ArrayList<>();
+//        for (Product product : productList)
+//        {
+//            ProductDto productDto =ProductDto.read(product);
+//
+//            lst.add(productDto);
+//        }
+//        return  lst;
     }
 
     @Override
-    public List<ProductDto> getActive() {
-        //return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
-        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
-        List<ProductDto> lst = new ArrayList<>();
-        for (Product product : productList)
-        {
-            ProductDto productDto =ProductDto.read(product);
-
-            lst.add(productDto);
-        }
-        return  lst;
+    public List<Product> getActive() {
+        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+//        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+//        List<ProductDto> lst = new ArrayList<>();
+//        for (Product product : productList)
+//        {
+//            ProductDto productDto =ProductDto.read(product);
+//
+//            lst.add(productDto);
+//        }
+//        return  lst;
     }
 
 
     @Override
-    public List<ProductDto> getAdminList() {
-        //return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
-        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndProductStatus_Id(false,false,2);
-        List<ProductDto> lst = new ArrayList<>();
-        for (Product product : productList)
-        {
-            ProductDto productDto =ProductDto.read(product);
-
-            lst.add(productDto);
-        }
-        return  lst;
+    public List<Product> getAdminList() {
+        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+//        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndProductStatus_Id(false,false,2);
+//        List<ProductDto> lst = new ArrayList<>();
+//        for (Product product : productList)
+//        {
+//            ProductDto productDto =ProductDto.read(product);
+//
+//            lst.add(productDto);
+//        }
+//        return  lst;
     }
 
     @Override
-    public List<ProductDto> getAdminList(int userId) {
-        //return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
-        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(false,false,userId,2);
-        List<ProductDto> lst = new ArrayList<>();
-        for (Product product : productList)
-        {
-            ProductDto productDto =ProductDto.read(product);
-
-            lst.add(productDto);
-        }
-        return  lst;
+    public List<Product> getAdminList(int userId) {
+        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+//        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(false,false,userId,2);
+//        List<ProductDto> lst = new ArrayList<>();
+//        for (Product product : productList)
+//        {
+//            ProductDto productDto =ProductDto.read(product);
+//
+//            lst.add(productDto);
+//        }
+//        return  lst;
     }
 
 
@@ -174,18 +174,18 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<ProductDto> getProductByPrice(double fromPrice, double toPrice) {
-        //return productRepository.getProductByPrice(fromPrice,toPrice);
+    public List<Product> getProductByPrice(double fromPrice, double toPrice) {
+        return productRepository.getProductByPrice(fromPrice,toPrice);
 
-        List<Product> productList= productRepository.getProductByPrice(fromPrice,toPrice);
-        List<ProductDto> lst = new ArrayList<>();
-        for (Product product : productList)
-        {
-            ProductDto productDto =ProductDto.read(product);
-
-            lst.add(productDto);
-        }
-        return  lst;
+//        List<Product> productList= productRepository.getProductByPrice(fromPrice,toPrice);
+//        List<ProductDto> lst = new ArrayList<>();
+//        for (Product product : productList)
+//        {
+//            ProductDto productDto =ProductDto.read(product);
+//
+//            lst.add(productDto);
+//        }
+//        return  lst;
     }
 
     @Override
@@ -202,18 +202,18 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<ProductDto> search(ProductSearchItem searchItem) {
+    public List<Product> search(ProductSearchItem searchItem) {
 
         searchItem.fitParameters();
         List<Product> productList= productRepository.search(searchItem.getProductName(),searchItem.getVendorName(),searchItem.getPriceFrom(),searchItem.getPriceTo());
-
-        List<ProductDto> lst = new ArrayList<>();
-        for (Product product : productList)
-        {
-            ProductDto productDto =ProductDto.read(product);
-            lst.add(productDto);
-        }
-        return  lst;
+        return  productList;
+//        List<ProductDto> lst = new ArrayList<>();
+//        for (Product product : productList)
+//        {
+//            ProductDto productDto =ProductDto.read(product);
+//            lst.add(productDto);
+//        }
+//        return  lst;
     }
 
     @Override
