@@ -39,7 +39,12 @@ export class ShoppingService {
   }
 
   public clearCart(): void {
-    localStorage.removeItem(this.CART_STORAGE_NAME);
+   this.getCart().subscribe((data) => {
+      data.items.forEach((e) => {
+        this.removeProduct(e.product, e.quantity);
+      });
+    });
+   localStorage.removeItem(this.CART_STORAGE_NAME);
   }
 
   public checkout(body: any) {
@@ -51,11 +56,11 @@ export class ShoppingService {
   }
 
 
- 
-  public reportProfit(vendorId : number) {  
+
+  public reportProfit(vendorId : number) {
     return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/reports/${vendorId}/profits`);
   }
-  public reportMyOrders(userId : number) {  
+  public reportMyOrders(userId : number) {
     return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/reports/${userId}/orders`);
   }
 

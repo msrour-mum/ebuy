@@ -122,13 +122,15 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> getAll() {
-
-        JPAUserDetails jpaUserDetails= Context.getUser();
         if(Context.getUser().getRole().getId() == RoleEnum.ADMIN.id) {
-            return (List<User>) userRepository.findAll();
+            return userRepository.findAll();
         }
         else if(Context.getUser().getRole().getId() == RoleEnum.VENDOR.id) {
-            return (List<User>) userRepository.findByVendor_Id(Context.getUser().getId());
+            if(Context.getUser().getVendor() != null) {
+                return userRepository.findByVendor_Id(Context.getUser().getVendor().getId());
+            } else {
+                return userRepository.findByVendor_Id(Context.getUser().getId());
+            }
         }
 
         return null;

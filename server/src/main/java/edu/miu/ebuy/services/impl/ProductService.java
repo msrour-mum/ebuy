@@ -1,16 +1,15 @@
 package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.common.enums.ProductStatusEnum;
+import edu.miu.ebuy.common.enums.RoleEnum;
 import edu.miu.ebuy.common.events.publishers.ProductApprovedEvent;
 import edu.miu.ebuy.common.events.publishers.ProductRejectedEvent;
 import edu.miu.ebuy.common.http.ResponseResult;
 import edu.miu.ebuy.common.http.ResponseStatus;
 import edu.miu.ebuy.dao.ProductRepository;
+import edu.miu.ebuy.dao.PromotionRepository;
 import edu.miu.ebuy.exceptions.ApplicationException;
-import edu.miu.ebuy.models.Category;
-import edu.miu.ebuy.models.Product;
-import edu.miu.ebuy.models.Promotion;
-import edu.miu.ebuy.models.User;
+import edu.miu.ebuy.models.*;
 import edu.miu.ebuy.models.dto.ProductDto;
 import edu.miu.ebuy.models.dto.ProductSearchItem;
 import edu.miu.ebuy.models.lookup.ProductStatus;
@@ -26,6 +25,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -39,64 +39,30 @@ public class ProductService implements IProductService {
     @Autowired
     ApplicationEventPublisher eventPublisher;
 
+    @Autowired
+    PromotionRepository promotionRepository;
+
 
     @Override
     public List<Product> getAll() {
 
         return (List<Product>) productRepository.findByIsDeleted(false);
-
-//        List<Product> productList=  productRepository.findByIsDeleted(false);
-//        List<ProductDto> lst = new ArrayList<>();
-//        for (Product product : productList)
-//        {
-//            ProductDto productDto =ProductDto.read(product);
-//
-//            lst.add(productDto);
-//        }
-//        return  lst;
     }
 
     @Override
     public List<Product> getActive() {
         return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
-//        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
-//        List<ProductDto> lst = new ArrayList<>();
-//        for (Product product : productList)
-//        {
-//            ProductDto productDto =ProductDto.read(product);
-//
-//            lst.add(productDto);
-//        }
-//        return  lst;
     }
 
 
     @Override
     public List<Product> getAdminList() {
         return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndProductStatus_Id(false,false,2);
-//        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndProductStatus_Id(false,false,2);
-//        List<ProductDto> lst = new ArrayList<>();
-//        for (Product product : productList)
-//        {
-//            ProductDto productDto =ProductDto.read(product);
-//
-//            lst.add(productDto);
-//        }
-//        return  lst;
     }
 
     @Override
     public List<Product> getAdminList(int userId) {
         return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndProductStatus_IdAndUser_Id(false,false,2,userId);
-//        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(false,false,userId,2);
-//        List<ProductDto> lst = new ArrayList<>();
-//        for (Product product : productList)
-//        {
-//            ProductDto productDto =ProductDto.read(product);
-//
-//            lst.add(productDto);
-//        }
-//        return  lst;
     }
 
 
@@ -111,10 +77,20 @@ public class ProductService implements IProductService {
 
     @Override
     public Product create(Product product, String imageUrl) {
-
-       // product.setDeleted(false);
         product.setProductStatus(new ProductStatus(1,""));
-        product.setUser(new User(Context.getUserId()));
+        if(Context.getUser().getRole().getId() == RoleEnum.ADMIN.id) {
+            product.setUser(new User(Context.getUserId()));
+        }
+        if(Context.getUser().getRole().getId() == RoleEnum.VENDOR.id)
+        {
+            if(Context.getUser().getVendor() == null) {
+                product.setUser(new User(Context.getUserId()));
+            } else {
+                product.setUser(new User(Context.getUser().getVendor().getId()));
+            }
+
+        }
+
         product.setImageUrl(imageUrl);
         product.setPublished(true);
         return productRepository.save(product);
@@ -133,8 +109,6 @@ public class ProductService implements IProductService {
         return productRepository.save(product);
     }
 
-
-
     @Override
     public Product update(Product product) {
         product.setProductStatus(new ProductStatus(product.getProductStatus().getId(),""));
@@ -145,10 +119,6 @@ public class ProductService implements IProductService {
                 LocalDate.now(), LocalDate.now().plusMonths(1), product));
         return productRepository.save(product);
     }
-
-
-
-
 
     @Override
     public void  delete(int productId) {
@@ -185,16 +155,6 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getProductByPrice(double fromPrice, double toPrice) {
         return productRepository.getProductByPrice(fromPrice,toPrice);
-
-//        List<Product> productList= productRepository.getProductByPrice(fromPrice,toPrice);
-//        List<ProductDto> lst = new ArrayList<>();
-//        for (Product product : productList)
-//        {
-//            ProductDto productDto =ProductDto.read(product);
-//
-//            lst.add(productDto);
-//        }
-//        return  lst;
     }
 
     @Override
@@ -290,18 +250,7 @@ public class ProductService implements IProductService {
 
     @Override
    public void deletePromotion(int productId, int promotionId) {
-        Product product = productRepository.getOne(productId);
-
-        Promotion promotionToDelete = product.getPromotions()
-                .stream()
-                .filter(p-> p.getId() == promotionId)
-                .findFirst()
-                .orElse(null);
-
-        if(promotionToDelete != null) {
-            product.getPromotions().remove(promotionToDelete);
-            productRepository.save(product);
-        }
+        promotionRepository.deleteById(promotionId);
     }
 
 }

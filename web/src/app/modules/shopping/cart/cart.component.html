@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
+  <div class="row" *ngIf="(shoppingService.getCart() | async)?.items.length !== 0">
     <div class="alert alert-dismissible alert-warning alert-custom-brdr color-black">
       The price and availability of items at eBuy.com are subject to change.
       The Cart is a temporary place to store a list of your items and reflects each item's most recent price.
@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <!-- Empty Cart Message box -->
-    <div class="card bg-light mb-3" *ngIf="(shoppingService.getCart() | async)?.count === 0">
+    <div class="card bg-light mb-3" *ngIf="(shoppingService.getCart() | async)?.items.length == 0">
       <div class="card-header">Information</div>
       <div class="card-body">
         <h4 class="card-title">Empty Cart</h4>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- Cart -->
-    <div class="col-sm-12 col-md-8 order-line-box" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
+    <div class="col-sm-12 col-md-8 order-line-box" *ngIf="(shoppingService.getCart() | async)?.items.length  !== 0">
       <div class="card custom-card-border mb-3" *ngFor="let orderItem of (shoppingService.getCart() | async)?.items">
         <div class="card-header row">
           <div class="col-4">
@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-12 col-md-4 order-summary-box jumbotron" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
+    <div class="col-sm-12 col-md-4 order-summary-box jumbotron" *ngIf="(shoppingService.getCart() | async)?.items.length !== 0">
 
       <span class="font-size-2rem">SUMMARY</span><hr>
       <div><i>Total price that you will pay as described bellow</i></div>
@@ -95,7 +95,7 @@
 
     </div>
   </div>
-  <div class="row" *ngIf="(shoppingService.getCart() | async)?.count !== 0">
+  <div class="row" *ngIf="(shoppingService.getCart() | async)?.items.length !== 0">
     <div class="col-md-8 col-sm-12"> </div>
     <div class="col-md-4 col-sm-12 alert-0-l-r-p">
       <div class="alert alert-dismissible alert-info alert-custom-brdr alert-0-l-r-mr color-black">

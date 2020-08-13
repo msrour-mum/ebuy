@@ -3,24 +3,6 @@
 <div class="container">
 
   <h3 style="margin-top: 40px;">Products</h3>
-
-
-
-
-
-
-<!--  <div class="row">
-     <div class="col-sm-12 col-md-8 mr-btm-10">
-      <div class="form-group col-sm-12 col-md-10 mr-btm-10">
-        <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="search">
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-4 mr-btm-10">
-      <a [routerLink]="['/add-product']" class="btn btn-flat">
-        <i class="fa fa-plus" aria-hidden="true"></i> Add Product
-      </a>
-    </div>
-  </div> -->
   <div class="row">
     <div   class="col-sm-12 col-md-8 order-line-box">
 
@@ -51,9 +33,8 @@
           </div>
           <div class="col-3">
             <i class="prd-lbl fa fa-th">&nbsp;<strong>Stock</strong></i>
-            <i> In-stock</i> <!--remove this implemet the below -->
-            <!--            <i *ngIf="isPublish"> In-stock</i>-->
-            <!--            <i *ngIf="product.isPublish"> Out-stock</i>-->
+            <i *ngIf="product.published"> In-stock</i>
+            <i *ngIf="!product.published"> Out-stock</i>
           </div>
         </div>
         <div class="card-body row">
@@ -68,13 +49,13 @@
             <div class="prodcut-cmd-icon " *ngIf="!product.published">
 
               <button type="button" class="btn btn-flat success-color" (click)="published(product.id)">
-                <i class="fa fa-upload" aria-hidden="true"></i> Download
+                <i class="fa fa-upload" aria-hidden="true"></i> Upload
               </button>
             </div>
 
             <div class="prodcut-cmd-icon "  *ngIf="product.published">
               <button type="button" class="btn btn-flat danger-color" (click)="unPublished(product.id)">
-                <i class="fa fa-download" aria-hidden="true"></i> Upload
+                <i class="fa fa-download" aria-hidden="true"></i> Download
               </button>
             </div>
 
