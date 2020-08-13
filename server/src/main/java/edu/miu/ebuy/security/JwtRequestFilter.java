@@ -1,14 +1,20 @@
 package edu.miu.ebuy.security;
 
+import edu.miu.ebuy.common.http.BaseResponse;
+import edu.miu.ebuy.exceptions.Errors;
+import edu.miu.ebuy.exceptions.HttpException;
 import edu.miu.ebuy.services.impl.JwtUserDetailsService;
 import edu.miu.ebuy.utilities.ConstantKeys;
 import io.jsonwebtoken.ExpiredJwtException;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -24,6 +30,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtToken jwtToken;
 
+    @SneakyThrows
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
@@ -46,8 +53,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 username = this.jwtToken.getUsernameFromToken(jwtToken);
             } catch (IllegalArgumentException e) {
                 System.out.println("Unable to get JWT Token");
+                throw new HttpException(HttpStatus.BAD_REQUEST, "JWT Token is invalid or expired", Errors.INVALID_JWT_TOKEN);
             } catch (ExpiredJwtException e) {
                 System.out.println("JWT Token has expired");
+                throw new HttpException(HttpStatus.BAD_REQUEST, "JWT Token is invalid or expired", Errors.INVALID_JWT_TOKEN);
+            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//                throw new HttpException(HttpStatus.BAD_REQUEST, "JWT Token is invalid or expired", Errors.INVALID_JWT_TOKEN);
+                response.sendError(5, "invalideeeeee");
+
             }
         } else {
             logger.warn("JWT Token does not begin with Bearer String");

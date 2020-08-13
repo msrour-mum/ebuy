@@ -1,6 +1,6 @@
 <main class="acc-form">
 
-  <div class="cotainer">
+  <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
@@ -51,20 +51,8 @@
 
               <div class="col-md-6 offset-md-4">
                 <button class="btn btn-primary" (click)="onSubmit()" >Login</button>
-                <a href="/signup" class="btn btn-link"> Create new account </a>
+                <a [routerLink]="['/signup']" class="btn btn-link"> Create new account </a>
               </div>
-
-              <p>
-                Form Value: {{ loginForm.value}}
-
-              </p>
-              <p>
-                Form invalid: {{ loginForm.invalid }}
-              </p>
-
-              <p>
-                Form Status: {{ loginForm.status }}
-              </p>
 
             </form>
           </div>

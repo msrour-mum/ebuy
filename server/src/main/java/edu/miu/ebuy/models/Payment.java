@@ -26,7 +26,7 @@ public class Payment {
     private String cardNumber;
 
     @Column(nullable = false)
-    private int cvv;
+    private int ccv;
 
     @Column(nullable = false)
     private String expireDate;
@@ -38,4 +38,76 @@ public class Payment {
     @JoinColumn(name ="cardTypeId")
     private CardType cardType;
 
+
+    public long getId() {
+        return id;
+    }
+
+    public Payment setId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Payment setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public Payment setOrder(Order order) {
+        this.order = order;
+        return this;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public Payment setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+        return this;
+    }
+
+    public int getCcv() {
+        return ccv;
+    }
+
+    public Payment setCcv(int ccv) {
+        this.ccv = ccv;
+        return this;
+    }
+
+    public String getExpireDate() {
+        return expireDate;
+    }
+
+    public Payment setExpireDate(String expireDate) {
+        this.expireDate = expireDate;
+        return this;
+    }
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public Payment setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+        return this;
+    }
+
+    public CardType getCardType() {
+        return cardType;
+    }
+
+    public Payment setCardType(CardType cardType) {
+        this.cardType = cardType;
+        return this;
+    }
 }

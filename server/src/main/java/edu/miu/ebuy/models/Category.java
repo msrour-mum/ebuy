@@ -3,9 +3,7 @@ package edu.miu.ebuy.models;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -13,8 +11,14 @@ import javax.persistence.Id;
 public class Category {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
     private String name;
+
+    public Category(Integer id, String name) {
+        //this.id = id;
+        this.name = name;
+    }
 }
