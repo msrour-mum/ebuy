@@ -2,6 +2,8 @@ package edu.miu.ebuy.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.ebuy.common.http.BaseResponse;
+import edu.miu.ebuy.common.http.ResponseResult;
+import edu.miu.ebuy.common.http.ResponseStatus;
 import edu.miu.ebuy.common.storage.IStorageService;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Product;
@@ -13,7 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -84,6 +90,39 @@ public class ProductController {
         }
         else
             return  productService.update(product);
+    }
+
+
+    @PostMapping("/{vendorId}/ftp")
+    //public ResponseResult ftpProduct(@PathVariable int vendorId, @RequestParam(value ="file", required=false) MultipartFile file) throws ApplicationException, IOException {
+    public void ftpProduct(@PathVariable int vendorId, @RequestParam(value ="file", required=false) MultipartFile file) throws ApplicationException, IOException {
+
+        //File csvFile = storageService.uploadCSVFile(file);
+        if (file!=null) {
+
+            File csvFile = storageService.uploadCSVFile(file);
+            List<String> lines = new ArrayList<>();
+            BufferedReader reader;
+            try {
+                reader = new BufferedReader(new FileReader(csvFile));
+                String line = reader.readLine();
+                while (line != null) {
+                   // System.out.println(line);
+                    // read next line
+                    line = reader.readLine();
+                    lines.add(line);
+                }
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String[] arr = new String[lines.size()];
+            arr = lines.toArray(arr);
+
+            productService.ftp(vendorId,arr);
+        }
+
+
     }
 
 //    @PutMapping("/{productId}")

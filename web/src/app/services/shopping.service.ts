@@ -50,4 +50,13 @@ export class ShoppingService {
     localStorage.setItem(this.CART_STORAGE_NAME, JSON.stringify(cart));
   }
 
+
+ 
+  public reportProfit(vendorId : number) {  
+    return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/reports/${vendorId}/profits`);
+  }
+  public reportMyOrders(userId : number) {  
+    return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/reports/${userId}/orders`);
+  }
+
 }

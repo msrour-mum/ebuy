@@ -4,8 +4,8 @@
     <parameter name="logo" class="java.lang.String"/>
     <field name="id" class="java.lang.Long">
     </field>
-    <field name="userId" class="java.lang.Integer">
-    </field>
+<!--    <field name="userId" class="java.lang.Integer">-->
+<!--    </field>-->
 
     <field name="orderDate" class="java.util.Date">
     </field>
@@ -54,20 +54,20 @@
                 </textElement>
                 <text><![CDATA[Order Details Report]]></text>
             </staticText>
-            <staticText>
-                <reportElement x="-20" y="11" width="130" height="30" uuid="28a1ac0b-edf8-4b4a-b564-15695e859a11"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="20"/>
-                </textElement>
-                <text><![CDATA[User Id : ]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="120" y="12" width="100" height="30" uuid="91162adb-f30b-4e12-8eb4-a49861fd2dd2"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="20"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{userId}]]></textFieldExpression>
-            </textField>
+<!--            <staticText>-->
+<!--                <reportElement x="-20" y="11" width="130" height="30" uuid="28a1ac0b-edf8-4b4a-b564-15695e859a11"/>-->
+<!--                <textElement textAlignment="Center" verticalAlignment="Middle">-->
+<!--                    <font size="20"/>-->
+<!--                </textElement>-->
+<!--                <text><![CDATA[User Id : ]]></text>-->
+<!--            </staticText>-->
+<!--            <textField>-->
+<!--                <reportElement x="120" y="12" width="100" height="30" uuid="91162adb-f30b-4e12-8eb4-a49861fd2dd2"/>-->
+<!--                <textElement textAlignment="Left" verticalAlignment="Middle">-->
+<!--                    <font size="20"/>-->
+<!--                </textElement>-->
+<!--                <textFieldExpression><![CDATA[$F{userId}]]></textFieldExpression>-->
+<!--            </textField>-->
             <staticText>
                 <reportElement x="247" y="0" width="210" height="42" uuid="f50e0e3a-50a0-4ec6-ba25-fe27012c213c"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">

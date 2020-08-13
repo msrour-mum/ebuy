@@ -27,4 +27,5 @@ public interface IProductService {
 
     public List<ProductDto> search(ProductSearchItem searchItem);
     List<Product> getAllProducts(List<Integer> productIds);
+    public void ftp(int userId , String[] lines) ;
 }

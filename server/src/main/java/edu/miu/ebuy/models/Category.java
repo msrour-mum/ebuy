@@ -24,6 +24,10 @@ public class Category {
         //this.id = id;
         this.name = name;
     }
+    public Category(Integer id) {
+        this.id = id;
+
+    }
 
     public Integer getId() {
         return id;

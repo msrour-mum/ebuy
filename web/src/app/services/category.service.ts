@@ -19,6 +19,7 @@ export class CategoryService {
   }
 
   public getOne(categoryId) {
+
     return this.http.get<any>(`${AppConfig.settings.apiServiceUrl}/categories/${categoryId}`);
   }
 

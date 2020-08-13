@@ -1,5 +1,7 @@
 package edu.miu.ebuy.services.impl;
 
+import edu.miu.ebuy.common.http.ResponseResult;
+import edu.miu.ebuy.common.http.ResponseStatus;
 import edu.miu.ebuy.dao.*;
 import edu.miu.ebuy.models.Order;
 
@@ -10,6 +12,7 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -17,32 +20,22 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 @Service
+@Transactional
+
 public class ReportService implements IReportService {
-    //@Autowired
-    //OrderReportRepository orderReportRepository;
-//    @Autowired
-//    private OrderItemReportRepository orderItemReportRepository;
-
-//    @Autowired
-//    private ProfitDtoRepository profitDtoRepository;
-
 
     @Autowired
     OrderRepository orderRepository;
     @Autowired
-
     private ProductRepository productRepository;
+    private   String  path ="C:\\uploads\\ebuy_uploads\\reports\\";
 
-    private   String  path =System.getProperty("user.home")+"\\Downloads";
-
-
-
-
-    public String  OrderReport(int userId) throws FileNotFoundException, JRException {
-
+    public ResponseResult  OrderReport(int userId) throws FileNotFoundException, JRException {
         List<Order> orders = orderRepository.findByUserId(userId);
-        //load file and compile it
-
+        if(orders==null || orders.size()==0)
+        {
+            return new ResponseResult(new ResponseStatus(400,""), "");
+        }
         List<OrdersDto> lst = new ArrayList<>();
         for (Order or:orders)
         {
@@ -56,19 +49,33 @@ public class ReportService implements IReportService {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("createdBy", "EBUY ECOMMERCE");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-        //generate pdf
-        String fileName = path + "\\orders"+new Random().nextInt(9500000) +".pdf";
-        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
+//        //generate pdf
+//        String pdf= "orders"+new Random().nextInt(9500000) +".pdf";
+//        String fileName = path + pdf;
+//        String mappedFile = "http://localhost:8080/api/uploads/reports/"+pdf;
+//        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
+//
+//        //return "report generated in path : " + path;
+//
+//       // return mappedFile;
 
-        //return "report generated in path : " + path;
-        return fileName;
+        //generate pdf
+        String pdf= "profit"+new Random().nextInt(9500000) +".pdf";
+        String fileName = path + pdf;
+        String mappedFile = "http://localhost:8080/api/uploads/reports/"+pdf;
+        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
+        return new ResponseResult(new ResponseStatus(200,""), mappedFile);
     }
 
 
-    public String  profitReport(int vendorId) throws FileNotFoundException, JRException {
+    public ResponseResult  profitReport(int vendorId) throws FileNotFoundException, JRException {
 
         List<Product> productList =  productRepository.reportProfit(vendorId);
 
+        if(productList==null || productList.size()==0)
+        {
+            return new ResponseResult(new ResponseStatus(400,""), "");
+        }
         List<ProfitDto> lstProfit = new ArrayList<>();
         for (Product product : productList)
         {
@@ -98,15 +105,16 @@ public class ReportService implements IReportService {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReportProfits, params, dataSource);
 
         //generate pdf
-        String fileName = path + "\\VendorProfits"+new Random().nextInt(9500000) +".pdf";
+        String pdf= "orders"+new Random().nextInt(9500000) +".pdf";
+        String fileName = path + pdf;
+        String mappedFile = "http://localhost:8080/api/uploads/reports/"+pdf;
         JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
-
-        return "report generated in path : " + path;
+        return new ResponseResult(new ResponseStatus(200,""), mappedFile);
 
     }
-    public String  orderItemReport(int userId) throws FileNotFoundException, JRException{
-        return  "not impplemneted";
-    }
+//    public String  orderItemReport(int userId) throws FileNotFoundException, JRException{
+//        return  "not impplemneted";
+//    }
 
 //    public String  orderItemReport(int userId) throws FileNotFoundException, JRException {
 //

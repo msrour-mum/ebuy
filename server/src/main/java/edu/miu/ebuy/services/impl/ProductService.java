@@ -3,6 +3,8 @@ package edu.miu.ebuy.services.impl;
 import edu.miu.ebuy.common.enums.ProductStatusEnum;
 import edu.miu.ebuy.common.events.publishers.ProductApprovedEvent;
 import edu.miu.ebuy.common.events.publishers.ProductRejectedEvent;
+import edu.miu.ebuy.common.http.ResponseResult;
+import edu.miu.ebuy.common.http.ResponseStatus;
 import edu.miu.ebuy.dao.ProductRepository;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Category;
@@ -217,6 +219,34 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAllProducts(List<Integer> productIds) {
         return productRepository.findByIdIn(productIds);
+    }
+
+
+    @Override
+    public void ftp(int userId , String[] lines) {
+
+            for (int i = 0; i < lines.length; i++) {
+                String line = lines[i];
+                String[] words = line.split(",");
+                if(words.length < 3) return;
+                Product product = new Product(
+                        words[0],
+                        words[4],
+                        words[3],
+                        new User(userId),
+                        new Category(Integer.parseInt(words[5])),
+                        Double.parseDouble(words[1]),
+                        Double.parseDouble(words[2]),
+                        new ProductStatus(1,""),
+                        true,
+                        false,
+                        ""
+                );
+                productRepository.save(product);
+            }
+
+
+
     }
 
 }

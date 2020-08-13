@@ -39,8 +39,8 @@
             Reports <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="admin">
-            <a class="dropdown-item" [routerLink]="['manage-users']">My Orders</a>
-            <a class="dropdown-item" [routerLink]="['manage-users']">My Profits</a>
+            <a class="dropdown-item"  (click)="reportMyOrders()" >My Orders</a>
+            <a class="dropdown-item"  (click)="reportProfit()" >My Profits</a>
             <div class="dropdown-divider"></div>
 <!--            <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>-->
 <!--            <a class="dropdown-item" [routerLink]="['approve-product']">Review Products</a>-->

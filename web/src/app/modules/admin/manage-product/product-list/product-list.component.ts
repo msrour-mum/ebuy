@@ -65,9 +65,12 @@ export class ProductListComponent implements OnInit {
 
   delete(productId:number ):void  {
    
-    this.dataService.delete(productId).subscribe();
+    if(confirm("Are you sure you want to delete this item ?"))
+    {
+    this.dataService.delete(productId).subscribe(x=>this.loadData());
     //this.lstProduct = this.dataService.getAdminList();
-    this.loadData();
+    
+    }
   }
 
 }

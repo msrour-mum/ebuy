@@ -106,6 +106,7 @@ export class AddUserComponent implements OnInit {
           
             alert("Record added successfully");
             this.form.reset();
+            
             //this.router.navigate(['/login']);
           }
         },

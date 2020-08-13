@@ -43,4 +43,27 @@ public class StorageService implements IStorageService {
                 extension);
         return fileRelativePath;
     }
+
+
+    @Override
+    public File uploadCSVFile(MultipartFile multipartFile) throws IOException {
+
+        String subDirs = "C:\\uploads\\ebuy_uploads\\ftp\\";
+        String extension = Files.getFileExtension(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+        UUID randomUUID = UUID.randomUUID();
+//        String filePhysicalPath =String.format("%s/%s/%s.%s",subDirs,
+//                "",
+//                "",
+//                randomUUID,
+//                extension);
+
+        String filePhysicalPath = subDirs+ randomUUID+extension;
+        File file = new File(filePhysicalPath);
+        if(!file.exists())
+        {
+            file.mkdirs();
+        }
+        multipartFile.transferTo(file);
+        return file;
+    }
 }

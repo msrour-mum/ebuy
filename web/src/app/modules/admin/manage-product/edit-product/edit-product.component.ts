@@ -27,6 +27,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
               private productService: ProductService,
               private categoryService:CategoryService) {
 
+                
                 activeRouter.params.subscribe((p) => {
                   this.productSubject = productService.getOne(p.productId);
                 });
@@ -50,7 +51,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       .subscribe({
           next: (result) => {
             const pro = result.data;
-            console.log(result)
+            
             this.img=pro.imageUrl;
             this.form =  this.fb.group({
               id: [pro.id],
@@ -86,7 +87,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    
     if (this.form.invalid) {
       return;
     }
@@ -95,13 +96,14 @@ export class EditProductComponent implements OnInit, OnDestroy {
       this.form.value.imageUrl=this.img;
     formData.append("productJson", JSON.stringify(this.form.value));
     formData.append("file", this.photoFile);
-    console.log(this.form.value.id);
+    
     this.subs.add(this.productService.update(formData,this.form.value.id)
       .subscribe(
         (result: any) => {
          if(result.status.code == 200) {
             //this.router.navigate(['/login']);
-            console.log("Done")
+           // console.log("Done")
+           alert("Record updated successfully");
             this.form.reset();
           }
         },

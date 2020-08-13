@@ -22,7 +22,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.categoryForm = this.fb.group({
-      category: ['', [Validators.required]],
+      name: ['', [Validators.required]],
     });
   }
 
@@ -34,16 +34,20 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   onSubmit() {
     if(this.categoryForm.valid){
       let formData = new FormData();
-      formData.append("name", JSON.stringify(this.categoryForm.get('category')));
-      this.subs.add(this.categoryService.create(formData)
+      //formData.append("name", JSON.stringify(this.categoryForm.get('category')));
+      formData.append("data", JSON.stringify(this.categoryForm.value));
+      console.log(this.categoryForm.value)
+      this.subs.add(this.categoryService.create(this.categoryForm.value)
         .subscribe(
           (result: any) => {
             if(result.status.code == 200) {
-              console.log("Done")
+              //console.log("Done")
+               alert("Record added successfully");
               this.categoryForm.reset();
               this.router.navigate(['/categories']);
 
             }
+            console.log(result)
           },
           error => console.log(error)
         ));
@@ -57,7 +61,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     return category == "" || category == null;
   }
 
-  isValid(category: string) {
-    return this.categoryForm.get(category).invalid && this.categoryForm.get(category).touched;
+  isValid(name: string) {
+    return this.categoryForm.get(name).invalid && this.categoryForm.get(name).touched;
   }
 }

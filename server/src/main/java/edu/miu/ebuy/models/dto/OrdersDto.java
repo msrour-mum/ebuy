@@ -18,24 +18,26 @@ public class OrdersDto {
     private double total;
     private double shipping;
     private double netTotal;
+    private String userAddress;
 
 
     List<OrdersItemsDto> lstItems = new ArrayList<>();
 
-    public OrdersDto(long id, String userName, Date orderDate, double total, double shipping) {
+    public OrdersDto(long id, String userName, Date orderDate, double total, double shipping , String userAddress) {
         this.id = id;
         this.userName = userName;
         this.orderDate = orderDate;
         this.total = total;
         this.shipping = shipping;
         this.netTotal =  total+shipping;
+        this.userAddress=userAddress;
     }
 
 
     public static OrdersDto read(Order or)
     {
         OrdersDto ordersDto = new OrdersDto(or.getId(),or.getUser().getName(),
-                or.getOrderDate(),or.getTotal(),or.getShipping());
+                or.getOrderDate(),or.getTotal(),or.getShipping(),or.getUser().getAddress());
         return ordersDto;
     }
 
@@ -49,7 +51,7 @@ public class OrdersDto {
     public static OrdersDto readFull(Order or)
     {
         OrdersDto ordersDto = new OrdersDto(or.getId(),or.getUser().getName(),
-                or.getOrderDate(),or.getTotal(),or.getShipping());
+                or.getOrderDate(),or.getTotal(),or.getShipping(),or.getUser().getAddress());
 
         for (OrderItem i : or.getItems())
         {

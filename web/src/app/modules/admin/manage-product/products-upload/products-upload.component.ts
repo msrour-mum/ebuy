@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SubSink} from 'subsink';
 import {Router} from '@angular/router';
 import {ProductService} from '../../../../services/product.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-products-upload',
@@ -17,6 +18,7 @@ export class ProductsUploadComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
+              public authService: AuthenticationService,
               private productService: ProductService) {
 
   }
@@ -30,6 +32,8 @@ export class ProductsUploadComponent implements OnInit {
 
   }
 
+
+
   public onFileSelect(event) {
     if (event.target.files.length > 0) {
       this.photoFile = event.target.files[0];
@@ -42,20 +46,23 @@ export class ProductsUploadComponent implements OnInit {
       return;
     }
     let formData: any = new FormData();
+    console.log(this.photoFile);
+    console.log(this.authService.currentUser.id)
     formData.append("file", this.photoFile);
-    // this.subs.add(this.productService.create(formData)
-    //   .subscribe(
-    //     (result: any) => {
-    //       if(result.status.code == 200) {
-    //         alert("Record added successfully");
-    //
-    //         this.form.reset();
-    //
-    //         this.router.navigate(['/product-list']);
-    //       }
-    //     },
-    //     error => console.log(error)
-    //   ));
+    this.subs.add(this.productService.ftpProduct(this.authService.currentUser.id, formData)
+      .subscribe(
+        (result: any) => {
+          console.log(result);
+          if(result.status.code == 200) {
+            alert("RecordS added successfully");
+    
+            this.form.reset();
+    
+            //this.router.navigate(['/product-list']);
+          }
+        },
+        error => console.log(error)
+      ));
   }
 
   hasError(field: string): boolean {

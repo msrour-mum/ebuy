@@ -41,6 +41,11 @@ public class User implements Serializable {
     @JoinColumn(name = "cardId", referencedColumnName = "id")
     private UserCard card;
 
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name ="vendorId")
+    private User vendor;
+
     public User(String name,String email, Role role, String pass, boolean isActive,String phone) {
         this.name = name;
         this.email = email;
@@ -54,7 +59,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(String name, String email, Role role, String password, Boolean isActive,  String phone, String address, String imageUrl) {
+    public User(String name, String email, Role role, String password, Boolean isActive,  String phone, String address, String imageUrl , User vendor) {
         this.name = name;
         this.email = email;
         this.role = role;
@@ -63,6 +68,7 @@ public class User implements Serializable {
         this.address = address;
         this.phone = phone;
         this.imageUrl = imageUrl;
+        this.vendor = vendor;
 
     }
 

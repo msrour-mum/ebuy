@@ -57,8 +57,11 @@ public class Product {
     @Column(name = "isDeleted",nullable = false, columnDefinition = "BIT(1) default 0")
     private boolean isDeleted;
 
+    public Product(Integer id) {
+        this.id = id;
+    }
 
-    public Product(String name,String shortDescription, String description, User user, Category category, double cost, double price, ProductStatus productStatus, boolean isPublished, boolean isService, String imageUrl) {
+    public Product(String name, String shortDescription, String description, User user, Category category, double cost, double price, ProductStatus productStatus, boolean isPublished, boolean isService, String imageUrl) {
 
         this.name = name;
         this.description = description;

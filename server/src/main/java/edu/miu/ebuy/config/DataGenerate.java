@@ -49,10 +49,10 @@ public class DataGenerate {
 
 
 
-        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
-        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
-        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
-        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
+        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
+        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
+        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
+        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
         em.persist(userAdmin1);
         em.persist(userAdmin2);
         em.persist(userAdmin3);
@@ -101,14 +101,14 @@ public class DataGenerate {
         //Vendors Users
         List<User> vendorList = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
-            User user1 = new User(categoryList.get(i).getName()+ " Vender ", "Vender"+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","");
+            User user1 = new User(categoryList.get(i).getName()+ " Vender ", "Vender"+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","",null);
             em.persist(user1);
             vendorList.add(user1);
         }
 
         //End Users
         for (int i = 1; i < 11; i++) {
-            User user1 = new User("User "+ i, "User"+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","");
+            User user1 = new User("User "+ i, "User"+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
             em.persist(user1);
         }
 
@@ -220,6 +220,11 @@ public class DataGenerate {
 
 
 
+
+        Promotion promotion1 = new Promotion("Promotion 1" , 0.1,new Date(2020,8,1),new Date(2020,8,20),vendorList.get(1),new Product(2));
+        Promotion promotion2 = new Promotion("Promotion 2" , 0.3,new Date(2020,8,1),new Date(2020,8,20),vendorList.get(1),new Product(3));
+        em.persist(promotion1);
+        em.persist(promotion1);
 
         TypedQuery<User> q = em.createQuery("from User where roleId=3", User.class);
         List<User> users = q.getResultList();

@@ -3,6 +3,7 @@ package edu.miu.ebuy.controllers;
 import edu.miu.ebuy.common.http.BaseResponse;
 //import edu.miu.ebuy.dao.OrderItemReportRepository;
 //import edu.miu.ebuy.dao.OrderReportRepository;
+import edu.miu.ebuy.common.http.ResponseResult;
 import edu.miu.ebuy.dao.ProductRepository;
 
 import edu.miu.ebuy.models.Product;
@@ -29,22 +30,22 @@ public class ReportsController {
 
 
     @GetMapping("/{userId}/orders")
-    public String generateOrdersReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
+    public ResponseResult generateOrdersReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
         return reportService.OrderReport(userId);
 
     }
 
 
     @GetMapping("/{vendorId}/profits")
-    public String generateProfitReport(@PathVariable int vendorId) throws FileNotFoundException, JRException {
+    public ResponseResult generateProfitReport(@PathVariable int vendorId) throws FileNotFoundException, JRException {
         return reportService.profitReport(vendorId);
     }
 
-    @GetMapping("/{userId}/orderDetails")
-    public String generateOrderDetailsReport(@PathVariable int userId) throws FileNotFoundException, JRException {
-        return reportService.orderItemReport(userId);
-
-    }
+//    @GetMapping("/{userId}/orderDetails")
+//    public ResponseResult generateOrderDetailsReport(@PathVariable int userId) throws FileNotFoundException, JRException {
+//        return reportService.orderItemReport(userId);
+//
+//    }
 
 
 

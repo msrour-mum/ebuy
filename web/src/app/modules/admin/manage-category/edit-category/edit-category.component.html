@@ -17,15 +17,15 @@
             <div class="card-body">
               <form [formGroup]="categoryForm" >
                 <div class="form-group row">
-                  <label for="category" class="col-md-4 col-form-label text-md-right">Category</label>
+                  <label for="name" class="col-md-4 col-form-label text-md-right">Category</label>
                   <div class="col-md-6">
                     <input type="text"
-                           [formControl]="categoryForm.get('category')"
-                           [ngClass]="{'is-invalid': isValid('category')}"
+                           [formControl]="categoryForm.get('name')"
+                           [ngClass]="{'is-invalid': isValid('name')}"
                            id="category"
                            class="form-control"
-                           name="category" autofocus>
-                    <div *ngIf="hasError('category')" class="invalid-feedback">
+                           name="name" autofocus>
+                    <div *ngIf="hasError('name')" class="invalid-feedback">
                       category is required
                     </div>
                   </div>

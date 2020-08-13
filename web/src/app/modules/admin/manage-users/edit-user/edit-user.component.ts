@@ -98,7 +98,9 @@ export class EditUserComponent implements OnInit , OnDestroy {
       .subscribe(
         (result: any) => {
          if(result.status.code == 200) {
-            this.router.navigate(['/login']);
+          alert("Record upadted successfully");
+          //this.router.navigate(['/login']);
+          this.router.navigate(['/app-user-list']);
           }
         },
         error => console.log(error)

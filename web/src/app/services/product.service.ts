@@ -60,4 +60,11 @@ export class ProductService {
     return this.http.post<any>(`${AppConfig.settings.apiServiceUrl}/products/search/`, body);
   }
 
+
+  public ftpProduct(vendorId: number, body: any) {
+    console.log(`${AppConfig.settings.apiServiceUrl}/products/${vendorId}/ftp`)
+    return this.http.post<any>(`${AppConfig.settings.apiServiceUrl}/products/${vendorId}/ftp`, body);
+  }
+
+  
 }

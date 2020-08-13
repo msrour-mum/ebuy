@@ -17,6 +17,10 @@ export class CategoryListComponent implements OnInit {
   }
 
   deleteCategory(categoryId: number) {
-
+    if(confirm("Are you sure you want to delete this item ?"))
+    {
+      this.categoryService.delete(categoryId).subscribe(x=>
+        this.categories = this.categoryService.get());
+    }
   }
 }
