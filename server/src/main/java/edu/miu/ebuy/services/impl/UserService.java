@@ -11,6 +11,7 @@ import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.security.Context;
+import edu.miu.ebuy.security.JPAUserDetails;
 import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import edu.miu.ebuy.services.interfaces.IUserService;
@@ -122,6 +123,7 @@ public class UserService implements IUserService {
     @Override
     public List<User> getAll() {
 
+        JPAUserDetails jpaUserDetails= Context.getUser();
         if(Context.getUser().getRole().getId() == RoleEnum.ADMIN.id) {
             return (List<User>) userRepository.findAll();
         }

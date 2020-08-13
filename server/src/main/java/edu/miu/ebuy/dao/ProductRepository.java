@@ -16,9 +16,15 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByIsDeleted(boolean isDeleted);
     List<Product> findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(boolean isDeleted,boolean isService,boolean isPublished,int statusId);
+    List<Product> findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_IdAndUser_Id(boolean isDeleted,boolean isService,boolean isPublished,int statusId,int userid);
+
 
     List<Product> findByIsDeletedAndIsServiceAndProductStatus_Id(boolean isDeleted,boolean isService,int statusId);
-    List<Product> findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(boolean isDeleted,boolean isService,int userid,int statusId);
+    List<Product> findByIsDeletedAndIsServiceAndProductStatus_IdAndUser_Id(boolean isDeleted,boolean isService,int statusId,int userid);
+
+
+    //List<Product> findByIsDeletedAndIsServiceAndProductStatus_Id(boolean isDeleted,boolean isService,int statusId);
+    //List<Product> findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(boolean isDeleted,boolean isService,int userid,int statusId);
 
     List<Product> findByProductStatus_Id(int statusId);
 

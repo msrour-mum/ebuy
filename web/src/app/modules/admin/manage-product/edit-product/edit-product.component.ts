@@ -103,6 +103,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
             //this.router.navigate(['/login']);
 
            alert("Record updated successfully");
+           this.router.navigate(['/product-list']);
            
           }
         },
