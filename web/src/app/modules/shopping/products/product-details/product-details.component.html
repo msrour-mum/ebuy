@@ -12,7 +12,11 @@
           <p style="text-align: right"><i class="fa fa-th">&nbsp;Stock<strong>&nbsp;&nbsp;In-Stock</strong></i></p>
         </div>
         <div class="col-md-3">
-         <p style="text-align: right"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;<strong>{{product.price}}</strong></p>
+         <p style="text-align: right"><i class="fa fa-money" aria-hidden="true"></i>
+           <strong [class.strike-red]="product.promotionPrice != 0">&nbsp;{{product.price | currency}}</strong>
+           &nbsp;<span *ngIf="product.promotionPrice != 0"> new price:<strong>&nbsp;{{product.promotionPrice | currency}}</strong></span>
+         </p>
+
         </div>
 
       </div>

@@ -490,3 +490,7 @@ footer .cpy {
 .underline-text:hover {
   text-decoration: underline;
 }
+.strike-red {
+  text-decoration: line-through;
+  color: red;
+}

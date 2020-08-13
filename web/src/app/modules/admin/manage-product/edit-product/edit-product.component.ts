@@ -14,9 +14,9 @@ import { AppConfig } from 'src/app/config/app.config';
 })
 export class EditProductComponent implements OnInit, OnDestroy {
   private photoFile;
+  public product: any;
   public form: FormGroup;
   public subs = new SubSink();
-  public product;
   public lstCategory =[];
   private productSubject: Observable<any> = new BehaviorSubject({}) ;
   public img=null;
@@ -27,7 +27,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
               private productService: ProductService,
               private categoryService:CategoryService) {
 
-                
+
                 activeRouter.params.subscribe((p) => {
                   this.productSubject = productService.getOne(p.productId);
                 });
@@ -35,7 +35,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.form = this.fb.group({     
+    this.form = this.fb.group({
       category: this.fb.group({ id: ['', [Validators.required]]}),
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -50,23 +50,23 @@ export class EditProductComponent implements OnInit, OnDestroy {
     this.subs.add(this.productSubject
       .subscribe({
           next: (result) => {
-            const pro = result.data;
-            this.img=pro.imageUrl;
+            this.product = result.data;
+            this.img= this.product.imageUrl;
             this.form =  this.fb.group({
-              id: [pro.id],
-              category: this.fb.group({ id: [pro.category.id, [Validators.required]]}),
-              user: this.fb.group({ id: [pro.user.id]}),
-              productStatus: this.fb.group({ id: [pro.productStatus.id, [Validators.required]]}),
-              name: [pro.name, [Validators.required]],
-              published: [pro.published, [Validators.required]],
-              service: [pro.service, [Validators.required]],
-              deleted: [pro.deleted, [Validators.required]],
+              id: [this.product.id],
+              category: this.fb.group({ id: [this.product.category.id, [Validators.required]]}),
+              user: this.fb.group({ id: [this.product.user.id]}),
+              productStatus: this.fb.group({ id: [this.product.productStatus.id, [Validators.required]]}),
+              name: [this.product.name, [Validators.required]],
+              published: [this.product.published, [Validators.required]],
+              service: [this.product.service, [Validators.required]],
+              deleted: [this.product.deleted, [Validators.required]],
 
-              description: [pro.description, [Validators.required]],
-              shortDescription: [pro.shortDescription, [Validators.required]],
+              description: [this.product.description, [Validators.required]],
+              shortDescription: [this.product.shortDescription, [Validators.required]],
               imageUrl: ['' ],
-              cost: [pro.cost, [Validators.required]],
-              price: [pro.price, [Validators.required]],
+              cost: [this.product.cost, [Validators.required]],
+              price: [this.product.price, [Validators.required]],
             });
           },
         error: (err) => { console.log(err); },
@@ -90,12 +90,12 @@ export class EditProductComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
-    let formData: any = new FormData();   
+    let formData: any = new FormData();
     if(this.form.value.imageUrl=='')
       this.form.value.imageUrl=this.img;
     formData.append("productJson", JSON.stringify(this.form.value));
     formData.append("file", this.photoFile);
-    
+
     this.subs.add(this.productService.update(formData,this.form.value.id)
       .subscribe(
         (result: any) => {
@@ -103,7 +103,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
             //this.router.navigate(['/login']);
 
            alert("Record updated successfully");
-           
+
           }
         },
         error => console.log(error)
@@ -118,10 +118,10 @@ export class EditProductComponent implements OnInit, OnDestroy {
     return this.form.get(field).invalid && this.form.get(field).touched;
   }
 
-  
+
   getCategories() {
     this.categoryService.getActive().subscribe( {
-      next: (result)=> {        
+      next: (result)=> {
        this.lstCategory = result.data;
 
       },

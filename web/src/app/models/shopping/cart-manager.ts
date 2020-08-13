@@ -39,7 +39,8 @@ export class CartManager {
       product.name,
       product.price,
       product.shortDescription,
-      product.imageUrl), quantity);
+      product.imageUrl,
+      product.promotionPrice), quantity);
 
     this.cart.items.push(orderItem);
     this.calc(orderItem);
@@ -68,7 +69,8 @@ export class CartManager {
   }
 
   private calcOrderItemTotal(orderItem: OrderItem): void  {
-    orderItem.total = orderItem.product.price * orderItem.quantity;
+    const price = orderItem.product.promotionPrice != 0 ? orderItem.product.promotionPrice : orderItem.product.price;
+    orderItem.total = price * orderItem.quantity;
   }
 
   private calcSubTotal(): void {

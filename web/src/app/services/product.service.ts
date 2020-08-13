@@ -66,5 +66,15 @@ export class ProductService {
     return this.http.post<any>(`${AppConfig.settings.apiServiceUrl}/products/${vendorId}/ftp`, body);
   }
 
-  
+  public addPromotion(promotion:any, productId: number) {
+    return this.http.post<any>(`${AppConfig.settings.apiServiceUrl}/products/${productId}/promotions`, promotion);
+  }
+
+  public deletePromotion(productId: number, promotionId: number, ) {
+    return this.http.delete<any>(`${AppConfig.settings.apiServiceUrl}/products/${productId}/promotions/${promotionId}`);
+  }
+
+
+
+
 }

@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class ProductDetailsComponent implements OnInit {
 
   public hostUrl: string = AppConfig.settings.apiServiceUrl;
-  public product = {};
+  public product: any;
   public subs = new SubSink();
 
   private productSubject: Observable<any> = new BehaviorSubject({}) ;
@@ -24,15 +24,15 @@ export class ProductDetailsComponent implements OnInit {
   constructor(public shoppingService: ShoppingService,
               private router: Router,
               private activeRouter: ActivatedRoute,
-              private productService: ProductService) { 
+              private productService: ProductService) {
 
                 this.activeRouter.params.subscribe((p) => {
-                  this.productService.getOne(p.productId).subscribe(x=>this.product = x.data);  });    
+                  this.productService.getOne(p.productId).subscribe(x=>this.product = x.data);  });
     }
 
   public ngOnInit(): void {
 
-   
+
     //   this.subs.add(this.productSubject
     //     .subscribe({
     //         next: (result) => {
@@ -42,7 +42,7 @@ export class ProductDetailsComponent implements OnInit {
     //       error: (err) => { console.log(err); },
     //       },
     //     ));
-     
+
 
   }
 

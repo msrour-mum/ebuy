@@ -7,10 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
-@Data
 @NoArgsConstructor
 public class Product {
 
@@ -41,6 +44,27 @@ public class Product {
     @Column(name ="price" , nullable = false)
     private double price;
 
+    @Transient
+    private double promotionPrice;
+
+    public void setPromotionPrice(double promotionPrice) {
+        this.promotionPrice = promotionPrice;
+    }
+
+    public double getPromotionPrice() {
+
+        LocalDate currentDate = LocalDate.now();
+
+        Optional<Promotion> promotion = getPromotions()
+                .stream()
+                .filter(p-> (p.getFromDate().isBefore(currentDate) || p.getFromDate().isEqual(currentDate))&&
+                        (p.getToDate().isAfter(currentDate)  || p.getToDate().isEqual(currentDate)))
+                .findFirst();
+        promotion.ifPresent(activePromotion -> this.promotionPrice = getPrice() - (activePromotion.getDiscount() / 100 * getPrice()));
+        return this.promotionPrice;
+    }
+
+
     @ManyToOne(optional = false)
     @JoinColumn(name ="statusId")
     private ProductStatus productStatus;
@@ -56,6 +80,17 @@ public class Product {
 
     @Column(name = "isDeleted",nullable = false, columnDefinition = "BIT(1) default 0")
     private boolean isDeleted;
+
+    public List<Promotion> getPromotions() {
+        return promotions;
+    }
+
+    public void setPromotions(List<Promotion> promotions) {
+        this.promotions = promotions;
+    }
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Promotion> promotions =new ArrayList<>();
 
     public Product(Integer id) {
         this.id = id;
@@ -192,4 +227,6 @@ public class Product {
         isDeleted = deleted;
         return this;
     }
+
+
 }

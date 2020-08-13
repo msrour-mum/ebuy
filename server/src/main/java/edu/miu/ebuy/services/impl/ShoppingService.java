@@ -158,7 +158,7 @@ public class ShoppingService implements IShoppingService {
 
             OrderItem orderLine = new OrderItem(product,
                     quantity,
-                    product.getPrice());
+                    product.getPromotionPrice() !=0 ? product.getPromotionPrice() : product.getPrice());
             order.getItems().add(orderLine);
         }
 

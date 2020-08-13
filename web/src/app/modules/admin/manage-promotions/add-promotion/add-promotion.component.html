@@ -1,0 +1,64 @@
+<main class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Add Promotion - {{product.name}}</div>
+
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <fieldset>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="email"
+                       [formControl]="form.get('name')"
+                       [ngClass]="{'is-invalid': isValid('name')}"
+                       id="name"
+                       class="form-control"
+                       placeholder="Enter Promotion Name"
+                />
+              </div>
+              <div class="row">
+              <div class="form-group col-6">
+                <label for="fromDate">From Date</label>
+                <input type="date"
+                       [formControl]="form.get('fromDate')"
+                       [ngClass]="{'is-invalid': isValid('fromDate')}"
+                       id="fromDate"
+                       class="form-control">
+                <div *ngIf="hasError('fromDate', 'required')" class="invalid-feedback">
+                  From Date is required
+                </div>
+
+              </div>
+              <div class="form-group col-6">
+                <label for="fromDate">To Date</label>
+                <input type="date"
+                       [formControl]="form.get('toDate')"
+                       [ngClass]="{'is-invalid': isValid('toDate')}"
+                       id="toDate"
+                       class="form-control">
+                <div *ngIf="hasError('toDate', 'required')" class="invalid-feedback">
+                  From Date is required
+                </div>
+
+              </div>
+              </div>
+              <div class="form-group">
+                <label for="discount">Discount%</label>
+                <input type="number"
+                       step="1"
+                       [formControl]="form.get('discount')"
+                       class="form-control"
+                       id="discount">
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
+
+            </fieldset>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

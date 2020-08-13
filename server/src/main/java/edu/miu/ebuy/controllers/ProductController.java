@@ -7,6 +7,7 @@ import edu.miu.ebuy.common.http.ResponseStatus;
 import edu.miu.ebuy.common.storage.IStorageService;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Product;
+import edu.miu.ebuy.models.Promotion;
 import edu.miu.ebuy.models.dto.ProductDto;
 import edu.miu.ebuy.models.dto.ProductSearchItem;
 import edu.miu.ebuy.security.Context;
@@ -84,7 +85,7 @@ public class ProductController {
         Product product = new ObjectMapper().readValue(productJson, Product.class);
         if (file!=null) {
 
-            Product product1 = productService.create(product,
+            Product product1 = productService.update(product,
                     storageService.uploadMultipartFile(file, Context.getUserIdAsString()));
             return product1;
         }
@@ -151,4 +152,20 @@ public class ProductController {
     public Product get() {
         return productService.getServiceProduct();
     }
+
+    @PostMapping("/{productId}/promotions")
+    public Product addPromotion(@RequestBody  Promotion promotion, @PathVariable int productId) {
+        return productService.addPromotion(promotion, productId);
+    }
+
+    @PutMapping("/{productId}/promotions/{promotionId}")
+    public void UpdatePromotion(@RequestBody  Promotion promotion, @PathVariable int productId) {
+        productService.updatePromotion(productId, promotion);
+    }
+
+    @DeleteMapping("/{productId}/promotions/{promotionId}")
+    public void addPromotion(@PathVariable int productId, @PathVariable int promotionId) {
+        productService.deletePromotion(productId, promotionId);
+    }
+
 }

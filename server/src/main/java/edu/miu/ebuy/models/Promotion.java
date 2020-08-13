@@ -1,9 +1,11 @@
 package edu.miu.ebuy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -22,28 +24,15 @@ public class Promotion {
     private double discount;
 
     @Column(name ="fromDate", nullable = false, columnDefinition = "DATETIME")
-    private Date fromDate;
+    private LocalDate fromDate;
 
     @Column(name ="toDate", nullable = false, columnDefinition = "DATETIME")
-    private Date toDate;
-
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name ="vendorId")
-    private User vendor;
+    private LocalDate toDate;
 
     @ManyToOne(optional = false)
     @JoinColumn(name ="productId")
+    @JsonIgnore
     private Product product;
-
-    public User getVendor() {
-        return vendor;
-    }
-
-    public Promotion setVendor(User vendor) {
-        this.vendor = vendor;
-        return this;
-    }
 
     public Integer getId() {
         return id;
@@ -72,20 +61,20 @@ public class Promotion {
         return this;
     }
 
-    public Date getFromDate() {
+    public LocalDate getFromDate() {
         return fromDate;
     }
 
-    public Promotion setFromDate(Date fromDate) {
+    public Promotion setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
         return this;
     }
 
-    public Date getToDate() {
+    public LocalDate getToDate() {
         return toDate;
     }
 
-    public Promotion setToDate(Date toDate) {
+    public Promotion setToDate(LocalDate toDate) {
         this.toDate = toDate;
         return this;
     }
@@ -99,13 +88,12 @@ public class Promotion {
         return this;
     }
 
-    public Promotion( String name, double discount, Date fromDate, Date toDate, User vendor, Product product) {
+    public Promotion( String name, double discount, LocalDate fromDate, LocalDate toDate, Product product) {
 
         this.name = name;
         this.discount = discount;
         this.fromDate = fromDate;
         this.toDate = toDate;
-        this.vendor = vendor;
         this.product = product;
     }
 }

@@ -9,6 +9,7 @@ import edu.miu.ebuy.dao.ProductRepository;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Category;
 import edu.miu.ebuy.models.Product;
+import edu.miu.ebuy.models.Promotion;
 import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.models.dto.ProductDto;
 import edu.miu.ebuy.models.dto.ProductSearchItem;
@@ -21,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.naming.Name;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -123,6 +126,9 @@ public class ProductService implements IProductService {
         product.setUser(new User(Context.getUserId()));
         product.setImageUrl(imageUrl);
 
+        product.getPromotions().add(new Promotion("test", 20,
+                LocalDate.now(), LocalDate.now().plusMonths(1), product));
+
 
         return productRepository.save(product);
     }
@@ -134,6 +140,9 @@ public class ProductService implements IProductService {
         product.setProductStatus(new ProductStatus(product.getProductStatus().getId(),""));
         product.setUser(new User(Context.getUserId()));
         product.setImageUrl(product.getImageUrl());
+
+        product.getPromotions().add(new Promotion("test", 20,
+                LocalDate.now(), LocalDate.now().plusMonths(1), product));
         return productRepository.save(product);
     }
 
@@ -247,6 +256,52 @@ public class ProductService implements IProductService {
 
 
 
+    }
+
+    @Override
+    public Product addPromotion(Promotion promotion, int productId) {
+
+        Product product = productRepository.getOne(productId);
+        product.getPromotions().add(new Promotion(promotion.getName(), promotion.getDiscount(),
+               promotion.getFromDate(), promotion.getToDate(), product));
+        return productRepository.save(product);
+    }
+
+    @Override
+    public void updatePromotion(int productId, Promotion promotion) {
+
+        Product product = productRepository.getOne(productId);
+
+       Promotion promotionToEdit = product.getPromotions()
+                .stream()
+                .filter(p-> p.getId() == promotion.getId())
+                .findFirst()
+                .orElse(null);
+
+        promotionToEdit.setDiscount(promotion.getDiscount());
+        promotionToEdit.setFromDate(promotion.getFromDate());
+        promotionToEdit.setToDate(promotion.getToDate());
+        promotionToEdit.setName(promotion.getName());
+
+        productRepository.save(product);
+
+
+    }
+
+    @Override
+   public void deletePromotion(int productId, int promotionId) {
+        Product product = productRepository.getOne(productId);
+
+        Promotion promotionToDelete = product.getPromotions()
+                .stream()
+                .filter(p-> p.getId() == promotionId)
+                .findFirst()
+                .orElse(null);
+
+        if(promotionToDelete != null) {
+            product.getPromotions().remove(promotionToDelete);
+            productRepository.save(product);
+        }
     }
 
 }

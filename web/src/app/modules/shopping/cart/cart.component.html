@@ -23,7 +23,7 @@
       <div class="card custom-card-border mb-3" *ngFor="let orderItem of (shoppingService.getCart() | async)?.items">
         <div class="card-header row">
           <div class="col-4">
-            <i class="prd-lbl">Price</i>&nbsp;<i>{{orderItem.product.price | currency}}</i>
+           <span  *ngIf="orderItem.product.promotionPrice ==0"><i class="prd-lbl">Price</i>&nbsp;<i>{{orderItem.product.price | currency}}</i></span><span  *ngIf="orderItem.product.promotionPrice !=0"><i class="prd-lbl">Price</i>&nbsp;<i>{{orderItem.product.promotionPrice | currency}}</i></span>
           </div>
           <div class="col-5">
             <i class="prd-lbl">Quantity</i>&nbsp;<i>{{orderItem.quantity}}</i>

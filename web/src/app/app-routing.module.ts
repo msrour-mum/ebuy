@@ -21,6 +21,8 @@ import {ProductDetailsComponent} from './modules/shopping/products/product-detai
 import {AuthGuard} from './common/guards/authGaurd';
 import { RejectedProjectComponent} from './modules/admin/manage-product/rejected-project/rejected-project.component';
 import {ProductsUploadComponent} from './modules/admin/manage-product/products-upload/products-upload.component';
+import {PromotionListComponent} from './modules/admin/manage-promotions/promotion-list/promotion-list.component';
+import {AddPromotionComponent} from './modules/admin/manage-promotions/add-promotion/add-promotion.component';
 
 const routes: Routes =  [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -33,6 +35,8 @@ const routes: Routes =  [
   {path: 'rejected-product', component: RejectedProjectComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:productId', component: EditProductComponent},
+  {path: 'promotions/:productId', component: PromotionListComponent},
+  {path: 'add-promotion/:productId', component: AddPromotionComponent},
   {path: 'products-upload', component: ProductsUploadComponent},
   {path: 'product/:productId', component: ProductDetailsComponent},
   {path: 'categories', component: CategoryListComponent},

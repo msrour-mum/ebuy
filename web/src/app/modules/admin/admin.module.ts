@@ -17,6 +17,9 @@ import {AppRoutingModule} from '../../app-routing.module';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { RejectedProjectComponent } from './manage-product/rejected-project/rejected-project.component';
 import { ProductsUploadComponent } from './manage-product/products-upload/products-upload.component';
+import { AddPromotionComponent } from './manage-promotions/add-promotion/add-promotion.component';
+import { EditPromotionComponent } from './manage-promotions/edit-promotion/edit-promotion.component';
+import { PromotionListComponent } from './manage-promotions/promotion-list/promotion-list.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { ProductsUploadComponent } from './manage-product/products-upload/produc
     UserListComponent,
     ProductHelpComponent,
     RejectedProjectComponent,
-    ProductsUploadComponent],
+    ProductsUploadComponent,
+    AddPromotionComponent,
+    EditPromotionComponent,
+    PromotionListComponent],
   imports: [
     CommonModule,
     FormsModule,

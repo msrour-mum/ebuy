@@ -221,10 +221,10 @@ public class DataGenerate {
 
 
 
-        Promotion promotion1 = new Promotion("Promotion 1" , 0.1,new Date(2020,8,1),new Date(2020,8,20),vendorList.get(1),new Product(2));
-        Promotion promotion2 = new Promotion("Promotion 2" , 0.3,new Date(2020,8,1),new Date(2020,8,20),vendorList.get(1),new Product(3));
-        em.persist(promotion1);
-        em.persist(promotion1);
+//        Promotion promotion1 = new Promotion("Promotion 1" , 0.1,new Date(2020,8,1),new Date(2020,8,20),vendorList.get(1),new Product(2));
+//        Promotion promotion2 = new Promotion("Promotion 2" , 0.3,new Date(2020,8,1),new Date(2020,8,20),vendorList.get(1),new Product(3));
+//        em.persist(promotion1);
+//        em.persist(promotion1);
 
         TypedQuery<User> q = em.createQuery("from User where roleId=3", User.class);
         List<User> users = q.getResultList();

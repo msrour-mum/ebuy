@@ -1,6 +1,7 @@
 package edu.miu.ebuy.services.interfaces;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Product ;
+import edu.miu.ebuy.models.Promotion;
 import edu.miu.ebuy.models.dto.ProductDto;
 import edu.miu.ebuy.models.dto.ProductSearchItem;
 
@@ -28,4 +29,7 @@ public interface IProductService {
     public List<Product> search(ProductSearchItem searchItem);
     List<Product> getAllProducts(List<Integer> productIds);
     public void ftp(int userId , String[] lines) ;
+    Product addPromotion(Promotion promotion, int productId);
+    void updatePromotion(int productId, Promotion promotion);
+    void deletePromotion(int productId, int promotionId);
 }
