@@ -29,6 +29,34 @@ export class AuthenticationService{
     return this.authenticationSubject.value ? this.authenticationSubject.value.user : null;
   }
 
+  public get currentVendorId(): number {
+    let usrid= this.currentUser.id ;   
+    if(this.currentUser.vendor)
+      usrid= this.currentUser.vendor.id ;   
+      console.log("usrid : "+usrid)
+    return usrid;
+
+  }
+
+
+  public get isAdmin(): boolean {
+    //if(!this.jwtHelperService.isTokenExpired(this.authToken)) return false;
+    if(! this.isAuthenticated) return false;
+    if(this.authenticationSubject.value.user.role.id==1 || this.authenticationSubject.value.user.role.id==2) return true;
+  
+    return false;
+     
+   }
+
+  public hasRole(role :string): boolean {
+   if(!this.jwtHelperService.isTokenExpired(this.authToken)) return false;
+   if(role=='admin' && this.authenticationSubject.value.user.role.id==1) return true;
+   if(role=='vendor' && this.authenticationSubject.value.user.role.id==2) return true;
+   return false;
+    
+  }
+
+
   public get authToken(): any {
     return this.authenticationSubject.value ? this.authenticationSubject.value.token : '';
   }

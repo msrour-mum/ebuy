@@ -73,7 +73,7 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getAdminList() {
-        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndProductStatus_Id(false,false,2);
 //        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndProductStatus_Id(false,false,2);
 //        List<ProductDto> lst = new ArrayList<>();
 //        for (Product product : productList)
@@ -87,7 +87,7 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getAdminList(int userId) {
-        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
+        return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndProductStatus_IdAndUser_Id(false,false,2,userId);
 //        List<Product> productList=  productRepository.findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(false,false,userId,2);
 //        List<ProductDto> lst = new ArrayList<>();
 //        for (Product product : productList)
@@ -249,7 +249,7 @@ public class ProductService implements IProductService {
                         new ProductStatus(1,""),
                         true,
                         false,
-                        ""
+                        "/uploads/0/p.jpg"
                 );
                 productRepository.save(product);
             }

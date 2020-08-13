@@ -36,7 +36,7 @@ export class ProductListComponent implements OnInit {
     if(this.authService.currentUser.role.id==1)
       this.lstProduct = this.dataService.getAdminList();
     else if(this.authService.currentUser.role.id==2)
-      this.lstProduct = this.dataService.getVendorList(this.authService.currentUser.id);
+      this.lstProduct = this.dataService.getVendorList(  this.authService.currentVendorId);
     else
      this.router.navigate(['/']);
 

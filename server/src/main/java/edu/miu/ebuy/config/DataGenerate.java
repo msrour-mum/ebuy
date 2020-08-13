@@ -29,6 +29,7 @@ public class DataGenerate {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
+        String imgUser = "/uploads/0/u.jpg";
         Role roleAdmin = new Role(1, "Admin");
         Role roleVendor = new Role(2, "Vendor");
         Role roleUser = new Role(3, "RegularUser");
@@ -49,10 +50,10 @@ public class DataGenerate {
 
 
 
-        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
-        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
-        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
-        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
+        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
+        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
+        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
+        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
         em.persist(userAdmin1);
         em.persist(userAdmin2);
         em.persist(userAdmin3);
@@ -101,14 +102,14 @@ public class DataGenerate {
         //Vendors Users
         List<User> vendorList = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
-            User user1 = new User(categoryList.get(i).getName()+ " Vender ", "Vender"+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","",null);
+            User user1 = new User(categoryList.get(i).getName()+ " Vender ", "Vender"+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
             em.persist(user1);
             vendorList.add(user1);
         }
 
         //End Users
         for (int i = 1; i < 11; i++) {
-            User user1 = new User("User "+ i, "User"+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","",null);
+            User user1 = new User("User "+ i, "User"+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
             em.persist(user1);
         }
 

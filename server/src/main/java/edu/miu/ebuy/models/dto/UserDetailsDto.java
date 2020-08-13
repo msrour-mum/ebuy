@@ -1,6 +1,7 @@
 package edu.miu.ebuy.models.dto;
 
 import edu.miu.ebuy.models.Role;
+import edu.miu.ebuy.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class UserDetailsDto {
     private Role role;
     private Boolean isActive;
     private String imageUrl;
+    private User vendor;
     //private String address;
     //private String phone;
 }

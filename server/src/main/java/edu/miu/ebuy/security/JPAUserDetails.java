@@ -23,6 +23,17 @@ public class JPAUserDetails implements UserDetails {
     private String imageUrl;
     private List<Role> roles;
 
+    public User getVendor() {
+        return vendor;
+    }
+
+    public JPAUserDetails setVendor(User vendor) {
+        this.vendor = vendor;
+        return this;
+    }
+
+    private User vendor;
+
     public JPAUserDetails(User user) {
         id = user.getId();
         name = user.getName();
@@ -32,6 +43,7 @@ public class JPAUserDetails implements UserDetails {
         roles = new ArrayList<>();
         roles.add(user.getRole());
         imageUrl = user.getImageUrl();
+        vendor = user.getVendor();
     }
 
     @Override

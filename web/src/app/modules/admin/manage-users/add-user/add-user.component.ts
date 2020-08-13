@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SubSink } from 'subsink';
 import { UsersService } from '../../../../services/users.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class AddUserComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private router: Router,
     private activeRouter: ActivatedRoute,
+    public authService: AuthenticationService,
     private usersService: UsersService) {
       this.getRoles();
     // if (this.authService.isAuthenticated) {
@@ -44,7 +46,7 @@ export class AddUserComponent implements OnInit {
       id: [''],
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
-      role: this.fb.group({ id: ['', [Validators.required]]}),
+      //role: this.fb.group({ id: ['']}),
       address: ['', Validators.required],
       phone: ['', Validators.required],
     });
@@ -88,17 +90,21 @@ export class AddUserComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log(this.form.invalid);
     if (this.form.invalid) {
       return;
     }
     let formData: any = new FormData();
+    this.form.value.role={id:2};
+    this.form.value.vendor={id:this.authService.currentUser.id};
+    
     formData.append("userJson", JSON.stringify(this.form.value));
     formData.append("file", this.photoFile);
 
     this.subs.add(this.usersService.create(formData)
       .subscribe(
         (result: any) => {
-          
+          console.log(result);
           if (result.status.code == 200) {
           
             alert("Record added successfully");
