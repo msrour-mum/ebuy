@@ -28,7 +28,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>
             <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['approve-product']">Review Products</a>
-            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['rejected-product']">Rejected Products</a>
+<!--            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['rejected-product']">Rejected Products</a>-->
             <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['categories']">Manage Categories</a>
 
           </div>
@@ -41,7 +41,7 @@
           <div class="dropdown-menu" aria-labelledby="admin">
             <a class="dropdown-item"  *ngIf="authService.currentUser.role.id==3" (click)="reportMyOrders()" >My Orders</a>
             <a class="dropdown-item"  *ngIf="authService.currentUser.role.id==2" (click)="reportProfit()" >My Profits</a>
-           
+
 <!--            <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>-->
 <!--            <a class="dropdown-item" [routerLink]="['approve-product']">Review Products</a>-->
 <!--            <a class="dropdown-item" [routerLink]="['rejected-product']">Rejected Products</a>-->
@@ -63,9 +63,9 @@
       <!-- User image -->
       <a [routerLink]="['edit-profile']" *ngIf="authService.isAuthenticated">
         <img class="user-small-img"
-             src="{{hostUrl + '/uploads/profile-photo.png'}}"
+             src="{{hostUrl + '/uploads/0/u.jpg'}}"
              alt="avatar"
-        *ngIf="authService.currentUser.imageUrl ==''">
+        *ngIf="authService.currentUser.imageUrl =='' || authService.currentUser.imageUrl == null">
         <img class="user-small-img"
              src="{{hostUrl + authService.currentUser.imageUrl}}"
              alt="avatar"

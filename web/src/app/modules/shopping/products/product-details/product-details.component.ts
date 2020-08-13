@@ -27,28 +27,18 @@ export class ProductDetailsComponent implements OnInit {
               private productService: ProductService) {
 
                 this.activeRouter.params.subscribe((p) => {
-                  this.productService.getOne(p.productId).subscribe(x=>this.product = x.data);  });
+                  this.productService.getOne(p.productId).subscribe(x=> this.product = x.data);  });
     }
 
   public ngOnInit(): void {
-
-
-    //   this.subs.add(this.productSubject
-    //     .subscribe({
-    //         next: (result) => {
-    //           this.product = result.data;
-    //           console.log(result)
-    //         },
-    //       error: (err) => { console.log(err); },
-    //       },
-    //     ));
-
-
   }
 
   public addToCart(product): void {
-    this.shoppingService.addProduct(product, 1);
-    this.router.navigate(['/cart']);
+    this.activeRouter.params.subscribe((p) => {
+      this.productService.getOne(p.productId).subscribe((result) => {
+        this.shoppingService.addProduct(result.data, 1);
+        this.router.navigate(['/cart']);
+      });
+    });
   }
-
 }
