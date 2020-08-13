@@ -46,7 +46,16 @@ public class User implements Serializable {
     @JoinColumn(name ="vendorId")
     private User vendor;
 
-    public User(String name,String email, Role role, String pass, boolean isActive,String phone) {
+    public User getVendor() {
+        return vendor;
+    }
+
+    public User setVendor(User vendor) {
+        this.vendor = vendor;
+        return this;
+    }
+
+    public User(String name, String email, Role role, String pass, boolean isActive, String phone) {
         this.name = name;
         this.email = email;
         this.role = role;

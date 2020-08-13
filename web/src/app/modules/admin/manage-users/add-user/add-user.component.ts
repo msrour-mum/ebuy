@@ -91,23 +91,19 @@ export class AddUserComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    console.log("valide")
     let formData: any = new FormData();
     formData.append("userJson", JSON.stringify(this.form.value));
     formData.append("file", this.photoFile);
 
-    console.log(formData)
     this.subs.add(this.usersService.create(formData)
       .subscribe(
         (result: any) => {
-          console.log("Done")
-          console.log(result)
+          
           if (result.status.code == 200) {
           
             alert("Record added successfully");
-            this.form.reset();
-            
-            //this.router.navigate(['/login']);
+            this.form.reset();            
+            this.router.navigate(['/app-user-list']);
           }
         },
         error => console.log(error)

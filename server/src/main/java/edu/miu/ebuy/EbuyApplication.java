@@ -16,7 +16,7 @@ public class EbuyApplication {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(EbuyApplication.class, args);
-        DataGenerate.Generate();
+        //DataGenerate.Generate();
     }
 
 }

@@ -43,19 +43,19 @@ export class ApproveProductComponent implements OnInit {
 
   OnAprove(productId: number): void {
    
-    this.dataService.approve(productId).subscribe();   
+    this.dataService.approve(productId).subscribe(x=>this.loadData());   
     //this.notifyService.showSuccess("product approve successfully !!", "eBuy")
 
-    this.loadData();
+    
 
   }
 
   OnReject(productId: number): void {
     
-    this.dataService.reject(productId).subscribe();
+    this.dataService.reject(productId).subscribe(x=>this.loadData());
     //this.notifyService.showSuccess("product rejected successfully !!", "eBuy")
 
-     this.loadData();
+     
    }
   
 

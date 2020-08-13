@@ -51,7 +51,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
       .subscribe({
           next: (result) => {
             const pro = result.data;
-            
             this.img=pro.imageUrl;
             this.form =  this.fb.group({
               id: [pro.id],
@@ -102,7 +101,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
         (result: any) => {
          if(result.status.code == 200) {
             //this.router.navigate(['/login']);
-           // console.log("Done")
+
            alert("Record updated successfully");
             this.form.reset();
           }
@@ -124,7 +123,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     this.categoryService.getActive().subscribe( {
       next: (result)=> {        
        this.lstCategory = result.data;
-       console.log(this.lstCategory);
+
       },
       error: (err)=> console.log(err.console.error())
      });

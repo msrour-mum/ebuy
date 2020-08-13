@@ -68,13 +68,13 @@
             <div class="prodcut-cmd-icon " *ngIf="!product.published">
 
               <button type="button" class="btn btn-flat success-color" (click)="published(product.id)">
-                <i class="fa fa-upload" aria-hidden="true"></i> Enable
+                <i class="fa fa-upload" aria-hidden="true"></i> Download
               </button>
             </div>
 
             <div class="prodcut-cmd-icon "  *ngIf="product.published">
               <button type="button" class="btn btn-flat danger-color" (click)="unPublished(product.id)">
-                <i class="fa fa-download" aria-hidden="true"></i> Disable
+                <i class="fa fa-download" aria-hidden="true"></i> Upload
               </button>
             </div>
 

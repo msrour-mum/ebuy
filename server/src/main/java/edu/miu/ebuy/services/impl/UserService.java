@@ -10,6 +10,7 @@ import edu.miu.ebuy.models.OrderItem;
 import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
+import edu.miu.ebuy.security.Context;
 import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import edu.miu.ebuy.services.interfaces.IUserService;
@@ -93,6 +94,9 @@ public class UserService implements IUserService {
         userToUpdate.setPhone(user.getPhone());
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setImageUrl(imageUrl);
+        if(Context.getUser().getRole().getId() == RoleEnum.VENDOR.id) {
+            user.setVendor(new User(Context.getUser().getId()));
+        }
         return userRepository.save(userToUpdate);
     }
 
@@ -103,6 +107,9 @@ public class UserService implements IUserService {
         BCryptPasswordEncoder passwordUtil=new BCryptPasswordEncoder();
         String pass=passwordUtil.encode("sa");
         user.setPassword(pass);
+        if(Context.getUser().getRole().getId() == RoleEnum.VENDOR.id) {
+            user.setVendor(new User(Context.getUser().getId()));
+        }
         return userRepository.save(user);
     }
 
@@ -114,7 +121,18 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> getAll() {
-        return (List<User>) userRepository.findAll();
+
+        if(Context.getUser().getRole().getId() == RoleEnum.ADMIN.id) {
+            return (List<User>) userRepository.findAll();
+        }
+        else if(Context.getUser().getRole().getId() == RoleEnum.VENDOR.id) {
+            return (List<User>) userRepository.findByVendor_Id(Context.getUser().getId());
+        }
+
+        return null;
+
+
+
     }
 
     @Override

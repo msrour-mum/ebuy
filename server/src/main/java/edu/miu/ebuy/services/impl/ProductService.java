@@ -98,11 +98,11 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public ProductDto get(int productId) {
-       //return  productRepository.getOne(productId);
+    public Product get(int productId) {
+       return  productRepository.getOne(productId);
 
-        ProductDto productDto =ProductDto.read(productRepository.getOne(productId));
-        return  productDto;
+//        ProductDto productDto =ProductDto.read(productRepository.getOne(productId));
+//        return  productDto;
     }
 
 

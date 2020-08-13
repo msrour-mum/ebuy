@@ -12,7 +12,7 @@ public interface IProductService {
 
     public List<ProductDto> getAll();
     public List<ProductDto> getActive();
-    public ProductDto get(int productId);
+    public Product get(int productId);
     public Product create(Product product, String imageUrl);
     public Product update(Product product);
     public Product update(Product product, String imageUrl);

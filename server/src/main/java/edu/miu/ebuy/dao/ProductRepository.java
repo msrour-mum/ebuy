@@ -43,7 +43,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "select  p.* from product p\n" +
             "inner join user vendor on vendor.id=p.vendorId\n" +
             "inner join category cat on cat.id=p.categoryId\n" +
-            "where p.isDeleted=0 and p.isService=0 and p.isPublished=1\n" +
+            "where p.statusId=2 and  p.isDeleted=0 and p.isService=0 and p.isPublished=1\n" +
             "and p.name like %:name%\n" +
             "and vendor.name like %:vendorName%\n" +
             "and p.price between :priceFrom and :priceTo", nativeQuery = true)

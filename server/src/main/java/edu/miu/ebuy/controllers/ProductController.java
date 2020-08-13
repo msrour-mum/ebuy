@@ -67,7 +67,7 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
-    public ProductDto get(@PathVariable int productId) {
+    public Product get(@PathVariable int productId) {
         return productService.get(productId);
     }
 

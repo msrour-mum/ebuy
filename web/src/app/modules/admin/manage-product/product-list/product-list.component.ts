@@ -51,25 +51,19 @@ export class ProductListComponent implements OnInit {
 
   published(productId:number ):void  {
    
-    this.dataService.published(productId,true).subscribe();
-    //this.lstProduct = this.dataService.getAdminList();
-    this.loadData();
+    this.dataService.published(productId,true).subscribe(x=>this.loadData());    
   }
   unPublished(productId:number ):void  {
    
-    this.dataService.published(productId,false).subscribe();
-    //this.lstProduct = this.dataService.getAdminList();
-    //this.lstProduct.subscribe(x=>console.log(x)); 
-    this.loadData();
+    this.dataService.published(productId,false).subscribe(x=>this.loadData());    
+    
   }
 
   delete(productId:number ):void  {
    
     if(confirm("Are you sure you want to delete this item ?"))
     {
-    this.dataService.delete(productId).subscribe(x=>this.loadData());
-    //this.lstProduct = this.dataService.getAdminList();
-    
+      this.dataService.delete(productId).subscribe(x=>this.loadData());    
     }
   }
 
