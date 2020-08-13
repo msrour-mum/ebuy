@@ -1,5 +1,7 @@
 package edu.miu.ebuy.services.impl;
 
+import edu.miu.ebuy.common.email.IEmailService;
+import edu.miu.ebuy.common.events.publishers.CheckoutEvent;
 import edu.miu.ebuy.dao.*;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.exceptions.Errors;
@@ -13,6 +15,7 @@ import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,53 +46,25 @@ public class ShoppingService implements IShoppingService {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
+
+
+    @Autowired
+    IEmailService emailService;
+
     @Override
     public boolean checkout(CheckoutDto checkout) throws ApplicationException {
-//        if (!merchantService.validateCard(checkout.getPayment().getCardNumber(),checkout.getPayment().getExpireDate(),
-//                checkout.getPayment().getCcv(), checkout.getPayment().getCardType().getId()))
-//        {
-//            throw new ApplicationException("Card not valid!", Errors.CARD_NOT_VALID);
-//            //return false;
-//        }
 
         User user = userService.get(Context.getUserId());
 
-        if(checkout.getCheckoutOptions().isSaveUpdateMyAddress()) {
-            user.setAddress(checkout.getAddress());
-        }
-
-        if(checkout.getCheckoutOptions().isSaveUpdateMyCard()) {
-            if(user.getCard() == null) {
-                //(String holderName, String cardNumber, int ccv, String expireDate, CardType cardType)
-                user.setCard(new UserCard(checkout.getCard().getHolderName(),
-                        checkout.getCard().getCardNumber(),
-                        checkout.getCard().getCcv(),
-                        checkout.getCard().getExpireDate(),
-                        checkout.getCard().getCardType()));
-            } else {
-                user.getCard().setCardNumber(checkout.getCard().getCardNumber());
-                user.getCard().setCardType(checkout.getCard().getCardType());
-                user.getCard().setCcv(checkout.getCard().getCcv());
-                user.getCard().setExpireDate(checkout.getCard().getExpireDate());
-                user.getCard().setHolderName(checkout.getCard().getHolderName());
-            }
-        }
-
-        List<Product> products = productService.getAllProducts(checkout
-                .getItems()
-                .stream()
-                .map(p-> p.getProductId())
-                .collect(Collectors.toList()));
-
-        Order order = new Order(user, new Date(), checkout.getShipping(), checkout.getAddress());
-
-        products.forEach(p-> {
-            int quantity = checkout.getItems().stream().filter(i -> i.getProductId() == p.getId()).findFirst().get().getQuantity();
-            addOrderLine(order, p, quantity);
-        });
+        UpdateUserAddress(checkout, user);
+        UpdateUserCard(checkout, user);
+        Order order = prepareOrder(checkout, user);
 
         userService.update(user);
         orderRepository.save(order);
+        eventPublisher.publishEvent(new CheckoutEvent(user));
         return true;
 
     }
@@ -129,6 +104,47 @@ public class ShoppingService implements IShoppingService {
             result.add(ordersDto);
         }
         return result;
+    }
+
+
+    private Order prepareOrder(CheckoutDto checkout, User user) {
+        List<Product> products = productService.getAllProducts(checkout
+                .getItems()
+                .stream()
+                .map(p-> p.getProductId())
+                .collect(Collectors.toList()));
+
+        Order order = new Order(user, new Date(), checkout.getShipping(), checkout.getAddress());
+
+        products.forEach(p-> {
+            int quantity = checkout.getItems().stream().filter(i -> i.getProductId() == p.getId()).findFirst().get().getQuantity();
+            addOrderLine(order, p, quantity);
+        });
+        return order;
+    }
+
+    private void UpdateUserCard(CheckoutDto checkout, User user) {
+        if(checkout.getCheckoutOptions().isSaveUpdateMyCard()) {
+            if(user.getCard() == null) {
+                user.setCard(new UserCard(checkout.getCard().getHolderName(),
+                        checkout.getCard().getCardNumber(),
+                        checkout.getCard().getCcv(),
+                        checkout.getCard().getExpireDate(),
+                        checkout.getCard().getCardType()));
+            } else {
+                user.getCard().setCardNumber(checkout.getCard().getCardNumber());
+                user.getCard().setCardType(checkout.getCard().getCardType());
+                user.getCard().setCcv(checkout.getCard().getCcv());
+                user.getCard().setExpireDate(checkout.getCard().getExpireDate());
+                user.getCard().setHolderName(checkout.getCard().getHolderName());
+            }
+        }
+    }
+
+    private void UpdateUserAddress(CheckoutDto checkout, User user) {
+        if(checkout.getCheckoutOptions().isSaveUpdateMyAddress()) {
+            user.setAddress(checkout.getAddress());
+        }
     }
 
     private void addOrderLine(Order order, Product product, int quantity)

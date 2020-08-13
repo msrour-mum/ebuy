@@ -1,6 +1,7 @@
 package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.common.enums.RoleEnum;
+import edu.miu.ebuy.common.events.publishers.SignupSuccessfullyEvent;
 import edu.miu.ebuy.dao.RoleRepository;
 import edu.miu.ebuy.dao.UserRepository;
 import edu.miu.ebuy.exceptions.Errors;
@@ -13,6 +14,7 @@ import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import edu.miu.ebuy.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,13 +40,16 @@ public class UserService implements IUserService {
     @Autowired
     IShoppingService shoppingService;
 
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
+
     @Bean
     public PasswordEncoder passwordUtil() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
-    public User create(User user) throws HttpException {
+    public User signup(User user) throws HttpException {
         CheckIfUserNameExists(user);
         Product product = null;
         if(user.getRole().getId() == RoleEnum.VENDOR.id)
@@ -62,6 +67,8 @@ public class UserService implements IUserService {
             OrderItem orderItem = new OrderItem(product, 1,product.getPrice());
             shoppingService.addOrder(orderItem, savedUser, 0);
         }
+        eventPublisher.publishEvent(new SignupSuccessfullyEvent(savedUser));
+
         return savedUser;
     }
 

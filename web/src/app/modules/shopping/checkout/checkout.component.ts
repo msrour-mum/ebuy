@@ -6,6 +6,8 @@ import {MerchantService} from '../../../services/merchant.service';
 import {SubSink} from 'subsink';
 import {Cart} from '../../../models/shopping/cart';
 import {Product} from '../../../models/shopping/product';
+import {UsersService} from '../../../services/users.service';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-checkout',
@@ -24,29 +26,35 @@ export class CheckoutComponent implements OnInit {
   constructor(public shoppingService: ShoppingService,
               private fb: FormBuilder,
               private router: Router,
-              private merchantService: MerchantService) {
+              private merchantService: MerchantService,
+              private userService: UsersService,
+              private authService: AuthenticationService) {
 
   }
 
   ngOnInit(): void {
+
     this.subs.add(this.shoppingService.getCart().subscribe((data) => this.cart = data));
-    this.form = this.fb.group({
-      //cart: [cart],
-      checkoutOptions: this.fb.group(
-        {
-          saveUpdateMyAddress: [true],
-          saveUpdateMyCard: [true],
-        },
-      ),
-      address: ['', Validators.required],
-      card: this.fb.group({
-        holderName: ['', Validators.required],
-        cardType: this.fb.group({id: ['1']}),
-        cardNumber: ['', [Validators.required, Validators.pattern('^\\d{16}$')]],
-        ccv: ['', [Validators.required, Validators.pattern('^\\d{3}$')]],
-        expireDate: ['', [Validators.required, Validators.pattern('^\\d{2}/\\\d{2}$')]],
-      }),
-    });
+    this.subs.add(this.userService.get(this.authService.currentUser.id).subscribe((result) => {
+        const user = result.data;
+        console.log(user);
+        this.form = this.fb.group({
+          checkoutOptions: this.fb.group(
+            {
+              saveUpdateMyAddress: [true],
+              saveUpdateMyCard: [true],
+            },
+          ),
+          address: [user.address, Validators.required],
+          card: this.fb.group({
+            holderName: [user.card ? user.card.holderName : '', Validators.required],
+            cardType: this.fb.group(user.card ? { id: [`${user.card.cardType.id}`]} : {id: ['1']}),
+            cardNumber: [user.card ? user.card.cardNumber : '', [Validators.required, Validators.pattern('^\\d{16}$')]],
+            ccv: [user.card ? user.card.ccv : '', [Validators.required, Validators.pattern('^\\d{3}$')]],
+            expireDate: [user.card ? user.card.expireDate : '', [Validators.required, Validators.pattern('^\\d{2}/\\\d{2}$')]],
+          }),
+        });
+      }));
   }
 
   public hasError(controlName, validationType) {

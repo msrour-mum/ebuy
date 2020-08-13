@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface IUserService {
     //Default
-    public User create(User user) throws HttpException;
+    public User signup(User user) throws HttpException;
     public User get(int id);
     public User update(User user);
     public User update(User user, String imageUrl);

@@ -1,5 +1,8 @@
 package edu.miu.ebuy.services.impl;
 
+import edu.miu.ebuy.common.enums.ProductStatusEnum;
+import edu.miu.ebuy.common.events.publishers.ProductApprovedEvent;
+import edu.miu.ebuy.common.events.publishers.ProductRejectedEvent;
 import edu.miu.ebuy.dao.ProductRepository;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Category;
@@ -11,6 +14,7 @@ import edu.miu.ebuy.models.lookup.ProductStatus;
 import edu.miu.ebuy.security.Context;
 import edu.miu.ebuy.services.interfaces.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +27,12 @@ import java.util.List;
 public class ProductService implements IProductService {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
 
 
     @Override
@@ -137,7 +147,16 @@ public class ProductService implements IProductService {
 
     @Override
     public void approveProduct(int productId, int statusId) {
+
         productRepository.updateStatus(productId,statusId);
+
+        Product product = productRepository.getOne(productId);
+        User vendor = userService.get(product.getUser().getId());
+        if (statusId == ProductStatusEnum.Approved.id) {
+            eventPublisher.publishEvent(new ProductApprovedEvent(vendor, product));
+        } else if (statusId == ProductStatusEnum.Rejected.id) {
+            eventPublisher.publishEvent(new ProductRejectedEvent(vendor, product));
+        }
     }
 
     @Override

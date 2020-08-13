@@ -1,22 +1,18 @@
 package edu.miu.ebuy.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.miu.ebuy.common.enums.RoleEnum;
 import edu.miu.ebuy.common.http.BaseResponse;
 import edu.miu.ebuy.common.storage.IStorageService;
 import edu.miu.ebuy.exceptions.ApplicationException;
-import edu.miu.ebuy.exceptions.Errors;
 import edu.miu.ebuy.exceptions.HttpException;
 import edu.miu.ebuy.models.Order;
-import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.security.Context;
 import edu.miu.ebuy.services.interfaces.IOrderService;
 import edu.miu.ebuy.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,9 +35,9 @@ public class UserController {
 
     @PostMapping("/signup")
     public User add(@RequestBody User user) throws HttpException {
-        if (user.getRole().getId() == 3) //no need to set user card for registered users
+        if (user.getRole().getId() == RoleEnum.REGESTERED.id) //no need to set user card for registered users
             user.setCard(null);
-        return userService.create(user);
+        return userService.signup(user);
     }
 
     @PutMapping("/{userId}")

@@ -18,29 +18,39 @@ public class EmailService implements IEmailService {
     String sentFrom;
 
     @Override
-    public void sendMail(String to, String subject, String body) {
+    public void sendMail(String subject, String body, String to){
 
-        MimeMessagePreparator messagePreparator = mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom(sentFrom);
-            messageHelper.setTo(to);
-            messageHelper.setSubject(subject);
-            messageHelper.setText(body, true);
-        };
-        emailSender.send(messagePreparator);
+        try {
+            MimeMessagePreparator messagePreparator = mimeMessage -> {
+                MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+                messageHelper.setFrom(sentFrom);
+                messageHelper.setTo(to);
+                messageHelper.setSubject(subject);
+                messageHelper.setText(body, true);
+            };
+            emailSender.send(messagePreparator);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Override
     public void sendMail(String subject, String body, String... to) {
 
-        MimeMessagePreparator messagePreparator = mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom(sentFrom);
-            messageHelper.setTo(to);
-            messageHelper.setSubject(subject);
-            messageHelper.setText(body, true);
-        };
-        emailSender.send(messagePreparator);
+        try {
+            MimeMessagePreparator messagePreparator = mimeMessage -> {
+                MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+                messageHelper.setFrom(sentFrom);
+                messageHelper.setTo(to);
+                messageHelper.setSubject(subject);
+                messageHelper.setText(body, true);
+            };
+            emailSender.send(messagePreparator);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 }
