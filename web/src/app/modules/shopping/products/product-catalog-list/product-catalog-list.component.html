@@ -67,29 +67,32 @@
       </div>
     </div>
     <!-- Products Catalog -->
-    <div class="row">
-      <div *ngFor="let product of (lstProduct | async)?.data" class="col-xs-12 col-md-4 col-sm-6 hh-50 product-box-lg">
-        <div class="img-box">
-          <a [routerLink]="['/product', product.id]">
-            <img src="{{hostUrl + product.imageUrl}}" class="prd-img-lg">
-          </a>
-          <div class="brd img-box-p r-btm-5 shw-hdn col-12">
+    <div class="col-12">
+      <div class="row">
+        <div *ngFor="let product of (lstProduct | async)?.data"
+             class="col-xs-12 col-md-4 col-sm-6 hh-50 product-box-lg">
+          <div class="img-box">
             <a [routerLink]="['/product', product.id]">
-              <div class="row">
-                <div class="head-text col-9">{{product.name}}</div>
-                <div class="col-3"></div>
-                <div class="prd-cat-price">
-                  <span [class.strike-red]="product.promotionPrice != 0">{{product.price | currency }}</span>
-                  &nbsp;<span *ngIf="product.promotionPrice != 0">{{product.promotionPrice | currency }}</span>
-                </div>
-              </div>
-              <div class="details-text row">{{product.shortDescription}}</div>
+              <img src="{{hostUrl + product.imageUrl}}" class="prd-img-lg">
             </a>
+            <div class="brd img-box-p r-btm-5 shw-hdn col-12">
+              <a [routerLink]="['/product', product.id]">
+                <div class="row">
+                  <div class="head-text col-9">{{product.name}}</div>
+                  <div class="col-3"></div>
+                  <div class="prd-cat-price">
+                    <span [class.strike-red]="product.promotionPrice != 0">{{product.price | currency }}</span>
+                    &nbsp;<span *ngIf="product.promotionPrice != 0">{{product.promotionPrice | currency }}</span>
+                  </div>
+                </div>
+                <div class="details-text row">{{product.shortDescription}}</div>
+              </a>
 
-            <div class="add-cart">
-              <button type="submit" class="btn btn-primary btn-add-cart" (click)="addToCart(product)">
-                <i class="fa fa-cart-plus fa-lg"></i>
-              </button>
+              <div class="add-cart">
+                <button type="submit" class="btn btn-primary btn-add-cart" (click)="addToCart(product)">
+                  <i class="fa fa-cart-plus fa-lg"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
