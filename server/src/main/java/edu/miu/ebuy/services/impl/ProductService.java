@@ -4,12 +4,12 @@ import edu.miu.ebuy.common.enums.ProductStatusEnum;
 import edu.miu.ebuy.common.enums.RoleEnum;
 import edu.miu.ebuy.common.events.publishers.ProductApprovedEvent;
 import edu.miu.ebuy.common.events.publishers.ProductRejectedEvent;
-import edu.miu.ebuy.common.http.ResponseResult;
-import edu.miu.ebuy.common.http.ResponseStatus;
 import edu.miu.ebuy.dao.ProductRepository;
 import edu.miu.ebuy.dao.PromotionRepository;
-import edu.miu.ebuy.exceptions.ApplicationException;
-import edu.miu.ebuy.models.*;
+import edu.miu.ebuy.models.Category;
+import edu.miu.ebuy.models.Product;
+import edu.miu.ebuy.models.Promotion;
+import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.models.dto.ProductDto;
 import edu.miu.ebuy.models.dto.ProductSearchItem;
 import edu.miu.ebuy.models.lookup.ProductStatus;
@@ -20,12 +20,9 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.naming.Name;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,7 +51,6 @@ public class ProductService implements IProductService {
         return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndIsPublishedAndProductStatus_Id(false,false,true,2);
     }
 
-
     @Override
     public List<Product> getAdminList() {
         return (List<Product>) productRepository.findByIsDeletedAndIsServiceAndProductStatus_Id(false,false,2);
@@ -69,9 +65,6 @@ public class ProductService implements IProductService {
     @Override
     public Product get(int productId) {
        return  productRepository.getOne(productId);
-
-//        ProductDto productDto =ProductDto.read(productRepository.getOne(productId));
-//        return  productDto;
     }
 
 
@@ -176,20 +169,12 @@ public class ProductService implements IProductService {
         searchItem.fitParameters();
         List<Product> productList= productRepository.search(searchItem.getProductName(),searchItem.getVendorName(),searchItem.getPriceFrom(),searchItem.getPriceTo());
         return  productList;
-//        List<ProductDto> lst = new ArrayList<>();
-//        for (Product product : productList)
-//        {
-//            ProductDto productDto =ProductDto.read(product);
-//            lst.add(productDto);
-//        }
-//        return  lst;
     }
 
     @Override
     public List<Product> getAllProducts(List<Integer> productIds) {
         return productRepository.findByIdIn(productIds);
     }
-
 
     @Override
     public void ftp(int userId , String[] lines) {

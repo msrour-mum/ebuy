@@ -5,10 +5,6 @@ import edu.miu.ebuy.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 @Data
 @AllArgsConstructor
 public class UserDetailsDto {
@@ -20,6 +16,4 @@ public class UserDetailsDto {
     private Boolean isActive;
     private String imageUrl;
     private User vendor;
-    //private String address;
-    //private String phone;
 }

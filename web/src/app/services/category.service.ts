@@ -34,8 +34,4 @@ export class CategoryService {
   public delete(categoryId) {
      return this.http.delete<any>(`${AppConfig.settings.apiServiceUrl}/categories/${categoryId}`);
   }
-
-
-
-
 }

@@ -73,8 +73,4 @@ export class ProductService {
   public deletePromotion(productId: number, promotionId: number, ) {
     return this.http.delete<any>(`${AppConfig.settings.apiServiceUrl}/products/${productId}/promotions/${promotionId}`);
   }
-
-
-
-
 }

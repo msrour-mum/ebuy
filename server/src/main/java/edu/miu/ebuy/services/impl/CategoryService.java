@@ -1,12 +1,9 @@
 package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.dao.CategoryRepository;
-import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Category;
-import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.services.interfaces.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -48,10 +45,4 @@ public class CategoryService implements ICategoryService {
 
         categoryRepository.updateItemDelete(productId);
     }
-
-
-
-
-
-
 }

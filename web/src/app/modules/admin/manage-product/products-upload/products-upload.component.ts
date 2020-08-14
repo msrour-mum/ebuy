@@ -55,10 +55,8 @@ export class ProductsUploadComponent implements OnInit {
           console.log(result);
           if(result.status.code == 200) {
             alert("RecordS added successfully");
-    
+
             this.form.reset();
-    
-            //this.router.navigate(['/product-list']);
           }
         },
         error => console.log(error)

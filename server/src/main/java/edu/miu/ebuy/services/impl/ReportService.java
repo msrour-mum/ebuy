@@ -28,6 +28,7 @@ public class ReportService implements IReportService {
     OrderRepository orderRepository;
     @Autowired
     private ProductRepository productRepository;
+
     private   String  path ="C:\\uploads\\ebuy_uploads\\reports\\";
 
     public ResponseResult  OrderReport(int userId) throws FileNotFoundException, JRException {
@@ -39,7 +40,6 @@ public class ReportService implements IReportService {
         List<OrdersDto> lst = new ArrayList<>();
         for (Order or:orders)
         {
-            //OrdersDto ordersDto = new OrdersDto(or.getId(),or.getUser().getName(),or.getOrderDate(),or.getTotal(),or.getShipping())
             OrdersDto ordersDto =OrdersDto.read(or);
             lst.add(ordersDto);
         }
@@ -49,15 +49,6 @@ public class ReportService implements IReportService {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("createdBy", "EBUY ECOMMERCE");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-//        //generate pdf
-//        String pdf= "orders"+new Random().nextInt(9500000) +".pdf";
-//        String fileName = path + pdf;
-//        String mappedFile = "http://localhost:8080/api/uploads/reports/"+pdf;
-//        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
-//
-//        //return "report generated in path : " + path;
-//
-//       // return mappedFile;
 
         //generate pdf
         String pdf= "profit"+new Random().nextInt(9500000) +".pdf";
@@ -112,37 +103,4 @@ public class ReportService implements IReportService {
         return new ResponseResult(new ResponseStatus(200,""), mappedFile);
 
     }
-//    public String  orderItemReport(int userId) throws FileNotFoundException, JRException{
-//        return  "not impplemneted";
-//    }
-
-//    public String  orderItemReport(int userId) throws FileNotFoundException, JRException {
-//
-//        List<OrderItemReport> orderItems =  orderItemReportRepository.findByUserId(userId);
-//        if(orderItems.isEmpty()){
-//            return "User Id doesnot exist";
-//        }
-//
-//        //load file
-//        File fileOrderItem = ResourceUtils.getFile("classpath:orderItemsReport.jrxml");
-//
-//        // compile it
-//        JasperReport jasperOrderItems = JasperCompileManager.compileReport(fileOrderItem.getAbsolutePath());
-//
-//        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orderItems);
-//
-//        HashMap<String, Object> params = new HashMap<String, Object>();
-//        params.put("logo", ClassLoader.getSystemResource("cart.png").getPath());
-//
-//
-//
-//        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperOrderItems, params, dataSource);
-//
-//        //generate pdf
-//        String fileName = path + "\\OrderItemsReport"+new Random().nextInt(9500000) +".pdf";
-//        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
-//
-//        return "report generated in path : " + path;
-//
-//    }
 }

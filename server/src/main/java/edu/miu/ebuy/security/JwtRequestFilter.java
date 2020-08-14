@@ -1,6 +1,5 @@
 package edu.miu.ebuy.security;
 
-import edu.miu.ebuy.common.http.BaseResponse;
 import edu.miu.ebuy.exceptions.Errors;
 import edu.miu.ebuy.exceptions.HttpException;
 import edu.miu.ebuy.services.impl.JwtUserDetailsService;
@@ -14,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -65,7 +63,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         } else {
             logger.warn("JWT Token does not begin with Bearer String");
-            //throw new NotAuthenticationException ("JWT Token does not begin with Bearer String", null);
 
         }
         // Once we get the token validate it.

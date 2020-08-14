@@ -18,20 +18,10 @@ import {Router} from '@angular/router';
 export class ProductCatalogListComponent implements OnInit {
 
   public hostUrl: string;
-  // public lstProduct =[];
   public lstProduct:Observable<any[]>;
   searchForm: FormGroup;
   public searchItem:any;
   constructor(private dataService: ProductService, private  fb: FormBuilder, private shoppingService: ShoppingService, private router: Router) {
-    //  this.dataService.get().subscribe( {
-    //    next: (result)=> {
-    //     this.lstProduct = result.data;
-    //     console.log(this.lstProduct);
-    //    },
-    //    error: (err)=> console.log(err.console.error())
-    //   });
-
-
     this.searchForm = this.fb.group(
       {
         productName: [''],
@@ -52,27 +42,8 @@ export class ProductCatalogListComponent implements OnInit {
   OnSubmit(): void {
     this.searchItem = this.searchForm.value;
 
-
-    // if (this.searchItem.bid_price < 0) {
-    //   this.errorMsg = 'bid price could not be negative number';
-    //   return;
-    // }
-
     console.log(this.searchItem);
     this.lstProduct = this.dataService.search(this.searchItem);
-
-
-   // let formData: any = new FormData();
-    //formData.append("payload", JSON.stringify(this.searchItem));
-    //formData.append("photo", this.frm.get('photo').value);
-
-    //this.dataService.save(formData).subscribe(( err:any) => {
-      // console.log('add auction : ',resp);
-      // if (err) {
-      //   this.errorMsg = err;
-      // }
-
-
   }
 
   addToCart(product: any) {

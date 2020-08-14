@@ -11,7 +11,6 @@ import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
 import edu.miu.ebuy.security.Context;
-import edu.miu.ebuy.security.JPAUserDetails;
 import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import edu.miu.ebuy.services.interfaces.IUserService;
@@ -24,7 +23,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -114,7 +114,6 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-
     @Override
     public void delete(int id) {
         userRepository.deleteById(id);
@@ -132,21 +131,17 @@ public class UserService implements IUserService {
                 return userRepository.findByVendor_Id(Context.getUser().getId());
             }
         }
-
         return null;
-
-
-
     }
 
     @Override
     public List<Role> getRoles() {
-        return (List<Role>) roleRepository.findAll();
+        return roleRepository.findAll();
     }
 
     @Override
     public List<User> findAllByEmail(String email) {
-        return (List<User>) userRepository.findAllByEmail(email);
+        return userRepository.findAllByEmail(email);
     }
 
     @Override
@@ -160,27 +155,5 @@ public class UserService implements IUserService {
             throw new HttpException(HttpStatus.BAD_REQUEST, "User name is already exists!", Errors.NOT_UNIQUE_USER_NAME_ERROR);
         }
     }
-
-//    @Override
-//    public List<UserDetail> getAllUser() {
-//        return
-//                convertToDetails( userRepository.findAll());
-//    }
-//
-//    public  List<UserDetail> convertToDetails(List<User> lst)
-//    {
-//        if (lst==null) return null;
-//        List<UserDetail> resultUser=new ArrayList<>();
-//        for (User user : lst)
-//        {
-//
-//
-//            UserDetail userDetail=new UserDetail(user.getId(), user.getName(),user.getEmail(),user.getBirthDate(),user.getGender(),user.getMobile(),user.getBio(),user.getPhotoUrl(),user.getCoverUrl(),user.isActive(),user.isAdmin());
-//            System.out.println("User : :"+user.getId()+" "+user.getName());
-//            resultUser.add(userDetail);
-//        }
-//        return resultUser;
-//    }
-
 
 }

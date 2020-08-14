@@ -8,16 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUserService {
-    //Default
-    public User signup(User user) throws HttpException;
-    public User get(int id);
-    public User update(User user);
-    public User update(User user, String imageUrl);
-    public User add(User user, String imageUrl);
-    public void delete(int id);
-    public List<User> findAllByEmail(String name);
-    public Optional<User> findByEmail(String email);
-    public List<User> getAll();
 
-    public List<Role> getRoles();
+    User signup(User user) throws HttpException;
+    User get(int id);
+    User update(User user);
+    User update(User user, String imageUrl);
+    User add(User user, String imageUrl);
+    void delete(int id);
+    List<User> findAllByEmail(String name);
+    Optional<User> findByEmail(String email);
+    List<User> getAll();
+    List<Role> getRoles();
 }

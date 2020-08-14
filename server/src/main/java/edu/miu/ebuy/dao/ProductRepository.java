@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+
     @Query("SELECT p FROM Product  p WHERE p.price >= :fromPrice AND p.price <= :toPrice")
     List<Product> getProductByPrice(double fromPrice, double toPrice);
     Product getProductByIsService(boolean isService);
@@ -22,29 +23,19 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByIsDeletedAndIsServiceAndProductStatus_Id(boolean isDeleted,boolean isService,int statusId);
     List<Product> findByIsDeletedAndIsServiceAndProductStatus_IdAndUser_Id(boolean isDeleted,boolean isService,int statusId,int userid);
 
-
-    //List<Product> findByIsDeletedAndIsServiceAndProductStatus_Id(boolean isDeleted,boolean isService,int statusId);
-    //List<Product> findByIsDeletedAndIsServiceAndUser_IdAndProductStatus_Id(boolean isDeleted,boolean isService,int userid,int statusId);
-
     List<Product> findByProductStatus_Id(int statusId);
-
-
-
 
     @Modifying
     @Query(value = "UPDATE product SET isDeleted=1 WHERE id=?1",nativeQuery = true)
-    public void updateItemDelete( @Param("id") Integer id);
-
+   void updateItemDelete( @Param("id") Integer id);
 
     @Modifying
     @Query(value = "UPDATE product SET isPublished=?2 WHERE id=?1",nativeQuery = true)
-    public void updateItemPublished( @Param("id") Integer id,@Param("isPublished")  Boolean isPublished);
-
+    void updateItemPublished( @Param("id") Integer id,@Param("isPublished")  Boolean isPublished);
 
     @Modifying
     @Query(value = "UPDATE product SET statusId=?2 WHERE id=?1",nativeQuery = true)
-    public void updateStatus( @Param("id") Integer id, @Param("statusId") Integer statusId);
-
+    void updateStatus( @Param("id") Integer id, @Param("statusId") Integer statusId);
 
     @Query(value = "select  p.* from product p\n" +
             "inner join user vendor on vendor.id=p.vendorId\n" +
@@ -53,7 +44,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "and p.name like %:name%\n" +
             "and vendor.name like %:vendorName%\n" +
             "and p.price between :priceFrom and :priceTo", nativeQuery = true)
-    public List<Product> search( @Param("name") String name,@Param("vendorName") String vendorName ,
+    List<Product> search( @Param("name") String name,@Param("vendorName") String vendorName ,
                                 @Param("priceFrom") double priceFrom, @Param("priceTo") double priceTo);
 
 
@@ -87,7 +78,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "    product.statusId,\n" +
             "    product.vendorId,\n" +
             "    product.isDeleted ", nativeQuery = true)
-    public List<Product> reportProfit( @Param("vendorId") int vendorId);
+    List<Product> reportProfit( @Param("vendorId") int vendorId);
 
     List<Product> findByIdIn(List<Integer> productIds);
 

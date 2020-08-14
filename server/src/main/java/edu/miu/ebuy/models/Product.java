@@ -1,15 +1,11 @@
 package edu.miu.ebuy.models;
 
-import com.sun.istack.Nullable;
-import edu.miu.ebuy.models.lookup.CardType;
 import edu.miu.ebuy.models.lookup.ProductStatus;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

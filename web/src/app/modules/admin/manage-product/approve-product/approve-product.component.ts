@@ -21,46 +21,36 @@ export class ApproveProductComponent implements OnInit {
   public lstProduct:Observable<any[]>;
   //searchForm: FormGroup;
   //public searchItem:any;
-  constructor(private dataService: ProductService, private  fb: FormBuilder) {    
-      //this.lstProduct = this.dataService.getActive();
+  constructor(private dataService: ProductService, private  fb: FormBuilder) {
     }
 
   ngOnInit(): void {
     this.hostUrl = AppConfig.settings.apiServiceUrl;
     this.loadData();
-    //this.lstProduct.subscribe(x=>console.log(x.data));
-  
+
   }
   loadData(): void {
-   
+
     this.lstProduct = this.dataService.getPending();
   }
 
   OnSubmit(): void {
-   
-    //this.lstProduct = this.dataService.search(this.searchItem);
+
   }
 
   OnAprove(productId: number): void {
-   
-    this.dataService.approve(productId).subscribe(x=>this.loadData());   
-    //this.notifyService.showSuccess("product approve successfully !!", "eBuy")
 
-    
-
+    this.dataService.approve(productId).subscribe(x=>this.loadData());
   }
 
   OnReject(productId: number): void {
-    
-    this.dataService.reject(productId).subscribe(x=>this.loadData());
-    //this.notifyService.showSuccess("product rejected successfully !!", "eBuy")
 
-     
+    this.dataService.reject(productId).subscribe(x=>this.loadData());
    }
-  
+
 
   clear():void  {
-   
+
   }
 
 }

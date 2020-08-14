@@ -86,13 +86,6 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
   }
 
-  // onFileSelect(event) {
-  //   if (event.target.files.length > 0) {
-  //     const file = event.target.files[0];
-  //     this.signupForm.get('photoUrl').setValue(file);
-  //   }
-  // }
-
   onSubmit(): void {
     if (this.signupForm.invalid) {
       return;

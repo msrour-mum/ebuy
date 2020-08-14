@@ -6,7 +6,6 @@ import { AddCategoryComponent } from './manage-category/add-category/add-categor
 import { AddProductComponent } from './manage-product/add-product/add-product.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ApproveProductComponent } from './manage-product/approve-product/approve-product.component';
-import { ViewSalesComponent } from './view-sales/view-sales.component';
 import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
 import { EditCategoryComponent } from './manage-category/edit-category/edit-category.component';
 import { AddUserComponent } from './manage-users/add-user/add-user.component';
@@ -29,7 +28,6 @@ import { PromotionListComponent } from './manage-promotions/promotion-list/promo
     AddCategoryComponent,
     AddProductComponent,
     ApproveProductComponent,
-    ViewSalesComponent,
     EditProductComponent,
     EditCategoryComponent,
     AddUserComponent,
@@ -47,8 +45,8 @@ import { PromotionListComponent } from './manage-promotions/promotion-list/promo
     ReactiveFormsModule,
     AppRoutingModule,
     Ng2SearchPipeModule,
-    
-    
+
+
   ],
   providers:[ ]
 })

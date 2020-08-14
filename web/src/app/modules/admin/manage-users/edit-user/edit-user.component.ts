@@ -30,9 +30,6 @@ export class EditUserComponent implements OnInit , OnDestroy {
               private router: Router,
               private activeRouter: ActivatedRoute,
               private usersService: UsersService) {
-
-    // if (this.authService.isAuthenticated) {
-    //   this.router.navigate(['/']);
     activeRouter.params.subscribe((p) => {
       this.userSubject = usersService.get(p.id);
     });

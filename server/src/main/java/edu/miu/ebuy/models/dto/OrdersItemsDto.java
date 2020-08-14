@@ -7,14 +7,6 @@ import lombok.Data;
 public class OrdersItemsDto {
 
     private long id;
-
-//    private long orderId;
-//    private String  orderUserName;
-//    private Date orderDate;
-//    private double orderTotal;
-//    private double orderShipping;
-//    private double orderNetTotal;
-
     private String  productName;
     private double  productPrice;
     private double  productCost;

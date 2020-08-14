@@ -34,7 +34,6 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   onSubmit() {
     if(this.categoryForm.valid){
       let formData = new FormData();
-      //formData.append("name", JSON.stringify(this.categoryForm.get('category')));
       formData.append("data", JSON.stringify(this.categoryForm.value));
       console.log(this.categoryForm.value)
       this.subs.add(this.categoryService.create(this.categoryForm.value)

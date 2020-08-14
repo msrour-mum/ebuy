@@ -15,5 +15,5 @@ public interface IShoppingService {
     boolean checkout(CheckoutDto checkout) throws ApplicationException;
     Product subscribeVendor(User user) throws HttpException;
     void addOrder(OrderItem orderItem, User user, double shipping);
-    public List<OrdersDto> userOrder(int userId);
+    List<OrdersDto> userOrder(int userId);
 }

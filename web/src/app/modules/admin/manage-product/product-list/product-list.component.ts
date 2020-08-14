@@ -16,14 +16,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  
+
   public hostUrl: string;
   search: string;
   public lstProduct:Observable<any[]>;
   constructor(private dataService: ProductService,
     public authService: AuthenticationService,
     private router: Router,
-     private  fb: FormBuilder) {    
+     private  fb: FormBuilder) {
     }
 
   ngOnInit(): void {
@@ -40,30 +40,28 @@ export class ProductListComponent implements OnInit {
     else
      this.router.navigate(['/']);
 
-  
+
   }
 
 
   OnSubmit(): void {
-   
-    //this.lstProduct = this.dataService.search(this.searchItem);
+
   }
 
   published(productId:number ):void  {
-   
-    this.dataService.published(productId,true).subscribe(x=>this.loadData());    
+
+    this.dataService.published(productId,true).subscribe(x=>this.loadData());
   }
   unPublished(productId:number ):void  {
-   
-    this.dataService.published(productId,false).subscribe(x=>this.loadData());    
-    
+
+    this.dataService.published(productId,false).subscribe(x=>this.loadData());
   }
 
   delete(productId:number ):void  {
-   
+
     if(confirm("Are you sure you want to delete this item ?"))
     {
-      this.dataService.delete(productId).subscribe(x=>this.loadData());    
+      this.dataService.delete(productId).subscribe(x=>this.loadData());
     }
   }
 

@@ -3,7 +3,6 @@ package edu.miu.ebuy.models.dto;
 import edu.miu.ebuy.models.Order;
 import edu.miu.ebuy.models.OrderItem;
 import lombok.Data;
-import org.apache.catalina.LifecycleState;
 
 import java.util.ArrayList;
 import java.util.Date;

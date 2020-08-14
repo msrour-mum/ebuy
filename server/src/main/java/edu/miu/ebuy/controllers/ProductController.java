@@ -2,8 +2,6 @@ package edu.miu.ebuy.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.ebuy.common.http.BaseResponse;
-import edu.miu.ebuy.common.http.ResponseResult;
-import edu.miu.ebuy.common.http.ResponseStatus;
 import edu.miu.ebuy.common.storage.IStorageService;
 import edu.miu.ebuy.exceptions.ApplicationException;
 import edu.miu.ebuy.models.Product;
@@ -56,12 +54,6 @@ public class ProductController {
         return productService.getPendingProduct();
     }
 
-    @GetMapping("/rejected")
-    public List<ProductDto> getRejected() {
-        //TODO: rejected list
-        return null;
-    }
-
     @PostMapping("/search")
     public List<Product> search(@RequestBody ProductSearchItem searchItem) {
         return productService.search(searchItem);
@@ -93,9 +85,7 @@ public class ProductController {
             return  productService.update(product);
     }
 
-
     @PostMapping("/{vendorId}/ftp")
-    //public ResponseResult ftpProduct(@PathVariable int vendorId, @RequestParam(value ="file", required=false) MultipartFile file) throws ApplicationException, IOException {
     public void ftpProduct(@PathVariable int vendorId, @RequestParam(value ="file", required=false) MultipartFile file) throws ApplicationException, IOException {
 
         //File csvFile = storageService.uploadCSVFile(file);
@@ -126,16 +116,10 @@ public class ProductController {
 
     }
 
-//    @PutMapping("/{productId}")
-//    public Product update(@RequestBody Product product) {
-//       return productService.update(product);
-//    }
-
     @DeleteMapping("/{productId}")
     public void delete(@PathVariable int productId) {
         productService.delete(productId);
     }
-
 
     @PutMapping("/{productId}/approve/{statusId}")
     public void approveProduct(@PathVariable int productId, @PathVariable int statusId) {
@@ -146,7 +130,6 @@ public class ProductController {
     public void published(@PathVariable int productId, @PathVariable boolean isPublished) {
         productService.published( productId, isPublished);
     }
-
 
     @GetMapping("/service")
     public Product get() {

@@ -27,7 +27,6 @@ export class AddUserComponent implements OnInit {
 
   private photoFile;
   public lstRoles =[];
-  //private userSubject: Observable<any> = new BehaviorSubject({}) ;
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -35,9 +34,6 @@ export class AddUserComponent implements OnInit {
     public authService: AuthenticationService,
     private usersService: UsersService) {
       this.getRoles();
-    // if (this.authService.isAuthenticated) {
-    //   this.router.navigate(['/']);
-    //activeRouter.params.subscribe((p) => {this.userSubject = usersService.get(p.id);});
   }
 
   ngOnInit() {
@@ -50,23 +46,6 @@ export class AddUserComponent implements OnInit {
       address: ['', Validators.required],
       phone: ['', Validators.required],
     });
-
-   
-    // this.subs.add(this.userSubject
-    // .subscribe({
-    // next: (result) => {
-    //   const user = result.data;
-    //   this.form =  this.fb.group({
-    //     id: [user.id],
-    //     email: [user.email, [Validators.required, Validators.email]],
-    //     name: [user.name, Validators.required],
-    //     address: [user.address, Validators.required],
-    //     phone: [user.phone, Validators.required],
-    //   });
-    // },
-    // error: (err) => { console.log(err); },
-    // },
-    // ));
   }
 
   ngOnDestroy() {
@@ -97,7 +76,7 @@ export class AddUserComponent implements OnInit {
     let formData: any = new FormData();
     this.form.value.role={id:2};
     this.form.value.vendor={id:this.authService.currentUser.id};
-    
+
     formData.append("userJson", JSON.stringify(this.form.value));
     formData.append("file", this.photoFile);
 
@@ -106,9 +85,9 @@ export class AddUserComponent implements OnInit {
         (result: any) => {
           console.log(result);
           if (result.status.code == 200) {
-          
+
             alert("Record added successfully");
-            this.form.reset();            
+            this.form.reset();
             this.router.navigate(['/app-user-list']);
           }
         },
@@ -125,9 +104,6 @@ export class AddUserComponent implements OnInit {
       },
       error: (err)=> console.log(err.console.error())
      });
-
-    // console.log(this.lstRoles);
-
  }
 
 }

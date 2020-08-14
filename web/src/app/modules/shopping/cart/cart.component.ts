@@ -12,13 +12,11 @@ import {AppConfig} from '../../../config/app.config';
 })
 export class CartComponent implements OnInit {
 
-  //public cart: Cart;
   public hostUrl: string = AppConfig.settings.apiServiceUrl;
   constructor(public shoppingService: ShoppingService,
               private router: Router) { }
 
   public ngOnInit(): void {
-    //this.shoppingService.getCart().subscribe((data) => this.cart = data);
   }
 
   public addToCart(product): void {

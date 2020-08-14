@@ -6,9 +6,8 @@ import net.sf.jasperreports.engine.JRException;
 import java.io.FileNotFoundException;
 
 public interface IReportService {
-    public ResponseResult  OrderReport(int userId) throws FileNotFoundException, JRException;
 
-    //public String  orderItemReport(int userId) throws FileNotFoundException, JRException;
+    ResponseResult OrderReport(int userId) throws FileNotFoundException, JRException;
 
-    public ResponseResult profitReport(int userId) throws FileNotFoundException, JRException;
+    ResponseResult profitReport(int userId) throws FileNotFoundException, JRException;
 }

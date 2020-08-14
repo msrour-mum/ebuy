@@ -1,7 +1,6 @@
 package edu.miu.ebuy.exceptions;
 
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Data

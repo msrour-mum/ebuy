@@ -35,11 +35,11 @@ export class EditCategoryComponent implements OnInit {
       .subscribe({
           next: (result) => {
             const pro = result.data;
-          
-          
+
+
             this.categoryForm =  this.fb.group({
-              id: [pro.id],            
-              name: [pro.name, [Validators.required]],              
+              id: [pro.id],
+              name: [pro.name, [Validators.required]],
             });
           },
         error: (err) => { console.log(err); },
@@ -49,14 +49,11 @@ export class EditCategoryComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    //throw new Error("Method not implemented.");
     this.subs.unsubscribe();
   }
 
   onSubmit() {
     if(this.categoryForm.valid){
-      // let formData = new FormData();
-      // formData.append("name", JSON.stringify(this.categoryForm.get('category')));
       this.subs.add(this.categoryService.update(this.categoryForm.value)
         .subscribe(
           (result: any) => {
