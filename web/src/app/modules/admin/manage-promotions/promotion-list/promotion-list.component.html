@@ -1,0 +1,45 @@
+<h3 style="margin-top: 40px;">{{(product | async)?.data.name}} - Promotions</h3>
+
+
+<div class="row"><div class="form-group col-sm-12 col-md-10 mr-btm-10">
+  <input type="text" class="form-control" placeholder="Search by name here" [(ngModel)]="search">
+</div>
+  <div class="col-sm-12 col-md-2 mr-btm-10">
+    <a [routerLink]="['/add-promotion', (product | async)?.data.id]" class="btn primary-color">
+      <i class="fa fa-plus" aria-hidden="true"></i> Add Promotion
+    </a>
+  </div>
+</div>
+
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Promotion</th>
+    <th scope="col">From</th>
+    <th scope="col">To</th>
+    <th scope="col" colSpan="3">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr class="table-secondary" *ngFor="let promotion of (product | async)?.data.promotions | filter:search">
+    <td>{{promotion.name}}</td>
+    <td scope="col">{{promotion.discount}}%</td>
+    <td scope="col">{{promotion.fromDate | date}}</td>
+    <td scope="col">{{promotion.toDate | date}}</td>
+    <td>
+      <button class="btn warning-color mr-btm-10" type="button" (click)="deletePromotion(promotion.id)">
+        <i class="fa fa-remove" aria-hidden="true">&nbsp;Delete</i>
+      </button>&nbsp;
+      <a class="btn primary-color mr-btm-10" [routerLink]="['/edit-promotion', promotion.id]">
+        <i class="fa fa-edit" aria-hidden="true">&nbsp;Edit</i>
+      </a>
+    </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+
+  </tbody>
+</table>

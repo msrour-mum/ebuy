@@ -1,1 +1,76 @@
-<p>profile works!</p>
+<main class="acc-form">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Edit My Profile</div>
+
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <fieldset>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email"
+                       [formControl]="form.get('email')"
+                       [ngClass]="{'is-invalid': isValid('email')}"
+                       id="email"
+                       class="form-control"
+                       placeholder="Enter email"
+                       disabled="true" />
+              </div>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="name"
+                       [formControl]="form.get('name')"
+                       [ngClass]="{'is-invalid': isValid('name')}"
+                       id="name"
+                       class="form-control"
+                       placeholder="Enter your name">
+                <div *ngIf="hasError('name', 'required')" class="invalid-feedback">
+                  Name is required
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text"
+                       [formControl]="form.get('phone')"
+                       class="form-control"
+                       id="phone"
+                       placeholder="phone">
+              </div>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="address"
+                       [formControl]="form.get('address')"
+                       [ngClass]="{'is-invalid': isValid('address')}"
+                       id="address"
+                       class="form-control"
+                       placeholder="Enter your name">
+                <div *ngIf="hasError('address', 'required')" class="invalid-feedback">
+                  Address is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="photoUrl">Profile Image</label>
+                <input type="file"
+                       class="form-control-file"
+                       id="photoUrl"
+                       aria-describedby="fileHelp"
+                       (change)="onFileSelect($event)">
+
+
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
+
+            </fieldset>
+
+            <!--            <p> form: {{form.value | json}}</p>-->
+            <!--            <p> Ss Invalid: {{form.invalid}}</p>-->
+            <!--            <p> Ss Invalid: {{form.errors | json}}</p>-->
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

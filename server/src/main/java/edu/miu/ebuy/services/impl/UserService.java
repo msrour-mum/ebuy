@@ -1,6 +1,7 @@
 package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.common.enums.RoleEnum;
+import edu.miu.ebuy.common.events.publishers.SignupSuccessfullyEvent;
 import edu.miu.ebuy.dao.RoleRepository;
 import edu.miu.ebuy.dao.UserRepository;
 import edu.miu.ebuy.exceptions.Errors;
@@ -9,10 +10,12 @@ import edu.miu.ebuy.models.OrderItem;
 import edu.miu.ebuy.models.Product;
 import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
+import edu.miu.ebuy.security.Context;
 import edu.miu.ebuy.services.interfaces.IMerchantService;
 import edu.miu.ebuy.services.interfaces.IShoppingService;
 import edu.miu.ebuy.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,7 +23,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -38,13 +42,16 @@ public class UserService implements IUserService {
     @Autowired
     IShoppingService shoppingService;
 
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
+
     @Bean
     public PasswordEncoder passwordUtil() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
-    public User create(User user) throws HttpException {
+    public User signup(User user) throws HttpException {
         CheckIfUserNameExists(user);
         Product product = null;
         if(user.getRole().getId() == RoleEnum.VENDOR.id)
@@ -59,9 +66,11 @@ public class UserService implements IUserService {
         if(user.getRole().getId() == RoleEnum.VENDOR.id)
         {
             assert product != null;
-            OrderItem orderItem = new OrderItem(product, 1, product.getPrice());
+            OrderItem orderItem = new OrderItem(product, 1,product.getPrice());
             shoppingService.addOrder(orderItem, savedUser, 0);
         }
+        eventPublisher.publishEvent(new SignupSuccessfullyEvent(savedUser));
+
         return savedUser;
     }
 
@@ -72,6 +81,36 @@ public class UserService implements IUserService {
 
     @Override
     public User update(User user) {
+        User userToUpdate = this.get(user.getId());
+        userToUpdate.setName(user.getName());
+        userToUpdate.setPhone(user.getPhone());
+        userToUpdate.setAddress(user.getAddress());
+        return userRepository.save(userToUpdate);
+    }
+
+    @Override
+    public User update(User user, String imageUrl) {
+        User userToUpdate = this.get(user.getId());
+        userToUpdate.setName(user.getName());
+        userToUpdate.setPhone(user.getPhone());
+        userToUpdate.setAddress(user.getAddress());
+        userToUpdate.setImageUrl(imageUrl);
+        if(Context.getUser().getRole().getId() == RoleEnum.VENDOR.id) {
+            user.setVendor(new User(Context.getUser().getId()));
+        }
+        return userRepository.save(userToUpdate);
+    }
+
+    @Override
+    public User add(User user, String imageUrl) {
+        user.setImageUrl(imageUrl);
+        user.setActive(true);
+        BCryptPasswordEncoder passwordUtil=new BCryptPasswordEncoder();
+        String pass=passwordUtil.encode("sa");
+        user.setPassword(pass);
+        if(Context.getUser().getRole().getId() == RoleEnum.VENDOR.id) {
+            user.setVendor(new User(Context.getUser().getId()));
+        }
         return userRepository.save(user);
     }
 
@@ -82,12 +121,27 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> getAll() {
-        return (List<User>) userRepository.findAll();
+        if(Context.getUser().getRole().getId() == RoleEnum.ADMIN.id) {
+            return userRepository.findAll();
+        }
+        else if(Context.getUser().getRole().getId() == RoleEnum.VENDOR.id) {
+            if(Context.getUser().getVendor() != null) {
+                return userRepository.findByVendor_Id(Context.getUser().getVendor().getId());
+            } else {
+                return userRepository.findByVendor_Id(Context.getUser().getId());
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        return roleRepository.findAll();
     }
 
     @Override
     public List<User> findAllByEmail(String email) {
-        return (List<User>) userRepository.findAllByEmail(email);
+        return userRepository.findAllByEmail(email);
     }
 
     @Override
@@ -101,27 +155,5 @@ public class UserService implements IUserService {
             throw new HttpException(HttpStatus.BAD_REQUEST, "User name is already exists!", Errors.NOT_UNIQUE_USER_NAME_ERROR);
         }
     }
-
-//    @Override
-//    public List<UserDetail> getAllUser() {
-//        return
-//                convertToDetails( userRepository.findAll());
-//    }
-//
-//    public  List<UserDetail> convertToDetails(List<User> lst)
-//    {
-//        if (lst==null) return null;
-//        List<UserDetail> resultUser=new ArrayList<>();
-//        for (User user : lst)
-//        {
-//
-//
-//            UserDetail userDetail=new UserDetail(user.getId(), user.getName(),user.getEmail(),user.getBirthDate(),user.getGender(),user.getMobile(),user.getBio(),user.getPhotoUrl(),user.getCoverUrl(),user.isActive(),user.isAdmin());
-//            System.out.println("User : :"+user.getId()+" "+user.getName());
-//            resultUser.add(userDetail);
-//        }
-//        return resultUser;
-//    }
-
 
 }

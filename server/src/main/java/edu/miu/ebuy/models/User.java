@@ -2,7 +2,6 @@ package edu.miu.ebuy.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +11,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class User implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -42,10 +40,20 @@ public class User implements Serializable {
     private UserCard card;
 
 
-    @Transient
-    MultipartFile image;
+    @ManyToOne(optional = true)
+    @JoinColumn(name ="vendorId")
+    private User vendor;
 
-    public User(String name,String email, Role role, String pass, boolean isActive,String phone) {
+    public User getVendor() {
+        return vendor;
+    }
+
+    public User setVendor(User vendor) {
+        this.vendor = vendor;
+        return this;
+    }
+
+    public User(String name, String email, Role role, String pass, boolean isActive, String phone) {
         this.name = name;
         this.email = email;
         this.role = role;
@@ -54,7 +62,11 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public User(String name, String email, Role role, String password, Boolean isActive,  String phone, String address, String imageUrl) {
+    public User(int id) {
+        this.id = id;
+    }
+
+    public User(String name, String email, Role role, String password, Boolean isActive,  String phone, String address, String imageUrl , User vendor) {
         this.name = name;
         this.email = email;
         this.role = role;
@@ -63,6 +75,98 @@ public class User implements Serializable {
         this.address = address;
         this.phone = phone;
         this.imageUrl = imageUrl;
+        this.vendor = vendor;
 
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public User setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public User setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public User setRole(Role role) {
+        this.role = role;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public User setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public User setActive(Boolean active) {
+        isActive = active;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public User setAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public User setPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public User setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public UserCard getCard() {
+        return card;
+    }
+
+    public User setCard(UserCard card) {
+        this.card = card;
+        return this;
     }
 }

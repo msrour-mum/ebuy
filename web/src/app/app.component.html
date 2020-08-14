@@ -13,43 +13,76 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['home']" *ngIf="authService.isAuthenticated">Home</a>
+          <a class="nav-link" [routerLink]="['home']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['myOrders']" *ngIf="authService.isAuthenticated">My Orders</a>
+          <a class="nav-link" [routerLink]="['my-orders', authService.currentUser.id]" *ngIf="authService.isAuthenticated && authService.currentUser.role.id==3">My Orders</a>
         </li>
 
-        <li class="nav-item dropdown" *ngIf="authService.isAuthenticated">
+        <li class="nav-item dropdown" *ngIf="authService.isAdmin">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="admin" aria-expanded="false">
             Admin <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="admin">
-            <a class="dropdown-item" href="../default/">Manage Users</a>
+            <a class="dropdown-item" [routerLink]="['manage-users']">Manage Users</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../cerulean/">Manage Products</a>
-            <a class="dropdown-item" [routerLink]="['approve-product']">Review Products</a>
-            <a class="dropdown-item" [routerLink]="['categories']">Manage Categories</a>
+            <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>
+            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['approve-product']">Review Products</a>
+<!--            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['rejected-product']">Rejected Products</a>-->
+            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['categories']">Manage Categories</a>
 
           </div>
         </li>
+
+        <li class="nav-item dropdown" *ngIf="authService.isAuthenticated &&( authService.currentUser.role.id==2 || authService.currentUser.role.id==3)">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="admin" aria-expanded="false">
+            Reports <span class="caret"></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="admin">
+            <a class="dropdown-item"  *ngIf="authService.currentUser.role.id==3" (click)="reportMyOrders()" >My Orders</a>
+            <a class="dropdown-item"  *ngIf="authService.currentUser.role.id==2" (click)="reportProfit()" >My Profits</a>
+
+<!--            <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>-->
+<!--            <a class="dropdown-item" [routerLink]="['approve-product']">Review Products</a>-->
+<!--            <a class="dropdown-item" [routerLink]="['rejected-product']">Rejected Products</a>-->
+<!--            <a class="dropdown-item" [routerLink]="['categories']">Manage Categories</a>-->
+
+          </div>
+        </li>
+
       </ul>
-      <div>
-        <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm" (ngSubmit)="onSubmit()" >
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" [formControl]="searchForm.get('search')">
-          <button type="submit"  class="btn btn-secondary my-2 my-sm-0 search-icon">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
-        </form>
+      <div class="m-2">
+        <!-- Cart  -->
+        <a [routerLink]="['/cart']" class="mr-1 white">
+          <i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i>
+          <i class="cart-ico" *ngIf="true">{{(shoppingService.getCart() | async)?.count}}</i>
+          <!-- Todo: check cart items count if zero then ngIf=false -->
+        </a>
       </div>
 
-      <a [routerLink]="['user/auctions']" *ngIf="authService.isAuthenticated">
-        <img class="user-small-img" src="/src/assets/images/profile-photo.png" alt="avatar">
+      <!-- User image -->
+      <a [routerLink]="['edit-profile']" *ngIf="authService.isAuthenticated">
+        <img class="user-small-img"
+             src="{{hostUrl + '/uploads/0/u.jpg'}}"
+             alt="avatar"
+        *ngIf="authService.currentUser.imageUrl =='' || authService.currentUser.imageUrl == null">
+        <img class="user-small-img"
+             src="{{hostUrl + authService.currentUser.imageUrl}}"
+             alt="avatar"
+             *ngIf="authService.currentUser.imageUrl !=''">
       </a>
-      <a class="nav-link" style="color:white" *ngIf="!authService.isAuthenticated" [routerLink]="['login']">Login</a>
-      <a class="nav-link" style="color:white" [routerLink]="['home']"
-         *ngIf="authService.isAuthenticated">Hello, {{authService.currentUser.name}} </a>
-      <a class="nav-link" style="color:white" *ngIf="authService.isAuthenticated"
-         (click)="authService.logout()">Logout</a>
+      <!-- Login -->
+      <a class="nav-link" style="color:white" [routerLink]="['login']" *ngIf="!authService.isAuthenticated">
+        Login
+      </a>
+      <!-- user name -->
+      <a class="nav-link" class="white pd-lft-1" [routerLink]="['edit-profile']"
+         *ngIf="authService.isAuthenticated">Hello, {{authService.currentUser.name}}
+      </a>
+      <!-- Logout -->
+      <a class="nav-link" style="color:white; cursor: pointer;" *ngIf="authService.isAuthenticated"
+         (click)="authService.logout()">Logout
+      </a>
     </div>
   </nav>
 </header>

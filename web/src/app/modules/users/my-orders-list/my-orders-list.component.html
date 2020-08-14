@@ -1,1 +1,76 @@
-<p>orders-list works!</p>
+<div class="container">
+  <h3>My Orders ({{orders.length}})</h3>
+  <div *ngIf="orders.length > 0">
+    <div class="row" *ngFor="let order of orders let $index = index">
+      <div class="col-sm-12 col-md-8">
+        <div class="card border-success mb-3">
+          <div class="card-header row">
+            <div class="col-3">
+              <i class="prd-lbl fa fa-clock-o"> Date</i><i>{{order.orderDate | date}}</i>
+            </div>
+            <div class="col-3">
+              <i class="prd-lbl fa fa-money"> Tax</i> <i>{{order.tax | currency}}</i>
+            </div>
+            <div class="col-3">
+              <i class="prd-lbl fa fa-money"> Shipping</i> <i>{{order.shipping | currency}}</i>
+            </div>
+            <div class="col-3">
+              <i class="prd-lbl fa fa-money"> Total</i> <i>{{order.total | currency}}</i>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button class="btn btn-link"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#orderDetails"
+                      aria-labelledby="#orderDetails"
+                      aria-expanded="false">
+                <i class="fa fa-angle-down" aria-hidden="true">Order details</i>
+              </button>
+            </div>
+          </div>
+
+          <div class="collapse row order-dtls-box" id="orderDetails">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-6"></div>
+                <div class="col-2"><i class="prd-lbl fa fa-money"> Price</i></div>
+                <div class="col-2"><i class="fa fa-bars" aria-hidden="true"> Quantity</i></div>
+                <div class="col-2"><i class="prd-lbl fa fa-money"> Total</i></div>
+              </div>
+            </div>
+            <div class="col-12" *ngFor="let orderItem of order.items">  <!-- ngFor order.orderItem -->
+              <div class="row">
+                <div class="col-2">
+                  <img src="{{hostUrl + orderItem.product.imageUrl}}" class="order-prd-img">
+                </div>
+                <div class="col-4">
+                  <a class="body-color" [routerLink]="['/product', orderItem.product.id]">
+                    <h6 class="underline-text">{{orderItem.product.name}}</h6>
+                  </a>
+                </div>
+                <div class="col-2">{{orderItem.itemPrice | currency}}</div>
+                <div class="col-2">{{orderItem.quantity}}</div>
+                <div class="col-2">{{orderItem.itemTotal | currency}}</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> <!-- ngFor each order in orders -->
+  </div>
+  <!-- No Orders Message box -->
+  <div class="card bg-light mb-3" *ngIf="orders.length <= 0">
+    <div class="card-header">Information</div>
+    <div class="card-body">
+      <h4 class="card-title"></h4>
+      <p class="card-text">There are no orders found in your account, please continue shopping then add
+        your products to the cart, then checkout the order</p>
+
+      <div><a class="btn btn-primary" [routerLink]="['/home']"> Continue Shopping</a></div>
+    </div>
+  </div>
+
+</div>

@@ -1,18 +1,12 @@
 package edu.miu.ebuy.models.dto;
 
 import edu.miu.ebuy.models.OrderItem;
+import lombok.Data;
 
+@Data
 public class OrdersItemsDto {
 
     private long id;
-
-//    private long orderId;
-//    private String  orderUserName;
-//    private Date orderDate;
-//    private double orderTotal;
-//    private double orderShipping;
-//    private double orderNetTotal;
-
     private String  productName;
     private double  productPrice;
     private double  productCost;

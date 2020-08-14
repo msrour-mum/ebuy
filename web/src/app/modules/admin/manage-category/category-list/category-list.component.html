@@ -1,12 +1,14 @@
 <main class="acc-form">
 
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-1">
       <div class="col-8">
         <h4>Admin Category List</h4>
       </div>
       <div class="col-4">
-        <button type="button" class="btn btn-primary">Add Category</button>
+        <a [routerLink]="['/add-category']" class="btn btn-primary">
+          <i class="fa fa-plus" aria-hidden="true"></i> Add Category
+        </a>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -16,15 +18,21 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Price</th>
-            <th scope="col">Vendor</th>
             <th>&nbsp;</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-
+          <tr class="table-striped" *ngFor="let category of (categories | async)?.data | filter:search; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{category.name}}</td>
+            <td>
+              <a [routerLink]="['/edit-category', category.id ]" class="btn btn-outline-primary">
+                <i class="fa fa-pencil" aria-hidden="true"></i> Edit Category
+              </a> &nbsp;&nbsp;
+              <a class="btn btn-outline-danger" (click)="deleteCategory(category.id)">
+                <i class="fa fa-close" aria-hidden="true"></i> Delete
+              </a>
+            </td>
           </tr>
           </tbody>
 

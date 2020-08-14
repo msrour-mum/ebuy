@@ -29,6 +29,7 @@ public class DataGenerate {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
+        String imgUser = "/uploads/0/u.jpg";
         Role roleAdmin = new Role(1, "Admin");
         Role roleVendor = new Role(2, "Vendor");
         Role roleUser = new Role(3, "RegularUser");
@@ -49,41 +50,36 @@ public class DataGenerate {
 
 
 
-        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
-        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
-        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
-        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
+        User userAdmin1 = new User("Admin", "admin@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
+        User userAdmin2 = new User("Mahmoud Srour", "msrour@mum.edu",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
+        User userAdmin3 = new User("Moustafa Zein", "mzein@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
+        User userAdmin4 = new User("Ibrahim Samier", "adminIbrahim@mum.com",  roleAdmin, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
         em.persist(userAdmin1);
         em.persist(userAdmin2);
         em.persist(userAdmin3);
         em.persist(userAdmin4);
 
 
-        //Vendors Users
-        List<User> vendorList = new ArrayList<>();
-        for (int i = 1; i < 6; i++) {
-            User user1 = new User("Vender "+ i, "Vender "+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St","imageUrl");
-            em.persist(user1);
-            vendorList.add(user1);
-        }
-
-        //End Users
-        for (int i = 1; i < 11; i++) {
-            User user1 = new User("User "+ i, "User "+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St","imageUrl");
-            em.persist(user1);
-        }
 
 
-        Category category1 = new Category(1,"Category 1");
-        Category category2 = new Category(1,"Category 2");
-        Category category3 = new Category(1,"Category 3");
-        Category category4 = new Category(1,"Category 4");
-        Category category5 = new Category(1,"Category 5");
+
+        Category category1 = new Category(1,"Watches");
+        Category category2 = new Category(2,"Laptops");
+        Category category3 = new Category(3,"Shampoo");
+        Category category4 = new Category(4,"T-Shert");
+        Category category5 = new Category(5,"Shoes");
+        Category category6 = new Category(6,"Mobile");
+        Category category7 = new Category(7,"Coffee Machine");
+        Category category8 = new Category(8,"TV");
+
         em.persist(category1);
         em.persist(category2);
         em.persist(category3);
         em.persist(category4);
         em.persist(category5);
+        em.persist(category6);
+        em.persist(category7);
+        em.persist(category8);
 
         List<Category> categoryList = new ArrayList<>();
         categoryList.add(category1);
@@ -91,6 +87,9 @@ public class DataGenerate {
         categoryList.add(category3);
         categoryList.add(category4);
         categoryList.add(category5);
+        categoryList.add(category6);
+        categoryList.add(category7);
+        categoryList.add(category8);
 
         ProductStatus productStatusPending = new ProductStatus(1,"Pending");
         ProductStatus productStatusActive = new ProductStatus(2,"Active");
@@ -100,19 +99,133 @@ public class DataGenerate {
         em.persist(productStatusRejected);
 
 
-        Product productSubscription = new Product("Subscription Fees",  "Subscription Fees","Subscription Fees, pay with vendor membership", userAdmin1, category1, 0, 20000, productStatusActive, true, true, "imageUrl");
-        em.persist(productSubscription);
+        //Vendors Users
+        List<User> vendorList = new ArrayList<>();
+        for (int i = 0; i < categoryList.size(); i++) {
+            User user1 = new User(categoryList.get(i).getName()+ " Vender ", "Vender"+ i+"@mum.com",  roleVendor, pass, true, "1232" , " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
+            em.persist(user1);
+            vendorList.add(user1);
+        }
 
-        //Products
-        for (int i = 1; i < 21; i++) {
-            Category category = categoryList.get(i%5);
-            User user = vendorList.get(i%5);
-            Product product = new Product("Product "+i,  "Product description"+i,"Product description"+i, user, category, i*20, i*40, productStatusActive, true, false, "imageUrl");
-            em.persist(product);
+        //End Users
+        for (int i = 1; i < 11; i++) {
+            User user1 = new User("User "+ i, "User"+ i+"@mum.com",  roleUser, pass, true, "1232", " Fairfield, Iowa ,1000 N 4th St",imgUser,null);
+            em.persist(user1);
         }
 
 
+        Product productSubscription = new Product("Subscription Fees",  "Subscription Fees","Subscription Fees, pay with vendor membership", userAdmin1, category1, 0, 20000, productStatusActive, true, true, "");
+        em.persist(productSubscription);
 
+        //Products
+        int picNo=1;
+
+
+        //Watches
+        for (int i = 0; i < 5; i++) {
+            Category category = categoryList.get(0);
+            User user = vendorList.get(0);
+            Product product = new Product("Watches "+i+1,  "Apple Watch Series 3 (GPS, 38mm) - Space Gray Aluminum Case with Black Sport Band\n",
+                    "Bought watch & was unsure if I would keep it? I am Not good with computers! Wanted this to motivate me to be more active & the Fall feature.\n" +
+                            "Wow!!! You Cannot have it back! This was Christmas Gift to myself! Hooked up thru my Iphone8 so easy! Bought several bands!\n" +
+                            "Update:Screen froze...cannot unlock! Tech support no help!",
+                    user, category, (i+1)*20, (i+1)*40, productStatusActive, true, false, "/uploads/"+user.getId()+"/"+ picNo+".jpg");
+            picNo++;
+            em.persist(product);
+        }
+
+        //Laptops
+        for (int i = 0; i < 5; i++) {
+            Category category = categoryList.get(1);
+            User user = vendorList.get(1);
+            Product product = new Product("Laptop "+i+1,  "Acer Aspire 5 Slim Laptop, 15.6 inches Full HD IPS Display, AMD Ryzen 3 3200U, Vega 3 Graphics, ",
+                    "Everything but the battery life on this watch is great! It has been easy to figure out for a variety of uses. I love the activity goals and challenges. The only complaint I have is the battery life (charging once a day), but that was not unexpected after researching before purchase. Just because it was expected doesn't mean it's not something that needs improving though.",
+                    user, category, (i+1)*200, (i+1)*300, productStatusActive, true, false, "/uploads/"+user.getId()+"/"+ picNo+".jpg");
+            picNo++;
+            em.persist(product);
+        }
+        //Shampoo
+        for (int i = 0; i < 5; i++) {
+            Category category = categoryList.get(2);
+            User user = vendorList.get(2);
+            Product product = new Product("Shampoo "+i+1,  "OUAI Detox Shampoo. Clarifying Cleanse for Dirt",
+                    "INGREDIENTS THAT GET THE JOB DONE. All OUAI products are carefully crafted to cut styling time and nourish your hair health. We put the good stuff in and leave the bad stuff out, without ever sacrificing quality. We are always trying to do better for the planet.",
+                    user, category, (i+1)*2.5, (i+1)*3, productStatusActive, true, false, "/uploads/"+user.getId()+"/"+ picNo+".jpg");
+            picNo++;
+            em.persist(product);
+        }
+        //T-Shert
+        for (int i = 0; i < 5; i++) {
+            Category category = categoryList.get(3);
+            User user = vendorList.get(3);
+            Product product = new Product("T-Shert "+i+1,  "NITAGUT Men's Casual Slim Fit Short Sleeve Pocket",
+                    "Comfortable and slim fit casual wear, suit for any casual occasions, such as daily wear, sports, work, holiday, beach etc, perfect gift for families, friends and boyfriend.\n" +
+                            "Please note: All buttons are just for decoration,sewn shut, not any function",
+                    user, category, (i+1)*10, (i+1)*15, productStatusActive, true, false, "/uploads/"+user.getId()+"/"+ picNo+".jpg");
+            picNo++;
+            em.persist(product);
+        }
+        //Shoes
+        for (int i = 0; i < 5; i++) {
+            Category category = categoryList.get(4);
+            User user = vendorList.get(4);
+            Product product = new Product("Shoe "+i+1,  "Walking Shoes Sock Sneakers - Mesh Slip On Air",
+                    "This shoe's sizing is equivalent to street shoe size.Width between medium and wide.\n" +
+                            "Boxed toe for toe stands,super lightweight and flexible just like socks,breathable and smooth fabric provide great freedom and comfortable feeling. Let you enjoy your travel on holidays.",
+                    user, category, (i+1)*15, (i+1)*17, productStatusActive, true, false, "/uploads/"+user.getId()+"/"+ picNo+".jpg");
+            picNo++;
+            em.persist(product);
+        }
+        //Mobile
+        for (int i = 0; i < 5; i++) {
+            Category category = categoryList.get(5);
+            User user = vendorList.get(5);
+            Product product = new Product("Mobile "+i+1,  "Samsung Galaxy A20s A207M/DS, 32GB/3GB",
+                    "International Model - No Warranty in US. Compatible with Most GSM Carriers like T-Mobile, AT&T, MetroPCS, etc. Will NOT work with CDMA Carriers Such as Verizon, Sprint, Boost\n" +
+                            "RAM 3GB , ROM 32GB Internal Memory ; MicroSD (Up to 512GB), Android 9.0 (Pie), Qualcomm SDM450 Snapdragon 450 (14 nm), Octa-core 1.8 GHz Cortex-A53, Adreno 506",
+                    user, category, (i+1)*200, (i+1)*300, productStatusActive, true, false, "/uploads/"+user.getId()+"/"+ picNo+".jpg");
+            picNo++;
+            em.persist(product);
+        }
+        //Coffee Machine
+        for (int i = 0; i < 5; i++) {
+            Category category = categoryList.get(6);
+            User user = vendorList.get(6);
+            Product product = new Product("Coffee Machine "+i+1,  "Classy Mini Single Serve Espresso",
+                    "Works with Lavazza Blue capsules\n" +
+                            "2 Coffee selections: simple touch controls, 1 programmable free dose and 1 pre-set.\n" +
+                            "Visual alerts: fitted with a visual indicator to show when the water tank is empty or the capsules drawer is full.",
+                    user, category, (i+1)*20, (i+1)*40, productStatusActive, true, false, "/uploads/"+user.getId()+"/"+ picNo+".jpg");
+            picNo++;
+            em.persist(product);
+        }
+
+        //TV
+        for (int i = 0; i < 5; i++) {
+            Category category = categoryList.get(7);
+            User user = vendorList.get(7);
+            Product product = new Product("TV "+i+1,  "Classy Mini Single Serve Espresso",
+                    "Insignia HD Smart TV – Fire TV Edition delivers 720p picture quality with deep blacks and rich colors.\n" +
+                            "With the Fire TV experience built-in, enjoy tens of thousands of channels, apps, and Alexa skills, including Disney+, Netflix, YouTube, Prime Video, Hulu, SHOWTIME, STARZ, and more",
+                    user, category, (i+1)*20, (i+1)*40, productStatusActive, true, false, "/uploads/"+user.getId()+"/"+ picNo+".jpg");
+            picNo++;
+            em.persist(product);
+        }
+
+//        for (int i = 1; i < 21; i++) {
+//            Category category = categoryList.get(i%5);
+//            User user = vendorList.get(i%5);
+//            Product product = new Product("Product "+i,  "Product description "+i,"Product description roduct description roduct description roduct description roduct description roduct description roduct description roduct description roduct description "+i, user, category, i*20, i*40, productStatusActive, true, false, "");
+//            em.persist(product);
+//        }
+
+
+
+
+//        Promotion promotion1 = new Promotion("Promotion 1" , 0.1,new Date(2020,8,1),new Date(2020,8,20),vendorList.get(1),new Product(2));
+//        Promotion promotion2 = new Promotion("Promotion 2" , 0.3,new Date(2020,8,1),new Date(2020,8,20),vendorList.get(1),new Product(3));
+//        em.persist(promotion1);
+//        em.persist(promotion1);
 
         TypedQuery<User> q = em.createQuery("from User where roleId=3", User.class);
         List<User> users = q.getResultList();
@@ -124,19 +237,23 @@ public class DataGenerate {
 
         for (User user: users)
         {
-            Order order = new Order(user,new Date(),0,20);
-            int total=0;
-            int c1 = new Random().nextInt(4)+1;
-            for (int i = 0; i < c1; i++) {
-                Product p= products.get(new Random().nextInt(products.size()));
-                int qt = new Random().nextInt(3);
-                OrderItem item = new OrderItem(p,qt,p.getPrice()*qt);
-                order.addItem(item);
-                total+=p.getPrice()*qt;
-            }
-            order.setTotal(total);
-            em.persist(order);
 
+            for (int k = 0; k < 7; k++) {
+
+
+                Order order = new Order(user, new Date(), 0, 20,user.getAddress());
+                int total = 0;
+                int c1 = new Random().nextInt(4) + 1;
+                for (int i = 0; i < c1; i++) {
+                    Product p = products.get(new Random().nextInt(products.size()));
+                    int qt = new Random().nextInt(3);
+                    OrderItem item = new OrderItem(p, qt, p.getPrice());
+                    order.addItem(item);
+                    total += p.getPrice() * qt;
+                }
+                order.setTotal(total);
+                em.persist(order);
+            }
 
             int ct = new Random().nextInt(2)+1;
             String cardNo="54789632587412"+recCount;

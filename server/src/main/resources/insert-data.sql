@@ -6,24 +6,24 @@ INSERT INTO `ebuy`.`cardtype`(`id`,`name`)VALUES(1,'Visa'),(2,'MasterCard'),(3,'
 INSERT INTO `ebuy`.`user`
 (`ImageUrl`,`address`,`email`,`isActive`,`name`,`password`,`phone`,`roleId`)
 VALUES
-('ImageUrl','addreass','admin1.gmail.com',1,'admin1','123','0215487877',1),
-('ImageUrl','addreass','admin2.gmail.com',1,'admin2','123','0215487877',1),
-('ImageUrl','addreass','admin3.gmail.com',1,'admin3','123','0215487877',1),
-('ImageUrl','addreass','Vendor1.gmail.com',1,'Vendor1','123','0215487877',2),
-('ImageUrl','addreass','Vendor2.gmail.com',1,'Vendor2','123','0215487877',2),
-('ImageUrl','addreass','Vendor3.gmail.com',1,'Vendor3','123','0215487877',2),
-('ImageUrl','addreass','Vendor4.gmail.com',1,'Vendor4','123','0215487877',2),
-('ImageUrl','addreass','Vendor5.gmail.com',1,'Vendor5','123','0215487877',2),
-('ImageUrl','addreass','use1.gmail.com',1,'use1','123','0215487877',3),
-('ImageUrl','addreass','use2.gmail.com',1,'use2','123','0215487877',3),
-('ImageUrl','addreass','use3.gmail.com',1,'use3','123','0215487877',3),
-('ImageUrl','addreass','use4.gmail.com',1,'use4','123','0215487877',3),
-('ImageUrl','addreass','use5.gmail.com',1,'use5','123','0215487877',3),
-('ImageUrl','addreass','use6.gmail.com',1,'use6','123','0215487877',3),
-('ImageUrl','addreass','use7.gmail.com',1,'use7','123','0215487877',3),
-('ImageUrl','addreass','use8.gmail.com',1,'use8','123','0215487877',3),
-('ImageUrl','addreass','use9.gmail.com',1,'use9','123','0215487877',3),
-('ImageUrl','addreass','use10.gmail.com',1,'use10','123','0215487877',3);
+('','addreass','admin1.gmail.com',1,'admin1','123','0215487877',1),
+('','addreass','admin2.gmail.com',1,'admin2','123','0215487877',1),
+('','addreass','admin3.gmail.com',1,'admin3','123','0215487877',1),
+('','addreass','Vendor1.gmail.com',1,'Vendor1','123','0215487877',2),
+('','addreass','Vendor2.gmail.com',1,'Vendor2','123','0215487877',2),
+('','addreass','Vendor3.gmail.com',1,'Vendor3','123','0215487877',2),
+('','addreass','Vendor4.gmail.com',1,'Vendor4','123','0215487877',2),
+('','addreass','Vendor5.gmail.com',1,'Vendor5','123','0215487877',2),
+('','addreass','use1.gmail.com',1,'use1','123','0215487877',3),
+('','addreass','use2.gmail.com',1,'use2','123','0215487877',3),
+('','addreass','use3.gmail.com',1,'use3','123','0215487877',3),
+('','addreass','use4.gmail.com',1,'use4','123','0215487877',3),
+('','addreass','use5.gmail.com',1,'use5','123','0215487877',3),
+('','addreass','use6.gmail.com',1,'use6','123','0215487877',3),
+('','addreass','use7.gmail.com',1,'use7','123','0215487877',3),
+('','addreass','use8.gmail.com',1,'use8','123','0215487877',3),
+('','addreass','use9.gmail.com',1,'use9','123','0215487877',3),
+('','addreass','use10.gmail.com',1,'use10','123','0215487877',3);
 
 
 

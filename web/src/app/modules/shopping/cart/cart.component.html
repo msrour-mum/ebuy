@@ -1,93 +1,107 @@
-<div class="row">
-
-<!--  <c:if test="${cart == null}">-->
-    <div class="card bg-light mb-3" *ngIf="false">
+<div class="container">
+  <div class="row" *ngIf="(shoppingService.getCart() | async)?.items.length !== 0">
+    <div class="alert alert-dismissible alert-warning alert-custom-brdr color-black">
+      The price and availability of items at eBuy.com are subject to change.
+      The Cart is a temporary place to store a list of your items and reflects each item's most recent price.
+      Shopping CartLearn more.
+    </div>
+  </div>
+  <div class="row">
+    <!-- Empty Cart Message box -->
+    <div class="card bg-light mb-3" *ngIf="(shoppingService.getCart() | async)?.items.length == 0">
       <div class="card-header">Information</div>
       <div class="card-body">
         <h4 class="card-title">Empty Cart</h4>
         <p class="card-text">There are no products found in your card, please continue shopping then add
           your products to the cart.</p>
 
-        <div><a class="btn btn-primary" href="/home"> Continue Shopping</a></div>
+        <div><a class="btn btn-primary" [routerLink]="['/home']"> Continue Shopping</a></div>
       </div>
     </div>
-<!--  </c:if>-->
-<!--  <c:if test="${cart != null}">-->
-    <div class="col-sm-12 col-md-8 order-line-box">
-
-<!--      <c:forEach var="cartItem" items="${cart.orderLines}">-->
-        <div class="card border-info mb-3">
-          <div class="card-header row">
-            <div class="col-4">
-              <i class="prd-lbl">Price</i><i>${cartItem.unitPrice}$</i>
-            </div>
-            <div class="col-6">
-              <i class="prd-lbl">Quantity</i> <i>${cartItem.quantity}</i>
-            </div>
-            <div class="col-2">
-              <i class="prd-lbl">Sum</i> <i>${cartItem.subtotal}$</i>
-            </div>
+    <!-- Cart -->
+    <div class="col-sm-12 col-md-8 order-line-box" *ngIf="(shoppingService.getCart() | async)?.items.length  !== 0">
+      <div class="card custom-card-border mb-3" *ngFor="let orderItem of (shoppingService.getCart() | async)?.items">
+        <div class="card-header row">
+          <div class="col-4">
+           <span  *ngIf="orderItem.product.promotionPrice ==0"><i class="prd-lbl">Price</i>&nbsp;<i>{{orderItem.product.price | currency}}</i></span><span  *ngIf="orderItem.product.promotionPrice !=0"><i class="prd-lbl">Price</i>&nbsp;<i>{{orderItem.product.promotionPrice | currency}}</i></span>
           </div>
-          <div class="card-body row">
-            <img src="${cartItem.product.imageUrl}" class="cart-prd-img col-3">
-            <div class="col-9">
-              <h4 class="card-title">${cartItem.product.productName}</h4>
-              <p class="card-text">${cartItem.product.description}</p>
-            </div>
-            <div class="order-line-cmd row">
-              <div class="prodcut-cmd-icon ">
-                <form method="post" action="/cart">
-                  <input type="hidden" value="remove" name="addItem" id="addItem"/>
-                  <input type="hidden" value="${cartItem.product.id}" name="productId"
-                         id="addItemProductId"/>
-                  <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </form>
-              </div>
-
-              <div class="prodcut-cmd-icon ">
-                <form method="post" action="/cart">
-                  <input type="hidden" value="remove" name="removeItem" id="removeItem"/>
-                  <input type="hidden" value="${cartItem.product.id}" name="productId"
-                         id="removeItemProductId"/>
-                  <button type="submit" class="btn btn-danger">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </form>
-              </div>
-            </div>
+          <div class="col-5">
+            <i class="prd-lbl">Quantity</i>&nbsp;<i>{{orderItem.quantity}}</i>
+          </div>
+          <div class="col-3">
+            <i class="prd-lbl">Sum</i>&nbsp;<i>{{orderItem.total | currency}}</i>
           </div>
         </div>
-<!--      </c:forEach>-->
-    </div>
-    <div class="col-sm-12 col-md-4 order-summary-box jumbotron">
+        <div class="card-body row">
 
-      <div><h1>SUMMARY</h1></div>
+          <img src="{{hostUrl + orderItem.product.imageUrl}}"
+               class="cart-prd-img col-3 pointer-cursor"
+               [routerLink]="['/product', orderItem.product.id]">
+          <div class="col-9">
+            <a [routerLink]="['/product', orderItem.product.id]">
+              <h5 class="card-title underline-text">{{orderItem.product.name}}</h5>
+
+              <p class="card-text body-color underline-text" style="font-size: 13px;">{{orderItem.product.shortDescription}}</p>
+            </a>
+
+          </div>
+
+          <div class="order-line-cmd row">
+            <div>
+              <button type="button" class="btn success-color" (click)="addToCart(orderItem.product)">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+            <div>
+                <button type="button" class="btn danger-color" (click)="removeFromCartCart(orderItem.product)">
+                  <i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4 order-summary-box jumbotron" *ngIf="(shoppingService.getCart() | async)?.items.length !== 0">
+
+      <span class="font-size-2rem">SUMMARY</span><hr>
       <div><i>Total price that you will pay as described bellow</i></div>
       <div class="sum-item subTotal row">
-        <div class="col-9 lbl">Sub Total</div>
-        <div class="col-3">${cart.subtotal}$</div>
+        <div class="col-8 lbl">Sub Total</div>
+        <div class="col-4">{{(shoppingService.getCart() | async)?.subTotal | currency}}</div>
       </div>
       <div class="sum-item tax row">
-        <div class="col-9 lbl">Tax</div>
-        <div class="col-3">${cart.tax}$</div>
+        <div class="col-8 lbl">Tax</div>
+        <div class="col-4">{{(shoppingService.getCart() | async)?.tax | currency}}</div>
       </div>
       <div class="sum-item shipping row">
-        <div class="col-9 lbl">Shipping</div>
-        <div class="col-3">${cart.shipping}$</div>
+        <div class="col-8 lbl">Shipping</div>
+        <div class="col-4">{{(shoppingService.getCart() | async)?.shipping | currency}}</div>
       </div>
       <hr>
       <div class="sum-item total row">
-        <div class="col-9 lbl">TOTAL</div>
-        <div class="col-3">${cart.total}$</div>
+        <div class="col-8 lbl info-color">TOTAL</div>
+        <div class="col-4 info-color">{{(shoppingService.getCart() | async)?.total | currency}}</div>
       </div>
 
       <div class="sum-btns row">
-        <a href="/checkout" class="btn btn-primary col-12 mr-btm-10">Proceed to Checkout</a>
-        <a href="/home" class="btn btn-primary col-12 mr-btm-10">Continue shopping</a>
+        <a [routerLink]="['/checkout']" class="btn btn-primary col-12 mr-btm-10">
+          <i class="fa fa-credit-card"></i> Proceed to Checkout
+        </a>
+        <a [routerLink]="['/home']" class="btn btn-primary col-12 mr-btm-10">
+          <i class="fa fa-home"></i> Continue shopping
+        </a>
       </div>
 
     </div>
-<!--  </c:if>-->
+  </div>
+  <div class="row" *ngIf="(shoppingService.getCart() | async)?.items.length !== 0">
+    <div class="col-md-8 col-sm-12"> </div>
+    <div class="col-md-4 col-sm-12 alert-0-l-r-p">
+      <div class="alert alert-dismissible alert-info alert-custom-brdr alert-0-l-r-mr color-black">
+        We'll ask you to <strong>Login!</strong> using your username and password or to create a new account if you dont have, it's mandatory to complete the checkout process.
+      </div>
+    </div>
+
+  </div>
 </div>

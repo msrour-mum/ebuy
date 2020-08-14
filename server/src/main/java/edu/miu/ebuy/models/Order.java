@@ -26,8 +26,17 @@ public class Order {
     @Column(name ="total" , nullable = false)
     private double total;
 
+    @Column(name ="tax" , nullable = false)
+    private double tax;
+
     @Column(name ="shipping" , nullable = false)
     private double shipping;
+
+    @Column(name ="orderAddress" , nullable = false)
+    private String orderAddress;
+
+
+
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name ="order_id", nullable = false)
@@ -39,13 +48,23 @@ public class Order {
         items.remove(item);
     }
 
-
-    public Order(User user, Date orderDate, double total, double shipping) {
+    public Order( User user, Date orderDate, double total, double shipping, String orderAddress) {
 
         this.user = user;
         this.orderDate = orderDate;
         this.total = total;
         this.shipping = shipping;
+        this.orderAddress = orderAddress;
+
+    }
+
+    public Order( User user, Date orderDate, double shipping, String orderAddress) {
+
+        this.user = user;
+        this.orderDate = orderDate;
+        this.shipping = shipping;
+        this.orderAddress = orderAddress;
+
     }
 
     public long getId() {
@@ -90,6 +109,15 @@ public class Order {
 
     public Order setShipping(double shipping) {
         this.shipping = shipping;
+        return this;
+    }
+
+    public String getOrderAddress() {
+        return orderAddress;
+    }
+
+    public Order setOrderAddress(String orderAddress) {
+        this.orderAddress = orderAddress;
         return this;
     }
 

@@ -1,6 +1,7 @@
 package edu.miu.ebuy.controllers;
 
 import edu.miu.ebuy.common.http.BaseResponse;
+import edu.miu.ebuy.common.http.ResponseResult;
 import edu.miu.ebuy.services.interfaces.IReportService;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +18,15 @@ import java.io.FileNotFoundException;
 public class ReportsController {
     @Autowired
     private IReportService reportService;
-  
+
 
     @GetMapping("/{userId}/orders")
-    public String generateOrdersReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
-        return reportService.exportOrderReport(userId);
+    public ResponseResult generateOrdersReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
+        return reportService.OrderReport(userId);
 
     }
-
-
-    @GetMapping("/{userId}/orderDetails")
-    public String generateOrderDetailsReport(@PathVariable int  userId) throws FileNotFoundException, JRException {
-        return reportService.exportOrderItemReport(userId);
+    @GetMapping("/{vendorId}/profits")
+    public ResponseResult generateProfitReport(@PathVariable int vendorId) throws FileNotFoundException, JRException {
+        return reportService.profitReport(vendorId);
     }
 }

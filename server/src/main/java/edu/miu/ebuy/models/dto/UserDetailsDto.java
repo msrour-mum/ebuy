@@ -1,12 +1,9 @@
 package edu.miu.ebuy.models.dto;
 
 import edu.miu.ebuy.models.Role;
+import edu.miu.ebuy.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +14,6 @@ public class UserDetailsDto {
     private String email;
     private Role role;
     private Boolean isActive;
-    //private String address;
-    //private String phone;
+    private String imageUrl;
+    private User vendor;
 }

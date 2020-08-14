@@ -7,7 +7,7 @@ import {AppConfig} from './config/app.config';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from './services/authentication.service';
 import {JwtInterceptor} from './common/interceptors/jwt.interceptor';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, NgForm, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './modules/authentication/login/login.component';
 import {SignupComponent} from './modules/authentication/signup/signup.component';
 import {CommonModule} from '@angular/common';
@@ -22,6 +22,12 @@ import {EditUserComponent} from './modules/admin/manage-users/edit-user/edit-use
 import {UserListComponent} from './modules/admin/manage-users/user-list/user-list.component';
 import {EditProductComponent} from './modules/admin/manage-product/edit-product/edit-product.component';
 import {EditCategoryComponent} from './modules/admin/manage-category/edit-category/edit-category.component';
+import {UsersModule} from './modules/users/users.module';
+import {ShoppingModule} from './modules/shopping/shopping.module';
+import {AdminModule} from './modules/admin/admin.module';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -33,24 +39,21 @@ export function initializeApp(appConfig: AppConfig) {
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ProductListComponent,
-    ProductCatalogListComponent,
-    CategoryListComponent,
-    AddProductComponent,
-    AddCategoryComponent,
-    EditCategoryComponent,
-    ApproveProductComponent,
-    EditProductComponent,
-    AddUserComponent,
-    EditUserComponent,
-    UserListComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
+    ShoppingModule,
+    AdminModule,
+    UsersModule,
+    Ng2SearchPipeModule, 
+  
+    
   ],
   providers: [AppConfig,
     { provide: APP_INITIALIZER,

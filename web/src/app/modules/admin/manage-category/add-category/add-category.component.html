@@ -1,32 +1,32 @@
 <main class="acc-form">
 
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-8">
-        <h4>Admin Category List</h4>
+    <div class="row justify-content-center mb-1 mx-2">
+      <div class="col">
+        <h4>Admin Category</h4>
       </div>
-      <div class="col-4">
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
+<!--      <div class="col-2">-->
+<!--        <button type="button" class="btn btn-primary">Save</button>-->
+<!--      </div>-->
     </div>
     <div class="row justify-content-center">
       <div class="col">
-        <div class="col-md-8">
+        <div class="col">
           <div class="card">
-            <div class="card-header">Create/Edit Product</div>
+            <div class="card-header">Add Category</div>
             <div class="card-body">
               <form [formGroup]="categoryForm" >
                 <div class="form-group row">
-                  <label for="category" class="col-md-4 col-form-label text-md-right">Category</label>
+                  <label for="name" class="col-md-4 col-form-label text-md-right">Category</label>
                   <div class="col-md-6">
                     <input type="text"
-                           [formControl]="categoryForm.get('category')"
-                           [ngClass]="{'is-invalid': isValid('category')}"
-                           id="category"
+                           [formControl]="categoryForm.get('name')"
+                           [ngClass]="{'is-invalid': isValid('name')}"
+                           id="name"
                            class="form-control"
-                           name="category" autofocus>
-                    <div *ngIf="hasError('category')" class="invalid-feedback">
-                      category is required
+                           name="name" autofocus>
+                    <div *ngIf="hasError('name')" class="invalid-feedback">
+                      name is required
                     </div>
                   </div>
                 </div>

@@ -20,15 +20,18 @@ public class OrderItem {
     @Column(name ="quantity" , nullable = false)
     private int quantity;
 
+    @Column(name ="itemPrice" , nullable = false)
+    private double itemPrice;
+
     @Column(name ="itemTotal" , nullable = false)
     private double itemTotal;
 
 
-    public OrderItem(Product product, int quantity, double itemTotal) {
-
+    public OrderItem(Product product, int quantity, double itemPrice) {
         this.product = product;
         this.quantity = quantity;
-        this.itemTotal = itemTotal;
+        this.itemPrice = itemPrice;
+        this.itemTotal = quantity*itemPrice ;
     }
 
     public long getId() {
@@ -55,6 +58,15 @@ public class OrderItem {
 
     public OrderItem setQuantity(int quantity) {
         this.quantity = quantity;
+        return this;
+    }
+
+    public double getItemPrice() {
+        return itemPrice;
+    }
+
+    public OrderItem setItemPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
         return this;
     }
 

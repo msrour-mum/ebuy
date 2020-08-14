@@ -17,6 +17,7 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(Exception.class)
     public ExceptionResult handleException(Exception e){
+        System.out.println(e);
         return new ExceptionResult(new ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()),
                 Errors.UNEXPECTED_ERROR,
                 e.getMessage());

@@ -1,7 +1,6 @@
 package edu.miu.ebuy.services.impl;
 
 import edu.miu.ebuy.dao.CardRepository;
-import edu.miu.ebuy.dao.PaymentRepository;
 import edu.miu.ebuy.models.MerchantCard;
 import edu.miu.ebuy.services.interfaces.IMerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ public class MerchantService implements IMerchantService {
 
     @Autowired
     CardRepository cardRepository;
-
-
 
     @Override
     public boolean validateCard(String cardNo, String expireDate, int ccv, int typeId) {
@@ -39,7 +36,7 @@ public class MerchantService implements IMerchantService {
     public boolean pay(String cardNo, String expireDate, int ccv, int typeId, double amount) {
 
         //sub from balance
-        //add transaction
+        //add transaction v
         //add payment
         return true;
     }

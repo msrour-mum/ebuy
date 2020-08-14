@@ -2,6 +2,7 @@ package edu.miu.ebuy.security;
 
 import edu.miu.ebuy.models.Role;
 import edu.miu.ebuy.models.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 public class JPAUserDetails implements UserDetails {
 
     private int id;
@@ -18,7 +20,19 @@ public class JPAUserDetails implements UserDetails {
     private String username;
     private String password;
     private boolean isActive;
+    private String imageUrl;
     private List<Role> roles;
+
+    public User getVendor() {
+        return vendor;
+    }
+
+    public JPAUserDetails setVendor(User vendor) {
+        this.vendor = vendor;
+        return this;
+    }
+
+    private User vendor;
 
     public JPAUserDetails(User user) {
         id = user.getId();
@@ -28,6 +42,8 @@ public class JPAUserDetails implements UserDetails {
         isActive = user.getIsActive();
         roles = new ArrayList<>();
         roles.add(user.getRole());
+        imageUrl = user.getImageUrl();
+        vendor = user.getVendor();
     }
 
     @Override
