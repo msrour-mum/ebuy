@@ -16,7 +16,8 @@
           <a class="nav-link" [routerLink]="['home']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['my-orders', authService.currentUser.id]" *ngIf="authService.isAuthenticated && authService.currentUser.role.id==3">My Orders</a>
+          <a class="nav-link" [routerLink]="['my-orders', authService.currentUser.id]"
+             *ngIf="authService.isAuthenticated && authService.currentUser.role.id==3">My Orders</a>
         </li>
 
         <li class="nav-item dropdown" *ngIf="authService.isAdmin">
@@ -27,25 +28,28 @@
             <a class="dropdown-item" [routerLink]="['manage-users']">Manage Users</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>
-            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['approve-product']">Review Products</a>
-<!--            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['rejected-product']">Rejected Products</a>-->
-            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['categories']">Manage Categories</a>
+            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['approve-product']">Review
+              Products</a>
+            <!--            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['rejected-product']">Rejected Products</a>-->
+            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==1" [routerLink]="['categories']">Manage
+              Categories</a>
 
           </div>
         </li>
 
-        <li class="nav-item dropdown" *ngIf="authService.isAuthenticated &&( authService.currentUser.role.id==2 || authService.currentUser.role.id==3)">
+        <li class="nav-item dropdown"
+            *ngIf="authService.isAuthenticated &&( authService.currentUser.role.id==2 || authService.currentUser.role.id==3)">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="admin" aria-expanded="false">
             Reports <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="admin">
-            <a class="dropdown-item"  *ngIf="authService.currentUser.role.id==3" (click)="reportMyOrders()" >My Orders</a>
-            <a class="dropdown-item"  *ngIf="authService.currentUser.role.id==2" (click)="reportProfit()" >My Profits</a>
+            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==3" (click)="reportMyOrders()">My Orders</a>
+            <a class="dropdown-item" *ngIf="authService.currentUser.role.id==2" (click)="reportProfit()">My Profits</a>
 
-<!--            <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>-->
-<!--            <a class="dropdown-item" [routerLink]="['approve-product']">Review Products</a>-->
-<!--            <a class="dropdown-item" [routerLink]="['rejected-product']">Rejected Products</a>-->
-<!--            <a class="dropdown-item" [routerLink]="['categories']">Manage Categories</a>-->
+            <!--            <a class="dropdown-item" [routerLink]="['product-list']">Manage Products</a>-->
+            <!--            <a class="dropdown-item" [routerLink]="['approve-product']">Review Products</a>-->
+            <!--            <a class="dropdown-item" [routerLink]="['rejected-product']">Rejected Products</a>-->
+            <!--            <a class="dropdown-item" [routerLink]="['categories']">Manage Categories</a>-->
 
           </div>
         </li>
@@ -65,11 +69,11 @@
         <img class="user-small-img"
              src="{{hostUrl + '/uploads/0/u.jpg'}}"
              alt="avatar"
-        *ngIf="authService.currentUser.imageUrl =='' || authService.currentUser.imageUrl == null">
+             *ngIf="authService.currentUser.imageUrl =='' || authService.currentUser.imageUrl == null">
         <img class="user-small-img"
              src="{{hostUrl + authService.currentUser.imageUrl}}"
              alt="avatar"
-             *ngIf="authService.currentUser.imageUrl !=''">
+             *ngIf="authService.currentUser.imageUrl !='' && authService.currentUser.imageUrl != null">
       </a>
       <!-- Login -->
       <a class="nav-link" style="color:white" [routerLink]="['login']" *ngIf="!authService.isAuthenticated">
@@ -92,28 +96,30 @@
 <section class="container">
   <router-outlet></router-outlet>
 </section>
-<footer class="footer bg-primary row">
-  <div class="footer-left col-xs-12 col-sm-12 col-md-4">
-    <a href="http://mumstudents.org/" class="block a-ftr">Company info</a>
-    <a href="http://mumstudents.org/" class="block a-ftr">Government relations</a>
+<footer class="footer bg-primary">
+  <div class="row">
+    <div class="footer-left col-xs-12 col-sm-12 col-md-4">
+      <a href="http://mumstudents.org/" class="block a-ftr">Company info</a>
+      <a href="http://mumstudents.org/" class="block a-ftr">Government relations</a>
 
-  </div>
-  <div class="footer-mid col-xs-12 col-sm-12 col-md-4">
-    <a href="http://mumstudents.org/" class="block a-ftr">Business sellers</a>
-    <a href="https://www.mum.edu/" class="block a-ftr">How to sell</a>
-    <a href="https://www.mum.edu/" class="block a-ftr">Registration & Signup</a>
-  </div>
-  <div class="footer-right col-xs-12 col-sm-12 col-md-4">
-    <a href="#" class="block a-ftr">Polices & privacy</a>
-    <a href="#" class="block a-ftr">Contact us</a>
-    <a href="#" class="block a-ftr">Charity Shop</a>
-    <a href="#" class="block a-ftr">eBuy Community</a>
-    <i class="icon-twitter"></i>
-    <i class="icon-facebook"></i>
-    <i class="icon-apple"></i>
-    <div class="cpy">
-      &copy;2020 MUM and individual contributors.Content is available under <a href="http://mumstudents.org/">these
-      licenses</a>
+    </div>
+    <div class="footer-mid col-xs-12 col-sm-12 col-md-4">
+      <a href="http://mumstudents.org/" class="block a-ftr">Business sellers</a>
+      <a href="https://www.mum.edu/" class="block a-ftr">How to sell</a>
+      <a href="https://www.mum.edu/" class="block a-ftr">Registration & Signup</a>
+    </div>
+    <div class="footer-right col-xs-12 col-sm-12 col-md-4">
+      <a href="#" class="block a-ftr">Polices & privacy</a>
+      <a href="#" class="block a-ftr">Contact us</a>
+      <a href="#" class="block a-ftr">Charity Shop</a>
+      <a href="#" class="block a-ftr">eBuy Community</a>
+      <i class="icon-twitter"></i>
+      <i class="icon-facebook"></i>
+      <i class="icon-apple"></i>
+      <div class="cpy">
+        &copy;2020 MUM and individual contributors.Content is available under <a href="http://mumstudents.org/">these
+        licenses</a>
+      </div>
     </div>
   </div>
 </footer>
