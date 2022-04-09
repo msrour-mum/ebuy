@@ -28,7 +28,7 @@
     "highcharts": "^8.0.0",
     "i": "^0.3.6",
     "jquery": "^3.4.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose-paginate": "^5.0.3",
     "ng2-search-filter": "^0.5.1",
     "ng2-validation": "^4.2.0",
